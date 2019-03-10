@@ -7,33 +7,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Wczytywanie {
-    // Metoda wczytująca plik z danymi
-    public static ArrayList<Wezel> czytajPlik(String sciezkadoPliku) throws FileNotFoundException {
+    public List<Kategoria> czytajKategoria(String sciezkadoPliku) throws FileNotFoundException {
         File plik = new File(sciezkadoPliku);
         Scanner skaner = new Scanner(plik);
         String sciezka = skaner.nextLine();
         Path sciezkaget = Paths.get(sciezka);
         boolean czyKategoria = false;
-        int index = 0;
-        // Lista będzie przechowywała kolejne linie odczytane z pliku jako String
-        ArrayList<String> odczyt = new ArrayList<String>();
+        ArrayList<String> odczyt = new ArrayList<>();
         List<Kategoria> katList = new ArrayList<>();
 
         try {
-            // Wczytanie wszystkich linii do listy
+
             odczyt = (ArrayList) Files.readAllLines(sciezkaget);
 
 
         } catch (IOException ex) {
             System.out.println("Brak pliku!");
         }
-
-        ArrayList<Wezel> wezely = new ArrayList<>();
+        Kategoria kategoria = new Kategoria();
         for (String linia : odczyt) {
-            if(!czyKategoria){
-                czyKategoria=true;
+            if (!czyKategoria) {
+                czyKategoria = true;
                 String[] kategoriaposz = linia.split(",");
-                Kategoria kategoria = new Kategoria();
                 kategoria.setNazwa(kategoriaposz[0]);
                 kategoria.setNazwa(kategoriaposz[1]);
                 kategoria.setNazwa(kategoriaposz[2]);
@@ -44,23 +39,41 @@ public class Wczytywanie {
                 katList.add(kategoria);
 
             }
-            else {
-                String[] wartposz = linia.split(",");
 
-            }
 
         }
-
-
-
-                // use comma as separator
-
-
-
-        // Wywołanie metody tworzącej obiekty i wypełniające je danymi z pliku
-        //ArrayList<Wezel> wezely = doObiektow(odczyt);
-        //return wezely;
-        return null;
+        return katList;
     }
+        public  List<Wezel> czytajWartosci(String sciezkadoPliku) throws FileNotFoundException {
+            File plik = new File(sciezkadoPliku);
+            Scanner skaner = new Scanner(plik);
+            String sciezka = skaner.nextLine();
+            Path sciezkaget = Paths.get(sciezka);
+            List<Wezel> wezList = new ArrayList<>();
 
-}
+            ArrayList<String> odczyt = new ArrayList<>();
+
+
+            try {
+                // Wczytanie wszystkich linii do listy
+                odczyt = (ArrayList) Files.readAllLines(sciezkaget);
+
+
+            } catch (IOException ex) {
+                System.out.println("Brak pliku!");
+            }
+            String naglowki = odczyt.get(0);
+
+            odczyt.remove(0);
+
+
+            for (String linia : odczyt) {
+
+
+
+                }
+
+                return wezList;
+            }
+
+    }
