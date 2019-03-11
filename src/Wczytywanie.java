@@ -7,44 +7,49 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Wczytywanie {
-    public List<Kategoria> czytajKategoria(String sciezkadoPliku) throws FileNotFoundException {
+
+    public List czytajKategoria(String sciezkadoPliku) throws FileNotFoundException {
         File plik = new File(sciezkadoPliku);
-        Scanner skaner = new Scanner(plik);
-        String sciezka = skaner.nextLine();
-        Path sciezkaget = Paths.get(sciezka);
-        boolean czyKategoria = false;
+        //Scanner skaner = new Scanner(plik);
+        //String sciezka = skaner.nextLine();
+        Path sciezkaget = Paths.get(sciezkadoPliku);
+
         ArrayList<String> odczyt = new ArrayList<>();
         List<Kategoria> katList = new ArrayList<>();
+        List<Parametr> parList = new ArrayList<>();
 
         try {
 
             odczyt = (ArrayList) Files.readAllLines(sciezkaget);
 
 
-        } catch (IOException ex) {
-            System.out.println("Brak pliku!");
-        }
-        Kategoria kategoria = new Kategoria();
-        for (String linia : odczyt) {
-            if (!czyKategoria) {
-                czyKategoria = true;
+            for (String linia : odczyt) {
                 String[] kategoriaposz = linia.split(",");
-                kategoria.setNazwa(kategoriaposz[0]);
-                kategoria.setNazwa(kategoriaposz[1]);
-                kategoria.setNazwa(kategoriaposz[2]);
-                kategoria.setNazwa(kategoriaposz[3]);
-                kategoria.setNazwa(kategoriaposz[4]);
-                kategoria.setNazwa(kategoriaposz[5]);
 
-                katList.add(kategoria);
+               // System.out.println(kategoriaposz[0]);
+                if (kategoriaposz[0].equals("0")) {
+                    Kategoria kategoria = new Kategoria();
 
-            }
+                    kategoria.setNazwa(kategoriaposz[1]);
+      //              System.out.println("kat="+kategoria);
 
+                    katList.add(kategoria);
+
+                }
 
         }
+
+
+        } catch (IOException ex) {
+            System.out.println("Brak pliku7!");
+        }
+
         return katList;
+
+
+
     }
-        public  List<Wezel> czytajWartosci(String sciezkadoPliku) throws FileNotFoundException {
+       /* public  List<Wezel> czytajWartosci(String sciezkadoPliku) throws FileNotFoundException {
             File plik = new File(sciezkadoPliku);
             Scanner skaner = new Scanner(plik);
             String sciezka = skaner.nextLine();
@@ -74,6 +79,6 @@ public class Wczytywanie {
                 }
 
                 return wezList;
-            }
+            }*/
 
     }

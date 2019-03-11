@@ -1,6 +1,12 @@
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Hello3");
         System.out.println("Hello Test GitHub!");
 
@@ -24,5 +30,13 @@ public class Main {
 
         System.out.print("Pre Order: ");
         drzewo.preOrder(korzen);
+
+        Wczytywanie plik = new Wczytywanie();
+
+        Object test = plik.czytajKategoria("D:/Mateusz/Pulpit/test.txt");
+
+        for(int i=0; i<((List) test).size(); i++){
+            System.out.println(((List) test).remove(0));
+        }
     }
 }
