@@ -45,9 +45,64 @@ public class Wczytywanie {
         }
 
         return katList;
+    }
 
-
-
+    public static Drzewo<ElementDrzewa> wczytajDrzewoZPliku(String sciezka){
+        File plik = new File(sciezka);
+        Scanner skaner = null;
+        try {
+            skaner = new Scanner(plik);
+        }catch(FileNotFoundException err){
+            System.out.println(err.toString());
+        }
+        List<Wezel<ElementDrzewa>> wezly = new ArrayList<>();
+        Drzewo<ElementDrzewa> drzewo = new Drzewo<>();
+        try {
+            skaner = new Scanner(plik);
+        }catch(FileNotFoundException err){
+            System.out.println(err.toString());
+        }
+        try{
+            boolean czyPierwszy = true;
+            while (skaner.hasNextLine()){
+                int tmp = skaner.nextInt();
+                if (tmp == 0) {
+                    Kategoria tmpKat = new Kategoria(skaner.next());
+                    String tmpNazwaRodzica = skaner.next();
+                    Wezel<ElementDrzewa> tmpRodzic = null;
+                    for(Wezel<ElementDrzewa> obj : wezly){
+                        if((obj.getDane().getNazwa().equals(tmpNazwaRodzica))){
+                            tmpRodzic = obj;
+                        }
+                    }
+                    Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpKat);
+                    wezly.add(tmpWezel);
+                    if (czyPierwszy){
+                        drzewo = new Drzewo<>(tmpWezel);
+                        czyPierwszy = false;
+                    }
+                } else {
+                    Parametr tmpPar = null;
+                    if(skaner.nextInt()==0) {
+                        tmpPar = new Parametr(skaner.next(),skaner.nextBoolean());
+                    }else{
+                        tmpPar = new Parametr(skaner.next(),skaner.nextInt());
+                    }
+                    String tmpNazwaRodzica = skaner.next();
+                    Wezel<ElementDrzewa> tmpRodzic = null;
+                    for(Wezel<ElementDrzewa> obj : wezly){
+                        if((obj.getDane().getNazwa().equals(tmpNazwaRodzica))){
+                            tmpRodzic = obj;
+                        }
+                    }
+                    Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpPar);
+                    wezly.add(tmpWezel);
+                }
+            }
+        }catch(NullPointerException err){
+            System.out.println(err.toString());
+        }
+        return drzewo;
     }
        /* public  List<Wezel> czytajWartosci(String sciezkadoPliku) throws FileNotFoundException {
             File plik = new File(sciezkadoPliku);
