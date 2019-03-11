@@ -56,6 +56,10 @@ public class Parametr implements ElementDrzewa {
     }
 
     public String toString(){
-        return nazwa+", "+wartosc;
+        if(czyLiczba) {
+            return nazwa + ", " + wartoscLiczbowa;
+        }else{
+            return nazwa + ", " + wartosc;
+        }
     }
 }
