@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.EventQueue;
+
 
 public class Main {
 
@@ -43,5 +45,10 @@ public class Main {
         for(int i=0; i<((List) test).size(); i++){
             System.out.println(((List) test).remove(0));
         }
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Okno();
+            }
+        });
     }
 }
