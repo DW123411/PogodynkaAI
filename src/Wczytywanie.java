@@ -81,6 +81,9 @@ public class Wczytywanie {
                         drzewo = new Drzewo<>(tmpWezel);
                         czyPierwszy = false;
                     }
+                    if(tmpRodzic!=null){
+                        tmpRodzic.dodajDziecko(tmpWezel);
+                    }
                 } else {
                     Parametr tmpPar = null;
                     if(skaner.nextInt()==0) {
@@ -97,6 +100,9 @@ public class Wczytywanie {
                     }
                     Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpPar);
                     wezly.add(tmpWezel);
+                    if(tmpRodzic!=null){
+                        tmpRodzic.dodajDziecko(tmpWezel);
+                    }
                 }
             }
         }catch(NullPointerException err){

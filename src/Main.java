@@ -45,10 +45,10 @@ public class Main {
         for(int i=0; i<((List) test).size(); i++){
             System.out.println(((List) test).remove(0));
         }
-        EventQueue.invokeLater(new Runnable() {
+        /*EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Okno();
             }
-        });
+        });*/
     }
 }
