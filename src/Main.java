@@ -33,22 +33,20 @@ public class Main {
         System.out.print("Pre Order: ");
         drzewo.preOrder(korzen);
 
-        Wczytywanie plik = new Wczytywanie();
+        //Wczytywanie plik = new Wczytywanie();
 
-        Object test = plik.czytajKategoria("D:/Mateusz/Pulpit/test.txt");
+        //Object test = plik.czytajKategoria("D:/Mateusz/Pulpit/test.txt");
 
-        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("C:/Users/Dell/Desktop/test.txt");
+        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("D:/Mateusz/Pulpit/test.txt");
 
         System.out.println("Test:");
         testWczytywania.preOrder(testWczytywania.getKorzen());
 
-        for(int i=0; i<((List) test).size(); i++){
-            System.out.println(((List) test).remove(0));
-        }
-        /*EventQueue.invokeLater(new Runnable() {
+
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Okno();
             }
-        });*/
+        });
     }
 }
