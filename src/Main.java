@@ -37,7 +37,7 @@ public class Main {
 
         //Object test = plik.czytajKategoria("D:/Mateusz/Pulpit/test.txt");
 
-        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("D:/Mateusz/Pulpit/test.txt");
+        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("C:/Users/Dell/Desktop/test.txt");
 
         System.out.println("Test:");
         testWczytywania.preOrder(testWczytywania.getKorzen());

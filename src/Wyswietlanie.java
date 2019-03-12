@@ -50,13 +50,59 @@ public class Wyswietlanie extends JPanel
         g.setColor(Color.black);
         Graphics2D g3 = (Graphics2D) okno.getGraphics();
         g3.setStroke(new BasicStroke(2));
-        g3.setColor(Color.red);
+        g3.setColor(Color.white);
 
 
-            Line2D.Double line = new Line2D.Double(250, 250, 500, 500);
+            Line2D.Double line = new Line2D.Double(270, 50, 200, 150);
+        Line2D.Double line2 = new Line2D.Double(270, 50, 270, 150);
+        Line2D.Double line3 = new Line2D.Double(270, 50, 340, 150);
+        Line2D.Double line4 = new Line2D.Double(200, 150, 150, 250);
+        Line2D.Double line5 = new Line2D.Double(340, 150, 370, 250);
+        Line2D.Double line6 = new Line2D.Double(270, 150, 270, 250);
+        Line2D.Double line7 = new Line2D.Double (150, 250, 120, 350);
+        Line2D.Double line8 = new Line2D.Double (150, 250, 190, 350);
 
-            g.draw(line);
-            g3.drawString("Outlook", 250, 250);
+        Line2D.Double line9 = new Line2D.Double (190, 350, 200, 450);
+        Line2D.Double line10 = new Line2D.Double (120, 350, 130, 450);
+
+
+        Line2D.Double line11 = new Line2D.Double (370, 250, 340, 350);
+        Line2D.Double line12 = new Line2D.Double (370, 250, 420, 350);
+
+        Line2D.Double line13 = new Line2D.Double (340, 350, 350, 450);
+        Line2D.Double line14 = new Line2D.Double (420, 350, 430, 450);
+
+
+
+        g.draw(line);
+        g.draw(line2);
+        g.draw(line3);
+        g.draw(line4);
+        g.draw(line5);
+        g.draw(line6);
+        g.draw(line7);
+        g.draw(line8);
+        g.draw(line9);
+        g.draw(line10);
+        g.draw(line11);
+        g.draw(line12);
+        g.draw(line13);
+        g.draw(line14);
+            g3.drawString("Outlook", 270, 50);
+        g3.drawString("Sunny", 200, 150);
+        g3.drawString("Cloudy", 270, 150);
+        g3.drawString("Rain", 340, 150);
+        g3.drawString("Humidity", 150, 250);
+        g3.drawString("Windy", 370, 250);
+        g3.drawString("Yes", 270, 250);
+        g3.drawString("High", 120, 350);
+        g3.drawString("Normal", 190, 350);
+        g3.drawString("False", 340, 350);
+        g3.drawString("True", 420, 350);
+        g3.drawString("Yes", 200, 450);
+        g3.drawString("No", 130, 450);
+        g3.drawString("Yes", 350, 450);
+        g3.drawString("No", 430, 450);
 
 
         repaint();
