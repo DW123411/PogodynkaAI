@@ -1,0 +1,3 @@
+0 Outlook null
+1 0 Sunny true Outlook
+1 0 Cloudy true Outlook
