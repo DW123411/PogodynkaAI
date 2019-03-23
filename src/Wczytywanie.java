@@ -1,7 +1,4 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,40 +19,40 @@ public class Wczytywanie {
             skaner.useDelimiter("\\s*,\\s*");
             boolean czyPierwszy = true; //zmienna potrzebna do wykrycia pierwszej linii danych w pliku
             while (skaner.hasNextLine()){
-                int tmp = skaner.nextInt(); //wczytanie liczby określającej typ danych (Kategoria lub Parametr)
-                if (tmp == 0) { //Kategoria
-                    Kategoria tmpKat = new Kategoria(skaner.next()); //utworzenie kategorii o nazwie wczytanej z pliku
-                    String tmpNazwaRodzica = skaner.next(); //wczytanie nazwy rodzica Kategorii w drzewie
+                int tmp = skaner.nextInt(); //wczytanie liczby określającej typ danych (Atrybut lub WartoscAtrybutu)
+                if (tmp == 0) { //Atrybut
+                    Atrybut tmpAtr = new Atrybut(skaner.next()); //utworzenie kategorii o nazwie wczytanej z pliku
+                    String tmpNazwaRodzica = skaner.next(); //wczytanie nazwy rodzica Atrybutu w drzewie
                     Wezel<ElementDrzewa> tmpRodzic = null;
                     for(Wezel<ElementDrzewa> obj : wezly){
-                        if((obj.getDane().getNazwa().equals(tmpNazwaRodzica))){ //przeszukanie wczytanych już wcześniej węzłów w celu znalezienia rodzica dla nowo wczytanej kategorii
+                        if((obj.getDane().getNazwa().equals(tmpNazwaRodzica))){ //przeszukanie wczytanych już wcześniej węzłów w celu znalezienia rodzica dla nowo wczytanego atrybutu
                             tmpRodzic = obj;
                         }
                     }
-                    Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpKat); //utworzenie węzła drzewa
+                    Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpAtr); //utworzenie węzła drzewa
                     wezly.add(tmpWezel);
-                    if (czyPierwszy){ //w przypadku pierwszej Kategorii należy utworzyć nowy objekt klasy Drzewo
+                    if (czyPierwszy){ //w przypadku pierwszego Atrybutu należy utworzyć nowy objekt klasy Drzewo
                         drzewo = new Drzewo<>(tmpWezel);
                         czyPierwszy = false;
                     }
                     if(tmpRodzic!=null){
                         tmpRodzic.dodajDziecko(tmpWezel); //dodanie utworzonego węzła do listy potomków jego rodzica w drzewie
                     }
-                } else { //Parametr
-                    Parametr tmpPar = null;
-                    if(skaner.nextInt()==0) { //jeśli drugą wczytaną wartością jest 0 to oznacza że parametr ma wartość boolean
-                        tmpPar = new Parametr(skaner.next(),skaner.nextBoolean());
-                    }else{ //jeśli druga wczytana wartość wynosi 1 to oznacza że parametr ma wartość liczbową
-                        tmpPar = new Parametr(skaner.next(),skaner.nextInt());
+                } else { //WartoscAtrybutu
+                    WartoscAtrybutu tmpWA = null;
+                    if(skaner.nextInt()==0) { //jeśli drugą wczytaną wartością jest 0 to oznacza że WartoscAtrybutu ma wartość boolean
+                        tmpWA = new WartoscAtrybutu(skaner.next(),skaner.nextBoolean());
+                    }else{ //jeśli druga wczytana wartość wynosi 1 to oznacza że WartoscAtrybutu ma wartość liczbową
+                        tmpWA = new WartoscAtrybutu(skaner.next(),skaner.nextInt());
                     }
-                    String tmpNazwaRodzica = skaner.next(); //wczytanie nazwy rodzica Parametru w drzewie
+                    String tmpNazwaRodzica = skaner.next(); //wczytanie nazwy rodzica WartosciAtrybutu w drzewie
                     Wezel<ElementDrzewa> tmpRodzic = null;
                     for(Wezel<ElementDrzewa> obj : wezly){
-                        if((obj.getDane().getNazwa().equals(tmpNazwaRodzica))){ //przeszukanie wczytanych już wcześniej węzłów w celu znalezienia rodzica dla nowo wczytanego parametru
+                        if((obj.getDane().getNazwa().equals(tmpNazwaRodzica))){ //przeszukanie wczytanych już wcześniej węzłów w celu znalezienia rodzica dla nowo wczytanej WartosciAtrybutu
                             tmpRodzic = obj;
                         }
                     }
-                    Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpPar); //utworzenie węzła drzewa
+                    Wezel<ElementDrzewa> tmpWezel = new Wezel<>(tmpRodzic,tmpWA); //utworzenie węzła drzewa
                     wezly.add(tmpWezel);
                     if(tmpRodzic!=null){
                         tmpRodzic.dodajDziecko(tmpWezel); //dodanie utworzonego węzła do listy potomków jego rodzica w drzewie

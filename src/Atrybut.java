@@ -1,11 +1,11 @@
-public class Kategoria implements ElementDrzewa {
+public class Atrybut implements ElementDrzewa {
     private String nazwa;
 
-    public Kategoria(){
+    public Atrybut(){
         nazwa = "";
     }
 
-    public Kategoria(String nazwa){
+    public Atrybut(String nazwa){
         this.nazwa = nazwa;
     }
 

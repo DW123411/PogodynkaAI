@@ -1,23 +1,23 @@
-public class Parametr implements ElementDrzewa {
+public class WartoscAtrybutu implements ElementDrzewa {
     private String nazwa;
     private boolean wartosc;
     private boolean czyLiczba;
     private int wartoscLiczbowa;
 
-    public Parametr(){
+    public WartoscAtrybutu(){
         nazwa = "";
         wartosc = false;
         czyLiczba = false;
         wartoscLiczbowa = 0;
     }
 
-    public Parametr(String nazwa, boolean wartosc){
+    public WartoscAtrybutu(String nazwa, boolean wartosc){
         this.nazwa = nazwa;
         this.wartosc = wartosc;
         czyLiczba = false;
     }
 
-    public Parametr(String nazwa, int wartoscLiczbowa){
+    public WartoscAtrybutu(String nazwa, int wartoscLiczbowa){
         this.nazwa = nazwa;
         this.wartoscLiczbowa = wartoscLiczbowa;
         czyLiczba = true;
