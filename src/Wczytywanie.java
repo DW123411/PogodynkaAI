@@ -58,6 +58,7 @@ public class Wczytywanie {
         List<Wezel<ElementDrzewa>> wezly = new ArrayList<>(); //lista zawierająca węzły wczytywanego drzewa
         Drzewo<ElementDrzewa> drzewo = new Drzewo<>();
         try{
+            skaner.useDelimiter("\\s*,\\s*");
             boolean czyPierwszy = true; //zmienna potrzebna do wykrycia pierwszej linii danych w pliku
             while (skaner.hasNextLine()){
                 int tmp = skaner.nextInt(); //wczytanie liczby określającej typ danych (Kategoria lub Parametr)
@@ -100,6 +101,7 @@ public class Wczytywanie {
                     }
                 }
             }
+            skaner.close();
         }catch(NullPointerException err){
             System.out.println(err.toString());
         }
