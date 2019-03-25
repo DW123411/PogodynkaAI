@@ -43,8 +43,9 @@ public class Main {
         testWczytywania.preOrder(testWczytywania.getKorzen());
         System.out.println();
 
-        String[][] klasyfikcaja = {{"Day","Outlook","Humidity","Wind","PlayTenis"},
-                {"D1","Sunny","High","Weak","No"},
+        String[][] atrybuty = {{"Day","Outlook","Humidity","Wind","PlayTenis"}};
+
+        String[][] klasyfikcaja = {{"D1","Sunny","High","Weak","No"},
                 {"D2","Sunny","High","Strong","No"},
                 {"D3","Overcast","High","Weak","Yes"},
                 {"D4","Rain","High","Weak","Yes"},
