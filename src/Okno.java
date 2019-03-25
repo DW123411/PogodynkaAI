@@ -24,7 +24,7 @@ public class Okno extends JFrame implements ActionListener
     Menuski menu = new Menuski();
     Wyswietlanie okno = new Wyswietlanie();
     String sciezkaDoPliku;
-    Drzewo<ElementDrzewa> testWczytywaniau;
+    Drzewo<ElementDrzewa> wczytywanie;
     public Okno() {  
         super("Projekt Zespołowy");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
@@ -65,9 +65,10 @@ public class Okno extends JFrame implements ActionListener
 
         else if(label.equals("Wczytaj drzewo z Pliku")){
             boolean spr = otworzPlik();
-            if (spr)
-           testWczytywaniau = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
-            Drzewo drzewo = new Drzewo(testWczytywaniau.getKorzen());
+            if (spr) {
+                wczytywanie = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
+                Drzewo drzewo = new Drzewo(wczytywanie.getKorzen());
+            }
 
         }  
     }

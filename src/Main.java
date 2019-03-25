@@ -41,6 +41,31 @@ public class Main {
 
         System.out.println("Test:");
         testWczytywania.preOrder(testWczytywania.getKorzen());
+        System.out.println();
+
+        String[][] klasyfikcaja = {{"Day","Outlook","Humidity","Wind","PlayTenis"},
+                {"D1","Sunny","High","Weak","No"},
+                {"D2","Sunny","High","Strong","No"},
+                {"D3","Overcast","High","Weak","Yes"},
+                {"D4","Rain","High","Weak","Yes"},
+                {"D5","Rain","Normal","Weak","Yes"},
+                {"D6","Rain","Normal","Strong","No"},
+                {"D7","Overcast","Normal","Strong","Yes"},
+                {"D8","Sunny","High","Weak","No"},
+                {"D9","Sunny","Normal","Weak","Yes"},
+                {"D10","Rain","Normal","Weak","Yes"},
+                {"D11","Sunny","Normal","Strong","Yes"},
+                {"D12","Overcast","High","Strong","Yes"},
+                {"D13","Overcast","Normal","Weak","Yes"},
+                {"D14","Rain","High","Strong","No"}
+        };
+
+        for(int i=0;i<klasyfikcaja.length;i++) {
+            for (int j=0; j<klasyfikcaja[i].length; j++)
+            System.out.print(klasyfikcaja[i][j]+"   ");
+
+            System.out.println();
+        }
 
 
         EventQueue.invokeLater(new Runnable() {
