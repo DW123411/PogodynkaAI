@@ -21,4 +21,8 @@ public class DrzewoDecyzyjne {
         }
         return new Drzewo<String>();
     }
+
+    public String wybierzAtrybut(String[] atrybuty, String[][] przyklady){
+        return "";
+    }
 }
