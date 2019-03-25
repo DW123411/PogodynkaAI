@@ -1,6 +1,4 @@
-import java.io.*;
-import java.awt.*;
-import javax.imageio.*;
+
 
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
@@ -52,6 +50,9 @@ public class Okno extends JFrame implements ActionListener
     {
         menu.showtree.addActionListener(this);
         menu.tree.addActionListener(this);
+        menu.exit.addActionListener(this);
+        menu.clean.addActionListener(this);
+        menu.credits.addActionListener(this);
 
     }
 
@@ -93,8 +94,20 @@ public class Okno extends JFrame implements ActionListener
                 wczytywanie = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
                 drzewo = new Drzewo(wczytywanie.getKorzen());
             }
+            else if (e.getActionCommand().equals("O programie")){
+                 okno.credits();
+            }
 
-        }  
+            else if (e.getActionCommand().equals("Wyjdź z programu")){
+            System.exit(0);
+            }
+            else if (e.getActionCommand().equals("Wyczyść")){
+                okno.wyczysc();
+
+            }
+        }
+
+
     }
 
     private void dopasujSieDoZawartosci()
