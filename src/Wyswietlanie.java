@@ -1,16 +1,9 @@
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+
 
 import javax.swing.JPanel;
-import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 
 public class Wyswietlanie extends JPanel
@@ -137,6 +130,33 @@ public class Wyswietlanie extends JPanel
         }
         repaint();
     }
+
+
+    public void credits(){
+        wyczysc();
+        Graphics2D g2 = (Graphics2D) okno.getGraphics();
+        g2.setStroke(new BasicStroke(2));
+
+        g2.setColor(Color.red);
+
+        g2.drawString("Program napisany w ramach Projektu Zespołowego",10, 10);
+        g2.drawString("Wersja : Wczesna (2-gi Sprint) ",10, 20);
+        g2.drawString("Autorzy : ",10, 30);
+        g2.drawString("Główni programiści :  ",10, 40);
+        g2.drawString("Dominik Woźniak ",20, 50);
+        g2.drawString("Adler ",20, 60);
+        g2.drawString("Testerzy : ",10, 70);
+        g2.drawString("Jakub Gabryś ",20, 80);
+        g2.drawString("Marcin Majzner ",20, 90);
+        g2.drawString("Programista Pomocniczy :  ",10, 100);
+        g2.drawString("Damian Staśkiewicz ",20, 110);
+        g2.drawString("Projektant interfejsu : ",10, 120);
+        g2.drawString("Adam Witasiak ",20, 130);
+        g2.drawString("2019, PWSZ KALISZ, ",20, 140);
+        repaint();
+
+    }
+
 
 
     //przesłonięta metoda paintComponent z klasy JPanel do rysowania
