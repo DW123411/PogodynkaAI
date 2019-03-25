@@ -44,4 +44,9 @@ public class Drzewo<T> {
         }
         System.out.print(n+" ");
     }
+
+    public int getLevel(Wezel<T> n) {
+        if (n == korzen) return 0;
+        else return 1 + getLevel(n.getRodzic());
+    }
 }

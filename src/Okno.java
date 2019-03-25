@@ -25,6 +25,7 @@ public class Okno extends JFrame implements ActionListener
     Wyswietlanie okno = new Wyswietlanie();
     String sciezkaDoPliku;
     Drzewo<ElementDrzewa> wczytywanie;
+    Drzewo drzewo;
     public Okno() {  
         super("Projekt Zespołowy");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
@@ -59,7 +60,30 @@ public class Okno extends JFrame implements ActionListener
     {
         String label = e.getActionCommand();
         if(label.equals("Rysuj Drzewo")){
-            okno.rysujDrzewo();
+            Wezel<String> korzen = new Wezel<String>(null, "Outlook");
+
+            Wezel<String> n1 = korzen.dodajDziecko("Sunny");
+            Wezel<String> n2 = korzen.dodajDziecko("Overcast");
+            Wezel<String> n3 = korzen.dodajDziecko("Rain");
+            Wezel<String> n4 = n1.dodajDziecko("Humidity");
+            Wezel<String> n5 = n2.dodajDziecko("No");
+
+            Wezel<String> n6 = n3.dodajDziecko("Wind");
+            Wezel<String> n7 = n4.dodajDziecko("High");
+            Wezel<String> n8 = n4.dodajDziecko("Normal");
+            Wezel<String> n9 = n7.dodajDziecko("Yes");
+            Wezel<String> n10 = n8.dodajDziecko("No");
+           // Wezel<String> n11 = n6.dodajDziecko("Strong");
+           // Wezel<String> n12 = n6.dodajDziecko("Weak");
+           // Wezel<String> n13 = n11.dodajDziecko("Yes");
+           // Wezel<String> n14 = n12.dodajDziecko("No");
+
+
+
+
+
+            //   Drzewo<String> drzewo = new Drzewo<String>(korzen);
+            okno.rysujDrzewo(korzen,550,50,korzen);
             //System.out.println("Coś tam");
         }
 
@@ -67,7 +91,7 @@ public class Okno extends JFrame implements ActionListener
             boolean spr = otworzPlik();
             if (spr) {
                 wczytywanie = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
-                Drzewo drzewo = new Drzewo(wczytywanie.getKorzen());
+                drzewo = new Drzewo(wczytywanie.getKorzen());
             }
 
         }  

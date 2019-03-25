@@ -2,6 +2,7 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.awt.EventQueue;
 
@@ -32,6 +33,9 @@ public class Main {
 
         System.out.print("Pre Order: ");
         drzewo.preOrder(korzen);
+        System.out.println(drzewo.getLevel(n1));
+
+
 
         //Wczytywanie plik = new Wczytywanie();
 
@@ -39,9 +43,16 @@ public class Main {
 
         Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("src/test.txt");
 
+
         System.out.println("Test:");
         testWczytywania.preOrder(testWczytywania.getKorzen());
         System.out.println();
+        Drzewo drzewow = new Drzewo(testWczytywania.getKorzen());
+
+        LinkedList<Wezel> lista = drzewow.getKorzen().getDzieci();
+        System.out.println(lista.size());
+        Wezel w = lista.remove(0);
+        System.out.println(w.czyLisc());
 
         String[][] atrybuty = {{"Day","Outlook","Humidity","Wind","PlayTenis"}};
 

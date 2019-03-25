@@ -44,16 +44,16 @@ public class Wyswietlanie extends JPanel
         setMaximumSize(r);
     }
 
-    public void rysujDrzewo() {
+    public void rysujDrzewo(Wezel wezel,int szerokosc,int wysokosc,Wezel korzen) {
         Graphics2D g = (Graphics2D) okno.getGraphics();
         g.setStroke(new BasicStroke(2));
         g.setColor(Color.black);
         Graphics2D g3 = (Graphics2D) okno.getGraphics();
         g3.setStroke(new BasicStroke(2));
         g3.setColor(Color.white);
+        Drzewo drzewo = new Drzewo(korzen);
 
-
-            Line2D.Double line = new Line2D.Double(270, 50, 200, 150);
+     /*       Line2D.Double line = new Line2D.Double(270, 50, 200, 150);
         Line2D.Double line2 = new Line2D.Double(270, 50, 270, 150);
         Line2D.Double line3 = new Line2D.Double(270, 50, 340, 150);
         Line2D.Double line4 = new Line2D.Double(200, 150, 150, 250);
@@ -89,7 +89,7 @@ public class Wyswietlanie extends JPanel
         g.draw(line13);
         g.draw(line14);
             g3.drawString("Outlook", 270, 50);
-        g3.drawString("Sunny", 200, 150);
+        g3.drawString("Sunny", 180, 150);
         g3.drawString("Cloudy", 270, 150);
         g3.drawString("Rain", 340, 150);
         g3.drawString("Humidity", 150, 250);
@@ -102,9 +102,39 @@ public class Wyswietlanie extends JPanel
         g3.drawString("Yes", 200, 450);
         g3.drawString("No", 130, 450);
         g3.drawString("Yes", 350, 450);
-        g3.drawString("No", 430, 450);
+        g3.drawString("No", 430, 450);*/
+     int odleglosc = 0;
+     int liczba = 0;
+        int poziom =  drzewo.getLevel(wezel);
+        if(wezel.equals(korzen))
+        g3.drawString(wezel.toString(), 270, 50);
+        else
+        g3.drawString(wezel.toString(), szerokosc, wysokosc);
+        LinkedList<Wezel> lista = wezel.getDzieci();
+        while(!lista.isEmpty()) {
+            int podzial = lista.size()+1;
+            Wezel w = lista.remove(0);
+            if(w.czyLisc()) {
+                System.out.println(w.toString());
+                g3.drawString(w.toString(), szerokosc, wysokosc + 100);
+            }
+
+            else {
+    if(liczba == 0) {
+        szerokosc = (szerokosc+70) / podzial;
+        odleglosc = szerokosc;
+        liczba ++;
+    }
+
+                wysokosc = (poziom +2)*75;
+                System.out.println(szerokosc+" "+wysokosc);
+
+                rysujDrzewo(w, szerokosc, wysokosc,korzen);
+                szerokosc = szerokosc + odleglosc;
+            }
 
 
+        }
         repaint();
     }
 
