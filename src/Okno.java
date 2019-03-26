@@ -50,7 +50,7 @@ public class Okno extends JFrame implements ActionListener
         menu.exit.addActionListener(this);
         menu.clean.addActionListener(this);
         menu.credits.addActionListener(this);
-
+        menu.savetree.addActionListener(this);
     }
 
     @Override
@@ -97,6 +97,10 @@ public class Okno extends JFrame implements ActionListener
         else if (label.equals("O programie")){
             okno.credits();
         }
+         else if(label.equals("Zapisz plik"))
+        {
+            zapiszPlik();
+        } 
 
         else if (label.equals("Wyjdź z programu")){
             System.exit(0);
@@ -132,18 +136,14 @@ public class Okno extends JFrame implements ActionListener
         }
         return check;
     }
-
-    private boolean zapiszPlik(){
+    private void zapiszPlik(){
         JFileChooser zapisz= new JFileChooser();
         FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
         zapisz.setFileFilter(filtr);
         int wynik = zapisz.showSaveDialog(this);
-        boolean check = false;
         if (wynik == JFileChooser.APPROVE_OPTION)
         {
             sciezkaDoPliku = zapisz.getSelectedFile().getPath();
-            check = true;
         }
-        return check;
     }
 }
