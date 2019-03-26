@@ -1,5 +1,4 @@
 
-
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -8,13 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import java.awt.event.*;
-
-
-
+import java.io.*;
+import javax.imageio.*;
+import java.awt.*;
 import java.util.*;
-
 import javax.swing.*;
 
 public class Okno extends JFrame implements ActionListener
@@ -23,6 +19,7 @@ public class Okno extends JFrame implements ActionListener
     Wyswietlanie okno = new Wyswietlanie();
     String sciezkaDoPliku;
     Drzewo<ElementDrzewa> wczytywanie;
+    Drzewo<ElementDrzewa> zapis;
     Drzewo drzewo;
     public Okno() {  
         super("Projekt Zespołowy");
@@ -74,12 +71,10 @@ public class Okno extends JFrame implements ActionListener
             Wezel<String> n8 = n4.dodajDziecko("Normal");
             Wezel<String> n9 = n7.dodajDziecko("Yes");
             Wezel<String> n10 = n8.dodajDziecko("No");
-           // Wezel<String> n11 = n6.dodajDziecko("Strong");
-           // Wezel<String> n12 = n6.dodajDziecko("Weak");
-           // Wezel<String> n13 = n11.dodajDziecko("Yes");
-           // Wezel<String> n14 = n12.dodajDziecko("No");
-
-
+            // Wezel<String> n11 = n6.dodajDziecko("Strong");
+            // Wezel<String> n12 = n6.dodajDziecko("Weak");
+            // Wezel<String> n13 = n11.dodajDziecko("Yes");
+            // Wezel<String> n14 = n12.dodajDziecko("No");
 
 
 
@@ -88,44 +83,64 @@ public class Okno extends JFrame implements ActionListener
             //System.out.println("Coś tam");
         }
 
-        else if(label.equals("Wczytaj drzewo z Pliku")){
+        else if(label.equals("Wczytaj drzewo z Pliku")) {
             boolean spr = otworzPlik();
             if (spr) {
                 wczytywanie = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
                 drzewo = new Drzewo(wczytywanie.getKorzen());
             }
-            else if (e.getActionCommand().equals("O programie")){
-                 okno.credits();
-            }
-
-            else if (e.getActionCommand().equals("Wyjdź z programu")){
-            System.exit(0);
-            }
-            else if (e.getActionCommand().equals("Wyczyść")){
-                okno.wyczysc();
-
+            else if (!spr) {
+                JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku");
             }
         }
 
+        else if (label.equals("O programie")){
+            okno.credits();
+        }
+
+        else if (label.equals("Wyjdź z programu")){
+            System.exit(0);
+        }
+        else if (label.equals("Wyczyść")){
+            okno.wyczysc();
+
+        }
 
     }
 
     private void dopasujSieDoZawartosci()
     {
         //dostosowanie okna do zawartości
-        pack();   
+        pack();
         //wyśrodkowanie ramki
-        setLocationRelativeTo(null);           
+        setLocationRelativeTo(null);
     }
+
     private boolean otworzPlik(){
         JFileChooser otworz= new JFileChooser();
         FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
+        FileNameExtensionFilter filtrCSV = new FileNameExtensionFilter("CSV", "csv");
         otworz.setFileFilter(filtr);
+        otworz.setFileFilter(filtrCSV);
         int wynik = otworz.showOpenDialog(this);
         boolean check = false;
         if (wynik == JFileChooser.APPROVE_OPTION)
         {
             sciezkaDoPliku = otworz.getSelectedFile().getPath();
+            check = true;
+        }
+        return check;
+    }
+
+    private boolean zapiszPlik(){
+        JFileChooser zapisz= new JFileChooser();
+        FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
+        zapisz.setFileFilter(filtr);
+        int wynik = zapisz.showSaveDialog(this);
+        boolean check = false;
+        if (wynik == JFileChooser.APPROVE_OPTION)
+        {
+            sciezkaDoPliku = zapisz.getSelectedFile().getPath();
             check = true;
         }
         return check;
