@@ -14,6 +14,8 @@ public class Menuski extends JMenuBar
     
     JMenuItem showtree = new JMenuItem("Rysuj Drzewo");
 
+    JMenuItem savetree = new JMenuItem("Zapisz Drzewo");
+
     JMenuItem exit = new JMenuItem("Wyjdź z programu");
 
     JMenuItem credits = new JMenuItem("O programie");
@@ -25,6 +27,7 @@ public class Menuski extends JMenuBar
         operacje.add(showtree);
         operacje.add(tree);
         operacje.add(clean);
+        operacje.add(new JSeparator());
         operacje.add(credits);
 
         operacje.add(exit);
