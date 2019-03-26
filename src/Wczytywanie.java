@@ -1,7 +1,9 @@
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class Wczytywanie {
 
@@ -62,6 +64,10 @@ public class Wczytywanie {
             skaner.close();
         }catch(NullPointerException err){
             System.out.println(err.toString());
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Nieprawidlowe dane");
+            System.out.println(e.toString());
         }
         return drzewo;
     }

@@ -122,6 +122,7 @@ public class Okno extends JFrame implements ActionListener
         FileNameExtensionFilter filtrCSV = new FileNameExtensionFilter("CSV", "csv");
         otworz.setFileFilter(filtr);
         otworz.setFileFilter(filtrCSV);
+        otworz.setAcceptAllFileFilterUsed(false);
         int wynik = otworz.showOpenDialog(this);
         boolean check = false;
         if (wynik == JFileChooser.APPROVE_OPTION)
