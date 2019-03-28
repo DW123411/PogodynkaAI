@@ -53,7 +53,7 @@ public class Main {
         Wezel w = lista.remove(0);
         System.out.println(w.czyLisc());
 
-        String[][] atrybuty = {{"Day","Outlook","Humidity","Wind","PlayTenis"}};
+        String[] atrybuty = {"Outlook","Humidity","Wind"};
 
         String[][] klasyfikcaja = {{"D1","Sunny","High","Weak","No"},
                 {"D2","Sunny","High","Strong","No"},
