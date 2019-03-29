@@ -49,4 +49,17 @@ public class Drzewo<T> {
         if (n == korzen) return 0;
         else return 1 + getLevel(n.getRodzic());
     }
+
+    public int getHeight(Wezel<T> n) {
+        if (n == null) return 0;
+        int h = 0;
+        System.out.println(h);
+
+
+        System.out.println(n.getLiczbaDzieci());
+
+
+        return h + 1;
+    }
+
 }
