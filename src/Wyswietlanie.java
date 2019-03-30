@@ -7,6 +7,7 @@ public class Wyswietlanie extends JPanel
 {
     
     BufferedImage okno;
+    JFrame f;
     //konstruktor
     public Wyswietlanie() 
     {
@@ -200,14 +201,16 @@ public class Wyswietlanie extends JPanel
 
 
     public void credits(){
-        wyczysc();
-        Graphics2D g2 = (Graphics2D) okno.getGraphics();
-        g2.setStroke(new BasicStroke(2));
 
-        g2.setColor(Color.red);
+        JOptionPane.showMessageDialog(null,"Program napisany w ramach Projektu Zespołowego \nWersja : Wczesna (3-ci Sprint) \nAutorzy : \nGłówni programiści : \nDominik Woźniak \nAdler Mateusz \nTesterzy : \nJakub Gabryś \nMarcin Majzner \nProgramista Pomocniczy \nDamian Staśkiewicz \nProjektant interfejsu : \nAdam Witasiak \n2019, PWSZ KALISZ ","O Programie",JOptionPane.INFORMATION_MESSAGE);
+        //wyczysc();
+       // Graphics2D g2 = (Graphics2D) okno.getGraphics();
+        //g2.setStroke(new BasicStroke(2));
 
-        g2.drawString("Program napisany w ramach Projektu Zespołowego",10, 10);
-        g2.drawString("Wersja : Wczesna (2-gi Sprint) ",10, 20);
+       // g2.setColor(Color.red);
+
+       // g2.drawString("Program napisany w ramach Projektu Zespołowego",10, 10);
+       /* g2.drawString("Wersja : Wczesna (2-gi Sprint) ",10, 20);
         g2.drawString("Autorzy : ",10, 30);
         g2.drawString("Główni programiści :  ",10, 40);
         g2.drawString("Dominik Woźniak ",20, 50);
@@ -220,8 +223,9 @@ public class Wyswietlanie extends JPanel
         g2.drawString("Projektant interfejsu : ",10, 120);
         g2.drawString("Adam Witasiak ",20, 130);
         g2.drawString("2019, PWSZ KALISZ, ",20, 140);
-        repaint();
 
+        repaint();
+*/
     }
 
 
