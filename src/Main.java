@@ -11,28 +11,34 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Hello3");
         System.out.println("Hello Test GitHub!");
+        Wyswietlanie test = new Wyswietlanie();
 
         Wezel<String> korzen = new Wezel<String>(null, "G");
 
         Wezel<String> n1 = korzen.dodajDziecko("E");
         Wezel<String> n2 = korzen.dodajDziecko("C");
         Wezel<String> n3 = korzen.dodajDziecko("V");
-        n1.dodajDziecko("Z");
+        Wezel<String> n7 = n1.dodajDziecko("Z");
         Wezel<String> n4 = n1.dodajDziecko("M");
-        n1.dodajDziecko("P");
-        n4.dodajDziecko("J");
+        Wezel<String> n8 = n1.dodajDziecko("P");
+        Wezel<String> n9 = n4.dodajDziecko("J");
         Wezel<String> n5 = n2.dodajDziecko("X");
-        n5.dodajDziecko("H");
-        n5.dodajDziecko("O");
-        n3.dodajDziecko("B");
+        Wezel<String> n10 = n5.dodajDziecko("H");
+        Wezel<String> n11  = n5.dodajDziecko("O");
+        Wezel<String> n12 = n3.dodajDziecko("B");
         Wezel<String> n6 = n3.dodajDziecko("S");
-        n6.dodajDziecko("F");
+        Wezel<String> n13 = n6.dodajDziecko("F");
 
         Drzewo<String> drzewo = new Drzewo<String>(korzen);
 
         System.out.print("Pre Order: ");
         drzewo.preOrder(korzen);
         System.out.println(drzewo.getLevel(n1));
+        System.out.println("test które dziecko" +korzen.getLiczbaDzieci());
+        korzen.setPoczatekDostepnegoMiejsca(0);
+        korzen.setKoniecDostepnegoMiejsca(600);
+        test.obliczanieWspozednych(korzen,korzen);
+        System.out.println("Test losowego wezla(obliczanie współżednych: "+n6.getPoczatekDostepnegoMiejsca()+" "+n6.getKoniecDostepnegoMiejsca()+" "+n6.getX());
 
 
 

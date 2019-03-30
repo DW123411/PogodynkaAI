@@ -1,17 +1,9 @@
 
-import java.awt.FlowLayout;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.*;
-import javax.imageio.*;
-import java.awt.*;
-import java.util.*;
-import javax.swing.*;
 
 public class Okno extends JFrame implements ActionListener
 {
@@ -64,23 +56,34 @@ public class Okno extends JFrame implements ActionListener
             Wezel<String> n2 = korzen.dodajDziecko("Overcast");
             Wezel<String> n3 = korzen.dodajDziecko("Rain");
             Wezel<String> n4 = n1.dodajDziecko("Humidity");
-            Wezel<String> n5 = n2.dodajDziecko("No");
+            Wezel<String> n14 = n2.dodajDziecko("No");
 
             Wezel<String> n6 = n3.dodajDziecko("Wind");
             Wezel<String> n7 = n4.dodajDziecko("High");
             Wezel<String> n8 = n4.dodajDziecko("Normal");
             Wezel<String> n9 = n7.dodajDziecko("Yes");
             Wezel<String> n10 = n8.dodajDziecko("No");
-            // Wezel<String> n11 = n6.dodajDziecko("Strong");
-            // Wezel<String> n12 = n6.dodajDziecko("Weak");
-            // Wezel<String> n13 = n11.dodajDziecko("Yes");
-            // Wezel<String> n14 = n12.dodajDziecko("No");
+            Wezel<String> n11 = n6.dodajDziecko("Strong");
+            Wezel<String> n12 = n6.dodajDziecko("Weak");
+             Wezel<String> n13 = n11.dodajDziecko("Yes");
+             Wezel<String> n15 = n12.dodajDziecko("No");
+            korzen.setPoczatekDostepnegoMiejsca(0);
+            korzen.setKoniecDostepnegoMiejsca(okno.getWidth());
+            okno.obliczanieWspozednych(korzen,korzen);
+            System.out.println("Test losowego wezla(obliczanie współżednych: "+korzen.getPoczatekDostepnegoMiejsca()+" "+korzen.getKoniecDostepnegoMiejsca()+" "+n2.getX());
 
 
+               Drzewo<String> drzewo = new Drzewo<String>(korzen);
+            drzewo.preOrder(korzen);
+            System.out.println("test działania głębokość drzewa: "+drzewo.getHeight(drzewo.getKorzen()));
 
-            //   Drzewo<String> drzewo = new Drzewo<String>(korzen);
-            okno.rysujDrzewo(korzen,550,50,korzen);
-            //System.out.println("Coś tam");
+            System.out.println("Czy liść: "+drzewo.getKorzen().czyLisc());
+            System.out.println("Czy liść: "+n4.getLiczbaDzieci());
+            okno.obliczanieWspozednychY(korzen,okno.getHeight()/(drzewo.getHeight(drzewo.getKorzen())+2),drzewo,korzen);
+            System.out.println("Test obliczania y: "+n1.getY());
+            System.out.println("Czy liść: "+n4.getLiczbaDzieci());
+           okno.rysujDrzewo(korzen,korzen);
+            System.out.println("qqq"+korzen.toString().length());
         }
 
         else if(label.equals("Wczytaj drzewo z Pliku")) {

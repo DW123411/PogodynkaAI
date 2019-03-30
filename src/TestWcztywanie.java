@@ -1,19 +1,17 @@
 
 
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+
 import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestWcztywanie {
         Wczytywanie unit = new Wczytywanie();
     @Test
     public void loadFile()
     {        
-        Wczytywanie unit = new Wczytywanie();
+     /*   Wczytywanie unit = new Wczytywanie();
         unit.wczytajDrzewoZPliku("src/test.txt");
         assertEquals("0", unit.wezly.get(0));
         assertEquals("Outlook", unit.wezly.get(1));
@@ -27,7 +25,7 @@ public class TestWcztywanie {
         assertEquals("0", unit.wezly.get(9));
         assertEquals("Cloudy", unit.wezly.get(10));
         assertEquals("false", unit.wezly.get(11));
-        assertEquals("Outlook", unit.wezly.get(12));
+        assertEquals("Outlook", unit.wezly.get(12));*/
     }
     @Test(expected=IOException.class)
     public void czyPlikJestPusty() throws IOException {

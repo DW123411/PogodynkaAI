@@ -1,10 +1,7 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.*;
-
-
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
+import java.util.LinkedList;
 
 public class Wyswietlanie extends JPanel
 {
@@ -37,14 +34,68 @@ public class Wyswietlanie extends JPanel
         setMaximumSize(r);
     }
 
-    public void rysujDrzewo(Wezel wezel,int szerokosc,int wysokosc,Wezel korzen) {
+    public void obliczanieWspozednych(Wezel wezel,Wezel korzen){
+        if(wezel.equals(korzen)) {
+            System.out.println("Test tu jest");
+            wezel.setX((wezel.getKoniecDostepnegoMiejsca() - wezel.getPoczatekDostepnegoMiejsca()) / 2);
+        }
+        int liczbaDzieci = wezel.getLiczbaDzieci(); //liczba dzieci rodzica wpowadzanego do metody
+        int dostepnaPrzestrzen = (wezel.getKoniecDostepnegoMiejsca() - wezel.getPoczatekDostepnegoMiejsca())/liczbaDzieci; //określenie ile przestrzeni(serokości) będą miały dzieci rodzica wprowadzonego do metody
+        int koniecDostepnegoMiejsca = 0; //pomocnicza zmienna(nigdy nie zostanie użysta z wartością 0)
+        for(int i=0; i<liczbaDzieci; i++){
+            Wezel d = wezel.getDziecko(i); //zwrócenie pierwszego dziecka(dzieci liczone od 0)
+            if(i==0) //dla piewszego dziecka zawsze dostępne miejsce będzie zaczynało się od współrzędnych początka dostępnego miejsca rodzca
+                d.setPoczatekDostepnegoMiejsca(d.getRodzic().getPoczatekDostepnegoMiejsca()); //ustalenie początka dostępnego miejsca dla dziecka
+            else
+                d.setPoczatekDostepnegoMiejsca(koniecDostepnegoMiejsca); //dla dzieci innych niż na pozycji 0(pierwsze dziecko) początek dostępnego miejca będzie zaczynał się tam gdzie kończy się dostępne miejsce poprzedniego dziecka
+            koniecDostepnegoMiejsca = d.getPoczatekDostepnegoMiejsca() + dostepnaPrzestrzen; //ustalenie końca dostępnego miejsca poprzez dodanie wyliczonej odległości do początku dostępnego miejsca
+            d.setKoniecDostepnegoMiejsca(koniecDostepnegoMiejsca); //zapisanie końca dostępnego miejsca do węzła
+            d.setX(((d.getKoniecDostepnegoMiejsca() - d.getPoczatekDostepnegoMiejsca())/2)+d.getPoczatekDostepnegoMiejsca()); //określenie współrzednej x
+        }
+        LinkedList<Wezel> lista = new LinkedList<Wezel>();
+        for(int i=0; i<wezel.getDzieci().size(); i++){
+            lista.add((Wezel) wezel.getDzieci().get(i));
+        } //list przechowująca dzieci
+        while (!lista.isEmpty()){
+            Wezel p = lista.remove(0);
+            if(!p.czyLisc()){
+                obliczanieWspozednych(p,korzen); //wykonanie rekurencjsi
+            }
+        }
+
+
+    }
+
+
+
+    public void obliczanieWspozednychY(Wezel wezel, int podzial,Drzewo drzewo,Wezel korzen){
+        if(wezel.equals(korzen)) {
+            System.out.println("Test tu jest");
+            wezel.setY((drzewo.getLevel(wezel)+1)*podzial);
+        }
+        if(!wezel.czyLisc()){
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for(int i=0; i<wezel.getDzieci().size(); i++){
+                lista.add((Wezel) wezel.getDzieci().get(i));
+            } //list przechowująca dzieci
+            while (!lista.isEmpty()){
+                Wezel w = lista.remove(0);
+                w.setY((drzewo.getLevel(w)+1)*podzial);
+                obliczanieWspozednychY(w,podzial,drzewo,korzen);
+            }
+        }
+
+
+    }
+
+    public void rysujDrzewo(Wezel wezel,Wezel korzen) {
         Graphics2D g = (Graphics2D) okno.getGraphics();
         g.setStroke(new BasicStroke(2));
         g.setColor(Color.black);
         Graphics2D g3 = (Graphics2D) okno.getGraphics();
         g3.setStroke(new BasicStroke(2));
         g3.setColor(Color.white);
-        Drzewo drzewo = new Drzewo(korzen);
+
 
      /*       Line2D.Double line = new Line2D.Double(270, 50, 200, 150);
         Line2D.Double line2 = new Line2D.Double(270, 50, 270, 150);
@@ -95,7 +146,7 @@ public class Wyswietlanie extends JPanel
         g3.drawString("Yes", 200, 450);
         g3.drawString("No", 130, 450);
         g3.drawString("Yes", 350, 450);
-        g3.drawString("No", 430, 450);*/
+        g3.drawString("No", 430, 450);
      int odleglosc = 0;
      int liczba = 0;
         int poziom =  drzewo.getLevel(wezel);
@@ -128,6 +179,22 @@ public class Wyswietlanie extends JPanel
 
 
         }
+        repaint();*/
+        if(wezel.equals(korzen)) {
+            g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
+
+        }
+        if(!wezel.czyLisc()){
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for(int i=0; i<wezel.getDzieci().size(); i++){
+                lista.add((Wezel) wezel.getDzieci().get(i));
+            } //list przechowująca dzieci
+            while (!lista.isEmpty()){
+                Wezel w = lista.remove(0);
+                g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
+                rysujDrzewo(w,korzen);
+            }
+        }
         repaint();
     }
 
@@ -144,7 +211,7 @@ public class Wyswietlanie extends JPanel
         g2.drawString("Autorzy : ",10, 30);
         g2.drawString("Główni programiści :  ",10, 40);
         g2.drawString("Dominik Woźniak ",20, 50);
-        g2.drawString("Adler ",20, 60);
+        g2.drawString("Adler Mateusz",20, 60);
         g2.drawString("Testerzy : ",10, 70);
         g2.drawString("Jakub Gabryś ",20, 80);
         g2.drawString("Marcin Majzner ",20, 90);

@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Drzewo<T> {
     private Wezel<T> korzen;
 
@@ -50,16 +52,24 @@ public class Drzewo<T> {
         else return 1 + getLevel(n.getRodzic());
     }
 
-    public int getHeight(Wezel<T> n) {
-        if (n == null) return 0;
-        int h = 0;
-        System.out.println(h);
+    public int getHeight(Wezel root){
+        if(root == null) return 0;
+        int h=0;
+        if(!root.czyLisc()) {
 
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for(int i=0; i<root.getDzieci().size(); i++){
+                lista.add((Wezel) root.getDzieci().get(i));
+            }
 
-        System.out.println(n.getLiczbaDzieci());
+            while (!lista.isEmpty()) {
 
+                Wezel w = lista.remove(0);
+                h = Math.max(h, getHeight(w));
 
-        return h + 1;
+            }
+        }
+        return h+1;
     }
 
 }

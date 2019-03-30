@@ -4,6 +4,11 @@ public class Wezel<T> {
     private T dane;
     private Wezel<T> rodzic;
     private LinkedList<Wezel<T>> dzieci;
+    private int x; //współrzedne x potrzebne do dynamycznego wyświetlania drzewa
+    private int y; //współrzedne y potrzebne do dynamicznego wyświetlania drzewa
+    private int poczatekDostepnegoMiejsca; //współrzędna określająca początek dostępnego miejsca dla danego węzła
+    private int koniecDostepnegoMiejsca; //współrzędna określająca koniec dostępnego miejsca dla danego węzła
+
 
     public Wezel(){
         rodzic = null;
@@ -91,4 +96,42 @@ public class Wezel<T> {
     public String toString(){
         return dane.toString();
     }
+
+    public int getLiczbaDzieci(){
+        if(dzieci.isEmpty()) return 0;
+        return dzieci.size();
+    }
+
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public void setY(int y){
+        this.y = y;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public void setPoczatekDostepnegoMiejsca(int w){
+        poczatekDostepnegoMiejsca = w;
+    }
+
+    public void setKoniecDostepnegoMiejsca(int w){
+        koniecDostepnegoMiejsca = w;
+    }
+
+    public int getPoczatekDostepnegoMiejsca(){
+        return poczatekDostepnegoMiejsca;
+    }
+
+    public int getKoniecDostepnegoMiejsca(){
+        return koniecDostepnegoMiejsca;
+    }
+
 }
