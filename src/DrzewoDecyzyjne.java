@@ -6,7 +6,6 @@ public class DrzewoDecyzyjne {
     }
 
     public Drzewo<String> indukcja(String[][] przyklady, String[] atrybuty, Drzewo<String> def){
-        boolean czyJednorodne = false;
         int atrybut = 0;
         int iloscY = 0;
         int iloscN = 0;
@@ -80,5 +79,25 @@ public class DrzewoDecyzyjne {
             wartosciString[i++] = obj;
         }
         return wartosciString;
+    }
+
+    public double entropia(String[][] przyklady){
+        int iloscYes = 0;
+        int iloscNo = 0;
+        for(int i=0;i<przyklady.length;i++){
+            if(przyklady[i][przyklady[i].length-1].equals("Yes")){
+                iloscYes++;
+            }else{
+                iloscNo++;
+            }
+        }
+        double suma = iloscYes+iloscNo;
+        double pplus = iloscYes/suma;
+        double pminus = iloscNo/suma;
+        return -pplus*(Math.log(pplus)/Math.log(2))-pminus*(Math.log(pplus)/Math.log(2));
+    }
+
+    public double zysk(String[][] przyklady){
+        return 0;
     }
 }
