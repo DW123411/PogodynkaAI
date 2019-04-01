@@ -1,9 +1,6 @@
 
+import java.awt.*;
 import java.io.FileNotFoundException;
-
-import java.util.LinkedList;
-
-import java.awt.EventQueue;
 
 
 public class Main {
@@ -54,10 +51,10 @@ public class Main {
         System.out.println();
         Drzewo drzewow = new Drzewo(testWczytywania.getKorzen());
 
-        LinkedList<Wezel> lista = drzewow.getKorzen().getDzieci();
-        System.out.println(lista.size());
-        Wezel w = lista.remove(0);
-        System.out.println(w.czyLisc());
+        //LinkedList<Wezel> lista = drzewow.getKorzen().getDzieci();
+        //System.out.println(lista.size());
+        //Wezel w = lista.remove(0);
+        //System.out.println(w.czyLisc());
 
         String[] atrybuty = {"Outlook","Humidity","Wind"};
 

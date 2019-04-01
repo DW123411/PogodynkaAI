@@ -50,7 +50,7 @@ public class Okno extends JFrame implements ActionListener
     {
         String label = e.getActionCommand();
         if(label.equals("Rysuj Drzewo")){
-            Wezel<String> korzen = new Wezel<String>(null, "Outlook");
+           /* Wezel<String> korzen = new Wezel<String>(null, "Outlook");
 
             Wezel<String> n1 = korzen.dodajDziecko("Sunny");
             Wezel<String> n2 = korzen.dodajDziecko("Overcast");
@@ -84,6 +84,33 @@ public class Okno extends JFrame implements ActionListener
             System.out.println("Czy liść: "+n4.getLiczbaDzieci());
            okno.rysujDrzewo(korzen,korzen);
             System.out.println("qqq"+korzen.toString().length());
+            */
+            String[] atrybuty = {"Outlook","Humidity","Wind"};
+
+            String[][] klasyfikcaja = {{"Day","Outlook","Humidity","Wind","Decision"},
+                    {"D1","Sunny","High","Weak","No"},
+                    {"D2","Sunny","High","Strong","No"},
+                    {"D3","Overcast","High","Weak","Yes"},
+                    {"D4","Rain","High","Weak","Yes"},
+                    {"D5","Rain","Normal","Weak","Yes"},
+                    {"D6","Rain","Normal","Strong","No"},
+                    {"D7","Overcast","Normal","Strong","Yes"},
+                    {"D8","Sunny","High","Weak","No"},
+                    {"D9","Sunny","Normal","Weak","Yes"},
+                    {"D10","Rain","Normal","Weak","Yes"},
+                    {"D11","Sunny","Normal","Strong","Yes"},
+                    {"D12","Overcast","High","Strong","Yes"},
+                    {"D13","Overcast","Normal","Weak","Yes"},
+                    {"D14","Rain","High","Strong","No"}
+            };
+
+            DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+            Drzewo<String> indukcja = dd.indukcja(klasyfikcaja,atrybuty,null);
+            indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+            indukcja.getKorzen().setKoniecDostepnegoMiejsca(okno.getWidth());
+            okno.obliczanieWspozednych(indukcja.getKorzen(),indukcja.getKorzen());
+            okno.obliczanieWspozednychY(indukcja.getKorzen(),okno.getHeight()/(indukcja.getHeight(indukcja.getKorzen())+2),indukcja,indukcja.getKorzen());
+            okno.rysujDrzewo(indukcja.getKorzen(),indukcja.getKorzen());
         }
 
         else if(label.equals("Wczytaj drzewo z Pliku")) {
