@@ -6,47 +6,57 @@ public class DrzewoDecyzyjne {
     }
 
     public Drzewo<String> indukcja(String[][] przyklady, String[] atrybuty, Drzewo<String> def){
-        int atrybut = 0;
+        Drzewo<String> drzewo = new Drzewo<>();
         int iloscY = 0;
         int iloscN = 0;
-        for(int i=0;i<przyklady.length;i++){
+        for(int i=1;i<przyklady.length;i++){
             if(przyklady[i][4].equals("Yes")){
                 iloscY++;
             }else{
                 iloscN++;
             }
         }
-        if(przyklady.length==0){
+        if(przyklady.length==1 || przyklady.length==0){
             return def;
-        }else if(iloscY==(przyklady.length) || iloscN==(przyklady.length)){
+        }else if(iloscY==(przyklady.length-1) || iloscN==(przyklady.length-1)){
             if(iloscY!=0) {
-                return new Drzewo<String>(new Wezel<String>(def.getKorzen(), "Yes"));
+                return new Drzewo<String>(new Wezel<String>(def.getKorzen().getRodzic(), "Yes"));
             }else{
-                return new Drzewo<String>(new Wezel<String>(def.getKorzen(), "No"));
+                return new Drzewo<String>(new Wezel<String>(def.getKorzen().getRodzic(), "No"));
             }
         }else if(atrybuty.length==0){
-            return new Drzewo<String>(new Wezel<String>(def.getKorzen(),decyduj(przyklady)));
+            return new Drzewo<String>(new Wezel<String>(def.getKorzen().getRodzic(),decyduj(przyklady)));
         }else{
             String najlepszy = wybierzAtrybut(atrybuty,przyklady);
-            atrybut++;
-            Wezel<String> tmp = new Wezel<String>(def.getKorzen(),najlepszy);
-            String[] wartosci = podajWartosci(atrybut,przyklady);
+            Wezel<String> tmp = new Wezel<String>(null, najlepszy);
+            if(def!=null){
+                tmp = new Wezel<String>(def.getKorzen().getRodzic(), najlepszy);
+            }
+            String[] wartosci = podajWartosci(najlepszy,przyklady);
             for(String obj : wartosci){
                 tmp.dodajDziecko(new Wezel<String>(tmp,obj));
             }
-            Drzewo<String> drzewo = new Drzewo<String>(tmp);
-
+            drzewo = new Drzewo<String>(tmp);
+            for(Wezel<String> obj : drzewo.getKorzen().getDzieci()){
+                String[][] przykladyDlaDanejWartosci = podajPrzykladyDlaWartosci(przyklady,obj.toString(),najlepszy);
+                String[] tmpAtrybuty = new String[atrybuty.length-1];
+                for(int i=1;i<atrybuty.length;i++){
+                    tmpAtrybuty[i-1] = atrybuty[i];
+                }
+                Drzewo<String> galaz = indukcja(przykladyDlaDanejWartosci,tmpAtrybuty,new Drzewo<String>(new Wezel<String>(obj,decyduj(przyklady))));
+            }
         }
-        return new Drzewo<String>();
+        return drzewo;
     }
 
     public String wybierzAtrybut(String[] atrybuty, String[][] przyklady){
         return atrybuty[0];
     }
+
     public String decyduj(String[][] przyklady){
         int liczYes = 0;
         int liczNo = 0;
-        for(int i=0;i<przyklady.length;i++){
+        for(int i=1;i<przyklady.length;i++){
             if(przyklady[i][przyklady[i].length-1].equals("Yes")){
                 liczYes++;
             }else{
@@ -59,11 +69,19 @@ public class DrzewoDecyzyjne {
             return "No";
         }
     }
-    public String[] podajWartosci(int pozycja, String[][] przyklady){
+
+    public String[] podajWartosci(String atrybut, String[][] przyklady){
         boolean czyNowy = true;
         ArrayList<String> wartosci = new ArrayList<String>();
-        for(int i=0;i<przyklady.length;i++){
-            String tmp = przyklady[i][pozycja];
+        int kolumna = 0;
+        for(int i=0;i<przyklady[0].length;i++){
+            if(przyklady[0][i].equals(atrybut)){
+                kolumna = i;
+            }
+        }
+        for(int i=1;i<przyklady.length;i++){
+            czyNowy = true;
+            String tmp = przyklady[i][kolumna];
             for(String obj : wartosci){
                 if(obj.equals(tmp)){
                     czyNowy = false;
@@ -81,10 +99,36 @@ public class DrzewoDecyzyjne {
         return wartosciString;
     }
 
+    public String[][] podajPrzykladyDlaWartosci(String[][] przyklady, String wartosc, String atrybut){
+        int liczWartosc = 0;
+        int kolumna = 0;
+        for(int i=0;i<przyklady[0].length;i++){
+            if(przyklady[0][i].equals(atrybut)){
+                kolumna = i;
+            }
+        }
+        for(int i=1;i<przyklady.length;i++){
+            if(przyklady[i][kolumna].equals(wartosc)){
+                liczWartosc++;
+            }
+        }
+        String[][] tmp = new String[liczWartosc][przyklady[0].length];
+        int tablicaTmp = 0;
+        for(int i=1;i<przyklady.length;i++){
+            if(przyklady[i][kolumna].equals(wartosc)){
+                for(int j=0;j<przyklady[i].length;j++){
+                    tmp[tablicaTmp][j] = przyklady[i][j];
+                }
+                tablicaTmp++;
+            }
+        }
+        return tmp;
+    }
+
     public double entropia(String[][] przyklady){
         int iloscYes = 0;
         int iloscNo = 0;
-        for(int i=0;i<przyklady.length;i++){
+        for(int i=1;i<przyklady.length;i++){
             if(przyklady[i][przyklady[i].length-1].equals("Yes")){
                 iloscYes++;
             }else{

@@ -61,7 +61,8 @@ public class Main {
 
         String[] atrybuty = {"Outlook","Humidity","Wind"};
 
-        String[][] klasyfikcaja = {{"D1","Sunny","High","Weak","No"},
+        String[][] klasyfikcaja = {{"Day","Outlook","Humidity","Wind","Decision"},
+                {"D1","Sunny","High","Weak","No"},
                 {"D2","Sunny","High","Strong","No"},
                 {"D3","Overcast","High","Weak","Yes"},
                 {"D4","Rain","High","Weak","Yes"},
@@ -76,6 +77,12 @@ public class Main {
                 {"D13","Overcast","Normal","Weak","Yes"},
                 {"D14","Rain","High","Strong","No"}
         };
+
+        DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+        Drzewo<String> indukcja = dd.indukcja(klasyfikcaja,atrybuty,null);
+        System.out.println("Indukcja:");
+        indukcja.preOrder(indukcja.getKorzen());
+        System.out.println();
 
         for(int i=0;i<klasyfikcaja.length;i++) {
             for (int j=0; j<klasyfikcaja[i].length; j++)
