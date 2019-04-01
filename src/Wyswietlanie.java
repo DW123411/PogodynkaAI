@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
@@ -193,6 +194,8 @@ public class Wyswietlanie extends JPanel
             while (!lista.isEmpty()){
                 Wezel w = lista.remove(0);
                 g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
+                Line2D.Double line = new Line2D.Double (w.getX(), w.getY()-20, w.getRodzic().getX(), w.getRodzic().getY()+10);
+                g.draw(line);
                 rysujDrzewo(w,korzen);
             }
         }
