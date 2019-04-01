@@ -6,7 +6,6 @@ public class DrzewoDecyzyjne {
     }
 
     public Drzewo<String> indukcja(String[][] przyklady, String[] atrybuty, Drzewo<String> def){
-        Drzewo<String> drzewo = new Drzewo<>();
         int iloscY = 0;
         int iloscN = 0;
         for(int i=1;i<przyklady.length;i++){
@@ -36,7 +35,7 @@ public class DrzewoDecyzyjne {
             for(String obj : wartosci){
                 tmp.dodajDziecko(new Wezel<String>(tmp,obj));
             }
-            drzewo = new Drzewo<String>(tmp);
+            Drzewo<String> drzewo = new Drzewo<String>(tmp);
             for(Wezel<String> obj : drzewo.getKorzen().getDzieci()){
                 String[][] przykladyDlaDanejWartosci = podajPrzykladyDlaWartosci(przyklady,obj.toString(),najlepszy);
                 String[] tmpAtrybuty = new String[atrybuty.length-1];
@@ -44,9 +43,10 @@ public class DrzewoDecyzyjne {
                     tmpAtrybuty[i-1] = atrybuty[i];
                 }
                 Drzewo<String> galaz = indukcja(przykladyDlaDanejWartosci,tmpAtrybuty,new Drzewo<String>(new Wezel<String>(obj,decyduj(przyklady))));
+                obj.dodajDziecko(galaz.getKorzen());
             }
+            return drzewo;
         }
-        return drzewo;
     }
 
     public String wybierzAtrybut(String[] atrybuty, String[][] przyklady){
@@ -112,8 +112,11 @@ public class DrzewoDecyzyjne {
                 liczWartosc++;
             }
         }
-        String[][] tmp = new String[liczWartosc][przyklady[0].length];
-        int tablicaTmp = 0;
+        String[][] tmp = new String[liczWartosc+1][przyklady[0].length];
+        for(int i=0;i<przyklady[0].length;i++){
+            tmp[0][i] = przyklady[0][i];
+        }
+        int tablicaTmp = 1;
         for(int i=1;i<przyklady.length;i++){
             if(przyklady[i][kolumna].equals(wartosc)){
                 for(int j=0;j<przyklady[i].length;j++){
