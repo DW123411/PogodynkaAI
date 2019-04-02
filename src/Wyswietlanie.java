@@ -10,11 +10,40 @@ public class Wyswietlanie extends JPanel
     BufferedImage okno;
     JFrame f;
     //konstruktor
-    public Wyswietlanie() 
+    public Wyswietlanie()
     {
-        super();   
+        super();
+        //Dynamiczne dopasowanie do ekranu dla 1 monitora
+        Dimension Rozmiar = Toolkit.getDefaultToolkit().getScreenSize();
+        int szerokosc = (int) Rozmiar.getWidth();
+        int wysokosc = (int)Rozmiar.getHeight();
+        double zajetosc1 = 0.9;//Ułamek dziesiętny zajętej szerokości
+        double zajetosc2 = 0; //Inicjalizacja do późniejszych obliczeń
+
+
+        //Obliczenia celem optymalnego rozłożenia okna dla danych typów ekranów, tj. 4:3, 5:4, 16:10 oraz 16:9
+        if(szerokosc/wysokosc==4/3){
+
+             zajetosc2 = (zajetosc1/4)*3;
+        }
+
+        else if (szerokosc/wysokosc==5/4) {
+             zajetosc2 = (zajetosc1/5)*4;
+        }
+        else if (szerokosc/wysokosc==16/10){
+             zajetosc2 = (zajetosc1/16)*10;
+        }
+           else if (szerokosc/wysokosc==16/9){
+         zajetosc2 = (zajetosc1/16)*9;
+        }
+           else {
+               zajetosc2 = 0.9;
+        }
+
+
+
         setLayout(new GridLayout(2,1));
-        ustawRozmiar(new Dimension(600,600));
+        ustawRozmiar(new Dimension((int)(szerokosc*zajetosc1),(int)(wysokosc*zajetosc2)));
         wyczysc();
     }
    
