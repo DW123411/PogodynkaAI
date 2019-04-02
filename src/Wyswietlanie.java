@@ -17,33 +17,32 @@ public class Wyswietlanie extends JPanel
         Dimension Rozmiar = Toolkit.getDefaultToolkit().getScreenSize();
         int szerokosc = (int) Rozmiar.getWidth();
         int wysokosc = (int)Rozmiar.getHeight();
-        double zajetosc1 = 0.9;//Ułamek dziesiętny zajętej szerokości
-        double zajetosc2 = 0; //Inicjalizacja do późniejszych obliczeń
+        double zajetosc = 0.9;//Ułamek dziesiętny zajętej Wysokości
 
 
         //Obliczenia celem optymalnego rozłożenia okna dla danych typów ekranów, tj. 4:3, 5:4, 16:10 oraz 16:9
         if(szerokosc/wysokosc==4/3){
 
-             zajetosc2 = (zajetosc1/4)*3;
+            szerokosc = (int) ((wysokosc*zajetosc)/3)*4;
         }
 
         else if (szerokosc/wysokosc==5/4) {
-             zajetosc2 = (zajetosc1/5)*4;
+            szerokosc = (int) ((wysokosc*zajetosc)/4)*5;
         }
         else if (szerokosc/wysokosc==16/10){
-             zajetosc2 = (zajetosc1/16)*10;
+            szerokosc = (int) ((wysokosc*zajetosc)/10)*16;
         }
            else if (szerokosc/wysokosc==16/9){
-         zajetosc2 = (zajetosc1/16)*9;
+            szerokosc = (int) ((wysokosc*zajetosc)/9)*16;
         }
            else {
-               zajetosc2 = 0.9;
+               szerokosc = (int) (szerokosc*zajetosc);
         }
 
-
+        wysokosc = (int)(wysokosc*zajetosc);
 
         setLayout(new GridLayout(2,1));
-        ustawRozmiar(new Dimension((int)(szerokosc*zajetosc1),(int)(wysokosc*zajetosc2)));
+        ustawRozmiar(new Dimension(szerokosc,wysokosc));
         wyczysc();
     }
    
