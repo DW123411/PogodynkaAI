@@ -6,6 +6,7 @@ public class DrzewoDecyzyjne {
     }
 
     public Drzewo<String> indukcja(String[][] przyklady, String[] atrybuty, Drzewo<String> def){
+        //sprawdzenie ilości "Yes" i "No" w celu określenia ewentualnej jednorodności decyzji
         int iloscY = 0;
         int iloscN = 0;
         for(int i=1;i<przyklady.length;i++){
@@ -15,34 +16,45 @@ public class DrzewoDecyzyjne {
                 iloscN++;
             }
         }
+        //jeśli tablica przykładów jest pusta to zwracamy drzewo przekazane rekurencyjnie
         if(przyklady.length==1 || przyklady.length==0){
             return def;
+        //jeśli decyzja jest jednorodna (tylko Yes lub tylko No) to zwracamy nowy węzeł z tą decyzją i rodzicem z drzewa przekazanego rekurencyjnie
         }else if(iloscY==(przyklady.length-1) || iloscN==(przyklady.length-1)){
             if(iloscY!=0) {
                 return new Drzewo<String>(new Wezel<String>(def.getKorzen().getRodzic(), "Yes"));
             }else{
                 return new Drzewo<String>(new Wezel<String>(def.getKorzen().getRodzic(), "No"));
             }
+        //jeśli tablica atrybutów jest pusta to zwracamy nowe drzewo z decyzją z pozostałych przykładów oraz rodzicem z drzewa przekazanego rekurencyjnie
         }else if(atrybuty.length==0){
             return new Drzewo<String>(new Wezel<String>(def.getKorzen().getRodzic(),decyduj(przyklady)));
         }else{
+            //wybór najlepszego atrybutu i stworzenie węzła
             String najlepszy = wybierzAtrybut(atrybuty,przyklady);
             Wezel<String> tmp = new Wezel<String>(null, najlepszy);
             if(def!=null){
                 tmp = new Wezel<String>(def.getKorzen().getRodzic(), najlepszy);
             }
+            //pobranie możliwych wartości i dodanie ich do węzłą atrybutu
             String[] wartosci = podajWartosci(najlepszy,przyklady);
             for(String obj : wartosci){
                 tmp.dodajDziecko(new Wezel<String>(tmp,obj));
             }
+            //utworzenie drzewa z korzeniem w wybranym atrybucie
             Drzewo<String> drzewo = new Drzewo<String>(tmp);
+            //dla każdej wartości atrybutu...
             for(Wezel<String> obj : drzewo.getKorzen().getDzieci()){
+                //...wybór przykładów zawierających daną wartość atrybutu
                 String[][] przykladyDlaDanejWartosci = podajPrzykladyDlaWartosci(przyklady,obj.toString(),najlepszy);
+                //skrócenie listy atrybutów kosztem wybranego wcześniej najlepszego atrybutu
                 String[] tmpAtrybuty = new String[atrybuty.length-1];
                 for(int i=1;i<atrybuty.length;i++){
                     tmpAtrybuty[i-1] = atrybuty[i];
                 }
+                //rekurencyjne wywołanie indukcji w danej gałęzi powstającego drzewa
                 Drzewo<String> galaz = indukcja(przykladyDlaDanejWartosci,tmpAtrybuty,new Drzewo<String>(new Wezel<String>(obj,decyduj(przyklady))));
+                //dodanie gałęzi do węzła wartości atrybutu
                 obj.dodajDziecko(galaz.getKorzen());
             }
             return drzewo;
