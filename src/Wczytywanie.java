@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class Wczytywanie {
 
+    /**
+     * metoda zwraca klase Drzewo z podanej ścieżki do pliku jako zmienna wejściowa
+     */
     public static Drzewo<ElementDrzewa> wczytajDrzewoZPliku(String sciezka){
         File plik = new File(sciezka);
         Scanner skaner = null;
@@ -71,4 +74,19 @@ public class Wczytywanie {
         }
         return drzewo;
     }
+    /**
+     * metoda zwraca klase Klasyfikacja z podanej ścieżki do pliku jako zmienna wejściowa
+     */
+    public static Klasyfikacja wczytajKlasyfikacjeZPliku(String Ścieżka){
+        File file = new File(Ścieżka);
+                Scanner scanner = null;
+          try {
+            scanner = new Scanner(file); //inicjalizacja Scannera
+        }catch(FileNotFoundException err){
+            System.out.println(err.toString());
+        }
+
+    return new Klasyfikacja();
+    }
+    
 }

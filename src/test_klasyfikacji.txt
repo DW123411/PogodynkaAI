@@ -1,0 +1,3 @@
+Id,Day,Outlook,Temperature,Humidity,Wind
+1,D1,Sunny,Hot,High,Weak
+2,D2,Sunny,Hot,High,Strong
