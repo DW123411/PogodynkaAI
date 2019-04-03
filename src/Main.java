@@ -43,7 +43,7 @@ public class Main {
 
         //Object test = plik.czytajKategoria("D:/Mateusz/Pulpit/test.txt");
 
-        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("src/test.txt");
+        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("test.txt");
 
 
         System.out.println("Test:");

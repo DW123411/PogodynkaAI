@@ -258,6 +258,11 @@ public class Wyswietlanie extends JPanel
         repaint();
 */
     }
+    
+    public void show_klasyfikacja(Klasyfikacja klasyfikacja){
+        
+        
+    }
 
 
 

@@ -80,13 +80,73 @@ public class Wczytywanie {
     public static Klasyfikacja wczytajKlasyfikacjeZPliku(String Ścieżka){
         File file = new File(Ścieżka);
                 Scanner scanner = null;
+                String[][] temp_table;
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera
         }catch(FileNotFoundException err){
             System.out.println(err.toString());
         }
-
-    return new Klasyfikacja();
+        /**
+         * Sprawdzenie pliku pod wzgledem przygotowania rozmiaru tablicy dwuwymiarowej
+         */
+        int max_szerokosc=0; 
+        int max_wysokosc=0;
+        int y=0;
+        while(scanner.hasNextLine()){
+        String linia = scanner.nextLine();
+        int x=0;
+        y++;
+        String wyraz="";
+        for(int i=0;i<linia.length();i++)
+        {   
+            if(linia.charAt(i)==','){
+                //System.out.println(wyraz);
+                wyraz="";x++;}
+            else{
+                wyraz+=linia.charAt(i);
+               
+            }
+        }
+            if(x>max_szerokosc){max_szerokosc=x;}
+        
+        }
+            if(y>max_wysokosc){max_wysokosc=y;}
+       
+            scanner.close();     // zamkniecie skanera
+        /**
+        * przygotowanie tablicy
+        */
+           temp_table= new String[max_wysokosc][max_szerokosc];
+          try {
+            scanner = new Scanner(file); //inicjalizacja Scannera na nowo
+        }catch(FileNotFoundException err){
+            System.out.println(err.toString());
+        }
+        /**
+         * wpisanie danych z pliku do tablicy
+         */
+        
+        y=0;
+        while(scanner.hasNextLine()){
+        String linia = scanner.nextLine();
+         int x=0;
+        String wyraz="";
+        for(int i=0;i<linia.length();i++)
+        {   
+            if(linia.charAt(i)==','){
+                temp_table[y][x]=wyraz;
+                wyraz="";x++;}
+            else{
+                wyraz+=linia.charAt(i);
+                
+            }
+        }
+         y++;
+        }
+           scanner.close();
+        Klasyfikacja KS = new Klasyfikacja();
+        KS.set_klasyfikacja_tablica(temp_table);
+    return KS;
     }
     
 }
