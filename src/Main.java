@@ -43,13 +43,13 @@ public class Main {
 
         //Object test = plik.czytajKategoria("D:/Mateusz/Pulpit/test.txt");
 
-        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("test.txt");
+        Drzewo<ElementDrzewa> testWczytywania = Wczytywanie.wczytajDrzewoZPliku("src/test.txt");
 
 
-        /*System.out.println("Test:");
+        System.out.println("Test:");
         testWczytywania.preOrder(testWczytywania.getKorzen());
         System.out.println();
-        Drzewo drzewow = new Drzewo(testWczytywania.getKorzen());*/
+        Drzewo drzewow = new Drzewo(testWczytywania.getKorzen());
 
         //LinkedList<Wezel> lista = drzewow.getKorzen().getDzieci();
         //System.out.println(lista.size());

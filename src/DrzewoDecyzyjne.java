@@ -49,8 +49,12 @@ public class DrzewoDecyzyjne {
                 String[][] przykladyDlaDanejWartosci = podajPrzykladyDlaWartosci(przyklady,obj.toString(),najlepszy);
                 //skrócenie listy atrybutów kosztem wybranego wcześniej najlepszego atrybutu
                 String[] tmpAtrybuty = new String[atrybuty.length-1];
-                for(int i=1;i<atrybuty.length;i++){
-                    tmpAtrybuty[i-1] = atrybuty[i];
+                int j = 0;
+                for(int i=0;i<atrybuty.length;i++){
+                    if(!atrybuty[i].equals(najlepszy)){
+                        tmpAtrybuty[j] = atrybuty[i];
+                        j++;
+                    }
                 }
                 //rekurencyjne wywołanie indukcji w danej gałęzi powstającego drzewa
                 Drzewo<String> galaz = indukcja(przykladyDlaDanejWartosci,tmpAtrybuty,new Drzewo<String>(new Wezel<String>(obj,decyduj(przyklady))));
@@ -62,7 +66,16 @@ public class DrzewoDecyzyjne {
     }
 
     public String wybierzAtrybut(String[] atrybuty, String[][] przyklady){
-        return atrybuty[0];
+        String najlepszy = atrybuty[0];
+        double najlepszyZysk = 0;
+        for(String atrybut : atrybuty){
+            double tmpZysk = zysk(przyklady,atrybut);
+            if(tmpZysk>najlepszyZysk){
+                najlepszyZysk = tmpZysk;
+                najlepszy = atrybut;
+            }
+        }
+        return najlepszy;
     }
 
     public String decyduj(String[][] przyklady){
@@ -151,12 +164,29 @@ public class DrzewoDecyzyjne {
             }
         }
         double suma = iloscYes+iloscNo;
-        double pplus = iloscYes/suma;
-        double pminus = iloscNo/suma;
-        return -pplus*(Math.log(pplus)/Math.log(2))-pminus*(Math.log(pplus)/Math.log(2));
+        double pplus = 0;
+        double logplus = 0;
+        if(iloscYes!=0) {
+            pplus = iloscYes / suma;
+            logplus = (Math.log(pplus) / Math.log(2));
+        }
+        double pminus = 0;
+        double logminus = 0;
+        if(iloscNo!=0){
+            pminus = iloscNo/suma;
+            logminus = (Math.log(pminus)/Math.log(2));
+        }
+        return -pplus*logplus-pminus*logminus;
     }
 
-    public double zysk(String[][] przyklady){
-        return 0;
+    public double zysk(String[][] przyklady, String atrybut){
+        String[] wartosci = podajWartosci(atrybut,przyklady);
+        double zysk = 0;
+        for(String wartosc : wartosci){
+            String[][] przykladyDlaWartosci = podajPrzykladyDlaWartosci(przyklady,wartosc,atrybut);
+            zysk += (((double)przykladyDlaWartosci.length-1)*entropia(przykladyDlaWartosci))/((double)przyklady.length-1);
+        }
+        zysk = entropia(przyklady)-zysk;
+        return zysk;
     }
 }
