@@ -88,9 +88,9 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.rysujDrzewo(korzen,korzen);
             System.out.println("qqq"+korzen.toString().length());
              */
-            String[] atrybuty = {"Outlook","Humidity","Wind"};
+            /*String[] atrybuty = {"Outlook","Humidity","Wind"};
 
-            String[][] klasyfikcaja = {{"Day","Outlook","Humidity","Wind","Decision"},
+            String[][] klasyfikacja = {{"Day","Outlook","Humidity","Wind","Decision"},
                     {"D1","Sunny","High","Weak","No"},
                     {"D2","Sunny","High","Strong","No"},
                     {"D3","Overcast","High","Weak","Yes"},
@@ -105,10 +105,19 @@ public class Okno extends JFrame implements ActionListener
                     {"D12","Overcast","High","Strong","Yes"},
                     {"D13","Overcast","Normal","Weak","Yes"},
                     {"D14","Rain","High","Strong","No"}
-                };
+                };*/
+
+            Klasyfikacja klasyfikacjaZPliku = new Klasyfikacja("src/test_klasyfikacji.txt");
+            String[][] klasyfikacjaTablica = klasyfikacjaZPliku.get_klasyfikacja();
+            String[] atrybuty = new String[klasyfikacjaTablica[0].length-2];
+            int j = 0;
+            for(int i=1;i<klasyfikacjaTablica[0].length-1;i++){
+                atrybuty[j] = klasyfikacjaTablica[0][i];
+                j++;
+            }
 
             DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-            Drzewo<String> indukcja = dd.indukcja(klasyfikcaja,atrybuty,null);
+            Drzewo<String> indukcja = dd.indukcja(klasyfikacjaTablica,atrybuty,null);
             indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
             indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
             wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(),indukcja.getKorzen());

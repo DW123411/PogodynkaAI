@@ -6,7 +6,7 @@ D4,Rain,Mild,High,Weak,Yes,
 D5,Rain,Cool,Normal,Weak,Yes,
 D6,Rain,Cool,Normal,Strong,No,
 D7,Overcast,Cool,Normal,Strong,Yes,
-D8,Sunny,Mild,High,Weak,No
+D8,Sunny,Mild,High,Weak,No,
 D9,Sunny,Cool,Normal,Weak,Yes,
 D10,Rain,Mild,Normal,Weak,Yes,
 D11,Sunny,Mild,Normal,Strong,Yes,

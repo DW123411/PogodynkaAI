@@ -10,7 +10,7 @@ public class DrzewoDecyzyjne {
         int iloscY = 0;
         int iloscN = 0;
         for(int i=1;i<przyklady.length;i++){
-            if(przyklady[i][4].equals("Yes")){
+            if(przyklady[i][przyklady[i].length-1].equals("Yes")){
                 iloscY++;
             }else{
                 iloscN++;
