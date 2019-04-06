@@ -28,7 +28,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
+import javax.swing.border.*;
 
 public class Menuski extends JMenuBar
 {
@@ -41,6 +41,15 @@ public class Menuski extends JMenuBar
     {         
         //JPanel rozklad = new JPanel();
         
+        
+        setBorder(new TitledBorder (
+        new TitledBorder(
+        LineBorder.createGrayLineBorder(),
+            "Menu"),
+            "",
+            TitledBorder.RIGHT,
+            TitledBorder.BOTTOM));
+    
          cred = new JButton("O programie");
         cred.setPreferredSize(new Dimension(50, 50));
         save = new JButton("Zapisz");
@@ -56,14 +65,15 @@ public class Menuski extends JMenuBar
         wycz = new JButton("Wyczyść");
         wycz.setPreferredSize(new Dimension(50, 50));
         zam = new JButton("Zamknij");
+       
         zam.setPreferredSize(new Dimension(50, 50));
-        add(zal, BorderLayout.CENTER); 
-        add(wyś, BorderLayout.CENTER);
-        add(klasyfikacja_z_pliku, BorderLayout.CENTER); 
-        add(show_klasyfikacja, BorderLayout.CENTER);
-        add(zam, BorderLayout.EAST);
-        add(wycz, BorderLayout.EAST);
-        add(cred, BorderLayout.EAST);
-        add(save, BorderLayout.EAST);
+        add(zal, BorderLayout.WEST); 
+        add(wyś, BorderLayout.WEST);
+        add(klasyfikacja_z_pliku, BorderLayout.WEST); 
+        add(show_klasyfikacja, BorderLayout.WEST);
+        add(zam, BorderLayout.WEST);
+        add(wycz, BorderLayout.WEST);
+        add(cred, BorderLayout.WEST);
+        add(save, BorderLayout.WEST);
     }
 }
