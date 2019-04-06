@@ -38,14 +38,14 @@ public class Okno extends JFrame implements ActionListener
 
     private void ustawNasluchZdarzen()
     {
-        menu.showtree.addActionListener(this);
-        menu.tree.addActionListener(this);
+        menu.wyś.addActionListener(this);
+        menu.zal.addActionListener(this);
+        menu.wycz.addActionListener(this);
+        menu.zam.addActionListener(this);
+        menu.cred.addActionListener(this);
+        menu.save.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
-        menu.clean.addActionListener(this);
-        menu.credits.addActionListener(this);
-        menu.exit.addActionListener(this);
-        menu.savetree.addActionListener(this);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Okno extends JFrame implements ActionListener
     {
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
          Object zrodlo = e.getSource();
-        if(zrodlo==menu.showtree){
+        if(zrodlo==menu.wyś){
             /* Wezel<String> korzen = new Wezel<String>(null, "Outlook");
 
             Wezel<String> n1 = korzen.dodajDziecko("Sunny");
@@ -125,7 +125,7 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.rysujDrzewo(indukcja.getKorzen(),indukcja.getKorzen());
         }
 
-        else if(zrodlo==menu.tree) {
+        else if(zrodlo==menu.zal) {
             boolean spr = otworzPlik();
             if (spr) {
                 wczytywanie = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
@@ -152,17 +152,17 @@ public class Okno extends JFrame implements ActionListener
            else{wyswietlanie.show_klasyfikacja(klasyfikacja);
             }
         }
-         else if (zrodlo==menu.clean){
+         else if (zrodlo==menu.wycz){
             wyswietlanie.wyczysc();
 
         }
-        else if (zrodlo==menu.credits){
+        else if (zrodlo==menu.cred){
             wyswietlanie.credits();
         }
-        else if (zrodlo==menu.exit){
+        else if (zrodlo==menu.zam){
             System.exit(0);
         }
-        else if(zrodlo==menu.savetree)
+        else if(zrodlo==menu.save)
         {
             zapiszPlik();
         } 
