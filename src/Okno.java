@@ -106,23 +106,24 @@ public class Okno extends JFrame implements ActionListener
                     {"D13","Overcast","Normal","Weak","Yes"},
                     {"D14","Rain","High","Strong","No"}
                 };*/
+            if(klasyfikacja!=null) {
+                //Klasyfikacja klasyfikacjaZPliku = new Klasyfikacja("src/test_klasyfikacji.txt");
+                String[][] klasyfikacjaTablica = klasyfikacja.get_klasyfikacja();
+                String[] atrybuty = new String[klasyfikacjaTablica[0].length - 2];
+                int j = 0;
+                for (int i = 1; i < klasyfikacjaTablica[0].length - 1; i++) {
+                    atrybuty[j] = klasyfikacjaTablica[0][i];
+                    j++;
+                }
 
-            Klasyfikacja klasyfikacjaZPliku = new Klasyfikacja("src/test_klasyfikacji.txt");
-            String[][] klasyfikacjaTablica = klasyfikacjaZPliku.get_klasyfikacja();
-            String[] atrybuty = new String[klasyfikacjaTablica[0].length-2];
-            int j = 0;
-            for(int i=1;i<klasyfikacjaTablica[0].length-1;i++){
-                atrybuty[j] = klasyfikacjaTablica[0][i];
-                j++;
+                DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+                Drzewo<String> indukcja = dd.indukcja(klasyfikacjaTablica, atrybuty, null);
+                indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
             }
-
-            DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-            Drzewo<String> indukcja = dd.indukcja(klasyfikacjaTablica,atrybuty,null);
-            indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
-            indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
-            wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(),indukcja.getKorzen());
-            wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(),wyswietlanie.getHeight()/(indukcja.getHeight(indukcja.getKorzen())+2),indukcja,indukcja.getKorzen());
-            wyswietlanie.rysujDrzewo(indukcja.getKorzen(),indukcja.getKorzen());
         }
 
         else if(zrodlo==menu.zal) {
