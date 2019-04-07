@@ -1,13 +1,18 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.Buffer;
 import java.util.LinkedList;
 
 public class Wyswietlanie extends JPanel
 {
     
-    BufferedImage okno;
+    static BufferedImage okno;
     JFrame f;
     //konstruktor
     public Wyswietlanie()
@@ -17,7 +22,7 @@ public class Wyswietlanie extends JPanel
         Dimension Rozmiar = Toolkit.getDefaultToolkit().getScreenSize();
         int szerokosc = (int) Rozmiar.getWidth();
         int wysokosc = (int)Rozmiar.getHeight();
-        double zajetosc = 0.9;//Ułamek dziesiętny zajętej Wysokości
+        double zajetosc = 0.85;//Ułamek dziesiętny zajętej Wysokości
 
 
         //Obliczenia celem optymalnego rozłożenia okna dla danych typów ekranów, tj. 4:3, 5:4, 16:10 oraz 16:9
@@ -233,7 +238,21 @@ public class Wyswietlanie extends JPanel
 
     public void credits(){
 
-        JOptionPane.showMessageDialog(null,"Program napisany w ramach Projektu Zespołowego \nWersja : Wczesna (3-ci Sprint) \nAutorzy : \nGłówni programiści : \nDominik Woźniak \nAdler Mateusz \nTesterzy : \nJakub Gabryś \nMarcin Majzner \nProgramista Pomocniczy \nDamian Staśkiewicz \nProjektant interfejsu : \nAdam Witasiak \n2019, PWSZ KALISZ ","O Programie",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Program napisany w ramach Projektu Zespołowego \n" +
+                "Wersja : Wczesna (3-ci Sprint) \n" +
+                "Autorzy : \n" +
+                "Główni programiści : \n" +
+                "Dominik Woźniak \n" +
+                "Adler Mateusz \n" +
+                "Testerzy : \n" +
+                "Jakub Gabryś \n" +
+                "Marcin Majzner \n" +
+                "Programista Pomocniczy \n" +
+                "Damian Staśkiewicz \n" +
+                "Projektant interfejsu : \n" +
+                "Adam Witasiak \n" +
+                "2019, PWSZ KALISZ ",
+                "O Programie",JOptionPane.INFORMATION_MESSAGE);
         //wyczysc();
        // Graphics2D g2 = (Graphics2D) okno.getGraphics();
         //g2.setStroke(new BasicStroke(2));
@@ -264,7 +283,21 @@ public class Wyswietlanie extends JPanel
         
     }
 
+    public static void save_jpeg() throws IOException {
 
+        JFileChooser jpegSave = new JFileChooser();
+        FileNameExtensionFilter filtr = new FileNameExtensionFilter("Pliki PNG", "png");
+        jpegSave.setFileFilter(filtr);
+        if (jpegSave.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File outputfile = jpegSave.getSelectedFile();
+            // save to file
+            try {
+                ImageIO.write(okno, "png", outputfile);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 
     //przesłonięta metoda paintComponent z klasy JPanel do rysowania
     @Override

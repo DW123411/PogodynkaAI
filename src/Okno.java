@@ -4,6 +4,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Okno extends JFrame implements ActionListener
 {
@@ -46,6 +47,7 @@ public class Okno extends JFrame implements ActionListener
         menu.save.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
+        menu.jpeg.addActionListener(this);
     }
 
     @Override
@@ -166,7 +168,14 @@ public class Okno extends JFrame implements ActionListener
         else if(zrodlo==menu.save)
         {
             zapiszPlik();
-        } 
+        }
+        else if (zrodlo==menu.jpeg){
+            try {
+                Wyswietlanie.save_jpeg();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
 
     }
 

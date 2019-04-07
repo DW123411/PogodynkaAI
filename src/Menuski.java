@@ -32,8 +32,7 @@ import javax.swing.border.*;
 
 public class Menuski extends JMenuBar
 {
-    JButton wycz, wyś, zam, zal, cred, save, klasyfikacja_z_pliku, show_klasyfikacja ;
-    
+    JButton wycz, wyś, zam, zal, cred, save, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
 
 
 
@@ -50,30 +49,61 @@ public class Menuski extends JMenuBar
             TitledBorder.RIGHT,
             TitledBorder.BOTTOM));
     
-         cred = new JButton("O programie");
-        cred.setPreferredSize(new Dimension(50, 50));
-        save = new JButton("Zapisz");
+         cred = new JButton("<html>O Programie</html>");
+         cred.setToolTipText("<html>O Programie</html>");
+        cred.setPreferredSize(new Dimension(55, 50));
+        cred.setMaximumSize(new Dimension(111, 50));
+
+        save = new JButton("<html>Zapisz Jako TXT</html>");
+        save.setToolTipText("<html>Zapisz Jako TXT</html>");
         save.setPreferredSize(new Dimension(50, 50));
-        klasyfikacja_z_pliku = new JButton("Wczytaj klasyfikację z pliku");
+        save.setMaximumSize(new Dimension(111, 50));
+
+        klasyfikacja_z_pliku = new JButton("<html>Wczytaj Klasyfikację<br />z Pliku</html>");
+        klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj Klasyfikację<br />z Pliku</html>");
         klasyfikacja_z_pliku.setPreferredSize(new Dimension(50, 50));
-        show_klasyfikacja = new JButton("Wyświetl klasyfikację");
+        klasyfikacja_z_pliku.setMaximumSize(new Dimension(111, 50));
+
+        show_klasyfikacja = new JButton("<html>Wyświetl Klasyfikację</html>");
+        show_klasyfikacja.setToolTipText("<html>Wyświetl Klasyfikację</html>");
         show_klasyfikacja.setPreferredSize(new Dimension(50, 50));
-        wyś = new JButton("Rysuj Drzewo");
+        show_klasyfikacja.setMaximumSize(new Dimension(111, 50));
+
+        wyś = new JButton("<html>Rysuj  Drzewo</html>");
+        wyś.setToolTipText("<html>Rysuj  Drzewo</html>");
         wyś.setPreferredSize(new Dimension(50, 50));
-        zal = new JButton("Wczytaj Drzewo");
+        wyś.setMaximumSize(new Dimension(111, 50));
+
+        zal = new JButton("<html>Wczytaj Drzewo</html>");
+        zal.setToolTipText("<html>Wczytaj Drzewo</html>");
         zal.setPreferredSize(new Dimension(50, 50));
-        wycz = new JButton("Wyczyść");
+        zal.setMaximumSize(new Dimension(111, 50));
+
+        wycz = new JButton("<html>Wyczyść</html>");
+        wycz.setToolTipText("<html>Wyczyść</html>");
         wycz.setPreferredSize(new Dimension(50, 50));
-        zam = new JButton("Zamknij");
-       
+        wycz.setMaximumSize(new Dimension(111, 50));
+
+        zam = new JButton("<html>Zamknij</html>");
+        zam.setToolTipText("<html>Wyjście z programu</html>");
         zam.setPreferredSize(new Dimension(50, 50));
+        zam.setMaximumSize(new Dimension(111, 50));
+
+        jpeg = new JButton("<html>Zapisz Jako Obraz</html>");
+        jpeg.setToolTipText("<html>Zapisz Jako Obraz</html>");
+        jpeg.setPreferredSize(new Dimension(50, 50));
+        jpeg.setMaximumSize(new Dimension(111, 50));
+
+
+
         add(zal, BorderLayout.WEST); 
         add(wyś, BorderLayout.WEST);
         add(klasyfikacja_z_pliku, BorderLayout.WEST); 
         add(show_klasyfikacja, BorderLayout.WEST);
-        add(zam, BorderLayout.WEST);
         add(wycz, BorderLayout.WEST);
-        add(cred, BorderLayout.WEST);
         add(save, BorderLayout.WEST);
+        add(jpeg, BorderLayout.WEST);
+        add(cred, BorderLayout.WEST);
+        add(zam, BorderLayout.WEST);
     }
 }
