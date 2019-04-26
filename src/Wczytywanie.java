@@ -51,7 +51,7 @@ public class Wczytywanie {
                     }
 
 
-                } else { //WartoscAtrybutu
+                } /*else { //WartoscAtrybutu
                     WartoscAtrybutu tmpWA = null;
                     if (skaner.nextInt() == 0) { //jeśli drugą wczytaną wartością jest 0 to oznacza że WartoscAtrybutu ma wartość boolean
                         tmpWA = new WartoscAtrybutu(skaner.next(), skaner.nextBoolean());
@@ -74,10 +74,10 @@ public class Wczytywanie {
                         blad = true;
                         break;
                     }
-                }
+                }*/
 
             if (blad != true) {
-                JOptionPane.showMessageDialog(null, wezly.toString());
+                //JOptionPane.showMessageDialog(null, wezly.toString());
             }
         }
             skaner.close();
@@ -85,7 +85,7 @@ public class Wczytywanie {
             System.out.println(err.toString());
         }
         catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Nieprawidlowe dane");
+            //JOptionPane.showMessageDialog(null, "Nieprawidlowe dane");
             System.out.println(e.toString());
         }
 

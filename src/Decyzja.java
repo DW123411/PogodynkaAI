@@ -1,11 +1,11 @@
-public class WartoscAtrybutu implements ElementDrzewa {
+public class Decyzja implements ElementDrzewa{
     private String nazwa;
 
-    public WartoscAtrybutu(){
+    public Decyzja(){
         nazwa = "";
     }
 
-    public WartoscAtrybutu(String nazwa){
+    public Decyzja(String nazwa){
         this.nazwa = nazwa;
     }
 
