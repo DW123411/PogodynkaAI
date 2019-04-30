@@ -75,12 +75,6 @@ public class Main {
                 {"D14","Rain","High","Strong","No"}
         };
 
-        DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-        Drzewo<String> indukcja = dd.indukcja(klasyfikcaja,atrybuty,null);
-        System.out.println("Indukcja:");
-        indukcja.preOrder(indukcja.getKorzen());
-        System.out.println();
-
         for(int i=0;i<klasyfikcaja.length;i++) {
             for (int j=0; j<klasyfikcaja[i].length; j++)
             System.out.print(klasyfikcaja[i][j]+"   ");

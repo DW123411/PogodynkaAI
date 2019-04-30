@@ -108,7 +108,7 @@ public class Okno extends JFrame implements ActionListener
                     {"D13","Overcast","Normal","Weak","Yes"},
                     {"D14","Rain","High","Strong","No"}
                 };*/
-            if(klasyfikacja!=null) {
+            /*if(klasyfikacja!=null) {
                 //Klasyfikacja klasyfikacjaZPliku = new Klasyfikacja("src/test_klasyfikacji.txt");
                 String[][] klasyfikacjaTablica = klasyfikacja.get_klasyfikacja();
                 String[] atrybuty = new String[klasyfikacjaTablica[0].length - 2];
@@ -125,7 +125,32 @@ public class Okno extends JFrame implements ActionListener
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
-            }
+            }*/
+            Atrybut[] atrybuty = {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind")};
+            ElementDrzewa[][] przyklady = {
+                    {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind"),new Atrybut()},
+                    {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("No")},
+                    {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")},
+                    {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Strong"),new Decyzja("No")},
+                    {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("No")},
+                    {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                    {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")}
+            };
+            DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+            Drzewo<ElementDrzewa> indukcja = dd.indukcja(przyklady, atrybuty, null);
+            indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+            indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+            wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+            wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+            wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
         }
 
         else if(zrodlo==menu.zal) {
