@@ -13,6 +13,7 @@ public class Okno extends JFrame implements ActionListener
     String sciezkaDoPliku;
     Drzewo<ElementDrzewa> wczytywanie;
     Drzewo<ElementDrzewa> zapis;
+    ElementDrzewa[][] przyklad;
     Drzewo drzewo;
     Klasyfikacja klasyfikacja = null;
     public Okno() {  
@@ -144,6 +145,7 @@ public class Okno extends JFrame implements ActionListener
                     {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
                     {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")}
             };
+            przyklad = przyklady;
             DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
             Drzewo<ElementDrzewa> indukcja = dd.indukcja(przyklady, atrybuty, null);
             indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
@@ -238,6 +240,12 @@ public class Okno extends JFrame implements ActionListener
         if (wynik == JFileChooser.APPROVE_OPTION)
         {
             sciezkaDoPliku = zapisz.getSelectedFile().getPath();
+        }
+        try {
+
+            Zapis.zapisDoPlkiu(przyklad,sciezkaDoPliku);
+        }catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
 }
