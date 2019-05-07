@@ -1,6 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class Zapis {
 
@@ -29,5 +27,23 @@ public class Zapis {
 
 
         }
+    }
+    public static void  zapiszDrzewoDoPliku(String sciezka,Drzewo<ElementDrzewa> ed) throws IOException,ClassNotFoundException{
+        ObjectOutputStream pl=null;
+        try{
+            FileOutputStream fileOut = new FileOutputStream(sciezka);
+
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            DataOutputStream fas = new DataOutputStream(out);
+            out.writeObject(ed);
+            out.close();
+            fileOut.close();
+
+        }
+        catch (IOException i) {
+            i.printStackTrace();
+        }
+
+
     }
 }
