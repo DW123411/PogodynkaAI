@@ -46,7 +46,7 @@ public class Wyswietlanie extends JPanel
 
         wysokosc = (int)(wysokosc*zajetosc);
 
-        setLayout(new GridLayout(2,1));
+        //setLayout(new GridLayout(2,1));
         ustawRozmiar(new Dimension(szerokosc,wysokosc));
         wyczysc();
     }
@@ -308,5 +308,5 @@ public class Wyswietlanie extends JPanel
         Graphics2D g2d = (Graphics2D) g;
         //wyrysowanie naszego płótna na panelu 
         g2d.drawImage(okno, 0, 0, this);
-    }    
+    }
 }

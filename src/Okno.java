@@ -1,10 +1,14 @@
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class Okno extends JFrame implements ActionListener
 {
@@ -16,26 +20,59 @@ public class Okno extends JFrame implements ActionListener
     ElementDrzewa[][] przyklad;
     Drzewo drzewo;
     Klasyfikacja klasyfikacja = null;
-    public Okno() {  
-        super("Projekt Zespołowy - drzewo decyzyjne");
+    String puste= "null";
+    JPanel p;
+    JPanel p2 = new JPanel(new GridLayout(0, 1, 10, 10));
+    JFrame f;
+    public Okno()  {
+
+        f= new JFrame("Projekt Zespołowy - drzewo decyzyjne");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //blokada zmiany rozmiaru okna
-        setResizable (false);
+        f.setResizable (false);
         //rozmieszczenie elementow - menadzer rozkladu
         //FlowLayout ustawia elementy jeden za drugim
         //w tym przypadku dodatkowo wysrodkowane na ekranie, z odstępem w pionie i poziomie
-        setLayout(new FlowLayout(FlowLayout.CENTER, 2, 2));
+        //setLayout(new FlowLayout(FlowLayout.CENTER, 2, 2));
+        p = new JPanel(new BorderLayout(5,5));
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        p.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         //ustawienie stworzonego menu
-        setJMenuBar(menu);
+        //f.setJMenuBar(menu);
         //dodanie paneli
-        add(wyswietlanie); 
+        //f.add(wyswietlanie);
+        JLabel test1 = new JLabel("test1test1");
+        JLabel test2 = new JLabel("test2test1");
+        p2.setBorder(new TitledBorder(
+                new TitledBorder(
+                        LineBorder.createGrayLineBorder(),
+                        "Dane"),
+                "",
+                TitledBorder.RIGHT,
+                TitledBorder.BOTTOM));
+
+        p.add(menu, BorderLayout.NORTH);
+        p.add(wyswietlanie, BorderLayout.CENTER);
+        p2.add(test1,BorderLayout.EAST);
+        p2.add(test2,BorderLayout.EAST);
+        p.add(p2,BorderLayout.EAST);
+
+        //p.setBackground(Color.white);
+
+
         //przypisanie obsługi akcji
         ustawNasluchZdarzen();        
         dopasujSieDoZawartosci();
         //wyswietlenie naszej ramki
-        setVisible(true);
+        f.setVisible(true);
+        // add panel to frame
+        f.add(p);
 
+        // set the size of frame
+        f.setSize(900, 700);
+
+        //f.show();
     }
 
     private void ustawNasluchZdarzen()

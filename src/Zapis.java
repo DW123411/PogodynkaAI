@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Zapis {
 
@@ -31,8 +33,12 @@ public class Zapis {
     public static void  zapiszDrzewoDoPliku(String sciezka,Drzewo<ElementDrzewa> ed) throws IOException,ClassNotFoundException{
         ObjectOutputStream pl=null;
         try{
-            FileOutputStream fileOut = new FileOutputStream(sciezka);
+            ElementDrzewa korzen = (ElementDrzewa) ed.getKorzen().getDane();
+            LinkedList<Wezel<ElementDrzewa>> dzieci = ed.getKorzen().getDzieci();
+            for(int i=0;i<ed.getHeight(ed.getKorzen())-1;i++) {
 
+            }
+            FileOutputStream fileOut = new FileOutputStream(sciezka);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             DataOutputStream fas = new DataOutputStream(out);
             out.writeObject(ed);
@@ -46,4 +52,5 @@ public class Zapis {
 
 
     }
+
 }

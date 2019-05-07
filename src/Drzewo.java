@@ -72,4 +72,14 @@ public class Drzewo<T> {
         return h+1;
     }
 
+    public LinkedList<Wezel<ElementDrzewa>> preOrderToList(Wezel<T> n, LinkedList<Wezel<ElementDrzewa>> list){
+        list.add((Wezel<ElementDrzewa>) n);
+        Wezel<T> temp = n.getPierwszeDzieckoPoLewej();
+        while(temp!=null){
+            preOrder(temp);
+            temp = temp.getPraweRodzenstwo();
+        }
+        return list;
+    }
+
 }

@@ -37,7 +37,7 @@ import java.awt.event.KeyEvent;
 
 public class Menuski extends JMenuBar
 {
-    JButton wycz, wyś, zam, zal, cred, save, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
+    public JButton wycz, wyś, zam, zal, cred, save, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
 
 
     public Menuski()
@@ -54,14 +54,14 @@ public class Menuski extends JMenuBar
             TitledBorder.BOTTOM));
            
             
-            ImageIcon imgIcon = new ImageIcon("icons/info.png");
-            ImageIcon imgIcon2 = new ImageIcon("icons/save.png");
-            ImageIcon imgIcon3 = new ImageIcon("icons/cancel.png");
-            ImageIcon imgIcon4 = new ImageIcon("icons/saveText.png");
-            ImageIcon imgIcon5 = new ImageIcon("icons/wczytaj.png");
-            ImageIcon imgIcon6 = new ImageIcon("icons/rysuj.png");
-            ImageIcon imgIcon7 = new ImageIcon("icons/delete.png");
-            ImageIcon imgIcon8 = new ImageIcon("icons/view.png");
+            ImageIcon imgIcon = new ImageIcon("src/icons/info.png");
+            ImageIcon imgIcon2 = new ImageIcon("src/icons/save.png");
+            ImageIcon imgIcon3 = new ImageIcon("src/icons/cancel.png");
+            ImageIcon imgIcon4 = new ImageIcon("src/icons/saveText.png");
+            ImageIcon imgIcon5 = new ImageIcon("src/icons/wczytaj.png");
+            ImageIcon imgIcon6 = new ImageIcon("src/icons/rysuj.png");
+            ImageIcon imgIcon7 = new ImageIcon("src/icons/delete.png");
+            ImageIcon imgIcon8 = new ImageIcon("src/icons/view.png");
          cred = new JButton("<html></html>");
          cred.setIcon(imgIcon);
          cred.setToolTipText("<html>O Programie</html>");
