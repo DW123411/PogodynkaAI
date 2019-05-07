@@ -99,6 +99,7 @@ public class Wczytywanie {
         File file = new File(Ścieżka);
                 Scanner scanner = null;
                 String[][] temp_table;
+                Object[][] temp_table_obj;
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera
         }catch(FileNotFoundException err){
@@ -135,6 +136,7 @@ public class Wczytywanie {
         * przygotowanie tablicy
         */
            temp_table= new String[max_wysokosc][max_szerokosc];
+           temp_table_obj = new Object[max_wysokosc][max_szerokosc];
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera na nowo
         }catch(FileNotFoundException err){
@@ -144,7 +146,7 @@ public class Wczytywanie {
          * wpisanie danych z pliku do tablicy
          */
         
-        y=0;
+        y=0; boolean atrybuty=true;
         while(scanner.hasNextLine()){
         String linia = scanner.nextLine();
          int x=0;
@@ -153,17 +155,26 @@ public class Wczytywanie {
         {   
             if(linia.charAt(i)==','){
                 temp_table[y][x]=wyraz;
+                if(atrybuty){
+                    temp_table_obj[y][x]=new Atrybut(wyraz);
+                }
+                if(!atrybuty){
+                                        temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
+                }
+
+                    
                 wyraz="";x++;}
             else{
                 wyraz+=linia.charAt(i);
                 
             }
         }
-         y++;
+         y++; atrybuty = false;
         }
            scanner.close();
         Klasyfikacja KS = new Klasyfikacja();
-        KS.set_klasyfikacja_tablica(temp_table);
+        KS.set_klasyfikacja_tablica_string(temp_table);
+        KS.set_klasyfikacja_tablica(temp_table_obj);
     return KS;
     }
 

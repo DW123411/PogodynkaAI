@@ -279,7 +279,9 @@ public class Wyswietlanie extends JPanel
     }
     
     public void show_klasyfikacja(Klasyfikacja klasyfikacja){
-        
+            String klasyfikacja_txt=klasyfikacja.print_string_format();
+            
+        JOptionPane.showMessageDialog(null, klasyfikacja_txt,"Klasyfikacja",JOptionPane.INFORMATION_MESSAGE);
         
     }
 
