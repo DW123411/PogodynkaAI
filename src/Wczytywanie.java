@@ -100,6 +100,7 @@ public class Wczytywanie {
                 Scanner scanner = null;
                 String[][] temp_table;
                 Object[][] temp_table_obj;
+                Atrybut[] temp_table_atrybuty;
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera
         }catch(FileNotFoundException err){
@@ -137,6 +138,7 @@ public class Wczytywanie {
         */
            temp_table= new String[max_wysokosc][max_szerokosc];
            temp_table_obj = new Object[max_wysokosc][max_szerokosc];
+           temp_table_atrybuty= new Atrybut[max_szerokosc-2];
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera na nowo
         }catch(FileNotFoundException err){
@@ -146,35 +148,81 @@ public class Wczytywanie {
          * wpisanie danych z pliku do tablicy
          */
         
-        y=0; boolean atrybuty=true;
+        y=0; boolean atrybuty=true; boolean pierwszy = true; int atr_x=0;
         while(scanner.hasNextLine()){
         String linia = scanner.nextLine();
          int x=0;
-        String wyraz="";
+        String wyraz=""; int kol = 0; 
+           for(int k=0;k<linia.length();k++){
+            if(linia.charAt(k)==','){
+            kol++;
+            }
+                    }  
         for(int i=0;i<linia.length();i++)
         {   
+               
             if(linia.charAt(i)==','){
                 temp_table[y][x]=wyraz;
+                if(y!=0){
+                    if(pierwszy){
+                    temp_table_obj[y][x]=new String(wyraz);
+                    pierwszy=false;
+                }else {
                 if(atrybuty){
+                    if(x==kol-1){
+                        temp_table_obj[y][x]=new String(wyraz);
+                    }
+                    else{
                     temp_table_obj[y][x]=new Atrybut(wyraz);
+                    temp_table_atrybuty[atr_x]= new Atrybut(wyraz);
+                    atr_x++;
+                }
                 }
                 if(!atrybuty){
+                    if(x==kol-1){
+                temp_table_obj[y][x]=new Decyzja(wyraz);
+                }else{
+                                        temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
+                                    }
+                }
+                }
+                    }
+                        else {
+                            if(pierwszy){
+                    temp_table_obj[y][x]=new String(wyraz);
+                    pierwszy=false;
+                }else {
+                if(atrybuty){
+                     if(x==kol-1){
+                            temp_table_obj[y][x]=new String(wyraz);
+                        }else{
+                    temp_table_obj[y][x]=new Atrybut(wyraz);
+                     temp_table_atrybuty[atr_x]= new Atrybut(wyraz);
+                    atr_x++;
+                }
+            }
+                if(!atrybuty){
+                     if(x==kol-1){
+                            temp_table_obj[y][x]=new String(wyraz);
+                        }else{
                                         temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
                 }
-
-                    
-                wyraz="";x++;}
+            }
+                        }
+                      }
+                wyraz="";x++;
+            }
             else{
                 wyraz+=linia.charAt(i);
-                
             }
         }
-         y++; atrybuty = false;
+         y++; atrybuty = false; pierwszy =true; 
         }
            scanner.close();
         Klasyfikacja KS = new Klasyfikacja();
         KS.set_klasyfikacja_tablica_string(temp_table);
         KS.set_klasyfikacja_tablica(temp_table_obj);
+        KS.set_klasyfikacja_tablica_atrybuty( temp_table_atrybuty);
     return KS;
     }
 

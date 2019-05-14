@@ -1,12 +1,14 @@
 public class Klasyfikacja{
      private String[][] tablica;
      private Object[][] dane;
+     private Atrybut[] atrybuty;
      /**
       *  zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
       */
     public Klasyfikacja(){
         this.tablica = new String[50][50];
         this.dane = new Object[50][50];
+         this.atrybuty = new Atrybut[50];
     }
      /**
       *  konstruktor klasy klasyfikacja z ustalonym rozmiarem tablicy danymi wejsciowymi x i y
@@ -14,51 +16,73 @@ public class Klasyfikacja{
     public Klasyfikacja(int y, int x){
         this.tablica = new String[y][x];
            this.dane = new Object[y][x];
+           this.atrybuty = new Atrybut[x];
     }
     /**
      * konstruktor ze zmienna ścieżka typu string. buduje klase na podstawie podanej ścieżki pliku
      */
     public Klasyfikacja(String Ścieżka){
-        this.tablica = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka).get_klasyfikacja_string();    
-                this.dane = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka).get_klasyfikacja();
+       Klasyfikacja to = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka);
+       this.tablica = to.get_klasyfikacja_string();    
+                this.dane = to.get_klasyfikacja();
+                this.atrybuty = to.get_klasyfikacja_atrybuty();
             }
     /**
-     * seter tablicy klasyfikacji ze zmienna wejsciowa sciezka pliku
+     * seter tablicy nazw [ stringow] klasyfikacji ze zmienna wejsciowa sciezka pliku
      */
     public void set_klasyfikacja_z_pliku_string(String Ścieżka){
     this.tablica = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka).get_klasyfikacja_string();
         
     }
     /**
-     * seter tablicy klasyfikacji ze zmienna wejsciowa sciezka pliku
+     * seter tablicy objektow wszystkich [ decyzja,wart.atrybutu, atrybut] klasyfikacji ze zmienna wejsciowa sciezka pliku
      */
     public void set_klasyfikacja_z_pliku(String Ścieżka){
     this.dane = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka).get_klasyfikacja();
         
     }
     /**
-     * seter tablicy klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu String[][]
+     * seter tablicy atrybutow klasyfikacji ze zmienna wejsciowa sciezka pliku
+     */
+    public void set_klasyfikacja_z_pliku_atrybut(String Ścieżka){
+    this.atrybuty = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka).get_klasyfikacja_atrybuty();
+        
+    }
+    /**
+     * seter tablicy wszystkich objektow klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu Object[][]
      */
     public void set_klasyfikacja_tablica(Object[][] tab){
     this.dane= tab;
     }
      /**
-     * seter tablicy klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu String[][]
+     * seter tablicy stringow [ nazw] klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu String[][]
      */
     public void set_klasyfikacja_tablica_string(String[][] tab){
     this.tablica= tab;
     }
     /**
-     * geter klasyfikacji, ktory zwraca tablice 2 wymiarowa
+     * seter tablicy stringow [ nazw] klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu String[][]
+     */
+    public void set_klasyfikacja_tablica_atrybuty(Atrybut[] tab){
+    this.atrybuty= tab;
+    }
+    /**
+     * geter klasyfikacji, ktory zwraca tablice objektow 2 wymiarowa
      */
     public Object[][] get_klasyfikacja(){
     return this.dane;
     }
     /**
-     * geter klasyfikacji, ktory zwraca tablice 2 wymiarowa
+     * geter klasyfikacji, ktory zwraca tablice stringow 2 wymiarowa
      */
     public String[][] get_klasyfikacja_string(){
     return this.tablica;
+    }
+    /**
+     * geter klasyfikacji, ktory zwraca tablice atrybutow 1 wymiarowa
+     */
+    public Atrybut[] get_klasyfikacja_atrybuty(){
+    return this.atrybuty;
     }
     /**
      *  metoda zwracajaca liczbe elementow w tablicy
@@ -94,6 +118,24 @@ public class Klasyfikacja{
         
     }
      /**
+     * metoda drukujaca tablice w konsoli
+     */
+    public void print_in_console_classes(){
+        for(int i=0;i<this.dane.length;i++){
+            for(int j=0;j<this.dane[i].length;j++)
+            {
+                if(this.dane[i][j]!=null){
+                System.out.print("["+this.dane[i][j].getClass()+"]");
+                }
+                else{
+                System.out.print("[]");
+                }
+            }
+             System.out.println();
+        }
+        
+    }
+     /**
      * metoda zwracajaca klasyfikacje do stringa
      */
     public String print_string_format(){
@@ -113,6 +155,23 @@ public class Klasyfikacja{
              temp+=" \n ";
         }
         return temp;
+    }
+    
+    /**
+     * metoda drukujaca w consoli tablice atrybutow klasyfikacji
+     */
+    public void print_in_console_atrybuty()
+    {
+            for(int i=0;i<this.atrybuty.length;i++)
+            {
+                if(this.atrybuty[i]!=null){
+                System.out.print("["+this.atrybuty[i].getNazwa()+"]");
+                }
+                else{
+                System.out.print("[]");
+                }
+            }
+             System.out.println("");
     }
     
         public static String klasyfikacja(String outlook, boolean windy, double humidity) {
