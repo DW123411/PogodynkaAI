@@ -1,6 +1,12 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+
 
 public class Zapis {
 
@@ -25,7 +31,7 @@ public class Zapis {
             }
             zapis.close();
         } catch (IOException ex) {
-            System.out.println("Problez z dostępem do pliku");
+            System.out.println("Problem z dostępem do pliku");
 
 
         }
@@ -51,6 +57,54 @@ public class Zapis {
         }
 
 
+    }
+    public static void save_jpeg() throws IOException {
+
+        BufferedImage okno = Wyswietlanie.okno;
+
+        JFileChooser jpegSave = new JFileChooser();
+        jpegSave.setAcceptAllFileFilterUsed(false);
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki JPEG","jpeg"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki JPG","jpg"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki PNG","png"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki bitmapy","bmp"));
+
+
+        jpegSave.setFileFilter(jpegSave.getChoosableFileFilters()[0]);
+
+
+        if (jpegSave.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File outputfile = jpegSave.getSelectedFile();
+            String path = outputfile.getAbsolutePath();
+            // save to file
+
+            try {
+                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[0]){
+                    outputfile=new File(path+".jpeg");
+                    ImageIO.write(okno, "jpeg", outputfile);
+                    }
+                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[1]){
+                    outputfile=new File(path+".jpg");
+                    ImageIO.write(okno, "jpg", outputfile);
+
+                }
+
+                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[2]){
+                    outputfile=new File(path+".png");
+                    ImageIO.write(okno, "png", outputfile);
+
+                }
+
+                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[3]){
+                    outputfile=new File(path+".bmp");
+                    ImageIO.write(okno, "bmp", outputfile);
+
+                }
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
 }

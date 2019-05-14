@@ -285,22 +285,6 @@ public class Wyswietlanie extends JPanel
         
     }
 
-    public static void save_jpeg() throws IOException {
-
-        JFileChooser jpegSave = new JFileChooser();
-        FileNameExtensionFilter filtr = new FileNameExtensionFilter("Pliki PNG", "png");
-        jpegSave.setFileFilter(filtr);
-        if (jpegSave.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File outputfile = jpegSave.getSelectedFile();
-            // save to file
-            try {
-                ImageIO.write(okno, "png", outputfile);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
-
     //przesłonięta metoda paintComponent z klasy JPanel do rysowania
     @Override
     public void paintComponent(Graphics g) {

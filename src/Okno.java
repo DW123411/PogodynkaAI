@@ -7,6 +7,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -24,6 +26,11 @@ public class Okno extends JFrame implements ActionListener
     JPanel p;
     JPanel p2 = new JPanel(new GridLayout(0, 1, 10, 10));
     JFrame f;
+    JPopupMenu popupMenu;
+    JMenuItem wyczysc;
+    JMenuItem zapisz;
+    JMenuItem zamkn;
+
     public Okno()  {
 
         f= new JFrame("Projekt Zespołowy - drzewo decyzyjne");
@@ -38,6 +45,7 @@ public class Okno extends JFrame implements ActionListener
         p = new JPanel(new BorderLayout(5,5));
         Border blackline = BorderFactory.createLineBorder(Color.black);
         p.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         //ustawienie stworzonego menu
         //f.setJMenuBar(menu);
         //dodanie paneli
@@ -59,12 +67,33 @@ public class Okno extends JFrame implements ActionListener
         p.add(p2,BorderLayout.EAST);
 
         //p.setBackground(Color.white);
+        popupMenu = new JPopupMenu();
+        wyczysc = new JMenuItem("Wyczyść");
+        wyczysc.setActionCommand("Wyczyść");
+        zapisz = new JMenuItem("Zapisz Obłazek");
+        zapisz.setActionCommand("Zapisz Obłazek");
+        zamkn= new JMenuItem("Zamknij");
+        zamkn.setActionCommand("Zamknij");
+        popupMenu.add(wyczysc);
+        popupMenu.add(zapisz);
+        popupMenu.add(zamkn);
+
+
+
+        f.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                popupMenu.show(f , e.getX(), e.getY());
+            }
+        });
+
+
 
 
         //przypisanie obsługi akcji
         ustawNasluchZdarzen();        
         dopasujSieDoZawartosci();
         //wyswietlenie naszej ramki
+
         f.setVisible(true);
         // add panel to frame
         f.add(p);
@@ -86,6 +115,10 @@ public class Okno extends JFrame implements ActionListener
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.jpeg.addActionListener(this);
+        wyczysc.addActionListener(this);
+        zapisz.addActionListener(this);
+        zamkn.addActionListener(this);
+
     }
 
     @Override
@@ -219,25 +252,29 @@ public class Okno extends JFrame implements ActionListener
            else{wyswietlanie.show_klasyfikacja(klasyfikacja);
             }
         }
-         else if (zrodlo==menu.wycz){
+         else if (zrodlo==menu.wycz||zrodlo==wyczysc){
+            wyswietlanie.wyczysc();
+
+        }
+        else if (zrodlo==menu.wycz){
             wyswietlanie.wyczysc();
 
         }
         else if (zrodlo==menu.cred){
             wyswietlanie.credits();
         }
-        else if (zrodlo==menu.zam){
+        else if (zrodlo==menu.zam||zrodlo==zamkn){
             System.exit(0);
         }
         else if(zrodlo==menu.save)
         {
             zapiszPlik();
         }
-        else if (zrodlo==menu.jpeg){
+        else if (zrodlo==menu.jpeg||zrodlo==zapisz){
             try {
-                Wyswietlanie.save_jpeg();
-            } catch (IOException e1) {
-                e1.printStackTrace();
+                Zapis.save_jpeg();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
 
