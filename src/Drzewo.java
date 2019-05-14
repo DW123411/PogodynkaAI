@@ -76,7 +76,7 @@ public class Drzewo<T> {
         list.add((Wezel<ElementDrzewa>) n);
         Wezel<T> temp = n.getPierwszeDzieckoPoLewej();
         while(temp!=null){
-            preOrder(temp);
+            preOrderToList(temp,list);
             temp = temp.getPraweRodzenstwo();
         }
         return list;

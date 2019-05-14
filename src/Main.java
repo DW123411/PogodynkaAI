@@ -1,11 +1,12 @@
 
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException,FileNotFoundException {
         System.out.println("Hello3");
         System.out.println("Hello Test GitHub!");
         Wyswietlanie test = new Wyswietlanie();
@@ -50,13 +51,33 @@ public class Main {
         testWczytywania.preOrder(testWczytywania.getKorzen());
         System.out.println();
         Drzewo drzewow = new Drzewo(testWczytywania.getKorzen());
-
+        Atrybut[] atrybuty = {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind")};
+        ElementDrzewa[][] przyklady = {
+                {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind"),new Atrybut()},
+                {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("No")},
+                {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")},
+                {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Strong"),new Decyzja("No")},
+                {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("No")},
+                {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
+                {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")}
+        };
+        DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+        Drzewo<ElementDrzewa> indukcja = dd.indukcja(przyklady, atrybuty, null);
+        Zapis.zapiszDrzewoDoPliku("src/testZapisu.txt",indukcja);
         //LinkedList<Wezel> lista = drzewow.getKorzen().getDzieci();
         //System.out.println(lista.size());
         //Wezel w = lista.remove(0);
         //System.out.println(w.czyLisc());
 
-        String[] atrybuty = {"Outlook","Humidity","Wind"};
+        //String[] atrybuty = {"Outlook","Humidity","Wind"};
 
         String[][] klasyfikcaja = {{"Day","Outlook","Humidity","Wind","Decision"},
                 {"D1","Sunny","High","Weak","No"},
