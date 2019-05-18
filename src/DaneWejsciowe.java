@@ -1,28 +1,28 @@
-public class Klasyfikacja{
+public class DaneWejsciowe {
      private String[][] tablica;
-     private Object[][] dane;
+     private ElementDrzewa[][] dane;
      private Atrybut[] atrybuty;
      /**
       *  zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
       */
-    public Klasyfikacja(){
+    public DaneWejsciowe(){
         this.tablica = new String[50][50];
-        this.dane = new Object[50][50];
+        this.dane = new ElementDrzewa[50][50];
          this.atrybuty = new Atrybut[50];
     }
      /**
       *  konstruktor klasy klasyfikacja z ustalonym rozmiarem tablicy danymi wejsciowymi x i y
       */
-    public Klasyfikacja(int y, int x){
+    public DaneWejsciowe(int y, int x){
         this.tablica = new String[y][x];
-           this.dane = new Object[y][x];
+           this.dane = new ElementDrzewa[y][x];
            this.atrybuty = new Atrybut[x];
     }
     /**
      * konstruktor ze zmienna ścieżka typu string. buduje klase na podstawie podanej ścieżki pliku
      */
-    public Klasyfikacja(String Ścieżka){
-       Klasyfikacja to = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka);
+    public DaneWejsciowe(String Ścieżka){
+       DaneWejsciowe to = Wczytywanie.wczytajKlasyfikacjeZPliku(Ścieżka);
        this.tablica = to.get_klasyfikacja_string();    
                 this.dane = to.get_klasyfikacja();
                 this.atrybuty = to.get_klasyfikacja_atrybuty();
@@ -51,7 +51,7 @@ public class Klasyfikacja{
     /**
      * seter tablicy wszystkich objektow klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu Object[][]
      */
-    public void set_klasyfikacja_tablica(Object[][] tab){
+    public void set_klasyfikacja_tablica(ElementDrzewa[][] tab){
     this.dane= tab;
     }
      /**
@@ -69,7 +69,7 @@ public class Klasyfikacja{
     /**
      * geter klasyfikacji, ktory zwraca tablice objektow 2 wymiarowa
      */
-    public Object[][] get_klasyfikacja(){
+    public ElementDrzewa[][] get_klasyfikacja(){
     return this.dane;
     }
     /**

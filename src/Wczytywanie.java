@@ -95,11 +95,11 @@ public class Wczytywanie {
     /**
      * metoda zwraca klase Klasyfikacja z podanej ścieżki do pliku jako zmienna wejściowa
      */
-    public static Klasyfikacja wczytajKlasyfikacjeZPliku(String Ścieżka){
+    public static DaneWejsciowe wczytajKlasyfikacjeZPliku(String Ścieżka){
         File file = new File(Ścieżka);
                 Scanner scanner = null;
                 String[][] temp_table;
-                Object[][] temp_table_obj;
+                ElementDrzewa[][] temp_table_obj;
                 Atrybut[] temp_table_atrybuty;
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera
@@ -137,7 +137,7 @@ public class Wczytywanie {
         * przygotowanie tablicy
         */
            temp_table= new String[max_wysokosc][max_szerokosc];
-           temp_table_obj = new Object[max_wysokosc][max_szerokosc];
+           temp_table_obj = new ElementDrzewa[max_wysokosc][max_szerokosc];
            temp_table_atrybuty= new Atrybut[max_szerokosc-2];
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera na nowo
@@ -165,12 +165,12 @@ public class Wczytywanie {
                 temp_table[y][x]=wyraz;
                 if(y!=0){
                     if(pierwszy){
-                    temp_table_obj[y][x]=new String(wyraz);
+                    temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
                     pierwszy=false;
                 }else {
                 if(atrybuty){
                     if(x==kol-1){
-                        temp_table_obj[y][x]=new String(wyraz);
+                        temp_table_obj[y][x]=new Decyzja(wyraz);
                     }
                     else{
                     temp_table_obj[y][x]=new Atrybut(wyraz);
@@ -189,12 +189,12 @@ public class Wczytywanie {
                     }
                         else {
                             if(pierwszy){
-                    temp_table_obj[y][x]=new String(wyraz);
+                    temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
                     pierwszy=false;
                 }else {
                 if(atrybuty){
                      if(x==kol-1){
-                            temp_table_obj[y][x]=new String(wyraz);
+                            temp_table_obj[y][x]=new Decyzja(wyraz);
                         }else{
                     temp_table_obj[y][x]=new Atrybut(wyraz);
                      temp_table_atrybuty[atr_x]= new Atrybut(wyraz);
@@ -203,7 +203,7 @@ public class Wczytywanie {
             }
                 if(!atrybuty){
                      if(x==kol-1){
-                            temp_table_obj[y][x]=new String(wyraz);
+                            temp_table_obj[y][x]=new Decyzja(wyraz);
                         }else{
                                         temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
                 }
@@ -219,7 +219,7 @@ public class Wczytywanie {
          y++; atrybuty = false; pierwszy =true; 
         }
            scanner.close();
-        Klasyfikacja KS = new Klasyfikacja();
+        DaneWejsciowe KS = new DaneWejsciowe();
         KS.set_klasyfikacja_tablica_string(temp_table);
         KS.set_klasyfikacja_tablica(temp_table_obj);
         KS.set_klasyfikacja_tablica_atrybuty( temp_table_atrybuty);

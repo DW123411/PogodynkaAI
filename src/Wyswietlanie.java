@@ -1,12 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.Buffer;
 import java.util.LinkedList;
 
 public class Wyswietlanie extends JPanel
@@ -278,7 +273,7 @@ public class Wyswietlanie extends JPanel
 */
     }
     
-    public void show_klasyfikacja(Klasyfikacja klasyfikacja){
+    public void show_klasyfikacja(DaneWejsciowe klasyfikacja){
             String klasyfikacja_txt=klasyfikacja.print_string_format();
             
         JOptionPane.showMessageDialog(null, klasyfikacja_txt,"Klasyfikacja",JOptionPane.INFORMATION_MESSAGE);

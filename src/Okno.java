@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class Okno extends JFrame implements ActionListener
 {
@@ -21,7 +20,7 @@ public class Okno extends JFrame implements ActionListener
     Drzewo<ElementDrzewa> zapis;
     ElementDrzewa[][] przyklad;
     Drzewo drzewo;
-    Klasyfikacja klasyfikacja = null;
+    DaneWejsciowe daneWejsciowe = null;
     String puste= "null";
     JPanel p;
     JPanel p2 = new JPanel(new GridLayout(0, 1, 10, 10));
@@ -197,7 +196,7 @@ public class Okno extends JFrame implements ActionListener
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
             }*/
-            Atrybut[] atrybuty = {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind")};
+            /*Atrybut[] atrybuty = {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind")};
             ElementDrzewa[][] przyklady = {
                     {new Atrybut("Outlook"),new Atrybut("Humidity"),new Atrybut("Wind"),new Atrybut()},
                     {new WartoscAtrybutu("Sunny"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Weak"),new Decyzja("No")},
@@ -214,15 +213,16 @@ public class Okno extends JFrame implements ActionListener
                     {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("Yes")},
                     {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
                     {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")}
-            };
-            przyklad = przyklady;
-            DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-            Drzewo<ElementDrzewa> indukcja = dd.indukcja(przyklady, atrybuty, null);
-            indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
-            indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
-            wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
-            wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
-            wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+            };*/
+            if(daneWejsciowe!=null) {
+                DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+            }
         }
 
         else if(zrodlo==menu.zal) {
@@ -238,7 +238,7 @@ public class Okno extends JFrame implements ActionListener
          else if(zrodlo==menu.klasyfikacja_z_pliku) {
             boolean spr = otworzPlik();
             if (spr) {
-                klasyfikacja = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
+                daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
                  JOptionPane.showMessageDialog(null, "Klasyfikacja wczytana poprawnie.");
             }
             else if (!spr) {
@@ -246,10 +246,10 @@ public class Okno extends JFrame implements ActionListener
             }
         }
          else if (zrodlo==menu.show_klasyfikacja){
-           if(klasyfikacja==null){
+           if(daneWejsciowe ==null){
               JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji z pliku.");
             }
-           else{wyswietlanie.show_klasyfikacja(klasyfikacja);
+           else{wyswietlanie.show_klasyfikacja(daneWejsciowe);
             }
         }
          else if (zrodlo==menu.wycz||zrodlo==wyczysc){
@@ -317,7 +317,7 @@ public class Okno extends JFrame implements ActionListener
         }
         try {
 
-            Zapis.zapisDoPlkiu(przyklad,sciezkaDoPliku);
+            Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku);
         }catch (IOException e1) {
             e1.printStackTrace();
         }
