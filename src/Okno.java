@@ -79,9 +79,11 @@ public class Okno extends JFrame implements ActionListener
 
 
 
-        f.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                popupMenu.show(f , e.getX(), e.getY());
+        wyswietlanie.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    popupMenu.show(wyswietlanie, e.getX(), e.getY());
+                }
             }
         });
 
