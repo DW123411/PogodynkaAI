@@ -14,7 +14,7 @@ public class Wyswietlanie extends JPanel
     {
         super();
         //Dynamiczne dopasowanie do ekranu dla 1 monitora
-        Dimension Rozmiar = Toolkit.getDefaultToolkit().getScreenSize();
+        /*Dimension Rozmiar = Toolkit.getDefaultToolkit().getScreenSize();
         int szerokosc = (int) Rozmiar.getWidth();
         int wysokosc = (int)Rozmiar.getHeight();
         double zajetosc = 0.85;//Ułamek dziesiętny zajętej Wysokości
@@ -39,10 +39,11 @@ public class Wyswietlanie extends JPanel
                szerokosc = (int) (szerokosc*zajetosc);
         }
 
-        wysokosc = (int)(wysokosc*zajetosc);
+        wysokosc = (int)(wysokosc*zajetosc);*/
 
         //setLayout(new GridLayout(2,1));
-        ustawRozmiar(new Dimension(szerokosc,wysokosc));
+        //ustawRozmiar(new Dimension(szerokosc,wysokosc));
+        ustawRozmiar(new Dimension(1200,1200));
         wyczysc();
     }
    

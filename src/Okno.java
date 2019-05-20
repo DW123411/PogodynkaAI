@@ -23,12 +23,13 @@ public class Okno extends JFrame implements ActionListener
     DaneWejsciowe daneWejsciowe = null;
     String puste= "null";
     JPanel p;
-    JPanel p2 = new JPanel(new GridLayout(0, 1, 10, 10));
+    JPanel p2 = new JPanel();
     JFrame f;
     JPopupMenu popupMenu;
     JMenuItem wyczysc;
     JMenuItem zapisz;
     JMenuItem zamkn;
+    boolean czyPrawyPanel = false;
 
     public Okno()  {
 
@@ -49,8 +50,8 @@ public class Okno extends JFrame implements ActionListener
         //f.setJMenuBar(menu);
         //dodanie paneli
         //f.add(wyswietlanie);
-        JLabel test1 = new JLabel("test1test1");
-        JLabel test2 = new JLabel("test2test1");
+        //JLabel test1 = new JLabel("test1test1");
+        //JLabel test2 = new JLabel("test2test1");
         p2.setBorder(new TitledBorder(
                 new TitledBorder(
                         LineBorder.createGrayLineBorder(),
@@ -61,9 +62,9 @@ public class Okno extends JFrame implements ActionListener
 
         p.add(menu, BorderLayout.NORTH);
         p.add(wyswietlanie, BorderLayout.CENTER);
-        p2.add(test1,BorderLayout.EAST);
-        p2.add(test2,BorderLayout.EAST);
-        p.add(p2,BorderLayout.EAST);
+        //p2.add(test1,BorderLayout.EAST);
+        //p2.add(test2,BorderLayout.EAST);
+        //p.add(p2,BorderLayout.EAST);
 
         //p.setBackground(Color.white);
         popupMenu = new JPopupMenu();
@@ -100,7 +101,7 @@ public class Okno extends JFrame implements ActionListener
         f.add(p);
 
         // set the size of frame
-        f.setSize(900, 700);
+        f.setSize(1200, 700);
 
         //f.show();
     }
@@ -242,6 +243,23 @@ public class Okno extends JFrame implements ActionListener
             if (spr) {
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
                  JOptionPane.showMessageDialog(null, "Klasyfikacja wczytana poprawnie.");
+                 Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
+                 JTable tabelaWyswietl = tabela.getTabela();
+                 tabelaWyswietl.setFillsViewportHeight(true);
+                 p2 = new JPanel();
+                 p2.add(new JScrollPane(tabelaWyswietl));
+                 p2.setBorder(new TitledBorder(
+                         new TitledBorder(
+                                 LineBorder.createGrayLineBorder(),
+                                 "Dane"),
+                         "",
+                         TitledBorder.RIGHT,
+                         TitledBorder.BOTTOM));
+                 p2.setMaximumSize(new Dimension(500, 500));
+                 p.add(p2, BorderLayout.EAST);
+                 dopasujSieDoZawartosci();
+                 f.setVisible(true);
+                 czyPrawyPanel = true;
             }
             else if (!spr) {
                 JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
