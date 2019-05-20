@@ -9,6 +9,9 @@ public class Wyswietlanie extends JPanel
     
     static BufferedImage okno;
     JFrame f;
+    LinkedList<JButton> listaButton = new LinkedList<JButton>();
+
+
     //konstruktor
     public Wyswietlanie()
     {
@@ -49,6 +52,9 @@ public class Wyswietlanie extends JPanel
    
        public void wyczysc()
     {
+        this.removeAll();
+
+        listaButton = new LinkedList<JButton>();
         //wyrysowanie białego tła
         Graphics2D g = (Graphics2D) okno.getGraphics();
         g.setColor(Color.gray);
@@ -67,7 +73,6 @@ public class Wyswietlanie extends JPanel
 
     public void obliczanieWspozednych(Wezel wezel,Wezel korzen){
         if(wezel.equals(korzen)) {
-            System.out.println("Test tu jest");
             wezel.setX((wezel.getKoniecDostepnegoMiejsca() - wezel.getPoczatekDostepnegoMiejsca()) / 2);
         }
         int liczbaDzieci = wezel.getLiczbaDzieci(); //liczba dzieci rodzica wpowadzanego do metody
@@ -101,7 +106,7 @@ public class Wyswietlanie extends JPanel
 
     public void obliczanieWspozednychY(Wezel wezel, int podzial,Drzewo drzewo,Wezel korzen){
         if(wezel.equals(korzen)) {
-            System.out.println("Test tu jest");
+
             wezel.setY((drzewo.getLevel(wezel)+1)*podzial);
         }
         if(!wezel.czyLisc()){
@@ -126,6 +131,14 @@ public class Wyswietlanie extends JPanel
         Graphics2D g3 = (Graphics2D) okno.getGraphics();
         g3.setStroke(new BasicStroke(2));
         g3.setColor(Color.white);
+        JButton button;
+        //JTextField jtext;
+
+
+
+
+
+
 
 
      /*       Line2D.Double line = new Line2D.Double(270, 50, 200, 150);
@@ -212,7 +225,14 @@ public class Wyswietlanie extends JPanel
         }
         repaint();*/
         if(wezel.equals(korzen)) {
-            g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
+       // g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
+
+
+            button = new JButton(wezel.toString());
+            button.setBounds((wezel.getX()-(3*wezel.toString().length())-25), wezel.getY()-20,wezel.toString().length()*13,30);
+            button.setMargin(new Insets(0,0,0,0));
+            //this.add(button1);
+            listaButton.add(button);
 
         }
         if(!wezel.czyLisc()){
@@ -222,14 +242,34 @@ public class Wyswietlanie extends JPanel
             } //list przechowująca dzieci
             while (!lista.isEmpty()){
                 Wezel w = lista.remove(0);
-                g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
+              //  g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
+                button = new JButton(w.toString());
+                button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,w.toString().length()*13,30);
+                button.setMargin(new Insets(0,0,0,0));
+                //this.add(button);
+                listaButton.add(button);
                 Line2D.Double line = new Line2D.Double (w.getX(), w.getY()-20, w.getRodzic().getX(), w.getRodzic().getY()+10);
                 g.draw(line);
                 rysujDrzewo(w,korzen);
             }
         }
+
+        repaint();
+
+    }
+
+    public void rysujPrzyciski(LinkedList lista) {
+        int i= 0;
+        while (i<lista.size()){
+
+                JButton b = listaButton.get(i);
+                i++;
+                this.add(b);
+
+        }
         repaint();
     }
+
 
 
     public void credits(){
@@ -288,5 +328,6 @@ public class Wyswietlanie extends JPanel
         Graphics2D g2d = (Graphics2D) g;
         //wyrysowanie naszego płótna na panelu 
         g2d.drawImage(okno, 0, 0, this);
+
     }
 }

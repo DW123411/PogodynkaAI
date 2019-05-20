@@ -225,6 +225,7 @@ public class Okno extends JFrame implements ActionListener
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+                wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
         }
 
@@ -334,12 +335,13 @@ public class Okno extends JFrame implements ActionListener
         if (wynik == JFileChooser.APPROVE_OPTION)
         {
             sciezkaDoPliku = zapisz.getSelectedFile().getPath();
-        }
-        try {
+            try {
 
-            Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku);
-        }catch (IOException e1) {
-            e1.printStackTrace();
+                Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku);
+            }catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
+
     }
 }
