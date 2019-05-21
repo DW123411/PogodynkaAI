@@ -61,7 +61,7 @@ public class Okno extends JFrame implements ActionListener
                 TitledBorder.BOTTOM));
 
         p.add(menu, BorderLayout.NORTH);
-        p.add(wyswietlanie, BorderLayout.CENTER);
+        p.add(new JScrollPane(wyswietlanie), BorderLayout.CENTER);
         //p2.add(test1,BorderLayout.EAST);
         //p2.add(test2,BorderLayout.EAST);
         //p.add(p2,BorderLayout.EAST);

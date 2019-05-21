@@ -132,6 +132,7 @@ public class Wyswietlanie extends JPanel
         g3.setStroke(new BasicStroke(2));
         g3.setColor(Color.white);
         JButton button;
+        this.setLayout(null);
         //JTextField jtext;
 
 
