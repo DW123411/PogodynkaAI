@@ -39,56 +39,55 @@ public class Zapis {
 
     public static void  zapiszDrzewoDoPliku(String sciezka,Drzewo<ElementDrzewa> ed) throws IOException{
         ObjectOutputStream pl=null;
-        FileWriter writer = new FileWriter(sciezka);
+        FileWriter writer = new FileWriter(sciezka+".txt");
         BufferedWriter bw = new BufferedWriter(writer);
 
-
         LinkedList<Wezel<ElementDrzewa>> test = ed.preOrderToList(ed.getKorzen(),new LinkedList<Wezel<ElementDrzewa>>());
+        try {
+            //int iterowanie = 0;
+            for (Wezel<ElementDrzewa> element : test) {
+                String nazwaKlasy = element.getDane().getClass().getName();
+                if (nazwaKlasy.equals("Atrybut")) {
+                    bw.write("0,");
+                    bw.write(element.toString() + ",");
+                    if (element.getRodzic() == null) {
+                        bw.write("null,");
+                    } else {
+                        bw.write(element.getRodzic().toString() + ",");
+                    }
+                } else if (nazwaKlasy.equals("WartoscAtrybutu")) {
+                    bw.write("1,");
+                    bw.write(element.toString() + ",");
+                    bw.write(element.getRodzic().toString() + ",");
 
-        //int iterowanie = 0;
-        for(Wezel<ElementDrzewa> element : test){
-            String nazwaKlasy = element.getDane().getClass().getName();
-            if(nazwaKlasy.equals("Atrybut")) {
-                bw.write("0,");
-                bw.write(element.toString()+",");
-                if(element.getRodzic()==null){
-                    bw.write("null,");}
-                else{
-                    bw.write(element.getRodzic().toString()+",");
+                } else if (nazwaKlasy.equals("Decyzja")) {
+                    bw.write("2,");
+                    bw.write(element.toString() + ",");
+                    //if(){
+                    // bw.write(element.getRodzic().toString());
+                    //}
+                    //else{
+                    bw.write(element.getRodzic().toString() + ",");
+                    //}
                 }
-            }
-            else if(nazwaKlasy.equals("WartoscAtrybutu")){
-                bw.write("1,");
-                bw.write(element.toString()+",");
-                bw.write(element.getRodzic().toString()+",");
+                bw.write("\n");
 
-            }
-            else if (nazwaKlasy.equals("Decyzja")){
-                bw.write("2,");
-                bw.write(element.toString()+",");
-                //if(){
-                // bw.write(element.getRodzic().toString());
+
+                //bw.write(zapis.get(i));
+
+
+                //ElementDrzewa korzen = (ElementDrzewa) ed.getKorzen().getDane();
+                //LinkedList<Wezel<ElementDrzewa>> dzieci = ed.getKorzen().getDzieci();
+                //for(int i=0;i<ed.getHeight(ed.getKorzen())-1;i++) {
+
                 //}
-                //else{
-                bw.write(element.getRodzic().toString()+",");
-                //}
+
             }
-            bw.write("\n");
-
-
-            //bw.write(zapis.get(i));
-
-
-
-
-            //ElementDrzewa korzen = (ElementDrzewa) ed.getKorzen().getDane();
-            //LinkedList<Wezel<ElementDrzewa>> dzieci = ed.getKorzen().getDzieci();
-            //for(int i=0;i<ed.getHeight(ed.getKorzen())-1;i++) {
-
-            //}
-
+            bw.close();
         }
-        bw.close();
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
 
     }

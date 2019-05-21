@@ -69,9 +69,9 @@ public class Main {
                 {new WartoscAtrybutu("Overcast"),new WartoscAtrybutu("Normal"),new WartoscAtrybutu("Weak"),new Decyzja("Yes")},
                 {new WartoscAtrybutu("Rain"),new WartoscAtrybutu("High"),new WartoscAtrybutu("Strong"),new Decyzja("No")}
         };
-        DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-        Drzewo<ElementDrzewa> indukcja = dd.indukcja(przyklady, atrybuty, null);
-        Zapis.zapiszDrzewoDoPliku("src/testZapisu.txt",indukcja);
+        //DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+        //Drzewo<ElementDrzewa> indukcja = dd.indukcja(przyklady, atrybuty, null);
+        //Zapis.zapiszDrzewoDoPliku("src/testZapisu",indukcja);
         //LinkedList<Wezel> lista = drzewow.getKorzen().getDzieci();
         //System.out.println(lista.size());
         //Wezel w = lista.remove(0);

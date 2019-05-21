@@ -37,7 +37,7 @@ import java.awt.event.KeyEvent;
 
 public class Menuski extends JMenuBar
 {
-    public JButton wycz, wyś, zam, zal, cred, save, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
+    public JButton wycz, wyś, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
 
 
     public Menuski()
@@ -73,6 +73,12 @@ public class Menuski extends JMenuBar
         save.setToolTipText("<html>Zapisz Jako TXT</html>");
         save.setPreferredSize(new Dimension(30, 30));
         save.setMaximumSize(new Dimension(30, 30));
+
+        tree = new JButton("<html></html>");
+        tree.setIcon(imgIcon4);
+        tree.setToolTipText("<html>Zapisz drzewo jako TXT</html>");
+        tree.setPreferredSize(new Dimension(30, 30));
+        tree.setMaximumSize(new Dimension(30, 30));
 
         klasyfikacja_z_pliku = new JButton("<html></html>");
         klasyfikacja_z_pliku.setIcon(imgIcon5);
@@ -123,6 +129,7 @@ public class Menuski extends JMenuBar
         add(show_klasyfikacja, BorderLayout.WEST);
         add(wycz, BorderLayout.WEST);
         add(save, BorderLayout.WEST);
+        add(tree, BorderLayout.WEST);
         add(jpeg, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);

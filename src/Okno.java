@@ -114,6 +114,7 @@ public class Okno extends JFrame implements ActionListener
         menu.zam.addActionListener(this);
         menu.cred.addActionListener(this);
         menu.save.addActionListener(this);
+        menu.tree.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.jpeg.addActionListener(this);
@@ -220,6 +221,7 @@ public class Okno extends JFrame implements ActionListener
             if(daneWejsciowe!=null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                zapis = indukcja;
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
@@ -291,6 +293,10 @@ public class Okno extends JFrame implements ActionListener
         {
             zapiszPlik();
         }
+        else if(zrodlo==menu.tree)
+        {
+            zapiszPlikDrzewa();
+        }
         else if (zrodlo==menu.jpeg||zrodlo==zapisz){
             try {
                 Zapis.save_jpeg();
@@ -338,6 +344,24 @@ public class Okno extends JFrame implements ActionListener
             try {
 
                 Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku);
+            }catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+    }
+
+    private void zapiszPlikDrzewa(){
+        JFileChooser zapisz= new JFileChooser();
+        FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
+        zapisz.setFileFilter(filtr);
+        int wynik = zapisz.showSaveDialog(this);
+        if (wynik == JFileChooser.APPROVE_OPTION)
+        {
+            sciezkaDoPliku = zapisz.getSelectedFile().getPath();
+            try {
+
+                Zapis.zapiszDrzewoDoPliku(sciezkaDoPliku,zapis);
             }catch (IOException e1) {
                 e1.printStackTrace();
             }
