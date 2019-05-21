@@ -130,6 +130,7 @@ public class Okno extends JFrame implements ActionListener
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
          Object zrodlo = e.getSource();
         if(zrodlo==menu.wyś){
+            wyswietlanie.wyczysc();
             /* Wezel<String> korzen = new Wezel<String>(null, "Outlook");
 
             Wezel<String> n1 = korzen.dodajDziecko("Sunny");
