@@ -5,10 +5,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class Okno extends JFrame implements ActionListener
@@ -30,6 +27,8 @@ public class Okno extends JFrame implements ActionListener
     JMenuItem zapisz;
     JMenuItem zamkn;
     boolean czyPrawyPanel = false;
+
+
 
     public Okno()  {
 

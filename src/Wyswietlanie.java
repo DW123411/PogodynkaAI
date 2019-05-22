@@ -226,7 +226,7 @@ public class Wyswietlanie extends JPanel
         }
         repaint();*/
         if(wezel.equals(korzen)) {
-       // g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
+        g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
 
 
             button = new JButton(wezel.toString());
@@ -234,6 +234,7 @@ public class Wyswietlanie extends JPanel
             button.setBackground(Color.blue);
             button.setBounds((wezel.getX()-(3*wezel.toString().length())-25), wezel.getY()-20,wezel.toString().length()*13,30);
             button.setMargin(new Insets(0,0,0,0));
+            button.setVisible(true);
             //this.add(button1);
             listaButton.add(button);
 
@@ -245,7 +246,7 @@ public class Wyswietlanie extends JPanel
             } //list przechowująca dzieci
             while (!lista.isEmpty()){
                 Wezel w = lista.remove(0);
-              //  g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
+               g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
                 button = new JButton(w.toString());
                 if(w.getDane().getClass().getName()=="Atrybut"){
                     button.setBackground(Color.blue);
@@ -257,6 +258,7 @@ public class Wyswietlanie extends JPanel
                 button.setForeground(Color.white);
                 button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,w.toString().length()*13,30);
                 button.setMargin(new Insets(0,0,0,0));
+                button.setVisible(true);
                 //this.add(button);
                 listaButton.add(button);
                 Line2D.Double line = new Line2D.Double (w.getX(), w.getY()-20, w.getRodzic().getX(), w.getRodzic().getY()+10);
@@ -272,7 +274,6 @@ public class Wyswietlanie extends JPanel
     public void rysujPrzyciski(LinkedList lista) {
         int i= 0;
         while (i<lista.size()){
-
                 JButton b = listaButton.get(i);
                 i++;
                 this.add(b);
@@ -286,7 +287,7 @@ public class Wyswietlanie extends JPanel
     public void credits(){
 
         JOptionPane.showMessageDialog(null,"Program napisany w ramach Projektu Zespołowego \n" +
-                "Wersja : Wczesna (3-ci Sprint) \n" +
+                "Wersja : Wczesna (5-ci Sprint) \n" +
                 "Autorzy : \n" +
                 "Główni programiści : \n" +
                 "Dominik Woźniak \n" +

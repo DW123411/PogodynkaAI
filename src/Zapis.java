@@ -3,7 +3,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -13,18 +12,18 @@ public class Zapis {
     public static void zapisDoPlkiu(ElementDrzewa tablica[][],String sciezka) throws FileNotFoundException {
         try {
             PrintWriter zapis = new PrintWriter(sciezka+".txt");
-            zapis.print("Day,");
+            //zapis.print("Day,");
             for (int i = 0; i < tablica.length; i++) {
-                if(i!=0){
-                    zapis.print("D"+i+",");
-                }
+           //     if(i!=0){
+          //          zapis.print("D"+i+",");
+          //      }
                 for (int j = 0; j < tablica[i].length; j++) {
-                    if(i==0 && j==tablica[i].length-1){
-                        zapis.print("Decision,");
-                    }
-                   else {
+            //        if(i==0 && j==tablica[i].length-1){
+            //            zapis.print("Decision,");
+             //       }
+            //       else {
                         zapis.print(tablica[i][j].getNazwa() + ",");
-                    }
+           //         }
 
                 }
                 zapis.println();
