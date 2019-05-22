@@ -230,6 +230,8 @@ public class Wyswietlanie extends JPanel
 
 
             button = new JButton(wezel.toString());
+            button.setForeground(Color.white);
+            button.setBackground(Color.blue);
             button.setBounds((wezel.getX()-(3*wezel.toString().length())-25), wezel.getY()-20,wezel.toString().length()*13,30);
             button.setMargin(new Insets(0,0,0,0));
             //this.add(button1);
@@ -245,6 +247,14 @@ public class Wyswietlanie extends JPanel
                 Wezel w = lista.remove(0);
               //  g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
                 button = new JButton(w.toString());
+                if(w.getDane().getClass().getName()=="Atrybut"){
+                    button.setBackground(Color.blue);
+                }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
+                    button.setBackground(Color.green);
+                }else{
+                    button.setBackground(Color.cyan);
+                }
+                button.setForeground(Color.white);
                 button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,w.toString().length()*13,30);
                 button.setMargin(new Insets(0,0,0,0));
                 //this.add(button);
