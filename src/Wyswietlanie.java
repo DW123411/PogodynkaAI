@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 
 public class Wyswietlanie extends JPanel
@@ -125,6 +126,7 @@ public class Wyswietlanie extends JPanel
     }
 
     public void rysujDrzewo(Wezel wezel,Wezel korzen) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00000");
         Graphics2D g = (Graphics2D) okno.getGraphics();
         g.setStroke(new BasicStroke(2));
         g.setColor(Color.black);
@@ -228,11 +230,11 @@ public class Wyswietlanie extends JPanel
         if(wezel.equals(korzen)) {
         g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
 
-
-            button = new JButton(wezel.toString());
+            button = new JButton("<html>"+wezel.toString()+"<br> E = "+decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia())+"</html>");
+            button.setHorizontalAlignment(SwingConstants.CENTER);
             button.setForeground(Color.white);
             button.setBackground(Color.blue);
-            button.setBounds((wezel.getX()-(3*wezel.toString().length())-25), wezel.getY()-20,wezel.toString().length()*13,30);
+            button.setBounds((wezel.getX()-(3*wezel.toString().length())-25), wezel.getY()-20,decimalFormat.format((Double)((Atrybut)wezel.getDane()).getEntropia()).length()*13,40);
             button.setMargin(new Insets(0,0,0,0));
             button.setVisible(true);
             //this.add(button1);
@@ -249,6 +251,7 @@ public class Wyswietlanie extends JPanel
                g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
                 button = new JButton(w.toString());
                 if(w.getDane().getClass().getName()=="Atrybut"){
+                    button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
                     button.setBackground(Color.blue);
                 }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
                     button.setBackground(Color.green);
@@ -257,6 +260,9 @@ public class Wyswietlanie extends JPanel
                 }
                 button.setForeground(Color.white);
                 button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,w.toString().length()*13,30);
+                if(w.getDane().getClass().getName()=="Atrybut"){
+                    button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,decimalFormat.format((Double)((Atrybut)w.getDane()).getEntropia()).length()*13,40);
+                }
                 button.setMargin(new Insets(0,0,0,0));
                 button.setVisible(true);
                 //this.add(button);

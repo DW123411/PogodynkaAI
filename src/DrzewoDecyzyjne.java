@@ -32,6 +32,7 @@ public class DrzewoDecyzyjne {
         }else{
             //wybór najlepszego atrybutu i stworzenie węzła
             Atrybut najlepszy = wybierzAtrybut(atrybuty,przyklady);
+            najlepszy.setEntropia(entropia(przyklady));
             Wezel<ElementDrzewa> tmp = new Wezel<ElementDrzewa>(null, najlepszy);
             if(def!=null){
                 tmp = new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), najlepszy);
