@@ -84,6 +84,48 @@ public class Wyswietlanie extends JPanel implements ActionListener
         String label = e.getActionCommand();
         Object zrodlo = e.getSource();
         if (label == "Zmień nazwę") {
+            PrzyciskMenu przyciskMenuu = (PrzyciskMenu)zrodlo;
+            ElementDrzewa elementDrzewaa = przyciskMenuu.getElement();
+            System.out.println("Test: "+elementDrzewaa);
+            if(elementDrzewaa!=null) {
+                String dialgOptionn = JOptionPane.showInputDialog(null, "Podaj nową nazwę: ");
+                if (dialgOptionn != null) {
+                    System.out.println(dialgOptionn);
+                    ElementDrzewa[][] tmp = o.daneWejsciowe.get_klasyfikacja();
+                    if (tmp != null) {
+                                for(int i=0;i<tmp.length;i++){
+                                    for(int j=0;j<tmp[i].length;j++){
+                                        if (tmp[i][j].toString().equals(elementDrzewaa.toString())) {
+                                            ElementDrzewa tmpp = tmp[i][j];
+                                            tmpp.setNazwa(dialgOptionn);
+                                            tmp[i][j] = tmpp;
+                                    }
+
+                            }
+                        }
+                        o.setDaneWejsciowe(new DaneWejsciowe(tmp));
+                    }
+                    o.actionPerformed(new ActionEvent(o.menu.wycz,ActionEvent.ACTION_PERFORMED,null));
+                    o.actionPerformed(new ActionEvent(o.menu.wyś,ActionEvent.ACTION_PERFORMED,null));
+                    Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
+                    JTable tabelaWyswietl = tabela.getTabela();
+                    tabelaWyswietl.setFillsViewportHeight(true);
+                    o.p2 = new JPanel();
+                    o.p2.add(new JScrollPane(tabelaWyswietl));
+                    o.p2.setBorder(new TitledBorder(
+                            new TitledBorder(
+                                    LineBorder.createGrayLineBorder(),
+                                    "Dane"),
+                            "",
+                            TitledBorder.RIGHT,
+                            TitledBorder.BOTTOM));
+                    o.p2.setMaximumSize(new Dimension(500, 500));
+                    o.p.add(o.p2, BorderLayout.EAST);
+                    o.dopasujSieDoZawartosci();
+                    o.f.setVisible(true);
+                    o.czyPrawyPanel = true;
+                }
+            }
 
         }else if(label == "Usuń"){
             PrzyciskMenu przyciskMenu = (PrzyciskMenu)zrodlo;
@@ -338,6 +380,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
             button = new JButton("<html>"+wezel.toString()+"<br> E = "+decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia())+"</html>");
             popupMenu = new JPopupMenu("Title");
             usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
+            zmien_nazweMenuItem.setElement((ElementDrzewa) wezel.getDane());
             popupMenu.add(zmien_nazweMenuItem);
             popupMenu.addSeparator();
             popupMenu.add(usun_MenuItem);
@@ -366,6 +409,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
                     button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
                     popupMenu.add(zmien_nazweMenuItem);
                     popupMenu.addSeparator();
                     popupMenu.add(usun_MenuItem);
@@ -374,6 +418,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
                 }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
                     popupMenu.add(zmien_nazweMenuItem);
                     popupMenu.addSeparator();
                     popupMenu.add(usun_MenuItem);
