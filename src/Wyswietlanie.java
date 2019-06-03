@@ -234,7 +234,7 @@ public class Wyswietlanie extends JPanel
             button.setHorizontalAlignment(SwingConstants.CENTER);
             button.setForeground(Color.white);
             button.setBackground(Color.blue);
-            button.setBounds((wezel.getX()-(3*wezel.toString().length())-25), wezel.getY()-20,decimalFormat.format((Double)((Atrybut)wezel.getDane()).getEntropia()).length()*13,40);
+            button.setBounds((wezel.getX() - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 6), wezel.getY() - 20, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
             button.setMargin(new Insets(0,0,0,0));
             button.setVisible(true);
             //this.add(button1);
@@ -261,7 +261,7 @@ public class Wyswietlanie extends JPanel
                 button.setForeground(Color.white);
                 button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,w.toString().length()*13,30);
                 if(w.getDane().getClass().getName()=="Atrybut"){
-                    button.setBounds((w.getX()-w.toString().length()*6), w.getY()-20,decimalFormat.format((Double)((Atrybut)w.getDane()).getEntropia()).length()*13,40);
+                    button.setBounds((w.getX() - decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 6), w.getY() - 20, decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 13, 40);
                 }
                 button.setMargin(new Insets(0,0,0,0));
                 button.setVisible(true);

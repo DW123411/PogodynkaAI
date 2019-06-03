@@ -268,13 +268,13 @@ public class Okno extends JFrame implements ActionListener
                 JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
             }
         }
-         else if (zrodlo==menu.show_klasyfikacja){
+       /*  else if (zrodlo==menu.show_klasyfikacja){
            if(daneWejsciowe ==null){
               JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji z pliku.");
             }
            else{wyswietlanie.show_klasyfikacja(daneWejsciowe);
             }
-        }
+        }*/
          else if (zrodlo==menu.wycz||zrodlo==wyczysc){
             wyswietlanie.wyczysc();
 
