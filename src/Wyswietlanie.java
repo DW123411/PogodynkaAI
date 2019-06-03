@@ -136,7 +136,9 @@ public class Wyswietlanie extends JPanel
         JButton button;
         this.setLayout(null);
         //JTextField jtext;
-
+        JPopupMenu popupMenu = new JPopupMenu("Title");
+        JMenuItem zmien_nazweMenuItem = new JMenuItem("Zmien nazwe");
+        popupMenu.add(zmien_nazweMenuItem);
 
 
 
@@ -237,6 +239,8 @@ public class Wyswietlanie extends JPanel
             button.setBounds((wezel.getX() - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 6), wezel.getY() - 20, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
             button.setMargin(new Insets(0,0,0,0));
             button.setVisible(true);
+            button.setComponentPopupMenu(popupMenu);
+
             //this.add(button1);
             listaButton.add(button);
 
@@ -252,6 +256,7 @@ public class Wyswietlanie extends JPanel
                 button = new JButton(w.toString());
                 if(w.getDane().getClass().getName()=="Atrybut"){
                     button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
+                    button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.blue);
                 }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
                     button.setBackground(Color.green);
@@ -265,6 +270,7 @@ public class Wyswietlanie extends JPanel
                 }
                 button.setMargin(new Insets(0,0,0,0));
                 button.setVisible(true);
+                button.setComponentPopupMenu(popupMenu);
                 //this.add(button);
                 listaButton.add(button);
                 Line2D.Double line = new Line2D.Double (w.getX(), w.getY()-20, w.getRodzic().getX(), w.getRodzic().getY()+10);
