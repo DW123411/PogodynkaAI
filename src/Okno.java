@@ -31,7 +31,7 @@ public class Okno extends JFrame implements ActionListener
 
 
     public Okno()  {
-
+        wyswietlanie.setOkno(this);
         f= new JFrame("Projekt Zespołowy - drzewo decyzyjne");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -308,7 +308,7 @@ public class Okno extends JFrame implements ActionListener
 
     }
 
-    private void dopasujSieDoZawartosci()
+    public void dopasujSieDoZawartosci()
     {
         //dostosowanie okna do zawartości
         pack();
@@ -368,5 +368,9 @@ public class Okno extends JFrame implements ActionListener
             }
         }
 
+    }
+
+    public void setDaneWejsciowe(DaneWejsciowe daneWejsciowe){
+        this.daneWejsciowe = daneWejsciowe;
     }
 }

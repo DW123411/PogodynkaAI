@@ -18,6 +18,17 @@ public class DaneWejsciowe {
            this.dane = new ElementDrzewa[y][x];
            this.atrybuty = new Atrybut[x];
     }
+
+    public DaneWejsciowe(ElementDrzewa[][] dane){
+        this.dane = dane;
+        Atrybut[] tmp = new Atrybut[dane[0].length-2];
+        int j = 0;
+        for(int i=1;i<dane[0].length-1;i++){
+            tmp[j++] = (Atrybut) dane[0][i];
+        }
+        atrybuty = tmp;
+        tablica = null;
+    }
     /**
      * konstruktor ze zmienna ścieżka typu string. buduje klase na podstawie podanej ścieżki pliku
      */

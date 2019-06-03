@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +15,10 @@ public class Wyswietlanie extends JPanel implements ActionListener
     static BufferedImage okno;
     JFrame f;
     LinkedList<JButton> listaButton = new LinkedList<JButton>();
+    JPopupMenu popupMenu = new JPopupMenu("Title");
     PrzyciskMenu zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
     PrzyciskMenu usun_MenuItem = new PrzyciskMenu("Usuń");
+    Okno o;
 
     //konstruktor
     public Wyswietlanie()
@@ -86,7 +90,72 @@ public class Wyswietlanie extends JPanel implements ActionListener
             ElementDrzewa elementDrzewa = przyciskMenu.getElement();
             System.out.println("Test: "+elementDrzewa);
             if(elementDrzewa!=null){
-                JOptionPane.showConfirmDialog(null,"Test przycisków: "+elementDrzewa);
+                int dialogOption = JOptionPane.showConfirmDialog(null,"Czy na pewno chcesz usunąć element "+elementDrzewa+"?");
+                if(dialogOption==JOptionPane.YES_OPTION){
+                    ElementDrzewa[][] tmp = o.daneWejsciowe.get_klasyfikacja();
+                    if(tmp!=null){
+                        if(elementDrzewa.getClass().getName().equals("Atrybut")){
+                            int kolumna = 0;
+                            for(int i=0;i<tmp[0].length;i++){
+                                if(tmp[0][i].toString().equals(elementDrzewa.toString())){
+                                    kolumna = i;
+                                }
+                            }
+                            ElementDrzewa[][] nowyTmp = new ElementDrzewa[tmp.length][tmp[0].length-1];
+                            int k = 0;
+                            for(int i=0;i<tmp.length;i++){
+                                for(int j=0;j<tmp[i].length;j++){
+                                    if(j!=kolumna){
+                                        nowyTmp[i][k++] = tmp[i][j];
+                                    }
+                                }
+                                k = 0;
+                            }
+                            o.setDaneWejsciowe(new DaneWejsciowe(nowyTmp));
+                        }else {
+                            int kolumna = 0;
+                            int liczWartosc = 0;
+                            for(int i=0;i<tmp.length;i++){
+                                for(int j=0;j<tmp[i].length;j++){
+                                    if(elementDrzewa.toString().equals(tmp[i][j].toString())){
+                                        kolumna = j;
+                                        liczWartosc++;
+                                    }
+                                }
+                            }
+                            ElementDrzewa[][] nowyTmp = new ElementDrzewa[tmp.length-liczWartosc][tmp[0].length];
+                            int k = 0;
+                            for(int i=0;i<tmp.length;i++){
+                                if(!tmp[i][kolumna].toString().equals(elementDrzewa.toString())) {
+                                    for (int j = 0; j < tmp[i].length; j++) {
+                                        nowyTmp[k][j] = tmp[i][j];
+                                    }
+                                    k++;
+                                }
+                            }
+                            o.setDaneWejsciowe(new DaneWejsciowe(nowyTmp));
+                        }
+                        o.actionPerformed(new ActionEvent(o.menu.wycz,ActionEvent.ACTION_PERFORMED,null));
+                        o.actionPerformed(new ActionEvent(o.menu.wyś,ActionEvent.ACTION_PERFORMED,null));
+                        Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
+                        JTable tabelaWyswietl = tabela.getTabela();
+                        tabelaWyswietl.setFillsViewportHeight(true);
+                        o.p2 = new JPanel();
+                        o.p2.add(new JScrollPane(tabelaWyswietl));
+                        o.p2.setBorder(new TitledBorder(
+                                new TitledBorder(
+                                        LineBorder.createGrayLineBorder(),
+                                        "Dane"),
+                                "",
+                                TitledBorder.RIGHT,
+                                TitledBorder.BOTTOM));
+                        o.p2.setMaximumSize(new Dimension(500, 500));
+                        o.p.add(o.p2, BorderLayout.EAST);
+                        o.dopasujSieDoZawartosci();
+                        o.f.setVisible(true);
+                        o.czyPrawyPanel = true;
+                    }
+                }
             }
         }
     }
@@ -162,7 +231,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
         JButton button;
         this.setLayout(null);
         //JTextField jtext;
-        JPopupMenu popupMenu = new JPopupMenu("Title");
+        popupMenu = new JPopupMenu("Title");
         zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
         zmien_nazweMenuItem.addActionListener(this);
         usun_MenuItem = new PrzyciskMenu("Usuń");
@@ -267,7 +336,11 @@ public class Wyswietlanie extends JPanel implements ActionListener
         g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
 
             button = new JButton("<html>"+wezel.toString()+"<br> E = "+decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia())+"</html>");
+            popupMenu = new JPopupMenu("Title");
             usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
+            popupMenu.add(zmien_nazweMenuItem);
+            popupMenu.addSeparator();
+            popupMenu.add(usun_MenuItem);
             button.setHorizontalAlignment(SwingConstants.CENTER);
             button.setForeground(Color.white);
             button.setBackground(Color.blue);
@@ -291,11 +364,19 @@ public class Wyswietlanie extends JPanel implements ActionListener
                 button = new JButton(w.toString());
                 if(w.getDane().getClass().getName()=="Atrybut"){
                     button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
+                    popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    popupMenu.add(zmien_nazweMenuItem);
+                    popupMenu.addSeparator();
+                    popupMenu.add(usun_MenuItem);
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.blue);
                 }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
+                    popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    popupMenu.add(zmien_nazweMenuItem);
+                    popupMenu.addSeparator();
+                    popupMenu.add(usun_MenuItem);
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.green);
                 }else{
@@ -391,5 +472,9 @@ public class Wyswietlanie extends JPanel implements ActionListener
         //wyrysowanie naszego płótna na panelu 
         g2d.drawImage(okno, 0, 0, this);
 
+    }
+
+    public void setOkno(Okno o){
+        this.o = o;
     }
 }
