@@ -1,17 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 
-public class Wyswietlanie extends JPanel
+public class Wyswietlanie extends JPanel implements ActionListener
 {
     
     static BufferedImage okno;
     JFrame f;
     LinkedList<JButton> listaButton = new LinkedList<JButton>();
-
+    PrzyciskMenu zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
+    PrzyciskMenu usun_MenuItem = new PrzyciskMenu("Usuń");
 
     //konstruktor
     public Wyswietlanie()
@@ -48,6 +51,7 @@ public class Wyswietlanie extends JPanel
         //setLayout(new GridLayout(2,1));
         //ustawRozmiar(new Dimension(szerokosc,wysokosc));
         ustawRozmiar(new Dimension(1200,1200));
+        ustawNasluchZdarzen();
         wyczysc();
     }
    
@@ -63,6 +67,28 @@ public class Wyswietlanie extends JPanel
         //ustalenie obramowania
         setBorder(BorderFactory.createLineBorder(Color.gray)); 
         repaint();
+    }
+
+    private void ustawNasluchZdarzen()
+    {
+        zmien_nazweMenuItem.addActionListener(this);
+        usun_MenuItem.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String label = e.getActionCommand();
+        Object zrodlo = e.getSource();
+        if (label == "Zmień nazwę") {
+
+        }else if(label == "Usuń"){
+            PrzyciskMenu przyciskMenu = (PrzyciskMenu)zrodlo;
+            ElementDrzewa elementDrzewa = przyciskMenu.getElement();
+            System.out.println("Test: "+elementDrzewa);
+            if(elementDrzewa!=null){
+                JOptionPane.showConfirmDialog(null,"Test przycisków: "+elementDrzewa);
+            }
+        }
     }
 
     public void ustawRozmiar(Dimension r)
@@ -137,8 +163,10 @@ public class Wyswietlanie extends JPanel
         this.setLayout(null);
         //JTextField jtext;
         JPopupMenu popupMenu = new JPopupMenu("Title");
-        JMenuItem zmien_nazweMenuItem = new JMenuItem("Zmien nazwe");
-        JMenuItem usun_MenuItem = new JMenuItem("Usuń");
+        zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
+        zmien_nazweMenuItem.addActionListener(this);
+        usun_MenuItem = new PrzyciskMenu("Usuń");
+        usun_MenuItem.addActionListener(this);
 
         usun_MenuItem.setForeground(Color.red);
         popupMenu.add(zmien_nazweMenuItem);
@@ -239,6 +267,7 @@ public class Wyswietlanie extends JPanel
         g3.drawString(wezel.toString(), (wezel.getX()-(3*wezel.toString().length())), wezel.getY());
 
             button = new JButton("<html>"+wezel.toString()+"<br> E = "+decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia())+"</html>");
+            usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
             button.setHorizontalAlignment(SwingConstants.CENTER);
             button.setForeground(Color.white);
             button.setBackground(Color.blue);
@@ -262,9 +291,11 @@ public class Wyswietlanie extends JPanel
                 button = new JButton(w.toString());
                 if(w.getDane().getClass().getName()=="Atrybut"){
                     button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
+                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.blue);
                 }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
+                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.green);
                 }else{

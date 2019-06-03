@@ -120,7 +120,8 @@ public class Okno extends JFrame implements ActionListener
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
         zamkn.addActionListener(this);
-
+        wyswietlanie.zmien_nazweMenuItem.addActionListener(this);
+        wyswietlanie.usun_MenuItem.addActionListener(this);
     }
 
     @Override
