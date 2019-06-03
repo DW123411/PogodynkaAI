@@ -138,7 +138,13 @@ public class Wyswietlanie extends JPanel
         //JTextField jtext;
         JPopupMenu popupMenu = new JPopupMenu("Title");
         JMenuItem zmien_nazweMenuItem = new JMenuItem("Zmien nazwe");
+        JMenuItem usun_MenuItem = new JMenuItem("Usuń");
+
+        usun_MenuItem.setForeground(Color.red);
         popupMenu.add(zmien_nazweMenuItem);
+        popupMenu.addSeparator();
+        popupMenu.add(usun_MenuItem);
+
 
 
 
