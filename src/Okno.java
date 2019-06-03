@@ -32,7 +32,7 @@ public class Okno extends JFrame implements ActionListener
 
     public Okno()  {
         wyswietlanie.setOkno(this);
-        f= new JFrame("Projekt Zespołowy - drzewo decyzyjne");
+        f= new JFrame("PogodynkaAI v.0.2");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //blokada zmiany rozmiaru okna

@@ -463,7 +463,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
     public void credits(){
 
         JOptionPane.showMessageDialog(null,"Program napisany w ramach Projektu Zespołowego \n" +
-                "Wersja : Wczesna (5-ci Sprint) \n" +
+                "Wersja : 0.2  Buffalo \n" +
                 "Autorzy : \n" +
                 "Główni programiści : \n" +
                 "Dominik Woźniak \n" +
