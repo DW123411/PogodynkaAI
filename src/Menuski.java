@@ -82,7 +82,7 @@ public class Menuski extends JMenuBar
 
         klasyfikacja_z_pliku = new JButton("<html></html>");
         klasyfikacja_z_pliku.setIcon(imgIcon5);
-        klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj Klasyfikację<br />z Pliku</html>");
+        klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");
         klasyfikacja_z_pliku.setPreferredSize(new Dimension(30, 30));
         klasyfikacja_z_pliku.setMaximumSize(new Dimension(30, 30));
 
@@ -118,18 +118,18 @@ public class Menuski extends JMenuBar
 
         jpeg = new JButton("<html></html>");
         jpeg.setIcon(imgIcon2);
-        jpeg.setToolTipText("<html>Zapisz Jako Obraz</html>");
+        jpeg.setToolTipText("<html>Zapisz jako obraz</html>");
         jpeg.setPreferredSize(new Dimension(30, 30));
         jpeg.setMaximumSize(new Dimension(30, 30));
 
 
         add(wyś, BorderLayout.WEST);
-        add(zal, BorderLayout.WEST); 
+        //add(zal, BorderLayout.WEST);
         add(klasyfikacja_z_pliku, BorderLayout.WEST); 
-        add(show_klasyfikacja, BorderLayout.WEST);
+        //add(show_klasyfikacja, BorderLayout.WEST);
         add(wycz, BorderLayout.WEST);
         add(save, BorderLayout.WEST);
-        add(tree, BorderLayout.WEST);
+        //add(tree, BorderLayout.WEST);
         add(jpeg, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);

@@ -265,6 +265,7 @@ public class Wyswietlanie extends JPanel
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.blue);
                 }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
+                    button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.green);
                 }else{
                     button.setBackground(Color.cyan);
@@ -276,7 +277,7 @@ public class Wyswietlanie extends JPanel
                 }
                 button.setMargin(new Insets(0,0,0,0));
                 button.setVisible(true);
-                button.setComponentPopupMenu(popupMenu);
+                //button.setComponentPopupMenu(popupMenu);
                 //this.add(button);
                 listaButton.add(button);
                 Line2D.Double line = new Line2D.Double (w.getX(), w.getY()-20, w.getRodzic().getX(), w.getRodzic().getY()+10);

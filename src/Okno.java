@@ -69,8 +69,8 @@ public class Okno extends JFrame implements ActionListener
         popupMenu = new JPopupMenu();
         wyczysc = new JMenuItem("Wyczyść");
         wyczysc.setActionCommand("Wyczyść");
-        zapisz = new JMenuItem("Zapisz Obłazek");
-        zapisz.setActionCommand("Zapisz Obłazek");
+        zapisz = new JMenuItem("Zapisz obrazek");
+        zapisz.setActionCommand("Zapisz obrazek");
         zamkn= new JMenuItem("Zamknij");
         zamkn.setActionCommand("Zamknij");
         popupMenu.add(wyczysc);
@@ -245,7 +245,7 @@ public class Okno extends JFrame implements ActionListener
             boolean spr = otworzPlik();
             if (spr) {
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
-                 JOptionPane.showMessageDialog(null, "Klasyfikacja wczytana poprawnie.");
+                 JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
                  Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
                  JTable tabelaWyswietl = tabela.getTabela();
                  tabelaWyswietl.setFillsViewportHeight(true);
@@ -265,7 +265,7 @@ public class Okno extends JFrame implements ActionListener
                  czyPrawyPanel = true;
             }
             else if (!spr) {
-                JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
+                //JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
             }
         }
        /*  else if (zrodlo==menu.show_klasyfikacja){
