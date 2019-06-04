@@ -54,14 +54,14 @@ public class Menuski extends JMenuBar
             TitledBorder.BOTTOM));
            
             
-            ImageIcon imgIcon = new ImageIcon("src/icons/info.png");
-            ImageIcon imgIcon2 = new ImageIcon("src/icons/save.png");
-            ImageIcon imgIcon3 = new ImageIcon("src/icons/cancel.png");
-            ImageIcon imgIcon4 = new ImageIcon("src/icons/saveText.png");
-            ImageIcon imgIcon5 = new ImageIcon("src/icons/wczytaj.png");
-            ImageIcon imgIcon6 = new ImageIcon("src/icons/rysuj.png");
-            ImageIcon imgIcon7 = new ImageIcon("src/icons/delete.png");
-            ImageIcon imgIcon8 = new ImageIcon("src/icons/view.png");
+            ImageIcon imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("icons/save.png"));
+            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
+            ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("icons/saveText.png"));
+            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
+            ImageIcon imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+            ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
+            ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
          cred = new JButton("<html></html>");
          cred.setIcon(imgIcon);
          cred.setToolTipText("<html>O Programie</html>");
