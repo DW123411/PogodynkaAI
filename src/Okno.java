@@ -22,13 +22,14 @@ public class Okno extends JFrame implements ActionListener
     JPanel p;
     JPanel p2 = new JPanel();
     JFrame f;
-    JPopupMenu popupMenu;
+    JPopupMenu popupMenu, popupMenu2;
     JMenuItem wyczysc;
     JMenuItem zapisz;
     JMenuItem zamkn;
+    JMenuItem wyczysc2;
+    JMenuItem zapisz2;
+    JMenuItem dodaj;
     boolean czyPrawyPanel = false;
-
-
 
     public Okno()  {
         wyswietlanie.setOkno(this);
@@ -68,7 +69,16 @@ public class Okno extends JFrame implements ActionListener
         popupMenu.add(zapisz);
         popupMenu.add(zamkn);
 
-
+        popupMenu2 = new JPopupMenu();
+        wyczysc2 = new JMenuItem("Wyczyść tabele");
+        wyczysc2.setActionCommand("Wyczyść tabele");
+        zapisz2 = new JMenuItem("Zapisz do pliku");
+        zapisz2.setActionCommand("Zapisz do pliku");
+        dodaj = new JMenuItem("Dodaj do tabeli ");
+        dodaj.setActionCommand("Dodaj do tabeli");
+        popupMenu2.add(wyczysc2);
+        popupMenu2.add(zapisz2);
+        popupMenu2.add(dodaj);
 
         wyswietlanie.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
@@ -78,6 +88,7 @@ public class Okno extends JFrame implements ActionListener
             }
         });
 
+       
 
 
 
@@ -157,8 +168,8 @@ public class Okno extends JFrame implements ActionListener
                  p2.add(new JScrollPane(tabelaWyswietl));
                  p2.setBorder(new TitledBorder(
                          new TitledBorder(
-                                 LineBorder.createGrayLineBorder(),
-                                 "Dane"),
+                         LineBorder.createGrayLineBorder(),
+                         "Dane"),
                          "",
                          TitledBorder.RIGHT,
                          TitledBorder.BOTTOM));
@@ -167,6 +178,14 @@ public class Okno extends JFrame implements ActionListener
                  dopasujSieDoZawartosci();
                  f.setVisible(true);
                  czyPrawyPanel = true;
+                 
+                  tabelaWyswietl.addMouseListener(new MouseAdapter() {
+                      public void mouseReleased(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                }
+            }
+        });
             }
             else if (!spr) {
                 //JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
@@ -183,6 +202,7 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.wyczysc();
 
         }
+       
         else if (zrodlo==menu.wycz){
             wyswietlanie.wyczysc();
 
