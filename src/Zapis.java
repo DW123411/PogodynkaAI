@@ -9,9 +9,9 @@ import java.util.LinkedList;
 
 public class Zapis {
 
-    public static void zapisDoPlkiu(ElementDrzewa tablica[][],String sciezka) throws FileNotFoundException {
+    public static void zapisDoPlkiu(ElementDrzewa tablica[][],String sciezka,String plik) throws FileNotFoundException {
         try {
-            PrintWriter zapis = new PrintWriter(sciezka+".txt");
+            PrintWriter zapis = new PrintWriter(sciezka+"."+plik);
             //zapis.print("Day,");
             for (int i = 0; i < tablica.length; i++) {
            //     if(i!=0){
