@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -120,6 +120,7 @@ public class Okno extends JFrame implements ActionListener
         menu.jpeg.addActionListener(this);
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
+        zapisz2.addActionListener(this);
         zamkn.addActionListener(this);
         wyswietlanie.zmien_nazweMenuItem.addActionListener(this);
         wyswietlanie.usun_MenuItem.addActionListener(this);
@@ -213,10 +214,11 @@ public class Okno extends JFrame implements ActionListener
         else if (zrodlo==menu.zam||zrodlo==zamkn){
             System.exit(0);
         }
-        else if(zrodlo==menu.save)
+        else if(zrodlo==menu.save||zrodlo==zapisz2)
         {
             zapiszPlik();
         }
+
         else if(zrodlo==menu.tree)
         {
             zapiszPlikDrzewa();
@@ -228,6 +230,7 @@ public class Okno extends JFrame implements ActionListener
                 ex.printStackTrace();
             }
         }
+
 
     }
 
@@ -241,10 +244,12 @@ public class Okno extends JFrame implements ActionListener
 
     private boolean otworzPlik(){
         JFileChooser otworz= new JFileChooser();
-        FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
-        FileNameExtensionFilter filtrCSV = new FileNameExtensionFilter("CSV", "csv");
-         otworz.setFileFilter(filtrCSV);
-        otworz.setFileFilter(filtr);
+
+        FileNameExtensionFilter filtrCSV = new FileNameExtensionFilter("Pliki CSV", "csv");
+        FileNameExtensionFilter filtr = new FileNameExtensionFilter("Pliki TXT", "txt");
+         otworz.addChoosableFileFilter(filtr);
+         otworz.addChoosableFileFilter(filtrCSV);
+        otworz.setFileFilter(filtrCSV);
       
         otworz.setAcceptAllFileFilterUsed(false);
         int wynik = otworz.showOpenDialog(this);
@@ -259,15 +264,23 @@ public class Okno extends JFrame implements ActionListener
 
     private void zapiszPlik(){
         JFileChooser zapisz= new JFileChooser();
-        FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
-        zapisz.setFileFilter(filtr);
+        FileNameExtensionFilter filtr = new FileNameExtensionFilter("Pliki TXT", "txt");
+        FileNameExtensionFilter filtrCSV = new FileNameExtensionFilter("Pliki CSV", "csv");
+
+        zapisz.addChoosableFileFilter(filtr);
+        zapisz.addChoosableFileFilter(filtrCSV);
+        zapisz.setFileFilter(filtrCSV);
+
         int wynik = zapisz.showSaveDialog(this);
         if (wynik == JFileChooser.APPROVE_OPTION)
         {
-            sciezkaDoPliku = zapisz.getSelectedFile().getPath();
+            sciezkaDoPliku = zapisz.getSelectedFile().getAbsolutePath();
             try {
+            if(zapisz.getFileFilter() == filtrCSV)
+                Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku,"csv");
+            else if(zapisz.getFileFilter()== filtr)
+                Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku,"txt");
 
-                Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku);
             }catch (IOException e1) {
                 e1.printStackTrace();
             }
