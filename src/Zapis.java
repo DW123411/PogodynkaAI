@@ -4,36 +4,67 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.LinkedList;
+import java.util.Scanner;
+import  java.io.FileWriter;
+
+
 
 
 
 public class Zapis {
 
     public static void zapisDoPlkiu(ElementDrzewa tablica[][],String sciezka,String plik) throws FileNotFoundException {
+
+       String save;
         try {
-            PrintWriter zapis = new PrintWriter(sciezka+"."+plik);
+            PrintWriter zapis = new PrintWriter(sciezka + "." + plik);
             //zapis.print("Day,");
             for (int i = 0; i < tablica.length; i++) {
-           //     if(i!=0){
-          //          zapis.print("D"+i+",");
-          //      }
+                //     if(i!=0){
+                //          zapis.print("D"+i+",");
+                //      }
                 for (int j = 0; j < tablica[i].length; j++) {
-            //        if(i==0 && j==tablica[i].length-1){
-            //            zapis.print("Decision,");
-             //       }
-            //       else {
-                        zapis.print(tablica[i][j].getNazwa() + ",");
-           //         }
+                    //        if(i==0 && j==tablica[i].length-1){
+                    //            zapis.print("Decision,");
+                    //       }
+                    //       else {
+
+                    zapis.print(tablica[i][j].getNazwa() + ",");
+                    //         }
 
                 }
-                zapis.println();
+               zapis.println();
             }
             zapis.close();
+
+            File nf = new File(sciezka + "." + plik);
+            BufferedWriter FileWriter = new BufferedWriter(new FileWriter(sciezka+"1."+plik));
+            try{
+                Scanner scanner = new Scanner(nf);
+                while(scanner.hasNextLine()){
+                    String line = scanner.nextLine();
+                    if(line.endsWith(",")){
+                        System.out.println(line);
+                        System.out.println(line.substring(0,line.length()-1));
+
+                       FileWriter.write(line.substring(0,line.length()-1));
+                       FileWriter.newLine();
+                    }
+
+                }
+                FileWriter.close();
+                File f1 = new File(sciezka+"."+plik);
+               File f2 = new File(sciezka+"1."+plik);
+               boolean a =f1.delete();
+              boolean b = f2.renameTo(f1);
+            } catch (IOException e) {
+                System.out.println("Problem z dostępem do pliku");
+            }
         } catch (IOException ex) {
             System.out.println("Problem z dostępem do pliku");
 
+            }
 
-        }
     }
 
     public static void  zapiszDrzewoDoPliku(String sciezka,Drzewo<ElementDrzewa> ed) throws IOException{
