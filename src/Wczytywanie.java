@@ -138,7 +138,7 @@ public class Wczytywanie {
         */
            temp_table= new String[max_wysokosc][max_szerokosc];
            temp_table_obj = new ElementDrzewa[max_wysokosc][max_szerokosc];
-           temp_table_atrybuty= new Atrybut[max_szerokosc-2];
+           temp_table_atrybuty= new Atrybut[max_szerokosc-1];
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera na nowo
         }catch(FileNotFoundException err){
@@ -163,6 +163,9 @@ public class Wczytywanie {
                
             if(linia.charAt(i)==','){
                 temp_table[y][x]=wyraz;
+                if(x == 0  &&  y == 0) {
+                    temp_table_atrybuty[atr_x++] = new Atrybut(wyraz);
+                }
                 if(y!=0){
                     if(pierwszy){
                     temp_table_obj[y][x]=new WartoscAtrybutu(wyraz);
