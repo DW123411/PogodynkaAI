@@ -25,7 +25,7 @@ public class Wczytywanie {
         List<Wezel<ElementDrzewa>> wezly = new ArrayList<>(); //lista zawierająca węzły wczytywanego drzewa
         Drzewo<ElementDrzewa> drzewo = new Drzewo<>();
         try {
-            skaner.useDelimiter(",|\r?\n");
+            skaner.useDelimiter("\\s*,\\s*");
             boolean czyPierwszy = true; //zmienna potrzebna do wykrycia pierwszej linii danych w pliku
             boolean blad = false; // zmienna do błędu
             while (skaner.hasNextLine()) {
@@ -49,7 +49,6 @@ public class Wczytywanie {
                     if (tmpRodzic != null) {
                         tmpRodzic.dodajDziecko(tmpWezel); //dodanie utworzonego węzła do listy potomków jego rodzica w drzewie
                     }
-
 
                 } /*else { //WartoscAtrybutu
                     WartoscAtrybutu tmpWA = null;
@@ -115,19 +114,11 @@ public class Wczytywanie {
         while(scanner.hasNextLine()){
         String linia = scanner.nextLine();
         int x=0;
+        String[] line = linia.split(",");
         y++;
         String wyraz="";
-        for(int i=0;i<linia.length();i++)
-        {   
-            if(linia.charAt(i)==','){
-                //System.out.println(wyraz);
-                wyraz="";x++;}
-            else{
-                wyraz+=linia.charAt(i);
-               
-            }
-        }
-            if(x>max_szerokosc){max_szerokosc=x;}
+
+            if(line.length>max_szerokosc){max_szerokosc=line.length;}
         
         }
             if(y>max_wysokosc){max_wysokosc=y;}
@@ -151,17 +142,24 @@ public class Wczytywanie {
         y=0; boolean atrybuty=true; boolean pierwszy = true; int atr_x=0;
         while(scanner.hasNextLine()){
         String linia = scanner.nextLine();
+        if(!linia.endsWith(",")){
+            linia=linia+",";
+        }
          int x=0;
+         String[] line=linia.split(",");
         String wyraz=""; int kol = 0; 
-           for(int k=0;k<linia.length();k++){
-            if(linia.charAt(k)==','){
-            kol++;
-            }
-                    }  
+
+
+
+        if(kol<line.length){
+            kol=line.length;
+        }
+
+
         for(int i=0;i<linia.length();i++)
         {   
                
-            if(linia.charAt(i)==','){
+            if(linia.charAt(i)==',' || linia.charAt(i)=='\n'){
                 temp_table[y][x]=wyraz;
                 if(x == 0  &&  y == 0) {
                     temp_table_atrybuty[atr_x++] = new Atrybut(wyraz);
