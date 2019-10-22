@@ -25,7 +25,7 @@ public class Wczytywanie {
         List<Wezel<ElementDrzewa>> wezly = new ArrayList<>(); //lista zawierająca węzły wczytywanego drzewa
         Drzewo<ElementDrzewa> drzewo = new Drzewo<>();
         try {
-            skaner.useDelimiter("\\s*,\\s*");
+            skaner.useDelimiter(",|\r?\n");
             boolean czyPierwszy = true; //zmienna potrzebna do wykrycia pierwszej linii danych w pliku
             boolean blad = false; // zmienna do błędu
             while (skaner.hasNextLine()) {
