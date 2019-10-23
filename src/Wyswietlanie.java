@@ -8,6 +8,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Wyswietlanie extends JPanel implements ActionListener
 {
@@ -521,5 +522,212 @@ public class Wyswietlanie extends JPanel implements ActionListener
 
     public void setOkno(Okno o){
         this.o = o;
+    }
+
+    /*public void rysujSkalowanie(Wezel wezel,Wezel korzen) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00000");
+        Graphics2D g = (Graphics2D) okno.getGraphics();
+        g.setStroke(new BasicStroke(2));
+        g.setColor(Color.black);
+        Graphics2D g3 = (Graphics2D) okno.getGraphics();
+        g3.setStroke(new BasicStroke(2));
+        g3.setColor(Color.white);
+        JButton button;
+        this.setLayout(null);
+        //JTextField jtext;
+        popupMenu = new JPopupMenu("Title");
+        zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
+        zmien_nazweMenuItem.addActionListener(this);
+        usun_MenuItem = new PrzyciskMenu("Usuń");
+        usun_MenuItem.addActionListener(this);
+
+        usun_MenuItem.setForeground(Color.red);
+        popupMenu.add(zmien_nazweMenuItem);
+        popupMenu.addSeparator();
+        popupMenu.add(usun_MenuItem);
+
+
+        if(wezel.equals(korzen)) {
+            g3.drawString(wezel.toString(), (wezel.getX()/2-(3*wezel.toString().length())/2), wezel.getY()/2);
+
+            button = new JButton("<html>"+wezel.toString()+"<br> E = "+decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia())+"</html>");
+            popupMenu = new JPopupMenu("Title");
+            usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
+            zmien_nazweMenuItem.setElement((ElementDrzewa) wezel.getDane());
+            popupMenu.add(zmien_nazweMenuItem);
+            popupMenu.addSeparator();
+            popupMenu.add(usun_MenuItem);
+            button.setHorizontalAlignment(SwingConstants.CENTER);
+            button.setForeground(Color.white);
+            button.setBackground(Color.blue);
+            //wezel.getDane()).getEntropia()).length() * 6 -- w prawo lub lewo
+            //wezel.getY() - 20 -- w dol i  w góre
+            //decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13 -- długość
+            // wezel.getDane()).getEntropia()).length() *  40 -- wysokosc
+            button.setBounds((wezel.getX()/2 - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 6/2), (wezel.getY() - 20)/2, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13/2, 40/2);
+            button.setMargin(new Insets(0,0,0,0));
+            button.setVisible(true);
+            button.setComponentPopupMenu(popupMenu);
+
+            //this.add(button1);
+            listaButton.add(button);
+
+        }
+        if(!wezel.czyLisc()){
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for(int i=0; i<wezel.getDzieci().size(); i++){
+                lista.add((Wezel) wezel.getDzieci().get(i));
+            } //list przechowująca dzieci
+            while (!lista.isEmpty()){
+                Wezel w = lista.remove(0);
+                //g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY()); --
+                g3.drawString(w.toString(), (w.getX()/2-(3*w.toString().length())/2), w.getY()/2);
+                button = new JButton(w.toString());
+                if(w.getDane().getClass().getName()=="Atrybut"){
+                    button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
+                    popupMenu = new JPopupMenu("Title");
+                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
+                    popupMenu.add(zmien_nazweMenuItem);
+                    popupMenu.addSeparator();
+                    popupMenu.add(usun_MenuItem);
+                    button.setComponentPopupMenu(popupMenu);
+                    button.setBackground(Color.blue);
+                }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
+                    popupMenu = new JPopupMenu("Title");
+                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
+                    popupMenu.add(zmien_nazweMenuItem);
+                    popupMenu.addSeparator();
+                    popupMenu.add(usun_MenuItem);
+                    button.setComponentPopupMenu(popupMenu);
+                    button.setBackground(Color.green);
+                }else{
+                    button.setBackground(Color.cyan);
+                }
+                button.setForeground(Color.white);
+                //wezel.getDane()).getEntropia()).length() * 6 -- w prawo lub lewo
+                //wezel.getY() - 20 -- w dol i  w góre
+                //decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13 -- długość
+                // wezel.getDane()).getEntropia()).length() *  40 -- wysokosc
+                button.setBounds(((w.getX()-w.toString().length()*6)/2), (w.getY()-20)/2,(w.toString().length()*13)/2,30/2);
+                if(w.getDane().getClass().getName()=="Atrybut"){
+                    button.setBounds((w.getX()/2 - decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 6/2), (w.getY() - 20)/2, decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 13/2, 40/2);
+                    // ta wyzej linia nic nie robi?
+                }
+                button.setMargin(new Insets(0,0,0,0));
+                button.setVisible(true);
+                //button.setComponentPopupMenu(popupMenu);
+                //this.add(button);
+                listaButton.add(button);
+                //Line2D.Double line = new Line2D.Double (w.getX(), w.getY()-120, w.getRodzic().getX(), w.getRodzic().getY()+10); -- długość lini , kierunek
+                Line2D.Double line = new Line2D.Double (w.getX()/2, (w.getY()-20)/2, w.getRodzic().getX()/2, (w.getRodzic().getY()+10)/2);
+                g.draw(line);
+                rysujDrzewo(w,korzen);
+            }
+        }
+
+        repaint();
+
+    }*/
+
+    public void rysujSkalowanie(Wezel wezel,Wezel korzen) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00000");
+        Graphics2D g = (Graphics2D) okno.getGraphics();
+        g.setStroke(new BasicStroke(2));
+        g.setColor(Color.black);
+        Graphics2D g3 = (Graphics2D) okno.getGraphics();
+        g3.setStroke(new BasicStroke(2));
+        g3.setColor(Color.white);
+        JButton button;
+        this.setLayout(null);
+        //JTextField jtext;
+        popupMenu = new JPopupMenu("Title");
+        zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
+        zmien_nazweMenuItem.addActionListener(this);
+        usun_MenuItem = new PrzyciskMenu("Usuń");
+        usun_MenuItem.addActionListener(this);
+
+        usun_MenuItem.setForeground(Color.red);
+        popupMenu.add(zmien_nazweMenuItem);
+        popupMenu.addSeparator();
+        popupMenu.add(usun_MenuItem);
+
+
+        if(wezel.equals(korzen)) {
+            //g3.drawString(wezel.toString(), (3*wezel.getX()/4-((3*3*wezel.toString().length()/4))), 3*wezel.getY()/4);
+
+            button = new JButton("<html>"+wezel.toString()+"<br> E = "+decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia())+"</html>");
+            popupMenu = new JPopupMenu("Title");
+            usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
+            zmien_nazweMenuItem.setElement((ElementDrzewa) wezel.getDane());
+            popupMenu.add(zmien_nazweMenuItem);
+            popupMenu.addSeparator();
+            popupMenu.add(usun_MenuItem);
+            button.setHorizontalAlignment(SwingConstants.CENTER);
+            button.setForeground(Color.white);
+            button.setBackground(Color.blue);
+            button.setBounds(((4*wezel.getX())/4 - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 18/4), (3*(wezel.getY() - 20))/4, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
+            button.setMargin(new Insets(0,0,0,0));
+            button.setVisible(true);
+            button.setComponentPopupMenu(popupMenu);
+
+            //this.add(button1);
+            listaButton.add(button);
+
+        }
+        if(!wezel.czyLisc()){
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for(int i=0; i<wezel.getDzieci().size(); i++){
+                lista.add((Wezel) wezel.getDzieci().get(i));
+            } //list przechowująca dzieci
+            while (!lista.isEmpty()){
+                Wezel w = lista.remove(0);
+               // g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
+                button = new JButton(w.toString());
+                if(w.getDane().getClass().getName()=="Atrybut"){
+                    button = new JButton("<html>"+w.toString()+"<br>E = "+decimalFormat.format(((Atrybut)w.getDane()).getEntropia())+"</html>");
+                    popupMenu = new JPopupMenu("Title");
+                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
+                    popupMenu.add(zmien_nazweMenuItem);
+                    popupMenu.addSeparator();
+                    popupMenu.add(usun_MenuItem);
+                    button.setComponentPopupMenu(popupMenu);
+                    button.setBackground(Color.blue);
+                }else if(w.getDane().getClass().getName()=="WartoscAtrybutu"){
+                    popupMenu = new JPopupMenu("Title");
+                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
+                    popupMenu.add(zmien_nazweMenuItem);
+                    popupMenu.addSeparator();
+                    popupMenu.add(usun_MenuItem);
+                    button.setComponentPopupMenu(popupMenu);
+                    button.setBackground(Color.green);
+                }else{
+                    button.setBackground(Color.cyan);
+                }
+                button.setForeground(Color.white);
+                //wezel.getDane()).getEntropia()).length() * 6 -- w prawo lub lewo
+                //wezel.getY() - 20 -- w dol i  w góre
+                //decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13 -- długość
+                // wezel.getDane()).getEntropia()).length() *  40 -- wysokosc
+                button.setBounds((w.getX()-w.toString().length()*18/4), (3*w.getY()-20)/4,w.toString().length()*13,30);
+                if(w.getDane().getClass().getName()=="Atrybut"){
+                    button.setBounds((w.getX() - decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 18/4), (3*w.getY() - 20)/4, decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 13, 40);
+                }
+                button.setMargin(new Insets(0,0,0,0));
+                button.setVisible(true);
+                //button.setComponentPopupMenu(popupMenu);
+                //this.add(button);
+                listaButton.add(button);
+                Line2D.Double line = new Line2D.Double ((3*w.getX())/3, (3*w.getY()-20)/4, (3*w.getRodzic().getX())/3, (3*w.getRodzic().getY()+10)/4);
+                g.draw(line);
+                rysujSkalowanie(w,korzen);
+            }
+        }
+
+        repaint();
+
     }
 }

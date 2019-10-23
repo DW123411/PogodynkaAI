@@ -37,34 +37,36 @@ import java.awt.event.KeyEvent;
 
 public class Menuski extends JMenuBar
 {
-    public JButton wycz, wyś, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
+    public JButton wycz, wyś,skalowanie, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
 
 
     public Menuski()
-    {         
+    {
         //JPanel rozklad = new JPanel();
-        
-        
+
+
         setBorder(new TitledBorder (
-        new TitledBorder(
-        LineBorder.createGrayLineBorder(),
-            "Menu"),
-            "",
-            TitledBorder.RIGHT,
-            TitledBorder.BOTTOM));
-           
-            
-            ImageIcon imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
-            ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("icons/save.png"));
-            ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
-            ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("icons/saveText.png"));
-            ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-            ImageIcon imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
-            ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
-            ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
-         cred = new JButton("<html></html>");
-         cred.setIcon(imgIcon);
-         cred.setToolTipText("<html>O Programie</html>");
+                new TitledBorder(
+                        LineBorder.createGrayLineBorder(),
+                        "Menu"),
+                "",
+                TitledBorder.RIGHT,
+                TitledBorder.BOTTOM));
+
+
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+        ImageIcon imgIcon2 = new ImageIcon(getClass().getResource("icons/save.png"));
+        ImageIcon imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
+        ImageIcon imgIcon4 = new ImageIcon(getClass().getResource("icons/saveText.png"));
+        ImageIcon imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
+        ImageIcon imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+        ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
+        ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+        ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
+
+        cred = new JButton("<html></html>");
+        cred.setIcon(imgIcon);
+        cred.setToolTipText("<html>O Programie</html>");
         cred.setPreferredSize(new Dimension(30, 30));
         cred.setMaximumSize(new Dimension(30, 30));
 
@@ -73,6 +75,12 @@ public class Menuski extends JMenuBar
         save.setToolTipText("<html>Zapisz Jako TXT</html>");
         save.setPreferredSize(new Dimension(30, 30));
         save.setMaximumSize(new Dimension(30, 30));
+
+        skalowanie = new JButton("<html></html>");
+        skalowanie.setIcon(imgIcon9);
+        skalowanie.setToolTipText("<html>Skalowanie 3/4 obrazu </html>");
+        skalowanie.setPreferredSize(new Dimension(30, 30));
+        skalowanie.setMaximumSize(new Dimension(30, 30));
 
         tree = new JButton("<html></html>");
         tree.setIcon(imgIcon4);
@@ -125,14 +133,16 @@ public class Menuski extends JMenuBar
 
         add(wyś, BorderLayout.WEST);
         //add(zal, BorderLayout.WEST);
-        add(klasyfikacja_z_pliku, BorderLayout.WEST); 
+        add(klasyfikacja_z_pliku, BorderLayout.WEST);
         //add(show_klasyfikacja, BorderLayout.WEST);
         add(wycz, BorderLayout.WEST);
         add(save, BorderLayout.WEST);
         //add(tree, BorderLayout.WEST);
         add(jpeg, BorderLayout.WEST);
+        add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
+
     }
-    
+
 }

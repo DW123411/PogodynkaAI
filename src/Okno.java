@@ -118,6 +118,7 @@ public class Okno extends JFrame implements ActionListener
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.jpeg.addActionListener(this);
+        menu.skalowanie.addActionListener(this);
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
         zapisz2.addActionListener(this);
@@ -229,6 +230,32 @@ public class Okno extends JFrame implements ActionListener
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        }
+        else if (zrodlo == menu.skalowanie) {
+            wyswietlanie.wyczysc();
+
+            if (daneWejsciowe != null) {
+                DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                zapis = indukcja;
+                indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                //wyswietlanie.getHeight() wysokosc
+                //indukcja.getHeight(indukcja.getKorzen()
+                wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                wyswietlanie.rysujSkalowanie(indukcja.getKorzen(), indukcja.getKorzen());
+                wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
+
+
+            } else if (zrodlo == menu.jpeg || zrodlo == zapisz) {
+                try {
+                    Zapis.save_jpeg();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
         }
 
 
