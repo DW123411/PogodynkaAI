@@ -3,9 +3,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.filechooser.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class Okno extends JFrame implements ActionListener
@@ -46,7 +49,6 @@ public class Okno extends JFrame implements ActionListener
         Border blackline = BorderFactory.createLineBorder(Color.black);
         p.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-
         p2.setBorder(new TitledBorder(
                 new TitledBorder(
                         LineBorder.createGrayLineBorder(),
@@ -54,6 +56,7 @@ public class Okno extends JFrame implements ActionListener
                 "",
                 TitledBorder.RIGHT,
                 TitledBorder.BOTTOM));
+
 
         p.add(menu, BorderLayout.NORTH);
         p.add(new JScrollPane(wyswietlanie), BorderLayout.CENTER);
@@ -161,6 +164,7 @@ public class Okno extends JFrame implements ActionListener
          else if(zrodlo==menu.klasyfikacja_z_pliku) {
             boolean spr = otworzPlik();
             if (spr) {
+                p.remove(p2);
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
                  JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
                  Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
