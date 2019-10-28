@@ -4,11 +4,7 @@ import javax.swing.JMenu;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -38,6 +34,8 @@ import java.awt.event.KeyEvent;
 public class Menuski extends JMenuBar
 {
     public JButton wycz, wyś,skalowanie, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
+public JLabel zbior;
+    public JTextArea rekord;
 
 
     public Menuski()
@@ -81,6 +79,8 @@ public class Menuski extends JMenuBar
         skalowanie.setToolTipText("<html>Skalowanie 3/4 obrazu </html>");
         skalowanie.setPreferredSize(new Dimension(30, 30));
         skalowanie.setMaximumSize(new Dimension(30, 30));
+
+
 
         tree = new JButton("<html></html>");
         tree.setIcon(imgIcon4);
@@ -130,6 +130,31 @@ public class Menuski extends JMenuBar
         jpeg.setPreferredSize(new Dimension(30, 30));
         jpeg.setMaximumSize(new Dimension(30, 30));
 
+        zbior = new JLabel("<html>Ilość rekordów</html>");
+        zbior.setToolTipText("<html>Ilość rekordów:</html>");
+        zbior.setPreferredSize(new Dimension(110, 30));
+        zbior.setMaximumSize(new Dimension(110, 30));
+        Border border = zbior.getBorder();
+        Border margin = new EmptyBorder(10,10,10,10);
+        zbior.setBorder(new CompoundBorder(border, margin));
+
+
+
+        int TA_ROWS = 1;
+        int TA_COLS = 1;
+
+
+        rekord = new JTextArea(TA_ROWS, TA_COLS);
+        rekord.setPreferredSize(new Dimension(50, 20));
+        rekord.setMaximumSize(new Dimension(50, 20));
+        rekord.setMargin( new Insets(0,10,0,10) );
+        rekord.setWrapStyleWord(true);
+        rekord.setLineWrap(true);
+        rekord.setDocument(new Rekord(4));
+        rekord.setCaretPosition(0);
+
+
+
 
         add(wyś, BorderLayout.WEST);
         //add(zal, BorderLayout.WEST);
@@ -139,6 +164,8 @@ public class Menuski extends JMenuBar
         add(save, BorderLayout.WEST);
         //add(tree, BorderLayout.WEST);
         add(jpeg, BorderLayout.WEST);
+        add(zbior, BorderLayout.WEST);
+        add(rekord, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);

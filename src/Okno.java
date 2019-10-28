@@ -5,10 +5,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class Okno extends JFrame implements ActionListener
@@ -227,6 +224,28 @@ public class Okno extends JFrame implements ActionListener
         else if(zrodlo==menu.tree)
         {
             zapiszPlikDrzewa();
+        }
+        else if(zrodlo==menu.rekord)
+        {
+            menu.rekord.addKeyListener(new KeyListener() {
+                public void keyTyped(KeyEvent e) {
+                    if(e.getKeyCode() == KeyEvent.VK_UP) {
+                        //pobieranie tekstu wpisanego i potwierdzenie go enterem.
+                        //String s = menu.rekord.getText();
+                        //System.out.println(s);
+                    }
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    // TODO Auto-generated method stub
+                }
+            });
         }
         else if (zrodlo==menu.jpeg||zrodlo==zapisz){
             try {
