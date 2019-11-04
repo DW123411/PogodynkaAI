@@ -242,6 +242,8 @@ public class Okno extends JFrame implements ActionListener
                 }
                 public void keyReleased(java.awt.event.KeyEvent evt) {
                     int s = Integer.parseInt(menu.rekord2.getText());
+                    if(s > 0){
+                    try{
                     System.out.println(menu.rekord2.getText());
                     System.out.println("Cyfra : "+Integer.parseInt(menu.rekord2.getText()));
                     PodzialUczTest.losowanietest(s,daneWejsciowe);
@@ -249,7 +251,7 @@ public class Okno extends JFrame implements ActionListener
                     wyswietlanie.wyczysc();
                     if(daneWejsciowe!=null) {
                         DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                        Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s,daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s,daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                        Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja_atrybuty(), null);
                         zapis = indukcja;
                         indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                         indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
@@ -257,7 +259,25 @@ public class Okno extends JFrame implements ActionListener
                         wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                         wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                         wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
-                }}
+                    }else if(daneWejsciowe==null){
+                        //JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
+                    }
+
+
+                    }catch(NumberFormatException e){
+
+                        JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
+                        menu.rekord2.setText("");
+
+                        }
+                }
+                    else if(s<0) {
+
+                        JOptionPane.showMessageDialog(f,"Liczba rekordów nie może być na minusie");
+                        menu.rekord2.setText("");
+                    }
+                    //menu.rekord2.setEditable(true);
+                }
 
                 @Override
                 public void keyPressed(KeyEvent e) {
