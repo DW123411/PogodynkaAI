@@ -227,7 +227,7 @@ public class Okno extends JFrame implements ActionListener
         {
             zapiszPlikDrzewa();
         }
-        else if(zrodlo==menu.rekord)
+        else if(zrodlo==menu.rekord2)
         {
 
             menu.rekord2.addKeyListener(new KeyListener() {
@@ -241,8 +241,23 @@ public class Okno extends JFrame implements ActionListener
                     }
                 }
                 public void keyReleased(java.awt.event.KeyEvent evt) {
-
-                }
+                    int s = Integer.parseInt(menu.rekord2.getText());
+                    System.out.println(menu.rekord2.getText());
+                    System.out.println("Cyfra : "+Integer.parseInt(menu.rekord2.getText()));
+                    PodzialUczTest.losowanietest(s,daneWejsciowe);
+                    PodzialUczTest.losowanieucz(s,daneWejsciowe);
+                    wyswietlanie.wyczysc();
+                    if(daneWejsciowe!=null) {
+                        DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+                        Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s,daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s,daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                        zapis = indukcja;
+                        indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                        indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                        wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                        wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                        wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+                        wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
+                }}
 
                 @Override
                 public void keyPressed(KeyEvent e) {

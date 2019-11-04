@@ -9,14 +9,15 @@ public class PodzialUczTest {
 
         int[] tr1 =null;
         int[] tr2 =null;
-        String[][] wylosowany=null;
+
         DaneWejsciowe test = new DaneWejsciowe();
 
         String[][] element = org.get_klasyfikacja_string();
+        String[][] wylosowany = new String[ilosc][element[0].length];
 
-            for(g=0; g<ilosc;g++){
+        for(g=0; g<ilosc;g++){
                for(t=0; t<element[0].length-1; t++){
-                    int r1 = (int) (Math.random() * (org.ile_elementow())+1);
+                    int r1 = (int) (Math.random() * (element.length));
                     wylosowany[g][t]=element[r1][t];
                 }
             }
@@ -31,19 +32,19 @@ public class PodzialUczTest {
     public static DaneWejsciowe losowanieucz(int ilosc, DaneWejsciowe org){
         int g = 0;
         int t = 0;
-        String[][] wylosowany=null;
 
         int[] tr1 =null;
         DaneWejsciowe ucz = new DaneWejsciowe();
 
-                  String[][] element = org.get_klasyfikacja_string();
+        String[][] element = org.get_klasyfikacja_string();
+        String[][] wylosowany = new String[ilosc][element[0].length];
 
-            for(g=0; g<ilosc; g++){
-                for(t=0; t<element[0].length; t++){
-                    int r1 = (int) (Math.random() * (org.ile_elementow())+1);
-                    wylosowany[g][t]=element[r1][t];
-                }
+        for(g=0; g<ilosc;g++){
+            for(t=0; t<element[0].length; t++){
+                int r1 = (int) (Math.random() * (element.length));
+                wylosowany[g][t]=element[r1][t];
             }
+        }
 
             ucz.set_klasyfikacja_tablica_string(wylosowany);
 
