@@ -250,6 +250,7 @@ public class Okno extends JFrame implements ActionListener
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                         boolean close = true;
+                        boolean close2 = true;
                         try{
                             int s = Integer.parseInt(menu.rekord2.getText());
                             if(s > 0) {
@@ -278,7 +279,7 @@ public class Okno extends JFrame implements ActionListener
                                 }
 
                             }
-                            else if(s<0 && close==true) {
+                            else if(s<=0 && close==true) {
 
                                     JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
                                     // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
@@ -295,15 +296,16 @@ public class Okno extends JFrame implements ActionListener
 
                             }
                         }catch(NumberFormatException ee ){
-                            if(close==true) {
+                            if(close==true ) {
                                 JOptionPane.showMessageDialog(f, "Błędna liczba rekordów");
 
                                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                                     menu.rekord2.setEnabled(false);
-                                    menu.rekord2.setText("0");
+                                    menu.rekord2.setText("");
                                     menu.rekord2.setEnabled(true);
-                                    close=false;
+
                                 }
+
                             }
 
                         }
