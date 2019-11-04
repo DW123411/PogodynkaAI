@@ -269,6 +269,7 @@ public class Okno extends JFrame implements ActionListener
                         JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
                         menu.rekord2.setText("");
 
+
                         }
                 }
                     else if(s<0) {
