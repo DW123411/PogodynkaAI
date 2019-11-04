@@ -241,48 +241,75 @@ public class Okno extends JFrame implements ActionListener
                     }
                 }
                 public void keyReleased(java.awt.event.KeyEvent evt) {
-                    int s = Integer.parseInt(menu.rekord2.getText());
-                    if(s > 0){
-                    try{
-                    System.out.println(menu.rekord2.getText());
-                    System.out.println("Cyfra : "+Integer.parseInt(menu.rekord2.getText()));
-                    PodzialUczTest.losowanietest(s,daneWejsciowe);
-                    PodzialUczTest.losowanieucz(s,daneWejsciowe);
-                    wyswietlanie.wyczysc();
-                    if(daneWejsciowe!=null) {
-                        DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                        Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja_atrybuty(), null);
-                        zapis = indukcja;
-                        indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
-                        indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
-                        wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
-                        wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
-                        wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
-                        wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
-                    }else if(daneWejsciowe==null){
-                        //JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
-                    }
 
+                        //int s = Integer.parseInt(menu.rekord2.getText());
 
-                    }catch(NumberFormatException e){
-
-                        JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
-                        menu.rekord2.setText("");
-
-
-                        }
-                }
-                    else if(s<0) {
-
-                        JOptionPane.showMessageDialog(f,"Liczba rekordów nie może być na minusie");
-                        menu.rekord2.setText("");
-                    }
-                    //menu.rekord2.setEditable(true);
                 }
 
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    // TODO Auto-generated method stub
+                    if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        boolean close = true;
+                        try{
+                            int s = Integer.parseInt(menu.rekord2.getText());
+                            if(s > 0) {
+                                System.out.println(menu.rekord2.getText());
+                                System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
+                                PodzialUczTest.losowanietest(s, daneWejsciowe);
+                                PodzialUczTest.losowanieucz(s, daneWejsciowe);
+                                wyswietlanie.wyczysc();
+                                if (daneWejsciowe != null) {
+                                    DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
+                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                                    zapis = indukcja;
+                                    indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                                    indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                                    wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                                    wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                                    wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+                                    wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
+                                } else if (daneWejsciowe == null) {
+                                    menu.rekord2.setEnabled(false);
+                                    menu.rekord2.setText("");
+                                    menu.rekord2.setEnabled(true);
+                                    close=false;
+
+                                    //JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
+                                }
+
+                            }
+                            else if(s<0 && close==true) {
+
+                                    JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
+                                    // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                                        menu.rekord2.setEnabled(false);
+                                        menu.rekord2.setText("");
+                                        menu.rekord2.setEnabled(true);
+                                        close = false;
+                                    }
+
+
+
+
+                            }
+                        }catch(NumberFormatException ee ){
+                            if(close==true) {
+                                JOptionPane.showMessageDialog(f, "Błędna liczba rekordów");
+
+                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                                    menu.rekord2.setEnabled(false);
+                                    menu.rekord2.setText("0");
+                                    menu.rekord2.setEnabled(true);
+                                    close=false;
+                                }
+                            }
+
+                        }
+
+
+                    }
                 }
 
 
