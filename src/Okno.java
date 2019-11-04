@@ -242,8 +242,8 @@ public class Okno extends JFrame implements ActionListener
                 }
                 public void keyReleased(java.awt.event.KeyEvent evt) {
                     int s = Integer.parseInt(menu.rekord2.getText());
-                    System.out.println(menu.rekord2.getText());
-                    System.out.println("Cyfra : "+Integer.parseInt(menu.rekord2.getText()));
+                    //System.out.println(menu.rekord2.getText());
+                    //System.out.println("Cyfra : "+Integer.parseInt(menu.rekord2.getText()));
                     PodzialUczTest.losowanietest(s,daneWejsciowe);
                     PodzialUczTest.losowanieucz(s,daneWejsciowe);
                     wyswietlanie.wyczysc();
