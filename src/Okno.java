@@ -29,6 +29,7 @@ public class Okno extends JFrame implements ActionListener
     JMenuItem wyczysc2;
     JMenuItem zapisz2;
     JMenuItem dodaj;
+    JLabel label;
     boolean czyPrawyPanel = false;
 
     public Okno()  {
@@ -115,6 +116,7 @@ public class Okno extends JFrame implements ActionListener
         menu.cred.addActionListener(this);
         menu.save.addActionListener(this);
         menu.tree.addActionListener(this);
+        menu.rekord2.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.jpeg.addActionListener(this);
@@ -227,13 +229,19 @@ public class Okno extends JFrame implements ActionListener
         }
         else if(zrodlo==menu.rekord)
         {
-            menu.rekord.addKeyListener(new KeyListener() {
+
+            menu.rekord2.addKeyListener(new KeyListener() {
                 public void keyTyped(KeyEvent e) {
                     if(e.getKeyCode() == KeyEvent.VK_UP) {
+                        //String  s = menu.rekord2.getText();
+                        //JOptionPane.showMessageDialog(null, s);
                         //pobieranie tekstu wpisanego i potwierdzenie go enterem.
                         //String s = menu.rekord.getText();
                         //System.out.println(s);
                     }
+                }
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+
                 }
 
                 @Override
@@ -241,10 +249,7 @@ public class Okno extends JFrame implements ActionListener
                     // TODO Auto-generated method stub
                 }
 
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    // TODO Auto-generated method stub
-                }
+
             });
         }
         else if (zrodlo==menu.jpeg||zrodlo==zapisz){

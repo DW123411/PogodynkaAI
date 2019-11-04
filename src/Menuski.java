@@ -27,6 +27,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.border.*;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.PlainDocument;
 import javax.swing.text.TextAction;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -36,6 +37,8 @@ public class Menuski extends JMenuBar
     public JButton wycz, wyś,skalowanie, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
 public JLabel zbior;
     public JTextArea rekord;
+    public JTextField rekord2;
+
 
 
     public Menuski()
@@ -143,15 +146,22 @@ public JLabel zbior;
         int TA_ROWS = 1;
         int TA_COLS = 1;
 
+        rekord2 = new JTextField("",1);
+        rekord2.setPreferredSize(new Dimension(50, 20));
+        rekord2.setMaximumSize(new Dimension(50, 20));
+        rekord2.setMargin( new Insets(0,5,0,5) );
+        rekord2.setDocument(new Rekord(4));
+        rekord2.setCaretPosition(0);
 
-        rekord = new JTextArea(TA_ROWS, TA_COLS);
-        rekord.setPreferredSize(new Dimension(50, 20));
-        rekord.setMaximumSize(new Dimension(50, 20));
-        rekord.setMargin( new Insets(0,10,0,10) );
-        rekord.setWrapStyleWord(true);
-        rekord.setLineWrap(true);
-        rekord.setDocument(new Rekord(4));
-        rekord.setCaretPosition(0);
+
+        //rekord = new JTextArea(TA_ROWS, TA_COLS);
+       // rekord.setPreferredSize(new Dimension(50, 20));
+        //rekord.setMaximumSize(new Dimension(50, 20));
+       // rekord.setMargin( new Insets(0,10,0,10) );
+       // rekord.setWrapStyleWord(true);
+       // rekord.setLineWrap(true);
+       // rekord.setDocument(new Rekord(4));
+        //rekord.setCaretPosition(0);
 
 
 
@@ -165,7 +175,7 @@ public JLabel zbior;
         //add(tree, BorderLayout.WEST);
         add(jpeg, BorderLayout.WEST);
         add(zbior, BorderLayout.WEST);
-        add(rekord, BorderLayout.WEST);
+        add(rekord2, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);

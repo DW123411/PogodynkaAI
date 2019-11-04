@@ -2,12 +2,13 @@ import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
+import java.util.regex.Pattern;
 
 
 public final class Rekord extends PlainDocument {
 
     private final int limit;
+
 
     public Rekord(int limit) {
         this.limit = limit;
@@ -23,7 +24,9 @@ public final class Rekord extends PlainDocument {
             super.insertString(offs, str, a);
         }
 
+
     }
+
 
 
 }
