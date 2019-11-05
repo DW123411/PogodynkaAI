@@ -1,7 +1,14 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class DaneWejsciowe {
      private String[][] tablica;
      private ElementDrzewa[][] dane;
      private Atrybut[] atrybuty;
+     private ElementDrzewa[][] zbiorUczacy;
+     private ElementDrzewa[][] zbiorTestowy;
+     private String opcja1;
+     private String opcja2;
      /**
       *  zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
       */
@@ -28,6 +35,7 @@ public class DaneWejsciowe {
         }
         atrybuty = tmp;
         tablica = null;
+        opcje();
     }
     /**
      * konstruktor ze zmienna ścieżka typu string. buduje klase na podstawie podanej ścieżki pliku
@@ -37,6 +45,7 @@ public class DaneWejsciowe {
        this.tablica = to.get_klasyfikacja_string();    
                 this.dane = to.get_klasyfikacja();
                 this.atrybuty = to.get_klasyfikacja_atrybuty();
+                opcje();
             }
     /**
      * seter tablicy nazw [ stringow] klasyfikacji ze zmienna wejsciowa sciezka pliku
@@ -95,6 +104,14 @@ public class DaneWejsciowe {
     public Atrybut[] get_klasyfikacja_atrybuty(){
     return this.atrybuty;
     }
+
+    public String getOpcja1(){
+        return opcja1;
+    }
+
+    public String getOpcja2(){
+        return opcja2;
+    }
     /**
      *  metoda zwracajaca liczbe elementow w tablicy
      */
@@ -110,6 +127,81 @@ public class DaneWejsciowe {
         }
         return ilosc;
     }
+
+    public void opcje(){
+        int szerokosc = dane[0].length;
+        opcja1 = dane[1][szerokosc].getNazwa();
+        for(int i=1;i<dane.length;i++){
+            if(dane[i][szerokosc].getNazwa()!=opcja1){
+                opcja2 = dane[i][szerokosc].getNazwa();
+                break;
+            }
+        }
+    }
+
+    public void podzialZbioru(){
+        int iloscWierszy = dane.length-1;
+        int iloscKolumn = dane[0].length;
+        if(iloscWierszy%2==0){
+            zbiorUczacy = new ElementDrzewa[(iloscWierszy/2)+1][iloscKolumn];
+            zbiorTestowy = new ElementDrzewa[(iloscWierszy/2)+1][iloscKolumn];
+        }else{
+            zbiorUczacy = new ElementDrzewa[((int)(iloscWierszy/2))+2][iloscKolumn];
+            zbiorTestowy = new ElementDrzewa[((int)(iloscWierszy/2))+1][iloscKolumn];
+        }
+        LinkedList<ElementDrzewa[]> opcja1Tmp = new LinkedList<ElementDrzewa[]>();
+        LinkedList<ElementDrzewa[]> opcja2Tmp = new LinkedList<ElementDrzewa[]>();
+        for(int i=0;i<dane.length;i++){
+            if(dane[i][iloscKolumn-1].getNazwa()==opcja1){
+                opcja1Tmp.add(dane[i]);
+            }else{
+                opcja2Tmp.add(dane[i]);
+            }
+        }
+        int opcja1TmpWielkosc = opcja1Tmp.size();
+        int opcja2TmpWielkosc = opcja2Tmp.size();
+        while(czyZbiorPelny(zbiorUczacy)){
+            int i = 0;
+            if(Math.random()<0.5 && !opcja1Tmp.isEmpty() && (opcja1TmpWielkosc-opcja1Tmp.size())<(zbiorUczacy.length/2)){
+                int los = (int)(Math.random()*opcja1Tmp.size());
+                if(sprawdzZbior(zbiorUczacy,opcja1Tmp.get(los))){
+                    zbiorUczacy[i++] = opcja1Tmp.get(los);
+                    opcja1Tmp.remove(los);
+                }
+            }else if(!opcja2Tmp.isEmpty()){
+                int los = (int)(Math.random()*opcja2Tmp.size());
+                if(sprawdzZbior(zbiorUczacy,opcja2Tmp.get(los))){
+                    zbiorUczacy[i++] = opcja2Tmp.get(los);
+                    opcja2Tmp.remove(los);
+                }
+            }
+        }
+    }
+
+    public boolean sprawdzZbior(ElementDrzewa[][] zbior, ElementDrzewa[] wiersz){
+        int tmp = 0;
+        for(int i=0;i<zbior.length;i++){
+            for(int j=0;j<zbior[i].length;j++){
+                if(zbior[i][j].getNazwa()==wiersz[j].getNazwa()){
+                    tmp = 0;
+                }
+            }
+            if(tmp==zbior[i].length){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean czyZbiorPelny(ElementDrzewa[][] zbior){
+        for(int i=0;i<zbior.length;i++){
+            if(zbior[i][0]==null){
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * metoda drukujaca tablice w konsoli
      */
