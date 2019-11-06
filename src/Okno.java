@@ -142,19 +142,29 @@ public class Okno extends JFrame implements ActionListener
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
                 zapis = indukcja;
-                LinkedList lista = wyswietlanie.dajWezly(indukcja.getKorzen());
+                LinkedList lista = new LinkedList();
+                LinkedList listaT = new LinkedList();
+                lista = wyswietlanie.dajWezly(indukcja.getKorzen(),listaT);
                 LinkedList listaM = new LinkedList();
                 LinkedList listaMo = new LinkedList();
                 int listasize = lista.size();
-                listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(1),listaM);
+                System.out.println(lista.size());
+                //listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(1),listaM);
 
-                //for(int i=0; i<listaMo.size(); i++){
+                for(int i=0; i<lista.size(); i++){
 
-                //        System.out.println("size "+listaMo.size());
-                //    System.out.print(listaMo.get(i).toString()+" ");
-               // }
+
+                    listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(i),listaM);
+
+                    wyswietlanie.dajDrogeF(listaMo);
+
+
+                    listaMo = new LinkedList();
+                    listaM = new LinkedList();
+                }
                 System.out.println();
-                wyswietlanie.dajDrogeF(listaMo);
+
+                //wyswietlanie.dajDrogeF(listaMo);
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());

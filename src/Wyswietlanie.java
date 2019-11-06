@@ -732,26 +732,26 @@ public class Wyswietlanie extends JPanel implements ActionListener
 
     }
 
-    public LinkedList dajWezly(Wezel wezel){
+    public LinkedList dajWezly(Wezel wezel,LinkedList lista){
 
         if(!wezel.czyLisc()) {
-            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            LinkedList<Wezel> listaT = new LinkedList<Wezel>();
             for (int i = 0; i < wezel.getDzieci().size(); i++) {
-                lista.add((Wezel) wezel.getDzieci().get(i));
+                listaT.add((Wezel) wezel.getDzieci().get(i));
             } //list przechowująca dzieci
-            while (!lista.isEmpty()) {
-                Wezel w = lista.remove(0);
+            while (!listaT.isEmpty()) {
+                Wezel w = listaT.remove(0);
                 if(w.czyLisc()){
-                    wezly.add(w);
+                    lista.add(w);
                 }
                 else
                 {
-                    dajWezly(w);
+                    dajWezly(w,lista);
                 }
             }
         }
 
-        return wezly;
+        return lista;
     }
 
     public void dajDroge(Wezel wezel) {
@@ -788,7 +788,9 @@ public class Wyswietlanie extends JPanel implements ActionListener
                 Wezel wt = (Wezel) lista.get(i += 1);
                 System.out.print(w.toString() + "=" + wt.toString()+"  ");
             }
+
         }
+        System.out.println();
 
     }
 
