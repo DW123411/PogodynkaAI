@@ -8,7 +8,6 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Wyswietlanie extends JPanel implements ActionListener
 {
@@ -20,6 +19,8 @@ public class Wyswietlanie extends JPanel implements ActionListener
     PrzyciskMenu zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
     PrzyciskMenu usun_MenuItem = new PrzyciskMenu("Usuń");
     Okno o;
+    LinkedList<Wezel> wezly = new LinkedList<>();
+    LinkedList<Wezel> wezlyN = new LinkedList<>();
 
     //konstruktor
     public Wyswietlanie()
@@ -730,4 +731,65 @@ public class Wyswietlanie extends JPanel implements ActionListener
         repaint();
 
     }
+
+    public LinkedList dajWezly(Wezel wezel){
+
+        if(!wezel.czyLisc()) {
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for (int i = 0; i < wezel.getDzieci().size(); i++) {
+                lista.add((Wezel) wezel.getDzieci().get(i));
+            } //list przechowująca dzieci
+            while (!lista.isEmpty()) {
+                Wezel w = lista.remove(0);
+                if(w.czyLisc()){
+                    wezly.add(w);
+                }
+                else
+                {
+                    dajWezly(w);
+                }
+            }
+        }
+
+        return wezly;
+    }
+
+    public void dajDroge(Wezel wezel) {
+        if(wezel.getRodzic() != null) {
+           // System.out.print(wezel.toString() + "-");
+            dajDroge(wezel.getRodzic());
+        }
+        else{
+            //System.out.print(wezel.toString());
+        }
+    }
+
+    public LinkedList dajDrogeM(Wezel wezel,LinkedList lista) {
+        if(wezel.getRodzic() != null) {
+           // System.out.print(wezel.toString() + "-");
+            dajDrogeM(wezel.getRodzic(),lista);
+        }
+        else{
+            //System.out.print(wezel.toString());
+        }
+        lista.add(wezel);
+        return lista;
+    }
+
+    public void dajDrogeF(LinkedList lista){
+        for(int i=0; i<lista.size();i++){
+            int j=i;
+            Wezel w = (Wezel)lista.get(i);
+            if(w.czyLisc()){
+                System.out.print("to D="+w.toString());
+            }
+            else {
+
+                Wezel wt = (Wezel) lista.get(i += 1);
+                System.out.print(w.toString() + "=" + wt.toString()+"  ");
+            }
+        }
+
+    }
+
 }

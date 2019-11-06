@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class Okno extends JFrame implements ActionListener
 {
@@ -141,6 +142,19 @@ public class Okno extends JFrame implements ActionListener
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
                 zapis = indukcja;
+                LinkedList lista = wyswietlanie.dajWezly(indukcja.getKorzen());
+                LinkedList listaM = new LinkedList();
+                LinkedList listaMo = new LinkedList();
+                int listasize = lista.size();
+                listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(1),listaM);
+
+                //for(int i=0; i<listaMo.size(); i++){
+
+                //        System.out.println("size "+listaMo.size());
+                //    System.out.print(listaMo.get(i).toString()+" ");
+               // }
+                System.out.println();
+                wyswietlanie.dajDrogeF(listaMo);
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
