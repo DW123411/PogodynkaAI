@@ -135,7 +135,6 @@ public class Okno extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e)
 
     {
-        final int[] s = {0};
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
          Object zrodlo = e.getSource();
         if(zrodlo==menu.wyś){
@@ -243,7 +242,6 @@ public class Okno extends JFrame implements ActionListener
 
             menu.rekord2.addKeyListener(new KeyListener() {
                 public void keyTyped(KeyEvent e) {
-                    s[0] = Integer.parseInt(menu.rekord2.getText());
 
                     if(e.getKeyCode() == KeyEvent.VK_UP) {
                         //String  s = menu.rekord2.getText();
@@ -264,17 +262,35 @@ public class Okno extends JFrame implements ActionListener
                     if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                         boolean close = true;
                         boolean close2 = true;
+                        String m = menu.rekord2.getText();
+                        int s = Integer.parseInt(menu.rekord2.getText());
                         try{
+                            if(s<=0 && close==true) {
+
+                                JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
+                                // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                                    menu.rekord2.setEnabled(false);
+                                    menu.rekord2.setText("");
+                                    menu.rekord2.setEnabled(true);
+                                    close = false;
+                                }
+
+
+
+
+                            }
                             //int s = Integer.parseInt(menu.rekord2.getText());
-                            if(s[0]!=0) {
+                            else {
                                 System.out.println(menu.rekord2.getText());
                                 System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
-                                PodzialUczTest.losowanietest(s[0], daneWejsciowe);
-                                PodzialUczTest.losowanieucz(s[0], daneWejsciowe);
+                                PodzialUczTest.losowanietest(s, daneWejsciowe);
+                                PodzialUczTest.losowanieucz(s, daneWejsciowe);
                                 wyswietlanie.wyczysc();
                                 if (daneWejsciowe != null) {
                                     DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja( (ElementDrzewa[][]) PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja( (ElementDrzewa[][]) PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja_atrybuty(), null);
                                     zapis = indukcja;
                                     indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                                     indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
@@ -292,23 +308,8 @@ public class Okno extends JFrame implements ActionListener
                                 }
 
                             }
-                            else if(s[0]<0 || s[0]==0 && close==true) {
 
-                                    JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
-                                    // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-                                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-                                        menu.rekord2.setEnabled(false);
-                                        menu.rekord2.setText("");
-                                        menu.rekord2.setEnabled(true);
-                                        close = false;
-                                    }
-
-
-
-
-                            }
-                        }catch(NumberFormatException ee ){
+                        }catch(NumberFormatException ee){
                             if(close==true ) {
                                 JOptionPane.showMessageDialog(f, "Błędna liczba rekordów");
 
