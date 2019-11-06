@@ -31,6 +31,7 @@ public class Okno extends JFrame implements ActionListener
     JMenuItem zapisz2;
     JMenuItem dodaj;
     JLabel label;
+    LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
 
     public Okno()  {
@@ -142,33 +143,13 @@ public class Okno extends JFrame implements ActionListener
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
                 zapis = indukcja;
-                LinkedList lista = new LinkedList();
+                lista = new LinkedList();
                 LinkedList listaT = new LinkedList();
                 lista = wyswietlanie.dajWezly(indukcja.getKorzen(),listaT);
-                LinkedList listaM = new LinkedList();
-                LinkedList listaMo = new LinkedList();
-                int listasize = lista.size();
-                System.out.println(lista.size());
-                //listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(1),listaM);
 
-                for(int i=0; i<lista.size(); i++){
-
-
-
-                        listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(i), listaM);
-                    Wezel tmp = (Wezel) listaMo.get(listaMo.size()-1);
-                    if(tmp.toString()=="Yes") {
-                        wyswietlanie.dajDrogeF(listaMo);
-
-
-
-                    }
-                    listaMo = new LinkedList();
-                    listaM = new LinkedList();
-                }
                 System.out.println();
 
-                //wyswietlanie.dajDrogeF(listaMo);
+
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());

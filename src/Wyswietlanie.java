@@ -17,6 +17,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
     LinkedList<JButton> listaButton = new LinkedList<JButton>();
     JPopupMenu popupMenu = new JPopupMenu("Title");
     PrzyciskMenu zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
+    PrzyciskMenu dajDroge_MenuItem = new PrzyciskMenu("Droga");
     PrzyciskMenu usun_MenuItem = new PrzyciskMenu("Usuń");
     Okno o;
     LinkedList<Wezel> wezly = new LinkedList<>();
@@ -86,29 +87,29 @@ public class Wyswietlanie extends JPanel implements ActionListener
         String label = e.getActionCommand();
         Object zrodlo = e.getSource();
         if (label == "Zmień nazwę") {
-            PrzyciskMenu przyciskMenuu = (PrzyciskMenu)zrodlo;
+            PrzyciskMenu przyciskMenuu = (PrzyciskMenu) zrodlo;
             ElementDrzewa elementDrzewaa = przyciskMenuu.getElement();
-            System.out.println("Test: "+elementDrzewaa);
-            if(elementDrzewaa!=null) {
+            System.out.println("Test: " + elementDrzewaa);
+            if (elementDrzewaa != null) {
                 String dialgOptionn = JOptionPane.showInputDialog(null, "Podaj nową nazwę: ");
                 if (dialgOptionn != null) {
                     System.out.println(dialgOptionn);
                     ElementDrzewa[][] tmp = o.daneWejsciowe.get_klasyfikacja();
                     if (tmp != null) {
-                                for(int i=0;i<tmp.length;i++){
-                                    for(int j=0;j<tmp[i].length;j++){
-                                        if (tmp[i][j].toString().equals(elementDrzewaa.toString())) {
-                                            ElementDrzewa tmpp = tmp[i][j];
-                                            tmpp.setNazwa(dialgOptionn);
-                                            tmp[i][j] = tmpp;
-                                    }
+                        for (int i = 0; i < tmp.length; i++) {
+                            for (int j = 0; j < tmp[i].length; j++) {
+                                if (tmp[i][j].toString().equals(elementDrzewaa.toString())) {
+                                    ElementDrzewa tmpp = tmp[i][j];
+                                    tmpp.setNazwa(dialgOptionn);
+                                    tmp[i][j] = tmpp;
+                                }
 
                             }
                         }
                         o.setDaneWejsciowe(new DaneWejsciowe(tmp));
                     }
-                    o.actionPerformed(new ActionEvent(o.menu.wycz,ActionEvent.ACTION_PERFORMED,null));
-                    o.actionPerformed(new ActionEvent(o.menu.wyś,ActionEvent.ACTION_PERFORMED,null));
+                    o.actionPerformed(new ActionEvent(o.menu.wycz, ActionEvent.ACTION_PERFORMED, null));
+                    o.actionPerformed(new ActionEvent(o.menu.wyś, ActionEvent.ACTION_PERFORMED, null));
                     Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
                     JTable tabelaWyswietl = tabela.getTabela();
                     tabelaWyswietl.setFillsViewportHeight(true);
@@ -129,48 +130,48 @@ public class Wyswietlanie extends JPanel implements ActionListener
                 }
             }
 
-        }else if(label == "Usuń"){
-            PrzyciskMenu przyciskMenu = (PrzyciskMenu)zrodlo;
+        } else if (label == "Usuń") {
+            PrzyciskMenu przyciskMenu = (PrzyciskMenu) zrodlo;
             ElementDrzewa elementDrzewa = przyciskMenu.getElement();
-            System.out.println("Test: "+elementDrzewa);
-            if(elementDrzewa!=null){
-                int dialogOption = JOptionPane.showConfirmDialog(null,"Czy na pewno chcesz usunąć element "+elementDrzewa+"?");
-                if(dialogOption==JOptionPane.YES_OPTION){
+            System.out.println("Test: " + elementDrzewa);
+            if (elementDrzewa != null) {
+                int dialogOption = JOptionPane.showConfirmDialog(null, "Czy na pewno chcesz usunąć element " + elementDrzewa + "?");
+                if (dialogOption == JOptionPane.YES_OPTION) {
                     ElementDrzewa[][] tmp = o.daneWejsciowe.get_klasyfikacja();
-                    if(tmp!=null){
-                        if(elementDrzewa.getClass().getName().equals("Atrybut")){
+                    if (tmp != null) {
+                        if (elementDrzewa.getClass().getName().equals("Atrybut")) {
                             int kolumna = 0;
-                            for(int i=0;i<tmp[0].length;i++){
-                                if(tmp[0][i].toString().equals(elementDrzewa.toString())){
+                            for (int i = 0; i < tmp[0].length; i++) {
+                                if (tmp[0][i].toString().equals(elementDrzewa.toString())) {
                                     kolumna = i;
                                 }
                             }
-                            ElementDrzewa[][] nowyTmp = new ElementDrzewa[tmp.length][tmp[0].length-1];
+                            ElementDrzewa[][] nowyTmp = new ElementDrzewa[tmp.length][tmp[0].length - 1];
                             int k = 0;
-                            for(int i=0;i<tmp.length;i++){
-                                for(int j=0;j<tmp[i].length;j++){
-                                    if(j!=kolumna){
+                            for (int i = 0; i < tmp.length; i++) {
+                                for (int j = 0; j < tmp[i].length; j++) {
+                                    if (j != kolumna) {
                                         nowyTmp[i][k++] = tmp[i][j];
                                     }
                                 }
                                 k = 0;
                             }
                             o.setDaneWejsciowe(new DaneWejsciowe(nowyTmp));
-                        }else {
+                        } else {
                             int kolumna = 0;
                             int liczWartosc = 0;
-                            for(int i=0;i<tmp.length;i++){
-                                for(int j=0;j<tmp[i].length;j++){
-                                    if(elementDrzewa.toString().equals(tmp[i][j].toString())){
+                            for (int i = 0; i < tmp.length; i++) {
+                                for (int j = 0; j < tmp[i].length; j++) {
+                                    if (elementDrzewa.toString().equals(tmp[i][j].toString())) {
                                         kolumna = j;
                                         liczWartosc++;
                                     }
                                 }
                             }
-                            ElementDrzewa[][] nowyTmp = new ElementDrzewa[tmp.length-liczWartosc][tmp[0].length];
+                            ElementDrzewa[][] nowyTmp = new ElementDrzewa[tmp.length - liczWartosc][tmp[0].length];
                             int k = 0;
-                            for(int i=0;i<tmp.length;i++){
-                                if(!tmp[i][kolumna].toString().equals(elementDrzewa.toString())) {
+                            for (int i = 0; i < tmp.length; i++) {
+                                if (!tmp[i][kolumna].toString().equals(elementDrzewa.toString())) {
                                     for (int j = 0; j < tmp[i].length; j++) {
                                         nowyTmp[k][j] = tmp[i][j];
                                     }
@@ -179,8 +180,8 @@ public class Wyswietlanie extends JPanel implements ActionListener
                             }
                             o.setDaneWejsciowe(new DaneWejsciowe(nowyTmp));
                         }
-                        o.actionPerformed(new ActionEvent(o.menu.wycz,ActionEvent.ACTION_PERFORMED,null));
-                        o.actionPerformed(new ActionEvent(o.menu.wyś,ActionEvent.ACTION_PERFORMED,null));
+                        o.actionPerformed(new ActionEvent(o.menu.wycz, ActionEvent.ACTION_PERFORMED, null));
+                        o.actionPerformed(new ActionEvent(o.menu.wyś, ActionEvent.ACTION_PERFORMED, null));
                         Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
                         JTable tabelaWyswietl = tabela.getTabela();
                         tabelaWyswietl.setFillsViewportHeight(true);
@@ -201,6 +202,11 @@ public class Wyswietlanie extends JPanel implements ActionListener
                     }
                 }
             }
+        } else if (label == "Droga") {
+            PrzyciskMenu przyciskMenu = (PrzyciskMenu) zrodlo;
+            ElementDrzewa elementDrzewa = przyciskMenu.getElement();
+            dajDrogeO(o.lista,elementDrzewa.toString());
+            System.out.println();
         }
     }
 
@@ -280,6 +286,8 @@ public class Wyswietlanie extends JPanel implements ActionListener
         zmien_nazweMenuItem.addActionListener(this);
         usun_MenuItem = new PrzyciskMenu("Usuń");
         usun_MenuItem.addActionListener(this);
+        dajDroge_MenuItem = new PrzyciskMenu("Droga");
+        dajDroge_MenuItem.addActionListener(this);
 
         usun_MenuItem.setForeground(Color.red);
         popupMenu.add(zmien_nazweMenuItem);
@@ -427,6 +435,11 @@ public class Wyswietlanie extends JPanel implements ActionListener
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.green);
                 }else{
+                    popupMenu = new JPopupMenu("Title");
+                    dajDroge_MenuItem.setElement((ElementDrzewa) w.getDane());
+
+                    popupMenu.add(dajDroge_MenuItem);
+                    button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.cyan);
                 }
                 button.setForeground(Color.white);
@@ -792,6 +805,30 @@ public class Wyswietlanie extends JPanel implements ActionListener
         }
         System.out.println();
 
+    }
+
+    public void dajDrogeO(LinkedList lista,String decyzja){
+        LinkedList listaM = new LinkedList();
+        LinkedList listaMo = new LinkedList();
+
+
+
+
+        for(int i=0; i<lista.size(); i++){
+
+
+
+            listaMo = dajDrogeM((Wezel) lista.get(i), listaM);
+            Wezel tmp = (Wezel) listaMo.get(listaMo.size()-1);
+            if(tmp.toString()==decyzja) {
+                dajDrogeF(listaMo);
+
+
+
+            }
+            listaMo = new LinkedList();
+            listaM = new LinkedList();
+        }
     }
 
 }
