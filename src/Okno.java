@@ -274,7 +274,7 @@ public class Okno extends JFrame implements ActionListener
                                 wyswietlanie.wyczysc();
                                 if (daneWejsciowe != null) {
                                     DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja( (ElementDrzewa[][]) PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja_atrybuty(), null);
                                     zapis = indukcja;
                                     indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                                     indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
