@@ -133,7 +133,9 @@ public class Okno extends JFrame implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e)
+
     {
+        final int[] s = {0};
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
          Object zrodlo = e.getSource();
         if(zrodlo==menu.wyś){
@@ -241,6 +243,8 @@ public class Okno extends JFrame implements ActionListener
 
             menu.rekord2.addKeyListener(new KeyListener() {
                 public void keyTyped(KeyEvent e) {
+                    s[0] = Integer.parseInt(menu.rekord2.getText());
+
                     if(e.getKeyCode() == KeyEvent.VK_UP) {
                         //String  s = menu.rekord2.getText();
                         //JOptionPane.showMessageDialog(null, s);
@@ -261,16 +265,16 @@ public class Okno extends JFrame implements ActionListener
                         boolean close = true;
                         boolean close2 = true;
                         try{
-                            int s = Integer.parseInt(menu.rekord2.getText());
-                            if(s > 0) {
+                            //int s = Integer.parseInt(menu.rekord2.getText());
+                            if(s[0]!=0) {
                                 System.out.println(menu.rekord2.getText());
                                 System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
-                                PodzialUczTest.losowanietest(s, daneWejsciowe);
-                                PodzialUczTest.losowanieucz(s, daneWejsciowe);
+                                PodzialUczTest.losowanietest(s[0], daneWejsciowe);
+                                PodzialUczTest.losowanieucz(s[0], daneWejsciowe);
                                 wyswietlanie.wyczysc();
                                 if (daneWejsciowe != null) {
                                     DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s[0], daneWejsciowe).get_klasyfikacja_atrybuty(), null);
                                     zapis = indukcja;
                                     indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                                     indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
@@ -288,7 +292,7 @@ public class Okno extends JFrame implements ActionListener
                                 }
 
                             }
-                            else if(s<=0 && close==true) {
+                            else if(s[0]<0 || s[0]==0 && close==true) {
 
                                     JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
                                     // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);

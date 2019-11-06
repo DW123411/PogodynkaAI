@@ -56,18 +56,18 @@ public class PodzialUczTest {
 
 
         for(g=0; g<ilosctest;g++){
-            int r1 = (int) (Math.random() * (element.length));
+            int r1 = (int) (Math.random() * (element.length))+1;
+            if(r1>element.length-1){ r1=r1-2;}
            // System.out.println(" ");
             for(t=0;t<element[0].length;t++){
-                 if(r1!=0){
-                     if(t<element[0].length-1){
+                 if(t<element[0].length-1){
                      wylosowany[g+1][t]=new WartoscAtrybutu(element[r1][t]);
                      }
                      else if(t==element[0].length-1){
                          wylosowany[g+1][t]=new Decyzja(element[r1][t]);
                      }
                    // System.out.print(wylosowany[g+1][t]+",");
-                 }
+
                  else r1=(int) (Math.random()*(element.length));
 
                  }
