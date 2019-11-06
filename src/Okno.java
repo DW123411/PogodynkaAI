@@ -154,11 +154,15 @@ public class Okno extends JFrame implements ActionListener
                 for(int i=0; i<lista.size(); i++){
 
 
-                    listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(i),listaM);
 
-                    wyswietlanie.dajDrogeF(listaMo);
+                        listaMo = wyswietlanie.dajDrogeM((Wezel) lista.get(i), listaM);
+                    Wezel tmp = (Wezel) listaMo.get(listaMo.size()-1);
+                    if(tmp.toString()=="Yes") {
+                        wyswietlanie.dajDrogeF(listaMo);
 
 
+
+                    }
                     listaMo = new LinkedList();
                     listaM = new LinkedList();
                 }
