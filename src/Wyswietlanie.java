@@ -645,6 +645,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
 
     }*/
 
+    
     public void rysujSkalowanie(Wezel wezel,Wezel korzen) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00000");
         Graphics2D g = (Graphics2D) okno.getGraphics();
@@ -681,7 +682,7 @@ public class Wyswietlanie extends JPanel implements ActionListener
             button.setHorizontalAlignment(SwingConstants.CENTER);
             button.setForeground(Color.white);
             button.setBackground(Color.blue);
-            button.setBounds(((4*wezel.getX())/4 - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 18/4), (3*(wezel.getY() - 20))/4, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
+            button.setBounds(((2*wezel.getX())/2 - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 15/2), (1*(wezel.getY() - 15))/3, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
             button.setMargin(new Insets(0,0,0,0));
             button.setVisible(true);
             button.setComponentPopupMenu(popupMenu);
@@ -726,16 +727,16 @@ public class Wyswietlanie extends JPanel implements ActionListener
                 //wezel.getY() - 20 -- w dol i  w góre
                 //decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13 -- długość
                 // wezel.getDane()).getEntropia()).length() *  40 -- wysokosc
-                button.setBounds((w.getX()-w.toString().length()*18/4), (3*w.getY()-20)/4,w.toString().length()*13,30);
+                button.setBounds((w.getX()-w.toString().length()), (w.getY())/2,w.toString().length()*13,30);
                 if(w.getDane().getClass().getName()=="Atrybut"){
-                    button.setBounds((w.getX() - decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 18/4), (3*w.getY() - 20)/4, decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 13, 40);
+                    button.setBounds((w.getX() - decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 2), (2*w.getY() - 3)/4, decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 13, 40);
                 }
                 button.setMargin(new Insets(0,0,0,0));
                 button.setVisible(true);
                 //button.setComponentPopupMenu(popupMenu);
                 //this.add(button);
                 listaButton.add(button);
-                Line2D.Double line = new Line2D.Double ((3*w.getX())/3, (3*w.getY()-20)/4, (3*w.getRodzic().getX())/3, (3*w.getRodzic().getY()+10)/4);
+                Line2D.Double line = new Line2D.Double ((2*w.getX())/2, (1*w.getY()-15)/1.9, (2*w.getRodzic().getX())/2, (w.getRodzic().getY()+5)/1.9);
                 g.draw(line);
                 rysujSkalowanie(w,korzen);
             }
