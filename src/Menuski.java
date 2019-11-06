@@ -34,7 +34,7 @@ import java.awt.event.KeyEvent;
 
 public class Menuski extends JMenuBar
 {
-    public JButton wycz, wyś,skalowanie, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
+    public JButton wycz, wyś,skalowanie,decyzja_okno,  zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
 public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -64,7 +64,9 @@ public JLabel zbior;
         ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
         ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
         ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
-
+            ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("icons/view.png"));
+            
+            
         cred = new JButton("<html></html>");
         cred.setIcon(imgIcon);
         cred.setToolTipText("<html>O Programie</html>");
@@ -141,7 +143,11 @@ public JLabel zbior;
         Border margin = new EmptyBorder(10,10,10,10);
         zbior.setBorder(new CompoundBorder(border, margin));
 
-
+decyzja_okno = new JButton("<html></html>");
+        decyzja_okno.setIcon(imgIcon1);
+        decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
+        decyzja_okno.setPreferredSize(new Dimension(30, 30));
+        decyzja_okno.setMaximumSize(new Dimension(30, 30));
 
         int TA_ROWS = 1;
         int TA_COLS = 1;
@@ -179,7 +185,7 @@ public JLabel zbior;
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
-
+        add(decyzja_okno, BorderLayout.WEST);
     }
 
 }

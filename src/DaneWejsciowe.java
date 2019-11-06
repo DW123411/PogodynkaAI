@@ -9,6 +9,8 @@ public class DaneWejsciowe {
      private ElementDrzewa[][] zbiorTestowy;
      private String opcja1;
      private String opcja2;
+      private Object[][] atrybuty_z_wartosciami_i_decyzja;
+          private Object[][] wartosci_atr_i_decyzja;
      /**
       *  zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
       */
@@ -16,6 +18,8 @@ public class DaneWejsciowe {
         this.tablica = new String[50][50];
         this.dane = new ElementDrzewa[50][50];
          this.atrybuty = new Atrybut[50];
+         this.atrybuty_z_wartosciami_i_decyzja = new String[50][50];
+         this.wartosci_atr_i_decyzja = new Object[50][50];
     }
      /**
       *  konstruktor klasy klasyfikacja z ustalonym rozmiarem tablicy danymi wejsciowymi x i y
@@ -24,6 +28,8 @@ public class DaneWejsciowe {
         this.tablica = new String[y][x];
            this.dane = new ElementDrzewa[y][x];
            this.atrybuty = new Atrybut[x];
+           this.atrybuty_z_wartosciami_i_decyzja = new String[y][x];
+         this.wartosci_atr_i_decyzja = new Object[y][x];
     }
 
     public DaneWejsciowe(ElementDrzewa[][] dane){
@@ -34,8 +40,16 @@ public class DaneWejsciowe {
             tmp[j++] = (Atrybut) dane[0][i];
         }
         atrybuty = tmp;
-        tablica = null;
+      //  tablica = null;
         opcje();
+          wartosci_i_decyzje_z_elementow_drzewa();
+        this.tablica = get_klasyfikacja_string();  
+        this.atrybuty = get_klasyfikacja_atrybuty();
+        this.atrybuty_z_wartosciami_i_decyzja= new Object[this.tablica.length-1][this.tablica.length];
+      this.wartosci_atr_i_decyzja = new Object[this.atrybuty.length+1][this.atrybuty.length+1];
+      
+        this.wartosci_atr_i_decyzja= get_klasyfikacja_wart_dec();
+        this.atrybuty_z_wartosciami_i_decyzja = get_klasyfikacja_string();
     }
     /**
      * konstruktor ze zmienna ścieżka typu string. buduje klase na podstawie podanej ścieżki pliku
@@ -45,6 +59,12 @@ public class DaneWejsciowe {
        this.tablica = to.get_klasyfikacja_string();    
                 this.dane = to.get_klasyfikacja();
                 this.atrybuty = to.get_klasyfikacja_atrybuty();
+                   // !! zamienic 5 na okreslana max. wartosc rozmiaru dlugosc tablicy 
+      this.atrybuty_z_wartosciami_i_decyzja= new Object[this.tablica.length-1][this.tablica.length];
+      this.wartosci_atr_i_decyzja = new Object[this.atrybuty.length+1][this.atrybuty.length+1];
+      
+        this.wartosci_atr_i_decyzja= to.get_klasyfikacja_wart_dec();
+        this.atrybuty_z_wartosciami_i_decyzja = to.get_klasyfikacja_string();
                 opcje();
             }
     /**
@@ -73,6 +93,12 @@ public class DaneWejsciowe {
      */
     public void set_klasyfikacja_tablica(ElementDrzewa[][] tab){
     this.dane= tab;
+    }
+     /**
+     * seter tablicy wszystkich objektow klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu Object[][]
+     */
+    public void set_klasyfikacja_tablica_atrybuty_i_decyzje(Object[][] tab){
+    this.wartosci_atr_i_decyzja= tab;
     }
      /**
      * seter tablicy stringow [ nazw] klasyfikacji ze zmienna wejsciowa tablica dwuwymiarowa typu String[][]
@@ -104,7 +130,12 @@ public class DaneWejsciowe {
     public Atrybut[] get_klasyfikacja_atrybuty(){
     return this.atrybuty;
     }
-
+    /**
+     * geter klasyfikacji wart i decyzji, ktory zwraca tablice atrybutow 2 wymiarowa
+     */
+    public Object[][] get_klasyfikacja_wart_dec(){
+    return this.wartosci_atr_i_decyzja;
+    }
     public String getOpcja1(){
         return opcja1;
     }
@@ -239,6 +270,120 @@ public class DaneWejsciowe {
         
     }
      /**
+     * metoda drukujaca tablice w konsoli
+     */
+    public void print_in_console_ATR(){
+        for(int i=0;i<this.wartosci_atr_i_decyzja.length;i++){
+            for(int j=0;j<this.wartosci_atr_i_decyzja[i].length;j++)
+            {
+                if(this.wartosci_atr_i_decyzja[j][i]!=null){
+                System.out.print("["+this.wartosci_atr_i_decyzja[j][i]+"]");
+                }
+                else{
+                System.out.print("[]");
+                }
+            }
+             System.out.println();
+        }
+        
+    }
+   
+        /**
+     * metoda drukujaca tablice stringow klas w konsoli
+     */
+    public void print_in_console_dane_stringi(){
+        int ixx =0;
+        for(int i=1;i<this.dane.length;i++){
+            for(int j=1;j<this.dane[i].length;j++)
+            {
+                if(this.dane[i][j]!=null){
+                System.out.print("["+this.dane[i][j].getNazwa()+" "+ixx+"]");
+                ixx++;
+                }
+                else{
+                System.out.print("[]");
+                }
+            }
+             System.out.println();
+        }
+        
+    }
+         /**
+     * metoda drukujaca tablice klas w konsoli
+     */
+    public void print_in_console_dane_stringi_odwrotnie(){
+        int ixx =0;
+        for(int i=1;i<this.dane[i].length;i++){
+            for(int j=1;j<this.dane.length;j++)
+            {
+                if(this.dane[j][i]!=null){
+                System.out.print("["+this.dane[j][i].getNazwa()+" "+ixx+"]");
+                ixx++;
+                }
+                else{
+                System.out.print("[]");
+                }
+            }
+             System.out.println();
+        }
+        
+    }
+    /**
+     * metoda tworzaca tabelke wartosci atrybutow i decyzji na podstawie danych
+     * 
+     **/
+    public void wartosci_i_decyzje_z_elementow_drzewa(){
+//        this.tablica
+for(int i=0;i<this.dane.length;i++){
+    
+    for(int j=0;j<this.dane[i].length;j++){
+        this.tablica[i][j] = this.dane[i][j].getNazwa();
+    }
+}
+       
+    }
+       /**
+     * metoda drukujaca tablice wartosci i decyzji w konsoli 2.0
+     */
+    public void print_in_console_dane_stringi_20(){
+        int ixx =0;
+        for(int i=0;i<this.wartosci_atr_i_decyzja.length;i++){
+            for(int j=0;j<this.wartosci_atr_i_decyzja[i].length;j++)
+            {
+                if(this.wartosci_atr_i_decyzja[i][j]!=null){
+                System.out.print("["+this.wartosci_atr_i_decyzja[i][j]+" "+ixx+"]");
+                ixx++;
+                }
+                else{
+                System.out.print("[]");
+                }
+            }
+             System.out.println();
+        }
+        
+    }
+         /**
+     * metoda drukujaca tablice wartosci i decyzji w konsoli 2.0
+     */
+    public void print_in_console_dane_stringi_odwrotnie_20(){
+        int ixx =0;
+        for(int i=0;i<this.wartosci_atr_i_decyzja.length;i++){
+            for(int j=0;j<this.wartosci_atr_i_decyzja[i].length;j++)
+            {
+                if(this.wartosci_atr_i_decyzja[j][i]!=null){
+                System.out.print("["+this.wartosci_atr_i_decyzja[j][i]+" "+ixx+"]");
+               
+                }
+                else{
+                System.out.print("["+ixx+"]");
+                }
+                 ixx++;
+            }
+             System.out.println();
+        }
+        
+    }
+     /**
      * metoda zwracajaca klasyfikacje do stringa
      */
     public String print_string_format(){
@@ -275,6 +420,13 @@ public class DaneWejsciowe {
                 }
             }
              System.out.println("");
+    }
+          /**
+     * metoda zwracajaca ilosc atrybutow 
+     */
+    public int ile_atrybutow(){
+
+    return atrybuty.length;
     }
     
         public static String klasyfikacja(String outlook, boolean windy, double humidity) {

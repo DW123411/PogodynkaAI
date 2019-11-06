@@ -100,6 +100,8 @@ public class Wczytywanie {
                 String[][] temp_table;
                 ElementDrzewa[][] temp_table_obj;
                 Atrybut[] temp_table_atrybuty;
+                 Object[][] temp_table_atrybuty_i_decyzje;
+                Object[][]                 temp_table_obj_obj;
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera
         }catch(FileNotFoundException err){
@@ -129,7 +131,9 @@ public class Wczytywanie {
         */
            temp_table= new String[max_wysokosc][max_szerokosc];
            temp_table_obj = new ElementDrzewa[max_wysokosc][max_szerokosc];
+            temp_table_obj_obj = new Object[max_wysokosc][max_szerokosc];
            temp_table_atrybuty= new Atrybut[max_szerokosc-1];
+           temp_table_atrybuty_i_decyzje = new Object[max_szerokosc-1][max_szerokosc-1];
           try {
             scanner = new Scanner(file); //inicjalizacja Scannera na nowo
         }catch(FileNotFoundException err){
@@ -219,11 +223,58 @@ public class Wczytywanie {
         }
          y++; atrybuty = false; pierwszy =true; 
         }
-           scanner.close();
+           // tablica decyzji i atrybutow
+        int max_ilosc_wartosci_atrybutow=0;
+       ArrayList<String> temp_stringow= new ArrayList();
+     int   x =0 ;
+ y=0;
+       for(int i=1;i<temp_table_obj[i].length;i++){
+            for(int j=1;j<temp_table_obj.length;j++)
+            {
+                  if(temp_table_obj[j][i]!=null){
+                      if(temp_stringow.isEmpty()){
+                          temp_stringow.add(temp_table_obj[j][i].getNazwa());
+                        }
+                        else {
+                            String tempstring=temp_table_obj[j][i].getNazwa();
+                            boolean czyjest = false;
+                            for(int k=0;k<temp_stringow.size();k++){
+                                if(tempstring.equals(temp_stringow.get(k)))
+                                {czyjest = true;}
+                            }
+                            if(czyjest==false){temp_stringow.add(tempstring);}
+                        }
+                      
+                    }
+                            
+             
+            }
+            int kkk = 0 ;
+            for(int k=0;k<temp_stringow.size();k++){
+          //  System.out.print(temp_stringow.get(k)+" ---");
+           temp_table_atrybuty_i_decyzje[y][x]=
+            temp_stringow.get(k);
+            y++;
+            kkk=k;
+        }
+            for(int kk=kkk+1;kk<temp_table_atrybuty_i_decyzje.length;kk++){
+         //  temp_table_atrybuty_i_decyzje[kk][x]="x";  UZUPELNIENIE TABELI ZEBY NULLI NIE BYLO WPISANIE "X"
+            y++;
+            }
+        
+        x++;
+        y=0;
+            
+                   //     System.out.println("");
+            temp_stringow= new ArrayList();
+        }
+        
+        scanner.close();
         DaneWejsciowe KS = new DaneWejsciowe();
         KS.set_klasyfikacja_tablica_string(temp_table);
         KS.set_klasyfikacja_tablica(temp_table_obj);
         KS.set_klasyfikacja_tablica_atrybuty( temp_table_atrybuty);
+                KS.set_klasyfikacja_tablica_atrybuty_i_decyzje(temp_table_atrybuty_i_decyzje);
     return KS;
     }
 

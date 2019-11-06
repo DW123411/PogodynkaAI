@@ -121,7 +121,9 @@ public class Okno extends JFrame implements ActionListener
         menu.rekord2.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
+        menu.decyzja_okno.addActionListener(this);
         menu.jpeg.addActionListener(this);
+                menu.show_klasyfikacja.addActionListener(this);
         menu.skalowanie.addActionListener(this);
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
@@ -158,6 +160,19 @@ public class Okno extends JFrame implements ActionListener
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
+            }
+        }
+         else if(zrodlo==menu.decyzja_okno){
+                if(daneWejsciowe!=null){
+           
+                    try{
+                    TableRenderDemo.createAndShowGUI(daneWejsciowe);}
+                    catch(Exception de){
+           JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");                        
+                    }
+                }
+            else{
+           JOptionPane.showMessageDialog(null, "Error.");
             }
         }
 
