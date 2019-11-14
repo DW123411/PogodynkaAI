@@ -28,6 +28,7 @@ public class Okno extends JFrame implements ActionListener
     JMenuItem zapisz;
     JMenuItem zamkn;
     JMenuItem wyczysc2;
+    JMenuItem pokaz;
     JMenuItem zapisz2;
     JMenuItem dodaj;
     JLabel label;
@@ -73,13 +74,17 @@ public class Okno extends JFrame implements ActionListener
         popupMenu.add(zamkn);
 
         popupMenu2 = new JPopupMenu();
-        wyczysc2 = new JMenuItem("Wyczyść tabele");
-        wyczysc2.setActionCommand("Wyczyść tabele");
+        wyczysc2 = new JMenuItem("Ukryj tabele");
+        wyczysc2.setActionCommand("Ukryj tabele");
+       // pokaz = new JMenuItem("Pokaż tabele");
+      //  pokaz.setActionCommand("Pokaż Tabelę");
         zapisz2 = new JMenuItem("Zapisz do pliku");
         zapisz2.setActionCommand("Zapisz do pliku");
         dodaj = new JMenuItem("Dodaj do tabeli ");
         dodaj.setActionCommand("Dodaj do tabeli");
         popupMenu2.add(wyczysc2);
+       // popupMenu2.add(pokaz);
+
         popupMenu2.add(zapisz2);
         popupMenu2.add(dodaj);
 
@@ -121,14 +126,16 @@ public class Okno extends JFrame implements ActionListener
         menu.rekord2.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
-        menu.decyzja_okno.addActionListener(this);
         menu.jpeg.addActionListener(this);
-                menu.show_klasyfikacja.addActionListener(this);
+        menu.pokaz.addActionListener(this);
+
         menu.skalowanie.addActionListener(this);
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
         zapisz2.addActionListener(this);
         wyczysc2.addActionListener(this);
+    //    pokaz.addActionListener(this);
+
         zamkn.addActionListener(this);
         wyswietlanie.zmien_nazweMenuItem.addActionListener(this);
         wyswietlanie.usun_MenuItem.addActionListener(this);
@@ -162,19 +169,6 @@ public class Okno extends JFrame implements ActionListener
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
         }
-         else if(zrodlo==menu.decyzja_okno){
-                if(daneWejsciowe!=null){
-           
-                    try{
-                    TableRenderDemo.createAndShowGUI(daneWejsciowe);}
-                    catch(Exception de){
-           JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");                        
-                    }
-                }
-            else{
-           JOptionPane.showMessageDialog(null, "Error.");
-            }
-        }
 
         else if(zrodlo==menu.zal) {
             boolean spr = otworzPlik();
@@ -205,6 +199,36 @@ public class Okno extends JFrame implements ActionListener
             f.setVisible(true);
             czyPrawyPanel = true;
 
+
+        }
+        else if(zrodlo==menu.pokaz) {
+            p.remove(p2);
+        //    JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
+            Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
+            JTable tabelaWyswietl = tabela.getTabela();
+            tabelaWyswietl.setFillsViewportHeight(true);
+            p2 = new JPanel();
+            p2.add(new JScrollPane(tabelaWyswietl));
+            p2.setBorder(new TitledBorder(
+                    new TitledBorder(
+                            LineBorder.createGrayLineBorder(),
+                            "Dane"),
+                    "",
+                    TitledBorder.RIGHT,
+                    TitledBorder.BOTTOM));
+            p2.setMaximumSize(new Dimension(500, 500));
+            p.add(p2, BorderLayout.EAST);
+            dopasujSieDoZawartosci();
+            f.setVisible(true);
+            czyPrawyPanel = true;
+
+            tabelaWyswietl.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if(SwingUtilities.isRightMouseButton(e)) {
+                        popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                    }
+                }
+            });
         }
          else if(zrodlo==menu.klasyfikacja_z_pliku) {
             boolean spr = otworzPlik();
@@ -299,8 +323,9 @@ public class Okno extends JFrame implements ActionListener
                         boolean close = true;
                         boolean close2 = true;
                         String m = menu.rekord2.getText();
-                        int s = Integer.parseInt(menu.rekord2.getText());
                         try{
+                            int s = Integer.parseInt(menu.rekord2.getText());
+
                             if(s<=0 && close==true) {
 
                                 JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
