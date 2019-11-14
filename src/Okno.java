@@ -127,8 +127,9 @@ public class Okno extends JFrame implements ActionListener
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.jpeg.addActionListener(this);
+        menu.show_klasyfikacja.addActionListener(this);
         menu.pokaz.addActionListener(this);
-
+        menu.decyzja_okno.addActionListener(this);
         menu.skalowanie.addActionListener(this);
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
@@ -149,7 +150,6 @@ public class Okno extends JFrame implements ActionListener
          Object zrodlo = e.getSource();
         if(zrodlo==menu.wyś){
             wyswietlanie.wyczysc();
-
             if(daneWejsciowe!=null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
@@ -157,16 +157,26 @@ public class Okno extends JFrame implements ActionListener
                 lista = new LinkedList();
                 LinkedList listaT = new LinkedList();
                 lista = wyswietlanie.dajWezly(indukcja.getKorzen(),listaT);
-
                 System.out.println();
-
-
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
+            }
+        }
+        else if(zrodlo==menu.decyzja_okno){
+            if(daneWejsciowe!=null){
+
+                try{
+                    TableRenderDemo.createAndShowGUI(daneWejsciowe);}
+                catch(Exception de){
+                    JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error.");
             }
         }
 

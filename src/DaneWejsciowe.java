@@ -6,30 +6,30 @@ public class DaneWejsciowe {
      private ElementDrzewa[][] dane;
      private Atrybut[] atrybuty;
      private ElementDrzewa[][] zbiorUczacy;
-     private ElementDrzewa[][] zbiorTestowy;
-     private String opcja1;
-     private String opcja2;
-      private Object[][] atrybuty_z_wartosciami_i_decyzja;
-          private Object[][] wartosci_atr_i_decyzja;
-     /**
-      *  zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
-      */
+    private ElementDrzewa[][] zbiorTestowy;
+    private String opcja1;
+    private String opcja2;
+    private Object[][] atrybuty_z_wartosciami_i_decyzja;
+    private Object[][] wartosci_atr_i_decyzja;
+    /**
+     *  zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
+     */
     public DaneWejsciowe(){
         this.tablica = new String[50][50];
         this.dane = new ElementDrzewa[50][50];
-         this.atrybuty = new Atrybut[50];
-         this.atrybuty_z_wartosciami_i_decyzja = new String[50][50];
-         this.wartosci_atr_i_decyzja = new Object[50][50];
+        this.atrybuty = new Atrybut[50];
+        this.atrybuty_z_wartosciami_i_decyzja = new String[50][50];
+        this.wartosci_atr_i_decyzja = new Object[50][50];
     }
-     /**
-      *  konstruktor klasy klasyfikacja z ustalonym rozmiarem tablicy danymi wejsciowymi x i y
+    /**
+     *  konstruktor klasy klasyfikacja z ustalonym rozmiarem tablicy danymi wejsciowymi x i y
       */
     public DaneWejsciowe(int y, int x){
         this.tablica = new String[y][x];
-           this.dane = new ElementDrzewa[y][x];
-           this.atrybuty = new Atrybut[x];
-           this.atrybuty_z_wartosciami_i_decyzja = new String[y][x];
-         this.wartosci_atr_i_decyzja = new Object[y][x];
+        this.dane = new ElementDrzewa[y][x];
+        this.atrybuty = new Atrybut[x];
+        this.atrybuty_z_wartosciami_i_decyzja = new String[y][x];
+        this.wartosci_atr_i_decyzja = new Object[y][x];
     }
 
     public DaneWejsciowe(ElementDrzewa[][] dane){

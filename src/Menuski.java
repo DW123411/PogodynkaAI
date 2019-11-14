@@ -34,7 +34,7 @@ import java.awt.event.KeyEvent;
 
 public class Menuski extends JMenuBar
 {
-    public JButton wycz, wyś,skalowanie, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg, pokaz;
+    public JButton wycz, wyś,skalowanie, zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg, pokaz,decyzja_okno;
 public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -138,6 +138,12 @@ public JLabel zbior;
         jpeg.setPreferredSize(new Dimension(30, 30));
         jpeg.setMaximumSize(new Dimension(30, 30));
 
+        decyzja_okno = new JButton("<html></html>");
+        decyzja_okno.setIcon(imgIcon3);
+        decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
+        decyzja_okno.setPreferredSize(new Dimension(30, 30));
+        decyzja_okno.setMaximumSize(new Dimension(30, 30));
+
         zbior = new JLabel("<html>Ilość rekordów</html>");
         zbior.setToolTipText("<html>Ilość rekordów:</html>");
         zbior.setPreferredSize(new Dimension(110, 30));
@@ -184,7 +190,7 @@ public JLabel zbior;
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(pokaz, BorderLayout.WEST);
-
+        add(decyzja_okno, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
 
     }
