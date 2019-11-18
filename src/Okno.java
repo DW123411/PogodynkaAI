@@ -144,11 +144,16 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.wyczysc();
 
             if(daneWejsciowe!=null) {
-                if(Integer.parseInt(menu.rekord2.getText())>0 && Integer.parseInt(menu.rekord2.getText())<daneWejsciowe.get_klasyfikacja().length-1) {
-                    daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                if(!menu.rekord2.getText().equals("")) {
+                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
+                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                    } else {
+                        int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                        daneWejsciowe.podzialZbioru(ilosc / 2);
+                    }
                 }else{
                     int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                    daneWejsciowe.podzialZbioru(ilosc/2);
+                    daneWejsciowe.podzialZbioru(ilosc / 2);
                 }
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
@@ -331,11 +336,16 @@ public class Okno extends JFrame implements ActionListener
                                 PodzialUczTest.losowanieucz(s, daneWejsciowe);
                                 wyswietlanie.wyczysc();
                                 if (daneWejsciowe != null) {
-                                    if(Integer.parseInt(menu.rekord2.getText())>0 && Integer.parseInt(menu.rekord2.getText())<daneWejsciowe.get_klasyfikacja().length-1) {
-                                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                                    if(!menu.rekord2.getText().equals("")) {
+                                        if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
+                                            daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                                        } else {
+                                            int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                                            daneWejsciowe.podzialZbioru(ilosc / 2);
+                                        }
                                     }else{
                                         int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                                        daneWejsciowe.podzialZbioru(ilosc/2);
+                                        daneWejsciowe.podzialZbioru(ilosc / 2);
                                     }
                                     DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
                                     Drzewo<ElementDrzewa> indukcja = dd.indukcja( (ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
@@ -390,11 +400,16 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.wyczysc();
 
             if (daneWejsciowe != null) {
-                if(Integer.parseInt(menu.rekord2.getText())>0 && Integer.parseInt(menu.rekord2.getText())<daneWejsciowe.get_klasyfikacja().length-1) {
-                    daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                if(!menu.rekord2.getText().equals("")) {
+                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
+                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                    } else {
+                        int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                        daneWejsciowe.podzialZbioru(ilosc / 2);
+                    }
                 }else{
                     int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                    daneWejsciowe.podzialZbioru(ilosc/2);
+                    daneWejsciowe.podzialZbioru(ilosc / 2);
                 }
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
