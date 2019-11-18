@@ -124,6 +124,7 @@ public class Okno extends JFrame implements ActionListener
         menu.save.addActionListener(this);
         menu.tree.addActionListener(this);
         menu.rekord2.addActionListener(this);
+        menu.glebokoscrekord.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.jpeg.addActionListener(this);
@@ -388,6 +389,93 @@ public class Okno extends JFrame implements ActionListener
                                     menu.rekord2.setEnabled(false);
                                     menu.rekord2.setText("");
                                     menu.rekord2.setEnabled(true);
+
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
+
+
+            });
+        }
+        else if(zrodlo==menu.glebokoscrekord)
+        {
+
+            menu.glebokoscrekord.addKeyListener(new KeyListener() {
+                public void keyTyped(KeyEvent e) {
+
+                    if(e.getKeyCode() == KeyEvent.VK_UP) {
+                        //String  s = menu.rekord2.getText();
+                        //JOptionPane.showMessageDialog(null, s);
+                        //pobieranie tekstu wpisanego i potwierdzenie go enterem.
+                        //String s = menu.rekord.getText();
+                        //System.out.println(s);
+                    }
+                }
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+
+                    //int s = Integer.parseInt(menu.rekord2.getText());
+
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        boolean close = true;
+                        boolean close2 = true;
+                        String m = menu.glebokoscrekord.getText();
+                        try{
+                            int s = Integer.parseInt(menu.glebokoscrekord.getText());
+
+                            if(s<=0 && close==true) {
+
+                                JOptionPane.showMessageDialog(f, "Głebokość nie może być na minusie lub zerowa");
+                                // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                                    menu.glebokoscrekord.setEnabled(false);
+                                    menu.glebokoscrekord.setText("");
+                                    menu.glebokoscrekord.setEnabled(true);
+                                    close = false;
+                                }
+
+
+
+
+                            }
+                            //int s = Integer.parseInt(menu.rekord2.getText());
+                            else {
+                                System.out.println(menu.rekord2.getText());
+                                System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
+                                //PodzialUczTest.losowanietest(s, daneWejsciowe);
+                                //PodzialUczTest.losowanieucz(s, daneWejsciowe);
+                                wyswietlanie.wyczysc();
+                                if (daneWejsciowe != null) {
+
+                                } else if (daneWejsciowe == null) {
+                                    menu.glebokoscrekord.setEnabled(false);
+                                    menu.glebokoscrekord.setText("");
+                                    menu.glebokoscrekord.setEnabled(true);
+                                    close=false;
+
+                                    //JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
+                                }
+
+                            }
+
+                        }catch(NumberFormatException ee){
+                            if(close==true ) {
+                                JOptionPane.showMessageDialog(f, "Błędnie określona głębokość");
+
+                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                                    menu.glebokoscrekord.setEnabled(false);
+                                    menu.glebokoscrekord.setText("");
+                                    menu.glebokoscrekord.setEnabled(true);
 
                                 }
 

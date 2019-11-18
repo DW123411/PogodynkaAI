@@ -38,8 +38,8 @@ public class Menuski extends JMenuBar
 public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
-
-
+    public JLabel glebokosc;
+    public JTextField glebokoscrekord;
 
     public Menuski()
     {
@@ -174,8 +174,20 @@ public JLabel zbior;
        // rekord.setDocument(new Rekord(4));
         //rekord.setCaretPosition(0);
 
+        glebokosc = new JLabel("<html>Określ głębokość</html>");
+        glebokosc.setToolTipText("<html>Określ głębokość:</html>");
+        glebokosc.setPreferredSize(new Dimension(130, 30));
+        glebokosc.setMaximumSize(new Dimension(130, 30));
+        Border border2 = zbior.getBorder();
+        Border margin2 = new EmptyBorder(10,10,10,10);
+        glebokosc.setBorder(new CompoundBorder(border, margin));
 
-
+        glebokoscrekord = new JTextField("",1);
+        glebokoscrekord.setPreferredSize(new Dimension(50, 20));
+        glebokoscrekord.setMaximumSize(new Dimension(50, 20));
+        glebokoscrekord.setMargin( new Insets(0,5,0,5) );
+        glebokoscrekord.setDocument(new Rekord(1));
+        glebokoscrekord.setCaretPosition(0);
 
         add(wyś, BorderLayout.WEST);
         //add(zal, BorderLayout.WEST);
@@ -192,7 +204,8 @@ public JLabel zbior;
         add(pokaz, BorderLayout.WEST);
         add(decyzja_okno, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
-
+        add(glebokosc, BorderLayout.WEST);
+        add(glebokoscrekord, BorderLayout.WEST);
     }
 
 }
