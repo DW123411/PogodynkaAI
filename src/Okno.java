@@ -144,8 +144,14 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.wyczysc();
 
             if(daneWejsciowe!=null) {
-                DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                if(Integer.parseInt(menu.rekord2.getText())>0 && Integer.parseInt(menu.rekord2.getText())<daneWejsciowe.get_klasyfikacja().length-1) {
+                    daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                }else{
+                    int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                    daneWejsciowe.podzialZbioru(ilosc/2);
+                }
+                DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
                 zapis = indukcja;
                 lista = new LinkedList();
                 LinkedList listaT = new LinkedList();
@@ -325,8 +331,14 @@ public class Okno extends JFrame implements ActionListener
                                 PodzialUczTest.losowanieucz(s, daneWejsciowe);
                                 wyswietlanie.wyczysc();
                                 if (daneWejsciowe != null) {
-                                    DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja( (ElementDrzewa[][]) PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja(), PodzialUczTest.losowanieucz(s, daneWejsciowe).get_klasyfikacja_atrybuty(), null);
+                                    if(Integer.parseInt(menu.rekord2.getText())>0 && Integer.parseInt(menu.rekord2.getText())<daneWejsciowe.get_klasyfikacja().length-1) {
+                                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                                    }else{
+                                        int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                                        daneWejsciowe.podzialZbioru(ilosc/2);
+                                    }
+                                    DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja( (ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
                                     zapis = indukcja;
                                     indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                                     indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
@@ -378,8 +390,14 @@ public class Okno extends JFrame implements ActionListener
             wyswietlanie.wyczysc();
 
             if (daneWejsciowe != null) {
-                DrzewoDecyzyjne dd = new DrzewoDecyzyjne();
-                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                if(Integer.parseInt(menu.rekord2.getText())>0 && Integer.parseInt(menu.rekord2.getText())<daneWejsciowe.get_klasyfikacja().length-1) {
+                    daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                }else{
+                    int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                    daneWejsciowe.podzialZbioru(ilosc/2);
+                }
+                DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
                 zapis = indukcja;
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());

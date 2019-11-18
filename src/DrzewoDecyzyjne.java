@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
 public class DrzewoDecyzyjne {
-    public DrzewoDecyzyjne(){
+    DaneWejsciowe daneWejsciowe;
 
+    public DrzewoDecyzyjne(DaneWejsciowe daneWejsciowe){
+        this.daneWejsciowe = daneWejsciowe;
     }
 
     public Drzewo<ElementDrzewa> indukcja(ElementDrzewa[][] przyklady, Atrybut[] atrybuty, Drzewo<ElementDrzewa> def){
@@ -10,7 +12,7 @@ public class DrzewoDecyzyjne {
         int iloscY = 0;
         int iloscN = 0;
         for(int i=1;i<przyklady.length;i++){
-            if(przyklady[i][przyklady[i].length-1].toString().equals("Yes")){
+            if(przyklady[i][przyklady[i].length-1].toString().equals(daneWejsciowe.getOpcja1())){
                 iloscY++;
             }else{
                 iloscN++;
@@ -22,9 +24,9 @@ public class DrzewoDecyzyjne {
         //jeśli decyzja jest jednorodna (tylko Yes lub tylko No) to zwracamy nowy węzeł z tą decyzją i rodzicem z drzewa przekazanego rekurencyjnie
         }else if(iloscY==(przyklady.length-1) || iloscN==(przyklady.length-1)){
             if(iloscY!=0) {
-                return new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), new Decyzja("Yes")));
+                return new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), new Decyzja(daneWejsciowe.getOpcja1())));
             }else{
-                return new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), new Decyzja("No")));
+                return new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), new Decyzja(daneWejsciowe.getOpcja2())));
             }
         //jeśli tablica atrybutów jest pusta to zwracamy nowe drzewo z decyzją z pozostałych przykładów oraz rodzicem z drzewa przekazanego rekurencyjnie
         }else if(atrybuty.length==0){
@@ -83,16 +85,16 @@ public class DrzewoDecyzyjne {
         int liczYes = 0;
         int liczNo = 0;
         for(int i=1;i<przyklady.length;i++){
-            if(przyklady[i][przyklady[i].length-1].toString().equals("Yes")){
+            if(przyklady[i][przyklady[i].length-1].toString().equals(daneWejsciowe.getOpcja1())){
                 liczYes++;
             }else{
                 liczNo++;
             }
         }
         if(liczYes>=liczNo){
-            return new Decyzja("Yes");
+            return new Decyzja(daneWejsciowe.getOpcja1());
         }else{
-            return new Decyzja("No");
+            return new Decyzja(daneWejsciowe.getOpcja2());
         }
     }
 
@@ -158,7 +160,7 @@ public class DrzewoDecyzyjne {
         int iloscYes = 0;
         int iloscNo = 0;
         for(int i=1;i<przyklady.length;i++){
-            if(przyklady[i][przyklady[i].length-1].toString().equals("Yes")){
+            if(przyklady[i][przyklady[i].length-1].toString().equals(daneWejsciowe.getOpcja1())){
                 iloscYes++;
             }else{
                 iloscNo++;

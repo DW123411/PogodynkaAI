@@ -228,7 +228,7 @@ public class Wczytywanie {
        ArrayList<String> temp_stringow= new ArrayList();
      int   x =0 ;
  y=0;
-       for(int i=1;i<temp_table_obj[i].length;i++){
+       /*for(int i=1;i<temp_table_obj[i].length;i++){
             for(int j=1;j<temp_table_obj.length;j++)
             {
                   if(temp_table_obj[j][i]!=null){
@@ -267,7 +267,7 @@ public class Wczytywanie {
             
                    //     System.out.println("");
             temp_stringow= new ArrayList();
-        }
+        }*/
         
         scanner.close();
         DaneWejsciowe KS = new DaneWejsciowe();

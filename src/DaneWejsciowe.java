@@ -41,7 +41,6 @@ public class DaneWejsciowe {
         }
         atrybuty = tmp;
       //  tablica = null;
-        opcje();
           wartosci_i_decyzje_z_elementow_drzewa();
         this.tablica = get_klasyfikacja_string();  
         this.atrybuty = get_klasyfikacja_atrybuty();
@@ -143,6 +142,8 @@ public class DaneWejsciowe {
     public String getOpcja2(){
         return opcja2;
     }
+    public ElementDrzewa[][] getZbiorUczacy() { return zbiorUczacy; }
+    public ElementDrzewa[][] getZbiorTestowy() { return zbiorTestowy; }
     /**
      *  metoda zwracajaca liczbe elementow w tablicy
      */
@@ -160,77 +161,59 @@ public class DaneWejsciowe {
     }
 
     public void opcje(){
-        int szerokosc = dane[0].length;
+        int szerokosc = dane[0].length-1;
         opcja1 = dane[1][szerokosc].getNazwa();
         for(int i=1;i<dane.length;i++){
-            if(dane[i][szerokosc].getNazwa()!=opcja1){
+            if(!dane[i][szerokosc].getNazwa().equals(opcja1)){
                 opcja2 = dane[i][szerokosc].getNazwa();
                 break;
             }
         }
     }
 
-    public void podzialZbioru(){
-        int iloscWierszy = dane.length-1;
+    public void podzialZbioru(int wielkoscZbioruUczacego){
+        opcje();
+        int iloscWierszy = dane.length;
         int iloscKolumn = dane[0].length;
-        if(iloscWierszy%2==0){
-            zbiorUczacy = new ElementDrzewa[(iloscWierszy/2)+1][iloscKolumn];
-            zbiorTestowy = new ElementDrzewa[(iloscWierszy/2)+1][iloscKolumn];
-        }else{
-            zbiorUczacy = new ElementDrzewa[((int)(iloscWierszy/2))+2][iloscKolumn];
-            zbiorTestowy = new ElementDrzewa[((int)(iloscWierszy/2))+1][iloscKolumn];
-        }
+        zbiorUczacy = new ElementDrzewa[wielkoscZbioruUczacego+1][iloscKolumn];
+        zbiorTestowy = new ElementDrzewa[iloscWierszy-wielkoscZbioruUczacego][iloscKolumn];
         LinkedList<ElementDrzewa[]> opcja1Tmp = new LinkedList<ElementDrzewa[]>();
         LinkedList<ElementDrzewa[]> opcja2Tmp = new LinkedList<ElementDrzewa[]>();
-        for(int i=0;i<dane.length;i++){
-            if(dane[i][iloscKolumn-1].getNazwa()==opcja1){
+        for(int i=0;i<zbiorUczacy[0].length;i++){
+            zbiorUczacy[0][i] = dane[0][i];
+            zbiorTestowy[0][i] = dane[0][i];
+        }
+        for(int i=1;i<dane.length;i++){
+            if(dane[i][iloscKolumn-1].getNazwa().equals(opcja1)){
                 opcja1Tmp.add(dane[i]);
             }else{
                 opcja2Tmp.add(dane[i]);
             }
         }
         int opcja1TmpWielkosc = opcja1Tmp.size();
-        int opcja2TmpWielkosc = opcja2Tmp.size();
-        while(czyZbiorPelny(zbiorUczacy)){
-            int i = 0;
-            if(Math.random()<0.5 && !opcja1Tmp.isEmpty() && (opcja1TmpWielkosc-opcja1Tmp.size())<(zbiorUczacy.length/2)){
+        int i = 1;
+        while(i<zbiorUczacy.length){
+            if(!opcja1Tmp.isEmpty() && (opcja1TmpWielkosc-opcja1Tmp.size())<(wielkoscZbioruUczacego/2)){
                 int los = (int)(Math.random()*opcja1Tmp.size());
-                if(sprawdzZbior(zbiorUczacy,opcja1Tmp.get(los))){
-                    zbiorUczacy[i++] = opcja1Tmp.get(los);
-                    opcja1Tmp.remove(los);
-                }
+                zbiorUczacy[i++] = opcja1Tmp.get(los);
+                opcja1Tmp.remove(los);
             }else if(!opcja2Tmp.isEmpty()){
                 int los = (int)(Math.random()*opcja2Tmp.size());
-                if(sprawdzZbior(zbiorUczacy,opcja2Tmp.get(los))){
-                    zbiorUczacy[i++] = opcja2Tmp.get(los);
-                    opcja2Tmp.remove(los);
-                }
+                zbiorUczacy[i++] = opcja2Tmp.get(los);
+                opcja2Tmp.remove(los);
             }
         }
-    }
-
-    public boolean sprawdzZbior(ElementDrzewa[][] zbior, ElementDrzewa[] wiersz){
-        int tmp = 0;
-        for(int i=0;i<zbior.length;i++){
-            for(int j=0;j<zbior[i].length;j++){
-                if(zbior[i][j].getNazwa()==wiersz[j].getNazwa()){
-                    tmp = 0;
-                }
-            }
-            if(tmp==zbior[i].length){
-                return false;
+        for(int j=1;j<zbiorTestowy.length;j++){
+            if(!opcja1Tmp.isEmpty()){
+                ElementDrzewa[] element = opcja1Tmp.getFirst();
+                zbiorTestowy[j] = element;
+                opcja1Tmp.remove(element);
+            }else{
+                ElementDrzewa[] element = opcja2Tmp.getFirst();
+                zbiorTestowy[j] = element;
+                opcja2Tmp.remove(element);
             }
         }
-        return true;
-    }
-
-    public boolean czyZbiorPelny(ElementDrzewa[][] zbior){
-        for(int i=0;i<zbior.length;i++){
-            if(zbior[i][0]==null){
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
