@@ -30,6 +30,7 @@ public class Okno extends JFrame implements ActionListener
     JMenuItem wyczysc2;
     JMenuItem zapisz2;
     JMenuItem dodaj;
+    JMenuItem pokaz;
     JLabel label;
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
@@ -73,13 +74,14 @@ public class Okno extends JFrame implements ActionListener
         popupMenu.add(zamkn);
 
         popupMenu2 = new JPopupMenu();
-        wyczysc2 = new JMenuItem("Wyczyść tabele");
-        wyczysc2.setActionCommand("Wyczyść tabele");
+        wyczysc2 = new JMenuItem("Ukryj Tabelę");
+        wyczysc2.setActionCommand("Ukryj tabele");
         zapisz2 = new JMenuItem("Zapisz do pliku");
         zapisz2.setActionCommand("Zapisz do pliku");
         dodaj = new JMenuItem("Dodaj do tabeli ");
         dodaj.setActionCommand("Dodaj do tabeli");
         popupMenu2.add(wyczysc2);
+       // popupMenu2.add(pokaz);
         popupMenu2.add(zapisz2);
         popupMenu2.add(dodaj);
 
@@ -91,12 +93,12 @@ public class Okno extends JFrame implements ActionListener
             }
         });
 
-       
+
 
 
 
         //przypisanie obsługi akcji
-        ustawNasluchZdarzen();        
+        ustawNasluchZdarzen();
         dopasujSieDoZawartosci();
         //wyswietlenie naszej ramki
 
@@ -123,9 +125,10 @@ public class Okno extends JFrame implements ActionListener
         menu.show_klasyfikacja.addActionListener(this);
         menu.decyzja_okno.addActionListener(this);
         menu.jpeg.addActionListener(this);
-                menu.show_klasyfikacja.addActionListener(this);
+        menu.show_klasyfikacja.addActionListener(this);
+        menu.glebokoscrekord.addActionListener(this);
         menu.skalowanie.addActionListener(this);
-		 menu.accuracy.addActionListener(this);
+        menu.pokaz.addActionListener(this);
         wyczysc.addActionListener(this);
         zapisz.addActionListener(this);
         zapisz2.addActionListener(this);
@@ -140,7 +143,7 @@ public class Okno extends JFrame implements ActionListener
 
     {
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
-         Object zrodlo = e.getSource();
+        Object zrodlo = e.getSource();
         if(zrodlo==menu.wyś){
             wyswietlanie.wyczysc();
 
@@ -174,23 +177,101 @@ public class Okno extends JFrame implements ActionListener
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
         }
-		   else if (zrodlo==menu.accuracy){
-            
-            new dokladnosc();
-            
-        }
-         else if(zrodlo==menu.decyzja_okno){
-                if(daneWejsciowe!=null){
-           
-                    try{
+        else if(zrodlo==menu.decyzja_okno){
+            if(daneWejsciowe!=null){
+
+                try{
                     TableRenderDemo.createAndShowGUI(daneWejsciowe);}
-                    catch(Exception de){
-           JOptionPane.showMessageDialog(null, "Error");                        
+                catch(Exception de){
+                    JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error.");
+            }
+        }
+        else if(zrodlo==menu.glebokoscrekord) {
+
+            menu.glebokoscrekord.addKeyListener(new KeyListener() {
+                public void keyTyped(KeyEvent e) {
+
+                    if (e.getKeyCode() == KeyEvent.VK_UP) {
+                        //String  s = menu.rekord2.getText();
+                        //JOptionPane.showMessageDialog(null, s);
+                        //pobieranie tekstu wpisanego i potwierdzenie go enterem.
+                        //String s = menu.rekord.getText();
+                        //System.out.println(s);
                     }
                 }
-            else{
-           JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");
-            }
+
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+
+                    //int s = Integer.parseInt(menu.rekord2.getText());
+
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        boolean close = true;
+                        boolean close2 = true;
+                        String m = menu.glebokoscrekord.getText();
+                        try {
+                            int s = Integer.parseInt(menu.glebokoscrekord.getText());
+
+                            if (s <= 0 && close == true) {
+
+                                JOptionPane.showMessageDialog(f, "Głebokość nie może być na minusie lub zerowa");
+                                // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                                    menu.glebokoscrekord.setEnabled(false);
+                                    menu.glebokoscrekord.setText("");
+                                    menu.glebokoscrekord.setEnabled(true);
+                                    close = false;
+                                }
+
+
+                            }
+                            //int s = Integer.parseInt(menu.rekord2.getText());
+                            else {
+                                System.out.println(menu.rekord2.getText());
+                                System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
+                                //PodzialUczTest.losowanietest(s, daneWejsciowe);
+                                //PodzialUczTest.losowanieucz(s, daneWejsciowe);
+                                wyswietlanie.wyczysc();
+                                if (daneWejsciowe != null) {
+
+                                } else if (daneWejsciowe == null) {
+                                    menu.glebokoscrekord.setEnabled(false);
+                                    menu.glebokoscrekord.setText("");
+                                    menu.glebokoscrekord.setEnabled(true);
+                                    close = false;
+
+                                    //JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
+                                }
+
+                            }
+
+                        } catch (NumberFormatException ee) {
+                            if (close == true) {
+                                JOptionPane.showMessageDialog(f, "Błędnie określona głębokość");
+
+                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                                    menu.glebokoscrekord.setEnabled(false);
+                                    menu.glebokoscrekord.setText("");
+                                    menu.glebokoscrekord.setEnabled(true);
+
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
+            });
         }
 
         else if(zrodlo==menu.zal) {
@@ -223,37 +304,37 @@ public class Okno extends JFrame implements ActionListener
             czyPrawyPanel = true;
 
         }
-         else if(zrodlo==menu.klasyfikacja_z_pliku) {
+        else if(zrodlo==menu.klasyfikacja_z_pliku) {
             boolean spr = otworzPlik();
             if (spr) {
                 p.remove(p2);
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
-                 JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
-                 Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
-                 JTable tabelaWyswietl = tabela.getTabela();
-                 tabelaWyswietl.setFillsViewportHeight(true);
-                 p2 = new JPanel();
-                 p2.add(new JScrollPane(tabelaWyswietl));
-                 p2.setBorder(new TitledBorder(
-                         new TitledBorder(
-                         LineBorder.createGrayLineBorder(),
-                         "Dane"),
-                         "",
-                         TitledBorder.RIGHT,
-                         TitledBorder.BOTTOM));
-                 p2.setMaximumSize(new Dimension(500, 500));
-                 p.add(p2, BorderLayout.EAST);
-                 dopasujSieDoZawartosci();
-                 f.setVisible(true);
-                 czyPrawyPanel = true;
-                 
-                  tabelaWyswietl.addMouseListener(new MouseAdapter() {
-                      public void mouseReleased(MouseEvent e) {
-                if(SwingUtilities.isRightMouseButton(e)) {
-                    popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
-                }
-            }
-        });
+                JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
+                Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
+                JTable tabelaWyswietl = tabela.getTabela();
+                tabelaWyswietl.setFillsViewportHeight(true);
+                p2 = new JPanel();
+                p2.add(new JScrollPane(tabelaWyswietl));
+                p2.setBorder(new TitledBorder(
+                        new TitledBorder(
+                                LineBorder.createGrayLineBorder(),
+                                "Dane"),
+                        "",
+                        TitledBorder.RIGHT,
+                        TitledBorder.BOTTOM));
+                p2.setMaximumSize(new Dimension(500, 500));
+                p.add(p2, BorderLayout.EAST);
+                dopasujSieDoZawartosci();
+                f.setVisible(true);
+                czyPrawyPanel = true;
+
+                tabelaWyswietl.addMouseListener(new MouseAdapter() {
+                    public void mouseReleased(MouseEvent e) {
+                        if(SwingUtilities.isRightMouseButton(e)) {
+                            popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                        }
+                    }
+                });
             }
             else if (!spr) {
                 //JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
@@ -266,11 +347,39 @@ public class Okno extends JFrame implements ActionListener
            else{wyswietlanie.show_klasyfikacja(daneWejsciowe);
             }
         }*/
-         else if (zrodlo==menu.wycz||zrodlo==wyczysc){
+        else if (zrodlo==menu.wycz||zrodlo==wyczysc){
             wyswietlanie.wyczysc();
 
         }
-       
+        else if(zrodlo==menu.pokaz) {
+            p.remove(p2);
+            //    JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
+            Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
+            JTable tabelaWyswietl = tabela.getTabela();
+            tabelaWyswietl.setFillsViewportHeight(true);
+            p2 = new JPanel();
+            p2.add(new JScrollPane(tabelaWyswietl));
+            p2.setBorder(new TitledBorder(
+                    new TitledBorder(
+                            LineBorder.createGrayLineBorder(),
+                            "Dane"),
+                    "",
+                    TitledBorder.RIGHT,
+                    TitledBorder.BOTTOM));
+            p2.setMaximumSize(new Dimension(500, 500));
+            p.add(p2, BorderLayout.EAST);
+            dopasujSieDoZawartosci();
+            f.setVisible(true);
+            czyPrawyPanel = true;
+
+            tabelaWyswietl.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                    }
+                }
+            });
+        }
         else if (zrodlo==menu.wycz){
             wyswietlanie.wyczysc();
 
@@ -306,7 +415,7 @@ public class Okno extends JFrame implements ActionListener
                 }
                 public void keyReleased(java.awt.event.KeyEvent evt) {
 
-                        //int s = Integer.parseInt(menu.rekord2.getText());
+                    //int s = Integer.parseInt(menu.rekord2.getText());
 
                 }
 
@@ -456,10 +565,10 @@ public class Okno extends JFrame implements ActionListener
 
         FileNameExtensionFilter filtrCSV = new FileNameExtensionFilter("Pliki CSV", "csv");
         FileNameExtensionFilter filtr = new FileNameExtensionFilter("Pliki TXT", "txt");
-         otworz.addChoosableFileFilter(filtr);
-         otworz.addChoosableFileFilter(filtrCSV);
+        otworz.addChoosableFileFilter(filtr);
+        otworz.addChoosableFileFilter(filtrCSV);
         otworz.setFileFilter(filtrCSV);
-      
+
         otworz.setAcceptAllFileFilterUsed(false);
         int wynik = otworz.showOpenDialog(this);
         boolean check = false;
@@ -485,10 +594,10 @@ public class Okno extends JFrame implements ActionListener
         {
             sciezkaDoPliku = zapisz.getSelectedFile().getAbsolutePath();
             try {
-            if(zapisz.getFileFilter() == filtrCSV)
-                Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku,"csv");
-            else if(zapisz.getFileFilter()== filtr)
-                Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku,"txt");
+                if(zapisz.getFileFilter() == filtrCSV)
+                    Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku,"csv");
+                else if(zapisz.getFileFilter()== filtr)
+                    Zapis.zapisDoPlkiu((ElementDrzewa[][])daneWejsciowe.get_klasyfikacja(),sciezkaDoPliku,"txt");
 
             }catch (IOException e1) {
                 e1.printStackTrace();
@@ -517,78 +626,5 @@ public class Okno extends JFrame implements ActionListener
 
     public void setDaneWejsciowe(DaneWejsciowe daneWejsciowe){
         this.daneWejsciowe = daneWejsciowe;
-    }
-	
-	
-    private class dokladnosc extends JFrame  implements ActionListener{
-
-        private JLabel label1;    private JLabel label2;    private JButton buton;
-        @Override
-        public void actionPerformed(ActionEvent e){
-            Object zrodlo = e.getSource();
-
-            if(zrodlo == buton){
-                dispose();
-                
-            }
-        }
-
-        private void dopasujSieDoZawartosci()
-        {
-            //dostosowanie okna do zawartości
-            pack();   
-            //wyśrodkowanie ramki
-            setLocationRelativeTo(null);           
-        }
-
-        public dokladnosc(){
-            buton = new JButton("OK");
-            label1 = new JLabel("Dokładność ucząca : ");
-            label2 = new JLabel("Dokładność testująca : ");
-            setSize( 250, 250);  // ustawienie rozmiarow okna
-            setLocation(500,500);
-            // Pozyskanie powierzchni zawartości
-            Container  contents = getContentPane();     
-            // Utworzenie własnego panela z powierzchnią do rysowania figur
-            // i dodanie go do powierzchni (zawartości) okna
-            //setLayout(new GridLayout( 10, 50));
-            setLayout( null );
-            label1.setSize(200,25);  label1.setLocation(10,50);
-
-            label2.setSize(200,25);  label2.setLocation(10,75);
-
-            buton.setSize(100,25);  buton.setLocation(50,100);
-            add(label1);
-             add(label2);
-            buton.addActionListener(this);
-
-            add(buton);
-
-            setVisible(true);
-           
-        }
-
-        /**
-         * metoda ustawia napis labela z atrybutem wejsciowym 
-         * 1 dla pierwszego(uczaca dokladnosc) 
-         * 2 dla drugiego (tesutjaca dokladnosc) 
-         */
-        public void setlabel(int l, String a){
-
-            if(l==1){
-                //dokladnosc uczaca
-                this.label1= new JLabel(a);
-            }
-            if(l==2){
-                //dokladnosc testujaca 
-                this.label2= new JLabel(a);
-            }
-
-        }
-        
-        public void popup(){
-            
-        }
-
     }
 }

@@ -5,17 +5,13 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
-import  java.io.FileWriter;
-
-
-
 
 
 public class Zapis {
 
-    public static void zapisDoPlkiu(ElementDrzewa tablica[][],String sciezka,String plik) throws FileNotFoundException {
+    public static void zapisDoPlkiu(ElementDrzewa tablica[][], String sciezka, String plik) throws FileNotFoundException {
 
-       String save;
+        String save;
         try {
             PrintWriter zapis = new PrintWriter(sciezka + "." + plik);
             //zapis.print("Day,");
@@ -33,46 +29,46 @@ public class Zapis {
                     //         }
 
                 }
-               zapis.println();
+                zapis.println();
             }
             zapis.close();
 
             File nf = new File(sciezka + "." + plik);
-            BufferedWriter FileWriter = new BufferedWriter(new FileWriter(sciezka+"1."+plik));
-            try{
+            BufferedWriter FileWriter = new BufferedWriter(new FileWriter(sciezka + "1." + plik));
+            try {
                 Scanner scanner = new Scanner(nf);
-                while(scanner.hasNextLine()){
+                while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
-                    if(line.endsWith(",")){
+                    if (line.endsWith(",")) {
                         System.out.println(line);
-                        System.out.println(line.substring(0,line.length()-1));
+                        System.out.println(line.substring(0, line.length() - 1));
 
-                       FileWriter.write(line.substring(0,line.length()-1));
-                       FileWriter.newLine();
+                        FileWriter.write(line.substring(0, line.length() - 1));
+                        FileWriter.newLine();
                     }
 
                 }
                 FileWriter.close();
-                File f1 = new File(sciezka+"."+plik);
-               File f2 = new File(sciezka+"1."+plik);
-               boolean a =f1.delete();
-              boolean b = f2.renameTo(f1);
+                File f1 = new File(sciezka + "." + plik);
+                File f2 = new File(sciezka + "1." + plik);
+                boolean a = f1.delete();
+                boolean b = f2.renameTo(f1);
             } catch (IOException e) {
                 System.out.println("Problem z dostępem do pliku");
             }
         } catch (IOException ex) {
             System.out.println("Problem z dostępem do pliku");
 
-            }
+        }
 
     }
 
-    public static void  zapiszDrzewoDoPliku(String sciezka,Drzewo<ElementDrzewa> ed) throws IOException{
-        ObjectOutputStream pl=null;
-        FileWriter writer = new FileWriter(sciezka+".txt");
+    public static void zapiszDrzewoDoPliku(String sciezka, Drzewo<ElementDrzewa> ed) throws IOException {
+        ObjectOutputStream pl = null;
+        FileWriter writer = new FileWriter(sciezka + ".txt");
         BufferedWriter bw = new BufferedWriter(writer);
 
-        LinkedList<Wezel<ElementDrzewa>> test = ed.preOrderToList(ed.getKorzen(),new LinkedList<Wezel<ElementDrzewa>>());
+        LinkedList<Wezel<ElementDrzewa>> test = ed.preOrderToList(ed.getKorzen(), new LinkedList<Wezel<ElementDrzewa>>());
         try {
             //int iterowanie = 0;
             for (Wezel<ElementDrzewa> element : test) {
@@ -114,14 +110,12 @@ public class Zapis {
 
             }
             bw.close();
-        }
-        catch (IOException e1) {
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
 
 
     }
-
 
 
     public static void save_jpeg() throws IOException {
@@ -130,10 +124,10 @@ public class Zapis {
 
         JFileChooser jpegSave = new JFileChooser();
         jpegSave.setAcceptAllFileFilterUsed(false);
-        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki JPEG","jpeg"));
-        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki JPG","jpg"));
-        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki PNG","png"));
-        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki bitmapy","bmp"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki JPEG", "jpeg"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki JPG", "jpg"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki PNG", "png"));
+        jpegSave.addChoosableFileFilter(new FileNameExtensionFilter("Pliki bitmapy", "bmp"));
 
 
         jpegSave.setFileFilter(jpegSave.getChoosableFileFilters()[0]);
@@ -145,24 +139,24 @@ public class Zapis {
             // save to file
 
             try {
-                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[0]){
-                    outputfile=new File(path+".jpeg");
+                if (jpegSave.getFileFilter() == jpegSave.getChoosableFileFilters()[0]) {
+                    outputfile = new File(path + ".jpeg");
                     ImageIO.write(okno, "jpeg", outputfile);
-                    }
-                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[1]){
-                    outputfile=new File(path+".jpg");
+                }
+                if (jpegSave.getFileFilter() == jpegSave.getChoosableFileFilters()[1]) {
+                    outputfile = new File(path + ".jpg");
                     ImageIO.write(okno, "jpg", outputfile);
 
                 }
 
-                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[2]){
-                    outputfile=new File(path+".png");
+                if (jpegSave.getFileFilter() == jpegSave.getChoosableFileFilters()[2]) {
+                    outputfile = new File(path + ".png");
                     ImageIO.write(okno, "png", outputfile);
 
                 }
 
-                if(jpegSave.getFileFilter()== jpegSave.getChoosableFileFilters()[3]){
-                    outputfile=new File(path+".bmp");
+                if (jpegSave.getFileFilter() == jpegSave.getChoosableFileFilters()[3]) {
+                    outputfile = new File(path + ".bmp");
                     ImageIO.write(okno, "bmp", outputfile);
 
                 }
@@ -171,6 +165,7 @@ public class Zapis {
                 e1.printStackTrace();
             }
         }
-    }}
+    }
+}
 
 

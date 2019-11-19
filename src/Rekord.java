@@ -1,8 +1,6 @@
-import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-import java.util.regex.Pattern;
 
 
 public final class Rekord extends PlainDocument {
@@ -26,7 +24,6 @@ public final class Rekord extends PlainDocument {
 
 
     }
-
 
 
 }

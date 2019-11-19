@@ -1,23 +1,23 @@
-public class Decyzja implements ElementDrzewa{
+public class Decyzja implements ElementDrzewa {
     private String nazwa;
 
-    public Decyzja(){
+    public Decyzja() {
         nazwa = "";
     }
 
-    public Decyzja(String nazwa){
+    public Decyzja(String nazwa) {
         this.nazwa = nazwa;
     }
 
-    public void setNazwa(String nazwa){
-        this.nazwa = nazwa;
-    }
-
-    public String getNazwa(){
+    public String getNazwa() {
         return nazwa;
     }
 
-    public String toString(){
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
+    }
+
+    public String toString() {
         return nazwa;
     }
 }

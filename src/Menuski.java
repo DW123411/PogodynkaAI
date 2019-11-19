@@ -1,52 +1,20 @@
 import javax.swing.*;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-
-import javax.swing.Box;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.border.*;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.PlainDocument;
-import javax.swing.text.TextAction;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.*;
 
-public class Menuski extends JMenuBar
-{
-    public JButton wycz, wyś,skalowanie,decyzja_okno,  zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg , accuracy;
-public JLabel zbior;
+public class Menuski extends JMenuBar {
+    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg, pokaz, decyzja_okno;
+    public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
+    public JLabel glebokosc;
+    public JTextField glebokoscrekord;
 
-
-
-    public Menuski()
-    {
+    public Menuski() {
         //JPanel rozklad = new JPanel();
 
 
-        setBorder(new TitledBorder (
+        setBorder(new TitledBorder(
                 new TitledBorder(
                         LineBorder.createGrayLineBorder(),
                         "Menu"),
@@ -64,10 +32,7 @@ public JLabel zbior;
         ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
         ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
         ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
-            ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("icons/view.png"));
-             ImageIcon imgIcon11 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
-            
-            
+
         cred = new JButton("<html></html>");
         cred.setIcon(imgIcon);
         cred.setToolTipText("<html>O Programie</html>");
@@ -86,11 +51,11 @@ public JLabel zbior;
         skalowanie.setPreferredSize(new Dimension(30, 30));
         skalowanie.setMaximumSize(new Dimension(30, 30));
 
-        accuracy = new JButton("<html></html>");
-        accuracy.setIcon(imgIcon11);
-        accuracy.setToolTipText("<html>Dokładność.</html>");
-        accuracy.setPreferredSize(new Dimension(30, 30));
-        accuracy.setMaximumSize(new Dimension(30, 30));
+        pokaz = new JButton("<html>Pokaz Tabele</html>");
+        pokaz.setIcon(imgIcon9);
+        pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
+        pokaz.setPreferredSize(new Dimension(30, 30));
+        pokaz.setMaximumSize(new Dimension(30, 30));
 
 
         tree = new JButton("<html></html>");
@@ -141,42 +106,55 @@ public JLabel zbior;
         jpeg.setPreferredSize(new Dimension(30, 30));
         jpeg.setMaximumSize(new Dimension(30, 30));
 
+        decyzja_okno = new JButton("<html></html>");
+        decyzja_okno.setIcon(imgIcon3);
+        decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
+        decyzja_okno.setPreferredSize(new Dimension(30, 30));
+        decyzja_okno.setMaximumSize(new Dimension(30, 30));
+
         zbior = new JLabel("<html>Ilość rekordów</html>");
         zbior.setToolTipText("<html>Ilość rekordów:</html>");
         zbior.setPreferredSize(new Dimension(110, 30));
         zbior.setMaximumSize(new Dimension(110, 30));
         Border border = zbior.getBorder();
-        Border margin = new EmptyBorder(10,10,10,10);
+        Border margin = new EmptyBorder(10, 10, 10, 10);
         zbior.setBorder(new CompoundBorder(border, margin));
 
-decyzja_okno = new JButton("<html></html>");
-        decyzja_okno.setIcon(imgIcon1);
-        decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
-        decyzja_okno.setPreferredSize(new Dimension(30, 30));
-        decyzja_okno.setMaximumSize(new Dimension(30, 30));
 
         int TA_ROWS = 1;
         int TA_COLS = 1;
 
-        rekord2 = new JTextField("",1);
+        rekord2 = new JTextField("", 1);
         rekord2.setPreferredSize(new Dimension(50, 20));
         rekord2.setMaximumSize(new Dimension(50, 20));
-        rekord2.setMargin( new Insets(0,5,0,5) );
+        rekord2.setMargin(new Insets(0, 5, 0, 5));
         rekord2.setDocument(new Rekord(4));
         rekord2.setCaretPosition(0);
 
 
         //rekord = new JTextArea(TA_ROWS, TA_COLS);
-       // rekord.setPreferredSize(new Dimension(50, 20));
+        // rekord.setPreferredSize(new Dimension(50, 20));
         //rekord.setMaximumSize(new Dimension(50, 20));
-       // rekord.setMargin( new Insets(0,10,0,10) );
-       // rekord.setWrapStyleWord(true);
-       // rekord.setLineWrap(true);
-       // rekord.setDocument(new Rekord(4));
+        // rekord.setMargin( new Insets(0,10,0,10) );
+        // rekord.setWrapStyleWord(true);
+        // rekord.setLineWrap(true);
+        // rekord.setDocument(new Rekord(4));
         //rekord.setCaretPosition(0);
 
+        glebokosc = new JLabel("<html>Określ głębokość</html>");
+        glebokosc.setToolTipText("<html>Określ głębokość:</html>");
+        glebokosc.setPreferredSize(new Dimension(130, 30));
+        glebokosc.setMaximumSize(new Dimension(130, 30));
+        Border border2 = zbior.getBorder();
+        Border margin2 = new EmptyBorder(10, 10, 10, 10);
+        glebokosc.setBorder(new CompoundBorder(border, margin));
 
-
+        glebokoscrekord = new JTextField("", 1);
+        glebokoscrekord.setPreferredSize(new Dimension(50, 20));
+        glebokoscrekord.setMaximumSize(new Dimension(50, 20));
+        glebokoscrekord.setMargin(new Insets(0, 5, 0, 5));
+        glebokoscrekord.setDocument(new Rekord(1));
+        glebokoscrekord.setCaretPosition(0);
 
         add(wyś, BorderLayout.WEST);
         //add(zal, BorderLayout.WEST);
@@ -190,9 +168,11 @@ decyzja_okno = new JButton("<html></html>");
         add(rekord2, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
-        add(zam, BorderLayout.WEST);
+        add(pokaz, BorderLayout.WEST);
         add(decyzja_okno, BorderLayout.WEST);
-            add(accuracy, BorderLayout.WEST);
+        add(zam, BorderLayout.WEST);
+        add(glebokosc, BorderLayout.WEST);
+        add(glebokoscrekord, BorderLayout.WEST);
     }
 
 }
