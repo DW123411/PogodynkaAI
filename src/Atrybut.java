@@ -1,3 +1,5 @@
+package src;
+
 public class Atrybut implements ElementDrzewa {
     private String nazwa;
     private double entropia;

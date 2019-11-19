@@ -1,3 +1,5 @@
+package src;
+
 import java.util.LinkedList;
 
 public class Drzewo<T> {

@@ -1,3 +1,5 @@
+package src;
+
 public interface ElementDrzewa {
     public String getNazwa();
 

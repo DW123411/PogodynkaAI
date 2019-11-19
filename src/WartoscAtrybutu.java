@@ -1,3 +1,5 @@
+package src;
+
 public class WartoscAtrybutu implements ElementDrzewa {
     private String nazwa;
 

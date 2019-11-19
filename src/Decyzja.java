@@ -1,3 +1,5 @@
+package src;
+
 public class Decyzja implements ElementDrzewa {
     private String nazwa;
 
