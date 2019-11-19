@@ -184,6 +184,10 @@ public class DaneWejsciowe {
         return zbiorTestowy;
     }
 
+    public void setZbiorUczacy(ElementDrzewa[][] zbiorUczacy) { this.zbiorUczacy = zbiorUczacy; }
+
+    public void setZbiorTestowy(ElementDrzewa[][] zbiorTestowy) { this.zbiorTestowy = zbiorTestowy; }
+
     /**
      * metoda zwracajaca liczbe elementow w tablicy
      */
@@ -349,6 +353,9 @@ public class DaneWejsciowe {
      **/
     public void wartosci_i_decyzje_z_elementow_drzewa() {
 //        this.tablica
+        if(this.tablica == null){
+            this.tablica = new String[this.dane.length][this.dane[0].length];
+        }
         for (int i = 0; i < this.dane.length; i++) {
 
             for (int j = 0; j < this.dane[i].length; j++) {
