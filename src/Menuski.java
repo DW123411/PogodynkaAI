@@ -34,7 +34,7 @@ import java.awt.event.KeyEvent;
 
 public class Menuski extends JMenuBar
 {
-    public JButton wycz, wyś,skalowanie,decyzja_okno,  zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg ;
+    public JButton wycz, wyś,skalowanie,decyzja_okno,  zam, zal, cred, save,tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg , accuracy;
 public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -65,6 +65,7 @@ public JLabel zbior;
         ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
         ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
             ImageIcon imgIcon1 = new ImageIcon(getClass().getResource("icons/view.png"));
+             ImageIcon imgIcon11 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
             
             
         cred = new JButton("<html></html>");
@@ -85,6 +86,11 @@ public JLabel zbior;
         skalowanie.setPreferredSize(new Dimension(30, 30));
         skalowanie.setMaximumSize(new Dimension(30, 30));
 
+        accuracy = new JButton("<html></html>");
+        accuracy.setIcon(imgIcon11);
+        accuracy.setToolTipText("<html>Dokładność.</html>");
+        accuracy.setPreferredSize(new Dimension(30, 30));
+        accuracy.setMaximumSize(new Dimension(30, 30));
 
 
         tree = new JButton("<html></html>");
@@ -186,6 +192,7 @@ decyzja_okno = new JButton("<html></html>");
         add(cred, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
         add(decyzja_okno, BorderLayout.WEST);
+            add(accuracy, BorderLayout.WEST);
     }
 
 }
