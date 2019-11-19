@@ -1,5 +1,3 @@
-package src;
-
 import javax.swing.*;
 
 public class PrzyciskMenu extends JMenuItem {

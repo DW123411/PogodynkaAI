@@ -1,5 +1,3 @@
-package src;
-
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
