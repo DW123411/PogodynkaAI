@@ -868,7 +868,8 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         zmien_nazweMenuItem.addActionListener(this);
         usun_MenuItem = new PrzyciskMenu("Usuń");
         usun_MenuItem.addActionListener(this);
-
+        dajDroge= new PrzyciskDrzewo("Droga");
+        dajDroge.addActionListener(this);
         usun_MenuItem.setForeground(Color.red);
         popupMenu.add(zmien_nazweMenuItem);
         popupMenu.addSeparator();
@@ -927,6 +928,12 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                     button.setBackground(Color.green);
                 } else {
                     button.setBackground(Color.cyan);
+                    popupMenu = new JPopupMenu("Title");
+                    dajDroge.setWezel((Wezel)w);
+                    popupMenu.add(dajDroge);
+                    button.setComponentPopupMenu(popupMenu);
+                    button.setBackground(Color.cyan);
+                    button.setWezel(w);
                 }
                 button.setForeground(Color.white);
                 //wezel.getDane()).getEntropia()).length() * 6 -- w prawo lub lewo
