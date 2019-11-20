@@ -682,9 +682,10 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
 
     public void credits() {
+        ImageIcon icon = new ImageIcon(getClass().getResource("icons/boink.png"));
 
         JOptionPane.showMessageDialog(null, "Program napisany w ramach Projektu Zespołowego \n" +
-                        "Wersja : 0.2  Buffalo \n" +
+                        "Wersja : 0.420  MMZ \n" +
                         "Autorzy : \n" +
                         "Główni programiści : \n" +
                         "Dominik Woźniak \n" +
@@ -697,7 +698,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                         "Projektant interfejsu : \n" +
                         "Adam Witasiak \n" +
                         "2019, PWSZ KALISZ ",
-                "O Programie", JOptionPane.INFORMATION_MESSAGE);
+                "O Programie", JOptionPane.INFORMATION_MESSAGE, icon);
         //wyczysc();
         // Graphics2D g2 = (Graphics2D) okno.getGraphics();
         //g2.setStroke(new BasicStroke(2));
