@@ -244,6 +244,16 @@ public class DaneWejsciowe {
                 int los = (int) (Math.random() * opcja2Tmp.size());
                 zbiorUczacy[i++] = opcja2Tmp.get(los);
                 opcja2Tmp.remove(los);
+            }else{
+                if(!opcja1Tmp.isEmpty()) {
+                    int los = (int) (Math.random() * opcja1Tmp.size());
+                    zbiorUczacy[i++] = opcja1Tmp.get(los);
+                    opcja1Tmp.remove(los);
+                }else if(!opcja2Tmp.isEmpty()){
+                    int los = (int) (Math.random() * opcja2Tmp.size());
+                    zbiorUczacy[i++] = opcja2Tmp.get(los);
+                    opcja2Tmp.remove(los);
+                }
             }
         }
         for (int j = 1; j < zbiorTestowy.length; j++) {

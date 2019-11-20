@@ -260,7 +260,7 @@ public class Okno extends JFrame implements ActionListener {
                 p.remove(p2);
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
                 if (!menu.rekord2.getText().equals("")) {
-                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
+                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) <= daneWejsciowe.get_klasyfikacja().length - 1) {
                         daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
                     } else {
                         int ilosc = daneWejsciowe.get_klasyfikacja().length;
@@ -394,7 +394,7 @@ public class Okno extends JFrame implements ActionListener {
             ukryjTabele();
             if (daneWejsciowe != null) {
                 if (!menu.rekord2.getText().equals("")) {
-                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
+                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) <= daneWejsciowe.get_klasyfikacja().length - 1) {
                         daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
                     } else {
                         int ilosc = daneWejsciowe.get_klasyfikacja().length;
