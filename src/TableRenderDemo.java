@@ -126,7 +126,7 @@ public class TableRenderDemo extends JPanel {
         frame.pack();
         frame.setVisible(true);
     }
-
+/*
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
@@ -136,7 +136,7 @@ public class TableRenderDemo extends JPanel {
             }
         });
     }
-
+*\
     /*
      * This method picks good column sizes.
      * If all column heads are wider than the column's cells'

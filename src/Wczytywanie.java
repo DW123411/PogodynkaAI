@@ -232,7 +232,7 @@ public class Wczytywanie {
             pierwszy = true;
         }
         // tablica decyzji i atrybutow
-        int max_ilosc_wartosci_atrybutow = 0;
+       /* int max_ilosc_wartosci_atrybutow = 0;
         ArrayList<String> temp_stringow = new ArrayList();
         int x = 0;
         y = 0;
@@ -276,7 +276,7 @@ public class Wczytywanie {
 
             //     System.out.println("");
             temp_stringow = new ArrayList();
-        }
+        }*/
 
         scanner.close();
         DaneWejsciowe KS = new DaneWejsciowe();

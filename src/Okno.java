@@ -114,7 +114,7 @@ public class Okno extends JFrame implements ActionListener {
         menu.cred.addActionListener(this);
         menu.save.addActionListener(this);
         menu.tree.addActionListener(this);
-        menu.rekord2.addActionListener(this);
+        menu.rekord3.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.decyzja_okno.addActionListener(this);
@@ -138,7 +138,7 @@ public class Okno extends JFrame implements ActionListener {
         Object zrodlo = e.getSource();
         if (zrodlo == menu.wyś) {
             wyswietlanie.wyczysc();
-
+            ukryjTabele();
             if (daneWejsciowe != null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
@@ -196,18 +196,14 @@ public class Okno extends JFrame implements ActionListener {
                         String m = menu.glebokoscrekord.getText();
                         try {
                             int s = Integer.parseInt(menu.glebokoscrekord.getText());
-
+                            menu.glebokoscrekord.setEnabled(false);
+                            menu.glebokoscrekord.setText("");
+                            menu.glebokoscrekord.setEnabled(true);
+                            close = false;
                             if (s <= 0 && close == true) {
 
                                 JOptionPane.showMessageDialog(f, "Głebokość nie może być na minusie lub zerowa");
                                 // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-                                    menu.glebokoscrekord.setEnabled(false);
-                                    menu.glebokoscrekord.setText("");
-                                    menu.glebokoscrekord.setEnabled(true);
-                                    close = false;
-                                }
 
 
                             }
@@ -247,9 +243,7 @@ public class Okno extends JFrame implements ActionListener {
                         }
 
 
-                    }
-                }
-            });
+                    }}});
         } else if (zrodlo == menu.zal) {
             boolean spr = otworzPlik();
             if (spr) {
@@ -259,24 +253,7 @@ public class Okno extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
             }
         } else if (zrodlo == wyczysc2) {
-            p.remove(p2);
-            //Tabela tabela = new Tabela();
-            //JTable tabelaWyswietl = tabela.getTabela();
-            p2 = new JPanel();
-            //p2.add(new JScrollPane(tabela));
-            p2.setBorder(new TitledBorder(
-                    new TitledBorder(
-                            LineBorder.createGrayLineBorder(),
-                            "Dane"),
-                    "",
-                    TitledBorder.RIGHT,
-                    TitledBorder.BOTTOM));
-            p2.setMaximumSize(new Dimension(500, 500));
-            p.add(p2, BorderLayout.EAST);
-            dopasujSieDoZawartosci();
-            f.setVisible(true);
-            czyPrawyPanel = true;
-
+           ukryjTabele();
         } else if (zrodlo == menu.klasyfikacja_z_pliku) {
             boolean spr = otworzPlik();
             if (spr) {
@@ -373,108 +350,39 @@ public class Okno extends JFrame implements ActionListener {
             zapiszPlik();
         } else if (zrodlo == menu.tree) {
             zapiszPlikDrzewa();
-        } else if (zrodlo == menu.rekord2) {
+        } else if (zrodlo == menu.rekord3) {
 
-            menu.rekord2.addKeyListener(new KeyListener() {
-                public void keyTyped(KeyEvent e) {
-
-                    if (e.getKeyCode() == KeyEvent.VK_UP) {
-                        //String  s = menu.rekord2.getText();
-                        //JOptionPane.showMessageDialog(null, s);
-                        //pobieranie tekstu wpisanego i potwierdzenie go enterem.
-                        //String s = menu.rekord.getText();
-                        //System.out.println(s);
+            boolean close = true;
+            boolean close2 = true;
+            String m = menu.rekord2.getText();
+            wyswietlanie.wyczysc();
+            ukryjTabele();
+            if (daneWejsciowe != null) {
+                if (!menu.rekord2.getText().equals("")) {
+                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
+                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                    } else {
+                        int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                        daneWejsciowe.podzialZbioru(ilosc / 2);
                     }
+                } else {
+                    int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                    daneWejsciowe.podzialZbioru(ilosc / 2);
                 }
-
-                public void keyReleased(java.awt.event.KeyEvent evt) {
-
-                    //int s = Integer.parseInt(menu.rekord2.getText());
-
-                }
-
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        boolean close = true;
-                        boolean close2 = true;
-                        String m = menu.rekord2.getText();
-                        int s = Integer.parseInt(menu.rekord2.getText());
-                        try {
-                            if (s <= 0 && close == true) {
-
-                                JOptionPane.showMessageDialog(f, "Liczba rekordów nie może być na minusie lub 0");
-                                // JOptionPane("Hello world", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-                                    menu.rekord2.setEnabled(false);
-                                    menu.rekord2.setText("");
-                                    menu.rekord2.setEnabled(true);
-                                    close = false;
-                                }
+                DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                zapis = indukcja;
+                indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+                wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
+            }
 
 
-                            }
-                            //int s = Integer.parseInt(menu.rekord2.getText());
-                            else {
-                                /*System.out.println(menu.rekord2.getText());
-                                System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
-                                PodzialUczTest.losowanietest(s, daneWejsciowe);
-                                PodzialUczTest.losowanieucz(s, daneWejsciowe);*/
-                                wyswietlanie.wyczysc();
-                                if (daneWejsciowe != null) {
-                                    if (!menu.rekord2.getText().equals("")) {
-                                        if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) < daneWejsciowe.get_klasyfikacja().length - 1) {
-                                            daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
-                                        } else {
-                                            int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                                            daneWejsciowe.podzialZbioru(ilosc / 2);
-                                        }
-                                    } else {
-                                        int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                                        daneWejsciowe.podzialZbioru(ilosc / 2);
-                                    }
-                                    DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
-                                    Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
-                                    zapis = indukcja;
-                                    indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
-                                    indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
-                                    wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
-                                    wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
-                                    wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
-                                    wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
-                                } else if (daneWejsciowe == null) {
-                                    menu.rekord2.setEnabled(false);
-                                    menu.rekord2.setText("");
-                                    menu.rekord2.setEnabled(true);
-                                    close = false;
-
-                                    //JOptionPane.showMessageDialog(f,"Nie podałeś liczby rekordów");
-                                }
-
-                            }
-
-                        } catch (NumberFormatException ee) {
-                            if (close == true) {
-                                JOptionPane.showMessageDialog(f, "Błędna liczba rekordów");
-
-                                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                                    menu.rekord2.setEnabled(false);
-                                    menu.rekord2.setText("");
-                                    menu.rekord2.setEnabled(true);
-
-                                }
-
-                            }
-
-                        }
 
 
-                    }
-                }
-
-
-            });
         } else if (zrodlo == menu.jpeg || zrodlo == zapisz) {
             try {
                 Zapis.save_jpeg();
@@ -581,5 +489,25 @@ public class Okno extends JFrame implements ActionListener {
 
     public void setDaneWejsciowe(DaneWejsciowe daneWejsciowe) {
         this.daneWejsciowe = daneWejsciowe;
+    }
+
+    public void ukryjTabele(){
+        p.remove(p2);
+        //Tabela tabela = new Tabela();
+        //JTable tabelaWyswietl = tabela.getTabela();
+        p2 = new JPanel();
+        //p2.add(new JScrollPane(tabela));
+        p2.setBorder(new TitledBorder(
+                new TitledBorder(
+                        LineBorder.createGrayLineBorder(),
+                        "Tabela"),
+                "",
+                TitledBorder.RIGHT,
+                TitledBorder.BOTTOM));
+        p2.setMaximumSize(new Dimension(500, 500));
+        p.add(p2, BorderLayout.EAST);
+        dopasujSieDoZawartosci();
+        f.setVisible(true);
+        czyPrawyPanel = true;
     }
 }

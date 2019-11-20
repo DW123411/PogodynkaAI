@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class Menuski extends JMenuBar {
-    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg, pokaz, decyzja_okno;
+    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg, pokaz, rekord3, decyzja_okno;
     public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -32,6 +32,8 @@ public class Menuski extends JMenuBar {
         ImageIcon imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
         ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
         ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
+        ImageIcon imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
+
 
         cred = new JButton("<html></html>");
         cred.setIcon(imgIcon);
@@ -94,6 +96,12 @@ public class Menuski extends JMenuBar {
         wycz.setPreferredSize(new Dimension(30, 30));
         wycz.setMaximumSize(new Dimension(30, 30));
 
+        rekord3 = new JButton("<html></html>");
+        rekord3.setIcon(imgIcon9);
+        rekord3.setToolTipText("<html>Potwierdź rozmiary zbiorów</html>");
+        rekord3.setPreferredSize(new Dimension(30, 30));
+        rekord3.setMaximumSize(new Dimension(30, 30));
+
         zam = new JButton("<html></html>");
         zam.setIcon(imgIcon3);
         zam.setToolTipText("<html>Wyjście z programu</html>");
@@ -107,7 +115,7 @@ public class Menuski extends JMenuBar {
         jpeg.setMaximumSize(new Dimension(30, 30));
 
         decyzja_okno = new JButton("<html></html>");
-        decyzja_okno.setIcon(imgIcon3);
+        decyzja_okno.setIcon(imgIcon10);
         decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
         decyzja_okno.setPreferredSize(new Dimension(30, 30));
         decyzja_okno.setMaximumSize(new Dimension(30, 30));
@@ -166,6 +174,7 @@ public class Menuski extends JMenuBar {
         add(jpeg, BorderLayout.WEST);
         add(zbior, BorderLayout.WEST);
         add(rekord2, BorderLayout.WEST);
+        add(rekord3, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(pokaz, BorderLayout.WEST);
