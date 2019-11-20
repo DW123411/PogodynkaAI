@@ -127,7 +127,7 @@ public class TableRenderDemo extends JPanel {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -135,7 +135,7 @@ public class TableRenderDemo extends JPanel {
                 createAndShowGUI(Wczytywanie.wczytajKlasyfikacjeZPliku("src/test_klasyfikacji.txt"));
             }
         });
-    }
+    }*/
 
     /*
      * This method picks good column sizes.
