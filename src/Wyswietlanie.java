@@ -13,14 +13,16 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
     static BufferedImage okno;
     JFrame f;
-    LinkedList<JButton> listaButton = new LinkedList<JButton>();
+    LinkedList<PrzyciskDrzewo> listaButton = new LinkedList<PrzyciskDrzewo>();
     JPopupMenu popupMenu = new JPopupMenu("Title");
     PrzyciskMenu zmien_nazweMenuItem = new PrzyciskMenu("Zmień nazwę");
-    PrzyciskMenu dajDroge_MenuItem = new PrzyciskMenu("Droga");
+    PrzyciskDrzewo dajDroge = new PrzyciskDrzewo("Droga");
     PrzyciskMenu usun_MenuItem = new PrzyciskMenu("Usuń");
+    //Wezel wezeldobutton = new Wezel();
     Okno o;
     LinkedList<Wezel> wezly = new LinkedList<>();
     LinkedList<Wezel> wezlyN = new LinkedList<>();
+    LinkedList<Wezel> wezlyDroga = new LinkedList<>();
 
     //konstruktor
     public Wyswietlanie() {
@@ -63,7 +65,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
     public void wyczysc() {
         this.removeAll();
 
-        listaButton = new LinkedList<JButton>();
+        listaButton = new LinkedList<PrzyciskDrzewo>();
         //wyrysowanie białego tła
         Graphics2D g = (Graphics2D) okno.getGraphics();
         g.setColor(Color.gray);
@@ -312,10 +314,97 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                 }
             }
         } else if (label == "Droga") {
-            PrzyciskMenu przyciskMenu = (PrzyciskMenu) zrodlo;
-            ElementDrzewa elementDrzewa = przyciskMenu.getElement();
-            dajDrogeO(o.lista, elementDrzewa.toString());
-            System.out.println();
+            //PrzyciskMenu przyciskMenu = (PrzyciskMenu) zrodlo;
+            PrzyciskDrzewo przyciskDrzewo = (PrzyciskDrzewo) zrodlo;
+            Wezel wezel = przyciskDrzewo.getWezel();
+            wezlyDroga = new LinkedList<>();
+            wezlyDroga = dajDrogeM(wezel,wezlyDroga);
+            ElementDrzewa elementDrzewa[][] = o.daneWejsciowe.getZbiorUczacy();
+            var szerokość = 0;
+            for(int g=0;g<1;g++){
+                for(int f=0;f<elementDrzewa[g].length;f++){
+                    szerokość++;
+                }
+            }
+            ElementDrzewa elementJtable[][] = new ElementDrzewa[elementDrzewa.length][szerokość];
+            //ElementDrzewa elementDrzewa = przyciskMenu.getElement();
+           // dajDrogeO(o.lista, elementDrzewa.toString());
+            String nazwa;
+           for(int o=1;o<wezlyDroga.size();o=o+2) {
+                nazwa = wezlyDroga.get(o).toString();
+                for (int i = 0; i < elementDrzewa.length; i++) {
+                    if(i==0){
+                        for (int x = 0; x < elementDrzewa[i].length; x++) {
+                            elementJtable[i][x] = elementDrzewa[i][x];
+                        }
+                    }
+                    for (int j = 0; j < elementDrzewa[i].length-1; j++) {
+
+                            if(nazwa.equals(elementDrzewa[i][j].toString())) {
+                                for (int p = 0; p < elementDrzewa[i].length; p++) {
+                                    elementJtable[i][p] = elementDrzewa[i][p];
+                                }
+                                break;
+                            }
+                    }
+
+
+               }
+               ElementDrzewa elementTnmp[][] = new ElementDrzewa[elementJtable.length][szerokość];
+                var licznik =0;
+                for(int k=0;k<elementJtable.length;k++){
+                    if(elementJtable[k][0]!=null){
+
+                    for(int u=0;u<elementJtable[k].length;u++) {
+                        elementTnmp[licznik][u] = elementJtable[k][u];
+
+                    }
+                        licznik++;
+
+                    }
+                }
+
+                elementJtable = new ElementDrzewa[licznik][szerokość];
+               licznik = 0;
+               for(int l=0;l<elementJtable.length;l++){
+                   for(int h=0;h<elementJtable[l].length;h++){
+                       elementJtable[l][h]=elementTnmp[l][h];
+                   }
+               }
+               elementDrzewa = new ElementDrzewa[elementJtable.length][szerokość];
+               for(int a=0;a<elementDrzewa.length;a++){
+                   for(int z=0;z<elementDrzewa[a].length;z++){
+                       elementDrzewa[a][z]=elementJtable[a][z];
+                   }
+               }
+               elementJtable = new ElementDrzewa[elementDrzewa.length][szerokość];
+            }
+            o.p.remove(o.p2);
+            Tabela tabela = new Tabela(elementDrzewa);
+            JTable tabelaWyswietl = tabela.getTabela();
+            tabelaWyswietl.setFillsViewportHeight(true);
+            o.p2 = new JPanel();
+            o.p2.add(new JScrollPane(tabelaWyswietl));
+            o.p2.setBorder(new TitledBorder(
+                    new TitledBorder(
+                            LineBorder.createGrayLineBorder(),
+                            "Dane"),
+                    "",
+                    TitledBorder.RIGHT,
+                    TitledBorder.BOTTOM));
+            o.p2.setMaximumSize(new Dimension(500, 500));
+            o.p.add(o.p2, BorderLayout.EAST);
+            o.dopasujSieDoZawartosci();
+            o.f.setVisible(true);
+            o.czyPrawyPanel = true;
+
+           // for(int d=0;d<elementDrzewa.length;d++){
+           //     for(int s=0;s<elementDrzewa[d].length;s++){
+           //         System.out.print(elementDrzewa[d][s].toString()+" ");
+           //     }
+            //    System.out.println();
+           // }
+
         }
     }
 
@@ -385,7 +474,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         Graphics2D g3 = (Graphics2D) okno.getGraphics();
         g3.setStroke(new BasicStroke(2));
         g3.setColor(Color.white);
-        JButton button;
+        PrzyciskDrzewo button;
         this.setLayout(null);
         //JTextField jtext;
         popupMenu = new JPopupMenu("Title");
@@ -393,8 +482,8 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         zmien_nazweMenuItem.addActionListener(this);
         usun_MenuItem = new PrzyciskMenu("Usuń");
         usun_MenuItem.addActionListener(this);
-        dajDroge_MenuItem = new PrzyciskMenu("Droga");
-        dajDroge_MenuItem.addActionListener(this);
+        dajDroge= new PrzyciskDrzewo("Droga");
+        dajDroge.addActionListener(this);
 
         usun_MenuItem.setForeground(Color.red);
         popupMenu.add(zmien_nazweMenuItem);
@@ -494,13 +583,15 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         if (wezel.equals(korzen)) {
             g3.drawString(wezel.toString(), (wezel.getX() - (3 * wezel.toString().length())), wezel.getY());
 
-            button = new JButton("<html>" + wezel.toString() + "<br> E = " + decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia()) + "</html>");
+            button = new PrzyciskDrzewo("<html>" + wezel.toString() + "<br> E = " + decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia()) + "</html>");
             popupMenu = new JPopupMenu("Title");
             usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
             zmien_nazweMenuItem.setElement((ElementDrzewa) wezel.getDane());
             popupMenu.add(zmien_nazweMenuItem);
             popupMenu.addSeparator();
             popupMenu.add(usun_MenuItem);
+
+
             button.setHorizontalAlignment(SwingConstants.CENTER);
             button.setForeground(Color.white);
             button.setBackground(Color.blue);
@@ -521,9 +612,9 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             while (!lista.isEmpty()) {
                 Wezel w = lista.remove(0);
                 g3.drawString(w.toString(), (w.getX() - (3 * w.toString().length())), w.getY());
-                button = new JButton(w.toString());
+                button = new PrzyciskDrzewo(w.toString());
                 if (w.getDane().getClass().getName() == "Atrybut") {
-                    button = new JButton("<html>" + w.toString() + "<br>E = " + decimalFormat.format(((Atrybut) w.getDane()).getEntropia()) + "</html>");
+                    button = new PrzyciskDrzewo("<html>" + w.toString() + "<br>E = " + decimalFormat.format(((Atrybut) w.getDane()).getEntropia()) + "</html>");
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
@@ -532,7 +623,10 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                     popupMenu.add(usun_MenuItem);
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.blue);
+
+
                 } else if (w.getDane().getClass().getName() == "WartoscAtrybutu") {
+                    button = new PrzyciskDrzewo(w.toString());
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
@@ -541,13 +635,16 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                     popupMenu.add(usun_MenuItem);
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.green);
+
                 } else {
                     popupMenu = new JPopupMenu("Title");
-                    dajDroge_MenuItem.setElement((ElementDrzewa) w.getDane());
-
-                    popupMenu.add(dajDroge_MenuItem);
+                    dajDroge.setWezel((Wezel)w);
+                    popupMenu.add(dajDroge);
                     button.setComponentPopupMenu(popupMenu);
                     button.setBackground(Color.cyan);
+                    button.setWezel(w);
+
+
                 }
                 button.setForeground(Color.white);
                 button.setBounds((w.getX() - w.toString().length() * 6), w.getY() - 20, w.toString().length() * 13, 30);
@@ -569,12 +666,15 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
     }
 
-    public void rysujPrzyciski(LinkedList lista) {
+    public void rysujPrzyciski(LinkedList<PrzyciskDrzewo> lista) {
         int i = 0;
         while (i < lista.size()) {
-            JButton b = listaButton.get(i);
+            PrzyciskDrzewo b = (PrzyciskDrzewo)lista.get(i);
+
+
             i++;
-            this.add(b);
+            this.add((PrzyciskDrzewo)b);
+
 
         }
         repaint();
@@ -760,7 +860,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         Graphics2D g3 = (Graphics2D) okno.getGraphics();
         g3.setStroke(new BasicStroke(2));
         g3.setColor(Color.white);
-        JButton button;
+        PrzyciskDrzewo button;
         this.setLayout(null);
         //JTextField jtext;
         popupMenu = new JPopupMenu("Title");
@@ -778,7 +878,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         if (wezel.equals(korzen)) {
             //g3.drawString(wezel.toString(), (3*wezel.getX()/4-((3*3*wezel.toString().length()/4))), 3*wezel.getY()/4);
 
-            button = new JButton("<html>" + wezel.toString() + "<br> E = " + decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia()) + "</html>");
+            button = new PrzyciskDrzewo("<html>" + wezel.toString() + "<br> E = " + decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia()) + "</html>");
             popupMenu = new JPopupMenu("Title");
             usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
             zmien_nazweMenuItem.setElement((ElementDrzewa) wezel.getDane());
@@ -805,9 +905,9 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             while (!lista.isEmpty()) {
                 Wezel w = lista.remove(0);
                 // g3.drawString(w.toString(), (w.getX()-(3*w.toString().length())), w.getY());
-                button = new JButton(w.toString());
+                button = new PrzyciskDrzewo(w.toString());
                 if (w.getDane().getClass().getName() == "Atrybut") {
-                    button = new JButton("<html>" + w.toString() + "<br>E = " + decimalFormat.format(((Atrybut) w.getDane()).getEntropia()) + "</html>");
+                    button = new PrzyciskDrzewo("<html>" + w.toString() + "<br>E = " + decimalFormat.format(((Atrybut) w.getDane()).getEntropia()) + "</html>");
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());

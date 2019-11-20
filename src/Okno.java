@@ -145,7 +145,7 @@ public class Okno extends JFrame implements ActionListener {
                 zapis = indukcja;
                 lista = new LinkedList();
                 LinkedList listaT = new LinkedList();
-                lista = wyswietlanie.dajWezly(indukcja.getKorzen(), listaT);
+                //lista = wyswietlanie.dajWezly(indukcja.getKorzen(), listaT);
 
                 System.out.println();
 
