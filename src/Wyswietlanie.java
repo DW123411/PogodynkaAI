@@ -4,6 +4,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
@@ -380,23 +382,57 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                elementJtable = new ElementDrzewa[elementDrzewa.length][szerokość];
             }
             o.p.remove(o.p2);
-            Tabela tabela = new Tabela(elementDrzewa);
+            Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
+            Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
+            Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+            Tabela tabelaDroga = new Tabela(elementDrzewa);
             JTable tabelaWyswietl = tabela.getTabela();
+            JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
+            JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+            JTable tabelaWyswietlDroga = tabelaDroga.getTabela();
             tabelaWyswietl.setFillsViewportHeight(true);
             o.p2 = new JPanel();
-            o.p2.add(new JScrollPane(tabelaWyswietl));
-            o.p2.setBorder(new TitledBorder(
-                    new TitledBorder(
-                            LineBorder.createGrayLineBorder(),
-                            "Dane"),
-                    "",
-                    TitledBorder.RIGHT,
-                    TitledBorder.BOTTOM));
+            JTabbedPane tabelaDane = new JTabbedPane();
+            tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
+            tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
+            tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+            tabelaDane.addTab("Droga", new JScrollPane(tabelaWyswietlDroga));
+            tabelaDane.setSelectedIndex(3);
+            o.p2.add(tabelaDane);
             o.p2.setMaximumSize(new Dimension(500, 500));
             o.p.add(o.p2, BorderLayout.EAST);
             o.dopasujSieDoZawartosci();
             o.f.setVisible(true);
             o.czyPrawyPanel = true;
+
+            tabelaWyswietl.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                    }
+                }
+            });
+            tabelaWyswietlZbiorUczacy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(tabelaWyswietlZbiorUczacy, e.getX(), e.getY());
+                    }
+                }
+            });
+            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                    }
+                }
+            });
+            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(tabelaWyswietlDroga, e.getX(), e.getY());
+                    }
+                }
+            });
 
            // for(int d=0;d<elementDrzewa.length;d++){
            //     for(int s=0;s<elementDrzewa[d].length;s++){
