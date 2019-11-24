@@ -26,6 +26,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
     LinkedList<Wezel> wezlyN = new LinkedList<>();
     LinkedList<Wezel> wezlyDroga = new LinkedList<>();
 
+
     //konstruktor
     public Wyswietlanie() {
         super();
@@ -322,13 +323,13 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             wezlyDroga = new LinkedList<>();
             wezlyDroga = dajDrogeM(wezel,wezlyDroga);
             ElementDrzewa elementDrzewa[][] = o.daneWejsciowe.getZbiorUczacy();
-            var szerokość = 0;
+            var szerokosc= 0;
             for(int g=0;g<1;g++){
                 for(int f=0;f<elementDrzewa[g].length;f++){
-                    szerokość++;
+                    szerokosc++;
                 }
             }
-            ElementDrzewa elementJtable[][] = new ElementDrzewa[elementDrzewa.length][szerokość];
+            ElementDrzewa elementJtable[][] = new ElementDrzewa[elementDrzewa.length][szerokosc];
             //ElementDrzewa elementDrzewa = przyciskMenu.getElement();
            // dajDrogeO(o.lista, elementDrzewa.toString());
             String nazwa;
@@ -352,7 +353,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
 
                }
-               ElementDrzewa elementTnmp[][] = new ElementDrzewa[elementJtable.length][szerokość];
+               ElementDrzewa elementTnmp[][] = new ElementDrzewa[elementJtable.length][szerokosc];
                 var licznik =0;
                 for(int k=0;k<elementJtable.length;k++){
                     if(elementJtable[k][0]!=null){
@@ -366,20 +367,20 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                     }
                 }
 
-                elementJtable = new ElementDrzewa[licznik][szerokość];
+                elementJtable = new ElementDrzewa[licznik][szerokosc];
                licznik = 0;
                for(int l=0;l<elementJtable.length;l++){
                    for(int h=0;h<elementJtable[l].length;h++){
                        elementJtable[l][h]=elementTnmp[l][h];
                    }
                }
-               elementDrzewa = new ElementDrzewa[elementJtable.length][szerokość];
+               elementDrzewa = new ElementDrzewa[elementJtable.length][szerokosc];
                for(int a=0;a<elementDrzewa.length;a++){
                    for(int z=0;z<elementDrzewa[a].length;z++){
                        elementDrzewa[a][z]=elementJtable[a][z];
                    }
                }
-               elementJtable = new ElementDrzewa[elementDrzewa.length][szerokość];
+               elementJtable = new ElementDrzewa[elementDrzewa.length][szerokosc];
             }
             o.p.remove(o.p2);
             Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
@@ -391,6 +392,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
             JTable tabelaWyswietlDroga = tabelaDroga.getTabela();
             tabelaWyswietl.setFillsViewportHeight(true);
+
             o.p2 = new JPanel();
             JTabbedPane tabelaDane = new JTabbedPane();
             tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
@@ -404,6 +406,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             o.dopasujSieDoZawartosci();
             o.f.setVisible(true);
             o.czyPrawyPanel = true;
+
 
             tabelaWyswietl.addMouseListener(new MouseAdapter() {
                 public void mouseReleased(MouseEvent e) {
@@ -714,6 +717,237 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
         }
         repaint();
+    }
+
+    public void getDecyzja(Wezel wezel){
+        ElementDrzewa decyzja[][] = o.daneWejsciowe2.get_klasyfikacja();
+        for(int j=1; j<decyzja.length;j++) {
+            decyzja[j][decyzja[j].length-1] = new Decyzja("");
+            decyzja(wezel,decyzja,j);
+        }
+        o.daneWejsciowe2.set_klasyfikacja_tablica(decyzja);
+        o.p.remove(o.p2);
+        Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
+        Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
+        Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        Tabela tabelaZbiorDecyzja = new Tabela(o.daneWejsciowe2.get_klasyfikacja());
+        JTable tabelaWyswietl = tabela.getTabela();
+        JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
+        JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        JTable tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
+        tabelaWyswietl.setFillsViewportHeight(true);
+        o.p2 = new JPanel();
+        JTabbedPane tabelaDane = new JTabbedPane();
+        tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
+        tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
+        tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+        tabelaDane.addTab("Decyzja",new JScrollPane(tabelaWyswietlDecyzje));
+                /*tabelaWyswietl.setBorder(new TitledBorder(
+                        new TitledBorder(
+                                LineBorder.createGrayLineBorder(),
+                                "Dane"),
+                        "",
+                        TitledBorder.RIGHT,
+                        TitledBorder.BOTTOM));*/
+        o.p2.add(tabelaDane);
+        o.p2.setMaximumSize(new Dimension(500, 500));
+        o.p.add(o.p2, BorderLayout.EAST);
+        o.dopasujSieDoZawartosci();
+        o.f.setVisible(true);
+        o.czyPrawyPanel = true;
+        o.ukryjTabele();
+        tabelaWyswietl.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorUczacy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlZbiorUczacy, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlDecyzje, e.getX(), e.getY());
+                }
+            }
+        });
+    }
+    private void decyzja(Wezel wezel,ElementDrzewa[][] decyzja,int j){
+        var pozycja = 0;
+
+        String nazwa = wezel.toString();
+        for (int i = 0; i < decyzja[0].length - 1; i++) {
+            if (decyzja[0][i].toString().equals(nazwa)) {
+                pozycja = i;
+            }
+        }
+        String nazwaSpr = decyzja[j][pozycja].toString();
+        for(int p = 0; p<wezel.getDzieci().size(); p++){
+            Wezel tmpW = wezel.getDziecko(p);
+            decyzja[j][decyzja[j].length-1] = new Decyzja("Błąd-brak drogi");
+            if(tmpW.toString().equals(nazwaSpr)){
+
+                if(tmpW.getDzieci().size()!=0){
+                    for(int a = 0; a<tmpW.getDzieci().size(); a++){
+                        Wezel tmpww = tmpW.getDziecko(a);
+                        if(tmpww.czyLisc()){
+
+                                decyzja[j][decyzja[j].length-1] = new Decyzja(tmpww.toString());
+
+
+                        }
+                        else {
+                            decyzja(tmpww,decyzja,j);
+                        }
+
+                    }
+                }
+                break;
+            }
+
+        }
+
+    }
+
+
+
+    public void sprawdzTestowy(Wezel wezel){
+        ElementDrzewa zbiorTestowy[][] = o.daneWejsciowe.getZbiorTestowy();
+
+        var szerokosc = 0;
+        for(int g=0;g<1;g++){
+            for(int f=0;f<zbiorTestowy[g].length;f++){
+                szerokosc++;
+            }
+        }
+        if(zbiorTestowy[0][szerokosc-1].toString().equals("Wynik Testu")){
+
+        }
+        else {
+            ElementDrzewa tmp[][] = new ElementDrzewa[zbiorTestowy.length][szerokosc];
+            for (int j = 0; j < tmp.length; j++) {
+                for (int o = 0; o < tmp[j].length; o++) {
+                    tmp[j][o] = zbiorTestowy[j][o];
+                }
+            }
+            zbiorTestowy = new ElementDrzewa[tmp.length][szerokosc + 1];
+            for (int j = 0; j < tmp.length; j++) {
+                for (int o = 0; o < tmp[j].length; o++) {
+                    if (j == 0) {
+
+                        zbiorTestowy[j][zbiorTestowy[j].length - 1] = new Atrybut("Wynik Testu");
+                    }
+                    zbiorTestowy[j][o] = tmp[j][o];
+                }
+            }
+        }
+    for(int j=1; j<zbiorTestowy.length;j++){
+        sprawdzTest(wezel,zbiorTestowy,j);
+        }
+        o.daneWejsciowe.setZbiorTestowy(zbiorTestowy);
+        szerokosc=0;
+
+        o.p.remove(o.p2);
+        Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
+        Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
+        Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        JTable tabelaWyswietl = tabela.getTabela();
+        JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
+        JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        tabelaWyswietl.setFillsViewportHeight(true);
+        o.p2 = new JPanel();
+        JTabbedPane tabelaDane = new JTabbedPane();
+        tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
+        tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
+        tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+                /*tabelaWyswietl.setBorder(new TitledBorder(
+                        new TitledBorder(
+                                LineBorder.createGrayLineBorder(),
+                                "Dane"),
+                        "",
+                        TitledBorder.RIGHT,
+                        TitledBorder.BOTTOM));*/
+        o.p2.add(tabelaDane);
+        o.p2.setMaximumSize(new Dimension(500, 500));
+        o.p.add(o.p2, BorderLayout.EAST);
+        o.dopasujSieDoZawartosci();
+        o.f.setVisible(true);
+        o.czyPrawyPanel = true;
+        o.ukryjTabele();
+        tabelaWyswietl.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorUczacy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlZbiorUczacy, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                }
+            }
+        });
+
+    }
+
+    private void sprawdzTest(Wezel wezel,ElementDrzewa[][] zbiorTestowy,int j){
+        var pozycja = 0;
+
+            String nazwa = wezel.toString();
+            for (int i = 0; i < zbiorTestowy[0].length - 1; i++) {
+                if (zbiorTestowy[0][i].toString().equals(nazwa)) {
+                    pozycja = i;
+                }
+            }
+            String nazwaSpr = zbiorTestowy[j][pozycja].toString();
+            for(int p = 0; p<wezel.getDzieci().size(); p++){
+                Wezel tmpW = wezel.getDziecko(p);
+                zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("Błąd-brak drogi"); //może do zmiany Wartość atrybutu na coś innego
+                if(tmpW.toString().equals(nazwaSpr)){
+
+                    if(tmpW.getDzieci().size()!=0){
+                        for(int a = 0; a<tmpW.getDzieci().size(); a++){
+                            Wezel tmpww = tmpW.getDziecko(a);
+                            if(tmpww.czyLisc()){
+                                if(zbiorTestowy[j][zbiorTestowy[j].length-2].toString().equals(tmpww.toString())){
+                                    zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("OK");
+                                }
+                                else {
+                                    zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("Błąd");
+                                }
+                            }
+                            else {
+                                sprawdzTest(tmpww,zbiorTestowy,j);
+                            }
+
+                        }
+                    }
+                    break;
+                }
+
+            }
+
     }
 
 

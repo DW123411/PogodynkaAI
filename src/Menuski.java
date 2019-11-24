@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class Menuski extends JMenuBar {
-    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, show_klasyfikacja, jpeg, pokaz, rekord3, decyzja_okno;
+    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, klasyfikacja_z_pliku2, show_klasyfikacja, jpeg, pokaz, rekord3, decyzja_okno;
     public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -71,6 +71,12 @@ public class Menuski extends JMenuBar {
         klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");
         klasyfikacja_z_pliku.setPreferredSize(new Dimension(30, 30));
         klasyfikacja_z_pliku.setMaximumSize(new Dimension(30, 30));
+
+        klasyfikacja_z_pliku2 = new JButton("<html></html>");
+        klasyfikacja_z_pliku2.setIcon(imgIcon5);
+        klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");
+        klasyfikacja_z_pliku2.setPreferredSize(new Dimension(30, 30));
+        klasyfikacja_z_pliku2.setMaximumSize(new Dimension(30, 30));
 
         show_klasyfikacja = new JButton("<html></html>");
         show_klasyfikacja.setIcon(imgIcon8);
@@ -167,6 +173,7 @@ public class Menuski extends JMenuBar {
         add(wyś, BorderLayout.WEST);
         //add(zal, BorderLayout.WEST);
         add(klasyfikacja_z_pliku, BorderLayout.WEST);
+        add(klasyfikacja_z_pliku2, BorderLayout.WEST);
         //add(show_klasyfikacja, BorderLayout.WEST);
         add(wycz, BorderLayout.WEST);
         add(save, BorderLayout.WEST);

@@ -17,6 +17,7 @@ public class Okno extends JFrame implements ActionListener {
     ElementDrzewa[][] przyklad;
     Drzewo drzewo;
     DaneWejsciowe daneWejsciowe = null;
+    DaneWejsciowe daneWejsciowe2 = null;
     String puste = "null";
     JPanel p;
     JPanel p2 = new JPanel();
@@ -116,6 +117,7 @@ public class Okno extends JFrame implements ActionListener {
         menu.tree.addActionListener(this);
         menu.rekord3.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
+        menu.klasyfikacja_z_pliku2.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
         menu.decyzja_okno.addActionListener(this);
         menu.jpeg.addActionListener(this);
@@ -148,8 +150,8 @@ public class Okno extends JFrame implements ActionListener {
                 //lista = wyswietlanie.dajWezly(indukcja.getKorzen(), listaT);
 
                 System.out.println();
-
-
+                wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                wyswietlanie.getDecyzja(indukcja.getKorzen());
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
@@ -270,6 +272,7 @@ public class Okno extends JFrame implements ActionListener {
                     int ilosc = daneWejsciowe.get_klasyfikacja().length;
                     daneWejsciowe.podzialZbioru(ilosc / 2);
                 }
+
                 JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
                 Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
                 Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
@@ -329,6 +332,15 @@ public class Okno extends JFrame implements ActionListener {
            else{wyswietlanie.show_klasyfikacja(daneWejsciowe);
             }
         }*/
+    else if (zrodlo == menu.klasyfikacja_z_pliku2) {
+            boolean spr = otworzPlik();
+            if (spr) {
+
+                daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
+
+
+            }
+        }
         else if (zrodlo == menu.wycz || zrodlo == wyczysc) {
             wyswietlanie.wyczysc();
 
@@ -337,15 +349,18 @@ public class Okno extends JFrame implements ActionListener {
             Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
             Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
             Tabela tabelaZbiorTestowy = new Tabela(daneWejsciowe.getZbiorTestowy());
+            Tabela tabelaZbiorDecyzja = new Tabela(daneWejsciowe2.get_klasyfikacja());
             JTable tabelaWyswietl = tabela.getTabela();
             JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
             JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+            JTable tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
             tabelaWyswietl.setFillsViewportHeight(true);
             p2 = new JPanel();
             JTabbedPane tabelaDane = new JTabbedPane();
             tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
             tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
             tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+            tabelaDane.addTab("Decyzja",new JScrollPane(tabelaWyswietlDecyzje));
             p2.add(tabelaDane);
             p2.setMaximumSize(new Dimension(500, 500));
             p.add(p2, BorderLayout.EAST);
@@ -371,6 +386,13 @@ public class Okno extends JFrame implements ActionListener {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                    }
+                }
+            });
+            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        popupMenu2.show(tabelaWyswietlDecyzje, e.getX(), e.getY());
                     }
                 }
             });
