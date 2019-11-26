@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class Menuski extends JMenuBar {
-    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, klasyfikacja_z_pliku2, show_klasyfikacja, jpeg, pokaz, rekord3, decyzja_okno;
+    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, klasyfikacja_z_pliku2, show_klasyfikacja, jpeg, pokaz, rekord3, decyzja_okno,glebokosc1;
     public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -170,6 +170,13 @@ public class Menuski extends JMenuBar {
         glebokoscrekord.setDocument(new Rekord(1));
         glebokoscrekord.setCaretPosition(0);
 
+
+        glebokosc1 = new JButton("<html></html>");
+        glebokosc1.setIcon(imgIcon4);
+        glebokosc1.setToolTipText("<html>Rozmiar maksymalnej głębokości</html>");
+        glebokosc1.setPreferredSize(new Dimension(30, 30));
+        glebokosc1.setMaximumSize(new Dimension(30, 30));
+
         add(wyś, BorderLayout.WEST);
         //add(zal, BorderLayout.WEST);
         add(klasyfikacja_z_pliku, BorderLayout.WEST);
@@ -182,13 +189,14 @@ public class Menuski extends JMenuBar {
         //add(zbior, BorderLayout.WEST);
         //add(rekord2, BorderLayout.WEST);
         add(rekord3, BorderLayout.WEST);
+        add(glebokosc1, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(pokaz, BorderLayout.WEST);
         add(decyzja_okno, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
-        add(glebokosc, BorderLayout.WEST);
-        add(glebokoscrekord, BorderLayout.WEST);
+        //add(glebokosc, BorderLayout.WEST);
+        //add(glebokoscrekord, BorderLayout.WEST);
     }
 
 }

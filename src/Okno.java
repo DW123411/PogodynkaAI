@@ -116,6 +116,7 @@ public class Okno extends JFrame implements ActionListener {
         menu.save.addActionListener(this);
         menu.tree.addActionListener(this);
         menu.rekord3.addActionListener(this);
+        menu.glebokosc1.addActionListener(this);
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.klasyfikacja_z_pliku2.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
@@ -409,6 +410,7 @@ public class Okno extends JFrame implements ActionListener {
         } else if (zrodlo == menu.tree) {
             zapiszPlikDrzewa();
         } else if (zrodlo == menu.rekord3) {
+
             String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego", "10");
             wyswietlanie.wyczysc();
             ukryjTabele();
@@ -438,7 +440,47 @@ public class Okno extends JFrame implements ActionListener {
 
 
 
-        } else if (zrodlo == menu.jpeg || zrodlo == zapisz) {
+        } else if (zrodlo == menu.glebokosc1) {
+            try {
+                String m = JOptionPane.showInputDialog("Podaj okreslona głebokosc", "3");
+                wyswietlanie.wyczysc();
+                ukryjTabele();
+                if (daneWejsciowe != null) {
+                    if (!m.equals("")) {
+                        if (Integer.parseInt(m) > 0) {
+                            // daneWejsciowe.podzialZbioru(Integer.parseInt(m));
+                        } else {
+                            JOptionPane.showMessageDialog(f, "Głębokość nie może być zerowa lub mniejsza niż zero");
+                            menu.glebokosc1.setEnabled(false);
+                            menu.glebokosc1.setText("");
+                            menu.glebokosc1.setEnabled(true);
+                            // daneWejsciowe.podzialZbioru(ilosc / 2);
+                        }
+                    } else {
+
+                        //int ilosc = daneWejsciowe.get_klasyfikacja().length;
+                        //daneWejsciowe.podzialZbioru(ilosc / 2);
+                    }
+
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(f, "Nie można obliczyć głębokości bez wczytania danych. ");
+                    menu.glebokosc1.setEnabled(false);
+                    menu.glebokosc1.setText("");
+                    menu.glebokosc1.setEnabled(true);
+                }
+
+
+            }catch  (NumberFormatException ee) {
+                JOptionPane.showMessageDialog(f, "Błędnie określona głębokość");
+                menu.glebokosc1.setEnabled(false);
+                menu.glebokosc1.setText("");
+                menu.glebokosc1.setEnabled(true);
+
+            }
+        }
+        else if (zrodlo == menu.jpeg || zrodlo == zapisz) {
             try {
                 Zapis.save_jpeg();
             } catch (IOException ex) {
