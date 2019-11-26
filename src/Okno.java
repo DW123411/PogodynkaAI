@@ -292,7 +292,7 @@ public class Okno extends JFrame implements ActionListener {
                 JTabbedPane tabelaDane = new JTabbedPane();
                 tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
                 tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
-                tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+                tabelaDane.addTab("Testujący",new JScrollPane(tabelaWyswietlZbiorTestowy));
                 /*tabelaWyswietl.setBorder(new TitledBorder(
                         new TitledBorder(
                                 LineBorder.createGrayLineBorder(),
