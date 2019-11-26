@@ -360,7 +360,7 @@ public class Okno extends JFrame implements ActionListener {
             JTabbedPane tabelaDane = new JTabbedPane();
             tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
             tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
-            tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+            tabelaDane.addTab("Testujący",new JScrollPane(tabelaWyswietlZbiorTestowy));
             tabelaDane.addTab("Decyzja",new JScrollPane(tabelaWyswietlDecyzje));
             p2.add(tabelaDane);
             p2.setMaximumSize(new Dimension(500, 500));
