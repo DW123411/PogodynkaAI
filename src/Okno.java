@@ -261,17 +261,9 @@ public class Okno extends JFrame implements ActionListener {
             if (spr) {
                 p.remove(p2);
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
-                if (!menu.rekord2.getText().equals("")) {
-                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) <= daneWejsciowe.get_klasyfikacja().length - 1) {
-                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
-                    } else {
-                        int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                        daneWejsciowe.podzialZbioru(ilosc / 2);
-                    }
-                } else {
-                    int ilosc = daneWejsciowe.get_klasyfikacja().length;
-                    daneWejsciowe.podzialZbioru(ilosc / 2);
-                }
+               int ilosc = daneWejsciowe.get_klasyfikacja().length;
+               daneWejsciowe.podzialZbioru(ilosc / 2);
+
 
                 JOptionPane.showMessageDialog(null, "Dane wejściowe wczytane poprawnie.");
                 Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
@@ -408,16 +400,13 @@ public class Okno extends JFrame implements ActionListener {
         } else if (zrodlo == menu.tree) {
             zapiszPlikDrzewa();
         } else if (zrodlo == menu.rekord3) {
-
-            boolean close = true;
-            boolean close2 = true;
-            String m = menu.rekord2.getText();
+            String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego", "10");
             wyswietlanie.wyczysc();
             ukryjTabele();
             if (daneWejsciowe != null) {
-                if (!menu.rekord2.getText().equals("")) {
-                    if (Integer.parseInt(menu.rekord2.getText()) > 0 && Integer.parseInt(menu.rekord2.getText()) <= daneWejsciowe.get_klasyfikacja().length - 1) {
-                        daneWejsciowe.podzialZbioru(Integer.parseInt(menu.rekord2.getText()));
+                if (!m.equals("")) {
+                    if (Integer.parseInt(m) > 0 && Integer.parseInt(m) <= daneWejsciowe.get_klasyfikacja().length - 1) {
+                        daneWejsciowe.podzialZbioru(Integer.parseInt(m));
                     } else {
                         int ilosc = daneWejsciowe.get_klasyfikacja().length;
                         daneWejsciowe.podzialZbioru(ilosc / 2);

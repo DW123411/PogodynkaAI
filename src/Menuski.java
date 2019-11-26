@@ -104,7 +104,7 @@ public class Menuski extends JMenuBar {
 
         rekord3 = new JButton("<html></html>");
         rekord3.setIcon(imgIcon9);
-        rekord3.setToolTipText("<html>Potwierdź rozmiary zbiorów</html>");
+        rekord3.setToolTipText("<html>Rozmiary Zbiorów</html>");
         rekord3.setPreferredSize(new Dimension(30, 30));
         rekord3.setMaximumSize(new Dimension(30, 30));
 
@@ -179,8 +179,8 @@ public class Menuski extends JMenuBar {
         add(save, BorderLayout.WEST);
         //add(tree, BorderLayout.WEST);
         add(jpeg, BorderLayout.WEST);
-        add(zbior, BorderLayout.WEST);
-        add(rekord2, BorderLayout.WEST);
+        //add(zbior, BorderLayout.WEST);
+        //add(rekord2, BorderLayout.WEST);
         add(rekord3, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
