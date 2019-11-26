@@ -151,7 +151,9 @@ public class Okno extends JFrame implements ActionListener {
 
                 System.out.println();
                 wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
-                wyswietlanie.getDecyzja(indukcja.getKorzen());
+                if(daneWejsciowe2 != null) {
+                    wyswietlanie.getDecyzja(indukcja.getKorzen());
+                }
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
@@ -341,11 +343,17 @@ public class Okno extends JFrame implements ActionListener {
             Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
             Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
             Tabela tabelaZbiorTestowy = new Tabela(daneWejsciowe.getZbiorTestowy());
-            Tabela tabelaZbiorDecyzja = new Tabela(daneWejsciowe2.get_klasyfikacja());
+            Tabela tabelaZbiorDecyzja = new Tabela();
+            if(daneWejsciowe2 != null) {
+                tabelaZbiorDecyzja = new Tabela(daneWejsciowe2.get_klasyfikacja());
+            }
             JTable tabelaWyswietl = tabela.getTabela();
             JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
             JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
-            JTable tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
+            JTable tabelaWyswietlDecyzje = new JTable();
+            if(daneWejsciowe2 != null) {
+                tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
+            }
             tabelaWyswietl.setFillsViewportHeight(true);
             p2 = new JPanel();
             JTabbedPane tabelaDane = new JTabbedPane();
@@ -381,10 +389,11 @@ public class Okno extends JFrame implements ActionListener {
                     }
                 }
             });
+            JTable finalTabelaWyswietlDecyzje = tabelaWyswietlDecyzje;
             tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
-                        popupMenu2.show(tabelaWyswietlDecyzje, e.getX(), e.getY());
+                        popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
                     }
                 }
             });
