@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.LinkedList;
-
+import java.io.File;
 public class Okno extends JFrame implements ActionListener {
     Menuski menu = new Menuski();
     Wyswietlanie wyswietlanie = new Wyswietlanie();
@@ -543,7 +543,7 @@ public class Okno extends JFrame implements ActionListener {
         otworz.addChoosableFileFilter(filtr);
         otworz.addChoosableFileFilter(filtrCSV);
         otworz.setFileFilter(filtrCSV);
-
+        otworz.setCurrentDirectory(new File("."));
         otworz.setAcceptAllFileFilterUsed(false);
         int wynik = otworz.showOpenDialog(this);
         boolean check = false;
