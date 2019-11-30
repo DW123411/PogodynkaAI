@@ -169,7 +169,9 @@ public class Okno extends JFrame implements ActionListener {
             
 
                 try {
-                    TableRenderDemo.createAndShowGUI(daneWejsciowe);
+                        new decyzja_before_popup();
+                        // popup do wyboru 
+                        //TableRenderDemo.createAndShowGUI(daneWejsciowe,1);
                 } catch (Exception de) {
                     if(DEBUG){
                         System.out.println(de);            }
@@ -671,7 +673,7 @@ public class Okno extends JFrame implements ActionListener {
             buton.addActionListener(this);
 
             add(buton);
-
+dopasujSieDoZawartosci();
             setVisible(true);
            
         }
@@ -701,6 +703,85 @@ public class Okno extends JFrame implements ActionListener {
             this.label2.setText("Dokładnośc testująca : "+a+"%");
             
         }
+        public void popup(){
+            
+        }
+
+    }
+    
+     private class decyzja_before_popup extends JFrame  implements ActionListener{
+
+        private JLabel label1;    
+        private JButton buton, buton1, buton2, buton3;
+        @Override
+        public void actionPerformed(ActionEvent e){
+            Object zrodlo = e.getSource();
+
+            if(zrodlo == buton){
+                TableRenderDemo.createAndShowGUI(daneWejsciowe,1);
+                dispose();
+                
+            }
+              else if(zrodlo == buton1){
+                TableRenderDemo.createAndShowGUI(daneWejsciowe,2);
+                dispose();
+                
+            }
+              else if(zrodlo == buton2){
+                TableRenderDemo.createAndShowGUI(daneWejsciowe,3);
+                dispose();
+                
+            }
+              else   if(zrodlo == buton3){
+                TableRenderDemo.createAndShowGUI(daneWejsciowe,4);
+                dispose();
+                
+            }
+        }
+
+        private void dopasujSieDoZawartosci()
+        {
+            //dostosowanie okna do zawartości
+            pack();   
+            //wyśrodkowanie ramki
+            setLocationRelativeTo(null);           
+        }
+
+        public decyzja_before_popup(){
+            buton = new JButton("Dane z pliku");
+            buton1 = new JButton("Dane uczące");
+            buton2= new JButton("Dane testujące");
+            buton3 = new JButton("Dane z drzewa");
+            label1 = new JLabel("Wybierz odnośnik porównywarki decyzji klasyfikacji : ");
+         
+            setSize( 360, 360);  // ustawienie rozmiarow okna
+            setLocation(250,250);
+            // Pozyskanie powierzchni zawartości
+            Container  contents = getContentPane();     
+            // Utworzenie własnego panela z powierzchnią do rysowania figur
+            // i dodanie go do powierzchni (zawartości) okna
+            //setLayout(new GridLayout( 10, 50));
+            setLayout( null );
+            label1.setSize(360,25);  label1.setLocation(10,10);
+
+
+            buton.setSize(160,24);  buton.setLocation(80,100);
+               buton1.setSize(160,24);  buton1.setLocation(80,126);
+                  buton2.setSize(160,24);  buton2.setLocation(80,152);
+                     buton3.setSize(160,24);  buton3.setLocation(80,178);
+            add(label1);
+        
+            buton.addActionListener(this);
+            buton1.addActionListener(this);
+                   buton2.addActionListener(this);
+                          buton3.addActionListener(this);
+            add(buton);add(buton1);add(buton2);add(buton3);
+            
+            setVisible(true);
+           
+        }
+
+       
         public void popup(){
             
         }

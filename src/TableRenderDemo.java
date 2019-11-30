@@ -60,10 +60,12 @@ public class TableRenderDemo extends JPanel {
     String[][] pelna_tabelka_klasyfikacji;
     private DaneWejsciowe klasyfikacja;
     private JButton sprawdz_decyzje, a,b,c,d;
-    public TableRenderDemo( DaneWejsciowe k) {
+    private int typic;
+    public TableRenderDemo( DaneWejsciowe k, int typ) {
         super(new GridLayout(0,1));
         // klasyfikacja=Wczytywanie.wczytajKlasyfikacjeZPliku("src/test_klasyfikacji.txt");
         this.klasyfikacja= k;
+        this.typic=typ;
         this.dane_wejsciowe_kolumny = new String[klasyfikacja.ile_atrybutow()+1];
         for(int i=0;i<klasyfikacja.ile_atrybutow();i++){
             dane_wejsciowe_kolumny[i]=klasyfikacja.get_klasyfikacja_atrybuty()[i].getNazwa();
@@ -119,7 +121,7 @@ public class TableRenderDemo extends JPanel {
 
                 System.out.println("tworzenie konstuktora tabelki");
         }
-        JTable table = new JTable(new MyTableModel(kolumny, dane , typy, klasyfikacja));
+        JTable table = new JTable(new MyTableModel(kolumny, dane , typy, klasyfikacja, this.typic));
         table.setPreferredScrollableViewportSize(new Dimension(600, 110));
         table.setFillsViewportHeight(true);
 
@@ -248,8 +250,8 @@ ilk++;
         
         int row_temp ;
         int col_temp; 
-
-        public MyTableModel(String[] kolumny, Object[][] dane, Object[] typydanych, DaneWejsciowe dane_wejsciowe){
+        int typic ; 
+        public MyTableModel(String[] kolumny, Object[][] dane, Object[] typydanych, DaneWejsciowe dane_wejsciowe, int typ){
              if(DEBUG){
                         System.out.println("\n wejscie konstruktora myTableModel ");
                     }
@@ -259,7 +261,7 @@ ilk++;
             this.longValues = typydanych;
             this.klasyfikacja = dane_wejsciowe;
             this.pelna_tabelka_klasyfikacji=dane_wejsciowe.get_klasyfikacja_string();
-            
+            this.typic = typ;
             row_temp = 0; 
                         col_temp = 0; 
             String decision = "Decision";
@@ -371,6 +373,9 @@ return 1;
         }
 
         private void updateDecision(int row, int col){
+           
+            
+            
             boolean decyzja=false;
             ArrayList<String> jakie_decyzje = new ArrayList();
             ArrayList<String> jakie_w_kolumnie = new ArrayList();
@@ -387,7 +392,13 @@ return 1;
                 }
 
             }
-            boolean czy_decyzja=false;
+            
+            switch(this.typic){
+                
+                
+                case 1 : {
+                    
+                    boolean czy_decyzja=false;
             if(DEBUG){
                 System.out.println( "\n przed sprawdzeniem pelna_tabelka_klasyfikacji[0].length  =  "+pelna_tabelka_klasyfikacji[0].length+" pelna_tabelka_klasyfikacji.length = "+pelna_tabelka_klasyfikacji.length+"\n");
             }
@@ -466,6 +477,16 @@ return 1;
                 data[0][nr_kol]=new Decyzja("Brak danych");
                   fireTableCellUpdated(0,numer_kolumny_decyzji);
             }
+                    
+                    
+                    break;
+                }
+                
+                
+                
+                default: {  break;}
+            }
+            
             
             
             
@@ -505,8 +526,9 @@ return 1;
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
      * event-dispatching thread.
+     * the integer type is shows which data table should compare range [1-4]
      */
-    public static void createAndShowGUI(DaneWejsciowe klasyfikacja) {
+    public static void createAndShowGUI(DaneWejsciowe klasyfikacja, int typ) {
         //Create and set up the window.
         JFrame frame = new JFrame("Sprawdź decyzję");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -519,7 +541,7 @@ return 1;
         //Create and set up the content pane.
         //        TableRenderDemo newContentPane = new TableRenderDemo(        );
           //  TableRenderDemo newContentPane = new TableRenderDemo(Wczytywanie.wczytajKlasyfikacjeZPliku("src/test_klasyfikacji.txt"));
-        TableRenderDemo newContentPane = new TableRenderDemo(klasyfikacja);
+        TableRenderDemo newContentPane = new TableRenderDemo(klasyfikacja, typ);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
@@ -533,7 +555,7 @@ return 1;
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    createAndShowGUI(Wczytywanie.wczytajKlasyfikacjeZPliku("src/test_klasyfikacji.txt"));
+                    createAndShowGUI(Wczytywanie.wczytajKlasyfikacjeZPliku("src/test_klasyfikacji.txt"),1);
                 }
             });
     }
