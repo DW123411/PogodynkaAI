@@ -10,7 +10,7 @@ public class DaneWejsciowe {
     private String opcja2;
     private Object[][] atrybuty_z_wartosciami_i_decyzja;
     private Object[][] wartosci_atr_i_decyzja;
-
+   boolean DEBUG = false; 
     /**
      * zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
      */
@@ -50,6 +50,27 @@ public class DaneWejsciowe {
 
         this.wartosci_atr_i_decyzja = get_klasyfikacja_wart_dec();
         this.atrybuty_z_wartosciami_i_decyzja = get_klasyfikacja_string();
+        
+                if(DEBUG){
+            System.out.println("konstruktor IN - elementdrzewa[][] ");
+            System.out.println("print_in_console  (this.tablica)" );
+            print_in_console();
+            System.out.println("print_in_console_ATR  (this.wartosci_atr_i_decyzja)" );
+            print_in_console_ATR();
+              System.out.println("print_in_console_atrybuty  (this.atrybuty)" );
+            print_in_console_atrybuty();
+              System.out.println("print_in_console_classes  (this.dane[i][j].getClass)" );            
+            print_in_console_classes();
+              System.out.println("print_in_console_dane_stringi  (this.dane[i][j].getNazwa())" );                        
+            print_in_console_dane_stringi();
+                          System.out.println("print_in_console_dane_stringi_20  (this.wartosci_atr_i_decyzja[i][j])" );                        
+            print_in_console_dane_stringi_20();
+             System.out.println("print_in_console_dane_stringi_odwrotnie  (this.dane[j][i].getNazwa())" );        
+            print_in_console_dane_stringi_odwrotnie();
+            
+                         System.out.println("print_in_console_dane_stringi_odwrotnie_20  (this.wartosci_atr_i_decyzja[j][i]+");        
+            print_in_console_dane_stringi_odwrotnie_20();
+        }
     }
 
     /**
