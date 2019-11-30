@@ -29,9 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-/*
- * TableRenderDemo.java requires no other files.
- */
+
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -49,6 +47,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.util.*;
+import javax.swing.WindowConstants;
 /** 
  * TableRenderDemo is just like TableDemo, except that it
  * explicitly initializes column sizes and it uses a combo box
@@ -71,7 +70,34 @@ public class TableRenderDemo extends JPanel {
             dane_wejsciowe_kolumny[i]=klasyfikacja.get_klasyfikacja_atrybuty()[i].getNazwa();
         }
         dane_wejsciowe_kolumny[klasyfikacja.ile_atrybutow()]="Decision";
-        this.dane_wejsciowe_dane = klasyfikacja.get_klasyfikacja_wart_dec();
+        switch(this.typic){
+            
+            case 1 : {
+                this.dane_wejsciowe_dane = klasyfikacja.get_klasyfikacja_wart_dec();
+                break; 
+            }
+            
+            case 2 : {
+                
+                this.dane_wejsciowe_dane = klasyfikacja.getZbiorUczacy();
+                break;
+            }
+            
+            case 3 : {
+                   this.dane_wejsciowe_dane = klasyfikacja.getZbiorTestowy();
+                break;
+            }
+            
+            case 4 : {
+                
+                break;
+            }
+            
+            default: {
+                 this.dane_wejsciowe_dane = klasyfikacja.get_klasyfikacja_wart_dec();
+                break;} 
+        }
+       
              Object[][]        dane = dane_wejsciowe_dane;
         String[] kolumny = dane_wejsciowe_kolumny;
         this.pelna_tabelka_klasyfikacji = klasyfikacja.get_klasyfikacja_string();
@@ -392,7 +418,8 @@ return 1;
                 }
 
             }
-            
+            // default zmieniony narazie 
+            this.typic =1;
             switch(this.typic){
                 
                 
@@ -544,10 +571,11 @@ return 1;
         TableRenderDemo newContentPane = new TableRenderDemo(klasyfikacja, typ);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
-
+frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+        
     }
 
     public static void main(String[] args) {
