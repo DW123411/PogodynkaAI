@@ -33,6 +33,7 @@ public class Okno extends JFrame implements ActionListener {
     JLabel label;
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
+    boolean DEBUG = false;
 
     public Okno() {
         wyswietlanie.setOkno(this);
@@ -164,13 +165,19 @@ public class Okno extends JFrame implements ActionListener {
             }
         } else if (zrodlo == menu.decyzja_okno) {
             if (daneWejsciowe != null) {
+                  
+            
 
                 try {
                     TableRenderDemo.createAndShowGUI(daneWejsciowe);
                 } catch (Exception de) {
-                     JOptionPane.showMessageDialog(null, "Error.");
+                    if(DEBUG){
+                        System.out.println(de);            }
+                    JOptionPane.showMessageDialog(null, "Error.");
                 }
-            } else {
+            } 
+            
+            else {
                 JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");
                
             }

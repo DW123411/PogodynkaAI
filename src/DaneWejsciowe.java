@@ -330,8 +330,8 @@ public class DaneWejsciowe {
     public void print_in_console_ATR() {
         for (int i = 0; i < this.wartosci_atr_i_decyzja.length; i++) {
             for (int j = 0; j < this.wartosci_atr_i_decyzja[i].length; j++) {
-                if (this.wartosci_atr_i_decyzja[j][i] != null) {
-                    System.out.print("[" + this.wartosci_atr_i_decyzja[j][i] + "]");
+                if (this.wartosci_atr_i_decyzja[i][j] != null) {
+                    System.out.print("[" + this.wartosci_atr_i_decyzja[i][j] + "]");
                 } else {
                     System.out.print("[]");
                 }

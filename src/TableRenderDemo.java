@@ -98,21 +98,21 @@ public class TableRenderDemo extends JPanel {
             System.out.println("print_in_console_ATR (wartosci_atr_i_decyzja table)");
             this.klasyfikacja.print_in_console_ATR();
             System.out.println();
-            System.out.println("print_in_console_atrybuty (this.atrybuty) ");
-            this.klasyfikacja.print_in_console_atrybuty();
-            System.out.println();
-            System.out.println("print_in_console_clasy (this.dane classy) i>j ");
-            this.klasyfikacja.print_in_console_classes();
-            System.out.println();
-            System.out.println("print_in_console_dane stringi (this.dane.getnazwa()) i > j ");
-            this.klasyfikacja.print_in_console_dane_stringi();
-            System.out.println();
-            System.out.println("print_in_console_dane stringi20  (this.wartosci_atr_i_decyzja  i>j) ");
-            this.klasyfikacja.print_in_console_dane_stringi_20();
-            System.out.println();
-            System.out.println("print_in_console_dane stringi odwr  (this.dane.getNazwa()  )  j> i ");
-            this.klasyfikacja.print_in_console_dane_stringi_odwrotnie();
-            System.out.println();
+//            System.out.println("print_in_console_atrybuty (this.atrybuty) ");
+//            this.klasyfikacja.print_in_console_atrybuty();
+//            System.out.println();
+//            System.out.println("print_in_console_clasy (this.dane classy) i>j ");
+//            this.klasyfikacja.print_in_console_classes();
+//            System.out.println();
+//            System.out.println("print_in_console_dane stringi (this.dane.getnazwa()) i > j ");
+//            this.klasyfikacja.print_in_console_dane_stringi();
+//            System.out.println();
+//            System.out.println("print_in_console_dane stringi20  (this.wartosci_atr_i_decyzja  i>j) ");
+//            this.klasyfikacja.print_in_console_dane_stringi_20();
+//            System.out.println();
+//            System.out.println("print_in_console_dane stringi odwr  (this.dane.getNazwa()  )  j> i ");
+//            this.klasyfikacja.print_in_console_dane_stringi_odwrotnie();
+//            System.out.println();
          //   System.out.println("print_in_console_dane stringi_odw20  wartosci_atr_i_decyzja   j>i ");
        //     this.klasyfikacja.print_in_console_dane_stringi_odwrotnie_20();
             System.out.println();
@@ -336,12 +336,13 @@ return 1;
                         + " to " + value
                         + " (an instance of "
                         + value.getClass() + ")");
-                }}
+                }
             else{
                 System.out.println("Setting value at " + row + "," + col
                     + " to " + value
                     + " (an instance of "
                     + "null)");
+            }
             }
             //                     if(value!=null){
             //             data[row][col] = value;
@@ -374,7 +375,7 @@ return 1;
             ArrayList<String> jakie_decyzje = new ArrayList();
             ArrayList<String> jakie_w_kolumnie = new ArrayList();
             // odczytanie decyzji
-            for(int i=0;i<getColumnCount();i++)
+            for(int i=0;i<getColumnCount()-1;i++)
             {
                 jakie_decyzje.add(getValueAt(0,i).toString());
 
@@ -388,18 +389,18 @@ return 1;
             }
             boolean czy_decyzja=false;
             if(DEBUG){
-                System.out.print( "\n przed sprawdzeniem i =  "+pelna_tabelka_klasyfikacji[0].length+" j = "+pelna_tabelka_klasyfikacji.length+"\n");
+                System.out.println( "\n przed sprawdzeniem pelna_tabelka_klasyfikacji[0].length  =  "+pelna_tabelka_klasyfikacji[0].length+" pelna_tabelka_klasyfikacji.length = "+pelna_tabelka_klasyfikacji.length+"\n");
             }
 
             // sprawdzenie
             jakie_w_kolumnie = new ArrayList();
             int nr_wiersz = 1;
-            int nr_kol = getColumnCount();
-            for(int i=1;i<pelna_tabelka_klasyfikacji.length-1;i++){
+            int nr_kol = getColumnCount()-1;
+            for(int i=1;i<pelna_tabelka_klasyfikacji.length;i++){
                 if(DEBUG){
-                    System.out.print( "    +++ ROW updateDecision-SPRAWDZANIE ");
+                    System.out.println( "    +++ ROW updateDecision-SPRAWDZANIE ");
                 }
-                for(int j=1;j<pelna_tabelka_klasyfikacji[i].length;j++){
+                for(int j=0;j<=pelna_tabelka_klasyfikacji[i].length-1;j++){
                     if(DEBUG){
                         if(pelna_tabelka_klasyfikacji[i][j]!=null){
                             System.out.print(pelna_tabelka_klasyfikacji[i][j].toString()+" ");}
@@ -411,13 +412,16 @@ return 1;
                     //             
 
                 }
+                 int TRUEKE = 0 ;
                 if(DEBUG){
                     System.out.println("\n #####SPRAWDZANIE ");
                 }
                 for(int h=0;h<jakie_w_kolumnie.size();h++)
                 {
-//                     if(DEBUG){
-//                         System.out.println("jakie_decyzje.get(0) :#"+jakie_decyzje.get(0)+ ";       jakie_w_kolumnie.get(0).toString(): #"+jakie_w_kolumnie.get(0).toString()
+                     if(DEBUG){
+                  
+                    System.out.print(jakie_w_kolumnie.get(h).toString()+" --");
+//                    System.out.println("jakie_decyzje.get(0) :#"+jakie_decyzje.get(0)+ ";       jakie_w_kolumnie.get(0).toString(): #"+jakie_w_kolumnie.get(0).toString()
 //                         +"      equals: #"+jakie_decyzje.get(0).equals(jakie_w_kolumnie.get(0).toString()));
 //                         System.out.println("jakie_decyzje.get(1) :#"+jakie_decyzje.get(1)+ ";       jakie_w_kolumnie.get(1).toString(): #"+jakie_w_kolumnie.get(1).toString()
 //                          +"      equals: #"+jakie_decyzje.get(1).equals(jakie_w_kolumnie.get(1).toString()));
@@ -425,34 +429,60 @@ return 1;
 //                          +"      equals: #"+jakie_decyzje.get(2).equals(jakie_w_kolumnie.get(2).toString()));
 //                         System.out.println("jakie_decyzje.get(3) :#"+jakie_decyzje.get(3)+ ";       jakie_w_kolumnie.get(3).toString(): #"+jakie_w_kolumnie.get(3).toString()
 //                          +"      equals: #"+jakie_decyzje.get(3).equals(jakie_w_kolumnie.get(3).toString()));
-//                     }
-                    if(jakie_decyzje.get(0).equals(jakie_w_kolumnie.get(0).toString())&&
-                    jakie_decyzje.get(1).equals(jakie_w_kolumnie.get(1).toString())&&
-                    jakie_decyzje.get(2).equals(jakie_w_kolumnie.get(2).toString())&&
-                    jakie_decyzje.get(3).equals(jakie_w_kolumnie.get(3).toString())){
+                     }
+                   
+                   
+                    
+                    }
+                
+                 for(int yk = 0 ; yk <jakie_decyzje.size(); yk++ ){
+                        if(jakie_decyzje.get(yk).toString().equals(jakie_w_kolumnie.get(yk).toString()))
+                            TRUEKE++;
+                        
+                    }
+                if(TRUEKE==jakie_decyzje.size()){
                         czy_decyzja=true;
                      nr_wiersz = i;
-                    nr_kol= this.numer_kolumny_decyzji;}
-
+                    nr_kol= this.numer_kolumny_decyzji;
                 }
+                TRUEKE=0;
+                jakie_w_kolumnie= new ArrayList();
 
                 if(DEBUG){
                     System.out.println("\n koniec sprawdzania jakie_w_kolumnie \n" );
                 }
+            
+             if(czy_decyzja){decyzja=true;
+            data[0][nr_kol]=pelna_tabelka_klasyfikacji[i][nr_kol];
+           
+             fireTableCellUpdated(0,numer_kolumny_decyzji);
+            break;
+             }
+             
             }
-            if(czy_decyzja){decyzja=true;}
+            
+            if(!czy_decyzja){
+                
+                data[0][nr_kol]=new Decyzja("Brak danych");
+                  fireTableCellUpdated(0,numer_kolumny_decyzji);
+            }
+            
+            
+            
+            
+           
 
             //             if(decyzja){    pelna_tabelka_klasyfikacji[row][numer_kolumny_decyzji] = new Decyzja("Yes");}
             //             else{ pelna_tabelka_klasyfikacji[row][numer_kolumny_decyzji] = new Decyzja("No");}
-            if(decyzja){  
-                String tak = "yes";
-                data[0][numer_kolumny_decyzji] = tak;}
-            else{ 
-                String nie = "no";
-                data[0][numer_kolumny_decyzji] = nie;}
-            fireTableCellUpdated(0,numer_kolumny_decyzji);
-            czy_decyzja=false;
-            decyzja=false;
+//            if(decyzja){  
+//                String tak = "yes";
+//                data[0][numer_kolumny_decyzji] = tak;}
+//            else{ 
+//                String nie = "no";
+//                data[0][numer_kolumny_decyzji] = nie;}
+//            fireTableCellUpdated(0,numer_kolumny_decyzji);
+//            czy_decyzja=false;
+//            decyzja=false;
 
         };
 

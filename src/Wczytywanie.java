@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Wczytywanie {
 
+    public static boolean DEBUG= false;
     /**
      * metoda zwraca klase Drzewo z podanej ścieżki do pliku jako zmienna wejściowa
      */
@@ -15,7 +16,7 @@ public class Wczytywanie {
         Scanner skaner = null;
 
         try {
-            skaner = new Scanner(plik); //inicjalizacja Scannera
+            skaner = new Scanner(plik); //inicjalizacja Scannera 
         } catch (FileNotFoundException err) {
             System.out.println(err.toString());
         }
@@ -83,10 +84,14 @@ public class Wczytywanie {
             }
             skaner.close();
         } catch (NullPointerException err) {
+            if(DEBUG){
             System.out.println(err.toString());
+            }
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(null, "Nieprawidlowe dane");
+            JOptionPane.showMessageDialog(null, "Nieprawidlowe dane");
+           if(DEBUG){
             System.out.println(e.toString());
+            }
         }
 
 
@@ -261,9 +266,9 @@ public class Wczytywanie {
              
             }
             int kkk = 0 ;
-      System.out.println(temp_stringow.size());      
+      if(DEBUG) {System.out.println(temp_stringow.size());       }
             for(int k=0;k<temp_stringow.size();k++){
-      System.out.print(temp_stringow.get(k)+" ---");
+      if(DEBUG) {   System.out.print(temp_stringow.get(k)+" ---");}
            temp_table_atrybuty_i_decyzje[y][x]=
             temp_stringow.get(k);
             y++;
