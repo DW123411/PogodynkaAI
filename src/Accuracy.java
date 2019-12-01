@@ -143,7 +143,9 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
         }
          
          public void calculate_accuracy(){
-             Wezel root = this.temp_prepared_tree.getKorzen();
+          try {
+              Wezel<ElementDrzewa> root = this.temp_prepared_tree.getKorzen();
+          
              double max = 100 ;
              int fail =0; 
              int succed = 0 ;
@@ -156,6 +158,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
                  
                  
              }
+          }catch(Exception e){}
              
              
              
