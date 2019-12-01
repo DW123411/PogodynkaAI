@@ -2,27 +2,36 @@
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ dokladnosc : 
+ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladnosc . [ w procentach]
  */
 
 /**
  *
- * @author Adnin
+ * @author 
+ * 
+ *  ^^^^^^^^^  ^^   ^^  ^^^^^^^
+ *  ^^^^       ^^  ^^   ^^  ^^^
+ *  ^^^^^^^^^  ^^^^     ^^^^^^^
+ *       ^^^^  ^^  ^^       ^^^
+ *  ^^^^^^^^^  ^^   ^^  ^^^^^^^
  */
  public class Accuracy extends JFrame  implements ActionListener{
 
         private JLabel label1;    private JLabel label2;    private JButton buton;
         
-             Drzewo<ElementDrzewa> temp_prepared_tree;
-             DaneWejsciowe data_classified ;
+         private    Drzewo<ElementDrzewa> temp_prepared_tree;
+          private   DaneWejsciowe data_classified ;
+          private   ElementDrzewa[][] data_load ;
+         private    float accuracy;private double dbl_accuracy;
+             
         @Override
         public void actionPerformed(ActionEvent e){
             Object zrodlo = e.getSource();
@@ -40,11 +49,12 @@ import javax.swing.JOptionPane;
             //wyśrodkowanie ramki
             setLocationRelativeTo(null);           
         }
-
-        public Accuracy(     Drzewo<ElementDrzewa> temp, DaneWejsciowe dane){
+        public Accuracy(){}
+        public Accuracy(    Drzewo<ElementDrzewa> temp, DaneWejsciowe dane){
            // super();
-            temp_prepared_tree= temp;
-            data_classified = dane; 
+            this.temp_prepared_tree= temp;
+            this.data_classified = dane; 
+            this.data_load = dane.get_klasyfikacja();
             buton = new JButton("OK");
             label1 = new JLabel("Dokładność ucząca : ");
             label2 = new JLabel("Dokładność testująca : ");
@@ -68,6 +78,8 @@ import javax.swing.JOptionPane;
             add(buton);
         //dopasujSieDoZawartosci();
             setVisible(true);
+            
+            calculate_accuracy();
            
         }
 
@@ -88,15 +100,22 @@ import javax.swing.JOptionPane;
             }
 
         }
-           public void setDoklUcz(int a){
+           public void setDoklUcz(double a){
             this.label1.setText("Dokładnośc ucząca : "+a+"%");
             
         }
-          public void setDoklTest(int a){
+          public void setDoklTest(double a){
             this.label2.setText("Dokładnośc testująca : "+a+"%");
             
         }
-        public void popup(){
+        public  void popup(){
+            int a = 0; 
+            while(a!=100){
+                
+                new Downpressor();
+                a++;
+            }
+            
             
         }
         
@@ -122,5 +141,65 @@ import javax.swing.JOptionPane;
             }
             
         }
+         
+         public void calculate_accuracy(){
+             Wezel root = this.temp_prepared_tree.getKorzen();
+             double max = 100 ;
+             int fail =0; 
+             int succed = 0 ;
+             while(!root.czyLisc()){
+                 for(int WIT=0;WIT<root.getLiczbaDzieci();WIT++){
+                 System.out.println(root.getDzieci().get(WIT));
+                 }
+                 root= root.getDziecko(fail);
+                 fail++;
+                 
+                 
+             }
+             
+             
+             
+             
+             
+         }
+         
+         
+         private class Downpressor extends JFrame  {
+              JButton label;
+             public  Downpressor(){
+                 super();
+                 
+                 int a ; 
+                 int b; 
+                 Random rand= new Random();
+                 a= rand.nextInt(1280);
+                 b= rand.nextInt(1680);
+                 int tempa=a;
+                 int tempb=b;
+                    setSize( a, b);  // ustawienie rozmiarow okna
+                    a= rand.nextInt(1280);
+                 b= rand.nextInt(1680);
+            setLocation(b,a);
+             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            // Pozyskanie powierzchni zawartości
+            Container  contents = getContentPane();     
+            // Utworzenie własnego panela z powierzchnią do rysowania figur
+            // i dodanie go do powierzchni (zawartości) okna
+            //setLayout(new GridLayout( 10, 50));
+            setLayout( null );
+            
+            this.label = new JButton("VAR");
+            label.setSize(tempa,tempb);  label.setLocation(0,0);
+            add(label);
+             
+        //dopasujSieDoZawartosci();
+            setVisible(true);
+             }
+             
+             
+     
+     
+     
+ }
 
     }

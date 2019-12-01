@@ -40,13 +40,14 @@ public class Okno extends JFrame implements ActionListener {
         wyswietlanie.setOkno(this);
         f = new JFrame("PogodynkaAI v.0.2");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         //blokada zmiany rozmiaru okna
         f.setResizable(false);
         //rozmieszczenie elementow - menadzer rozkladu
         //FlowLayout ustawia elementy jeden za drugim
         //w tym przypadku dodatkowo wysrodkowane na ekranie, z odstępem w pionie i poziomie
-
+            new Accuracy().popup();
         p = new JPanel(new BorderLayout(5, 5));
         Border blackline = BorderFactory.createLineBorder(Color.black);
         p.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -427,7 +428,8 @@ public class Okno extends JFrame implements ActionListener {
         } else if (zrodlo == menu.cred) {
             wyswietlanie.credits();
         } else if (zrodlo == menu.zam || zrodlo == zamkn) {
-            System.exit(0);
+            new Accuracy().popup();
+          //  System.exit(0);
         } else if (zrodlo == menu.save || zrodlo == zapisz2) {
             zapiszPlik();
         } else if (zrodlo == menu.tree) {
