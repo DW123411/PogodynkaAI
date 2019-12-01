@@ -10,6 +10,8 @@ public class DaneWejsciowe {
     private String opcja2;
     private Object[][] atrybuty_z_wartosciami_i_decyzja;
     private Object[][] wartosci_atr_i_decyzja;
+    private Object[][] wartosci_atr_i_decyzja_uczace ;
+    private Object[][] wartosci_atr_i_decyzja_testujace ;
    boolean DEBUG = false; 
     /**
      * zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50

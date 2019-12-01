@@ -287,6 +287,8 @@ public class Wczytywanie {
         }
         
         //koniec temp_table_atrybuty_i_decyzje tworzenie 
+        
+        
 
         scanner.close();
         DaneWejsciowe KS = new DaneWejsciowe();

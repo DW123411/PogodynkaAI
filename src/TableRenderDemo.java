@@ -31,6 +31,7 @@
 
 
 
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -80,11 +81,140 @@ public class TableRenderDemo extends JPanel {
             case 2 : {
                 
                 this.dane_wejsciowe_dane = klasyfikacja.getZbiorUczacy();
+                Object[][] temp_dane_uczace = new Object[dane_wejsciowe_dane.length-1][dane_wejsciowe_dane[0].length];
+                int APH_INIT =0 ; 
+                int PYK_INIT= 0;
+                        
+                for(int APH=1;APH<dane_wejsciowe_dane.length;APH++){
+                    for(int PYK=0;PYK <dane_wejsciowe_dane[0].length;PYK++){
+                        temp_dane_uczace[APH_INIT][PYK_INIT] = dane_wejsciowe_dane[APH][PYK];
+                        PYK_INIT++;
+                    }
+                    APH_INIT++;
+                    PYK_INIT =0; 
+                }
+                          this.dane_wejsciowe_dane = temp_dane_uczace;
+                          
+                                    // tablica decyzji i atrybutow
+        int max_ilosc_wartosci_atrybutow=0;
+       ArrayList<String> temp_stringow= new ArrayList();
+     int   x =0 ;
+        int y=0;
+        String[][] temp_table_atrybuty_i_decyzje = new String[dane_wejsciowe_dane.length-1][dane_wejsciowe_dane[0].length];
+ // temp_table_atrybuty_i_decyzje  robienie 
+ 
+       for(int i=0;i<dane_wejsciowe_dane[i].length;i++){
+            for(int j=1;j<dane_wejsciowe_dane.length;j++)
+            {
+                  if(dane_wejsciowe_dane[j][i]!=null){
+                      if(temp_stringow.isEmpty()){
+                          temp_stringow.add(dane_wejsciowe_dane[j][i].toString());
+                        }
+                        else {
+                            String tempstring=dane_wejsciowe_dane[j][i].toString();
+                            boolean czyjest = false;
+                            for(int ui=0;ui<temp_stringow.size();ui++){
+                                if(tempstring.equals(temp_stringow.get(ui)))
+                                {czyjest = true;}
+                            }
+                            if(czyjest==false){temp_stringow.add(tempstring);}
+                        }
+                      
+                    }
+                            
+             
+            }
+            int kkk = 0 ;
+      if(DEBUG) {System.out.println(temp_stringow.size());       }
+            for(int ui=0;ui<temp_stringow.size();ui++){
+      if(DEBUG) {   System.out.print(temp_stringow.get(ui)+" ---");}
+           temp_table_atrybuty_i_decyzje[y][x]=
+            temp_stringow.get(ui);
+            y++;
+            kkk=ui;
+             }
+            for(int kk=kkk+1;kk<temp_table_atrybuty_i_decyzje.length;kk++){
+         //  temp_table_atrybuty_i_decyzje[kk][x]="x";  UZUPELNIENIE TABELI ZEBY NULLI NIE BYLO WPISANIE "X"
+            y++;
+            }
+        
+        x++;
+        y=0;
+            
+                   //     System.out.println("");
+            temp_stringow= new ArrayList();
+        }
+          this.dane_wejsciowe_dane = temp_table_atrybuty_i_decyzje;
+        //koniec temp_table_atrybuty_i_decyzje tworzenie 
                 break;
             }
             
             case 3 : {
                    this.dane_wejsciowe_dane = klasyfikacja.getZbiorTestowy();
+                     Object[][] temp_dane_test = new Object[dane_wejsciowe_dane.length-1][dane_wejsciowe_dane[0].length];
+                        int APH_INIT =0 ; 
+                int PYK_INIT= 0;
+                for(int APH=1;APH<dane_wejsciowe_dane.length;APH++){
+                    for(int PYK=0;PYK <dane_wejsciowe_dane[0].length;PYK++){
+                        temp_dane_test[APH_INIT][PYK_INIT] = dane_wejsciowe_dane[APH][PYK];
+                           PYK_INIT++;
+                    }
+                       APH_INIT++;
+                    PYK_INIT =0; 
+                }
+                  this.dane_wejsciowe_dane = temp_dane_test;
+                  
+                               // tablica decyzji i atrybutow
+        int max_ilosc_wartosci_atrybutow=0;
+       ArrayList<String> temp_stringow= new ArrayList();
+     int   x =0 ;
+        int y=0;
+        String[][] temp_table_atrybuty_i_decyzje = new String[dane_wejsciowe_dane.length-1][dane_wejsciowe_dane[0].length];
+ // temp_table_atrybuty_i_decyzje  robienie 
+ 
+       for(int i=0;i<dane_wejsciowe_dane[i].length;i++){
+            for(int j=1;j<dane_wejsciowe_dane.length;j++)
+            {
+                  if(dane_wejsciowe_dane[j][i]!=null){
+                      if(temp_stringow.isEmpty()){
+                          temp_stringow.add(dane_wejsciowe_dane[j][i].toString());
+                        }
+                        else {
+                            String tempstring=dane_wejsciowe_dane[j][i].toString();
+                            boolean czyjest = false;
+                            for(int ui=0;ui<temp_stringow.size();ui++){
+                                if(tempstring.equals(temp_stringow.get(ui)))
+                                {czyjest = true;}
+                            }
+                            if(czyjest==false){temp_stringow.add(tempstring);}
+                        }
+                      
+                    }
+                            
+             
+            }
+            int kkk = 0 ;
+      if(DEBUG) {System.out.println(temp_stringow.size());       }
+            for(int ui=0;ui<temp_stringow.size();ui++){
+      if(DEBUG) {   System.out.print(temp_stringow.get(ui)+" ---");}
+           temp_table_atrybuty_i_decyzje[y][x]=
+            temp_stringow.get(ui);
+            y++;
+            kkk=ui;
+             }
+            for(int kk=kkk+1;kk<temp_table_atrybuty_i_decyzje.length;kk++){
+         //  temp_table_atrybuty_i_decyzje[kk][x]="x";  UZUPELNIENIE TABELI ZEBY NULLI NIE BYLO WPISANIE "X"
+            y++;
+            }
+        
+        x++;
+        y=0;
+            
+                   //     System.out.println("");
+            temp_stringow= new ArrayList();
+        }
+          this.dane_wejsciowe_dane = temp_table_atrybuty_i_decyzje;
+        //koniec temp_table_atrybuty_i_decyzje tworzenie
                 break;
             }
             
@@ -277,6 +407,7 @@ ilk++;
         int row_temp ;
         int col_temp; 
         int typic ; 
+        
         public MyTableModel(String[] kolumny, Object[][] dane, Object[] typydanych, DaneWejsciowe dane_wejsciowe, int typ){
              if(DEBUG){
                         System.out.println("\n wejscie konstruktora myTableModel ");
@@ -419,11 +550,12 @@ return 1;
 
             }
             // default zmieniony narazie 
-            this.typic =1;
+            //this.typic =1;
             switch(this.typic){
                 
                 
-                case 1 : {
+
+      case 1 : {
                     
                     boolean czy_decyzja=false;
             if(DEBUG){
@@ -508,7 +640,181 @@ return 1;
                     
                     break;
                 }
+      
+     
+      case 2 :   {
+          
+          boolean czy_decyzja=false;
+            if(DEBUG){
+                System.out.println( "\n przed sprawdzeniem pelna_tabelka_klasyfikacji[0].length  =  "+pelna_tabelka_klasyfikacji[0].length+" pelna_tabelka_klasyfikacji.length = "+pelna_tabelka_klasyfikacji.length+"\n");
+            }
+
+            // sprawdzenie
+            jakie_w_kolumnie = new ArrayList();
+            int nr_wiersz = 1;
+            int nr_kol = getColumnCount()-1;
+            for(int i=1;i<pelna_tabelka_klasyfikacji.length;i++){
+                if(DEBUG){
+                    System.out.println( "    +++ ROW updateDecision-SPRAWDZANIE ");
+                }
+                for(int j=0;j<=pelna_tabelka_klasyfikacji[i].length-1;j++){
+                    if(DEBUG){
+                        if(pelna_tabelka_klasyfikacji[i][j]!=null){
+                            System.out.print(pelna_tabelka_klasyfikacji[i][j].toString()+" ");}
+                        else{
+                            System.out.print(" []");
+                        }
+                    }
+                    jakie_w_kolumnie.add(pelna_tabelka_klasyfikacji[i][j].toString());
+                    //             
+
+                }
+                 int TRUEKE = 0 ;
+                if(DEBUG){
+                    System.out.println("\n #####SPRAWDZANIE ");
+                }
+                for(int h=0;h<jakie_w_kolumnie.size();h++)
+                {
+                     if(DEBUG){
+                  
+                    System.out.print(jakie_w_kolumnie.get(h).toString()+" --");
+//                    System.out.println("jakie_decyzje.get(0) :#"+jakie_decyzje.get(0)+ ";       jakie_w_kolumnie.get(0).toString(): #"+jakie_w_kolumnie.get(0).toString()
+//                         +"      equals: #"+jakie_decyzje.get(0).equals(jakie_w_kolumnie.get(0).toString()));
+//                         System.out.println("jakie_decyzje.get(1) :#"+jakie_decyzje.get(1)+ ";       jakie_w_kolumnie.get(1).toString(): #"+jakie_w_kolumnie.get(1).toString()
+//                          +"      equals: #"+jakie_decyzje.get(1).equals(jakie_w_kolumnie.get(1).toString()));
+//                         System.out.println("jakie_decyzje.get(2) :#"+jakie_decyzje.get(2)+ ";       jakie_w_kolumnie.get(2).toString(): #"+jakie_w_kolumnie.get(2).toString()
+//                          +"      equals: #"+jakie_decyzje.get(2).equals(jakie_w_kolumnie.get(2).toString()));
+//                         System.out.println("jakie_decyzje.get(3) :#"+jakie_decyzje.get(3)+ ";       jakie_w_kolumnie.get(3).toString(): #"+jakie_w_kolumnie.get(3).toString()
+//                          +"      equals: #"+jakie_decyzje.get(3).equals(jakie_w_kolumnie.get(3).toString()));
+                     }
+                   
+                   
+                    
+                    }
                 
+                 for(int yk = 0 ; yk <jakie_decyzje.size(); yk++ ){
+                        if(jakie_decyzje.get(yk).toString().equals(jakie_w_kolumnie.get(yk).toString()))
+                            TRUEKE++;
+                        
+                    }
+                if(TRUEKE==jakie_decyzje.size()){
+                        czy_decyzja=true;
+                     nr_wiersz = i;
+                    nr_kol= this.numer_kolumny_decyzji;
+                }
+                TRUEKE=0;
+                jakie_w_kolumnie= new ArrayList();
+
+                if(DEBUG){
+                    System.out.println("\n koniec sprawdzania jakie_w_kolumnie \n" );
+                }
+            
+             if(czy_decyzja){decyzja=true;
+            data[0][nr_kol]=pelna_tabelka_klasyfikacji[i][nr_kol];
+           
+             fireTableCellUpdated(0,numer_kolumny_decyzji);
+            break;
+             }
+             
+            }
+            
+            if(!czy_decyzja){
+                
+                data[0][nr_kol]=new String("Brak danych");
+                  fireTableCellUpdated(0,numer_kolumny_decyzji);
+            }
+                    
+                    
+                    break;
+                }
+
+      case 3 : {
+          
+          boolean czy_decyzja=false;
+            if(DEBUG){
+                System.out.println( "\n przed sprawdzeniem pelna_tabelka_klasyfikacji[0].length  =  "+pelna_tabelka_klasyfikacji[0].length+" pelna_tabelka_klasyfikacji.length = "+pelna_tabelka_klasyfikacji.length+"\n");
+            }
+
+            // sprawdzenie
+            jakie_w_kolumnie = new ArrayList();
+            int nr_wiersz = 1;
+            int nr_kol = getColumnCount()-1;
+            for(int i=1;i<pelna_tabelka_klasyfikacji.length;i++){
+                if(DEBUG){
+                    System.out.println( "    +++ ROW updateDecision-SPRAWDZANIE ");
+                }
+                for(int j=0;j<=pelna_tabelka_klasyfikacji[i].length-1;j++){
+                    if(DEBUG){
+                        if(pelna_tabelka_klasyfikacji[i][j]!=null){
+                            System.out.print(pelna_tabelka_klasyfikacji[i][j].toString()+" ");}
+                        else{
+                            System.out.print(" []");
+                        }
+                    }
+                    jakie_w_kolumnie.add(pelna_tabelka_klasyfikacji[i][j].toString());
+                    //             
+
+                }
+                 int TRUEKE = 0 ;
+                if(DEBUG){
+                    System.out.println("\n #####SPRAWDZANIE ");
+                }
+                for(int h=0;h<jakie_w_kolumnie.size();h++)
+                {
+                     if(DEBUG){
+                  
+                    System.out.print(jakie_w_kolumnie.get(h).toString()+" --");
+//                    System.out.println("jakie_decyzje.get(0) :#"+jakie_decyzje.get(0)+ ";       jakie_w_kolumnie.get(0).toString(): #"+jakie_w_kolumnie.get(0).toString()
+//                         +"      equals: #"+jakie_decyzje.get(0).equals(jakie_w_kolumnie.get(0).toString()));
+//                         System.out.println("jakie_decyzje.get(1) :#"+jakie_decyzje.get(1)+ ";       jakie_w_kolumnie.get(1).toString(): #"+jakie_w_kolumnie.get(1).toString()
+//                          +"      equals: #"+jakie_decyzje.get(1).equals(jakie_w_kolumnie.get(1).toString()));
+//                         System.out.println("jakie_decyzje.get(2) :#"+jakie_decyzje.get(2)+ ";       jakie_w_kolumnie.get(2).toString(): #"+jakie_w_kolumnie.get(2).toString()
+//                          +"      equals: #"+jakie_decyzje.get(2).equals(jakie_w_kolumnie.get(2).toString()));
+//                         System.out.println("jakie_decyzje.get(3) :#"+jakie_decyzje.get(3)+ ";       jakie_w_kolumnie.get(3).toString(): #"+jakie_w_kolumnie.get(3).toString()
+//                          +"      equals: #"+jakie_decyzje.get(3).equals(jakie_w_kolumnie.get(3).toString()));
+                     }
+                   
+                   
+                    
+                    }
+                
+                 for(int yk = 0 ; yk <jakie_decyzje.size(); yk++ ){
+                        if(jakie_decyzje.get(yk).toString().equals(jakie_w_kolumnie.get(yk).toString()))
+                            TRUEKE++;
+                        
+                    }
+                if(TRUEKE==jakie_decyzje.size()){
+                        czy_decyzja=true;
+                     nr_wiersz = i;
+                    nr_kol= this.numer_kolumny_decyzji;
+                }
+                TRUEKE=0;
+                jakie_w_kolumnie= new ArrayList();
+
+                if(DEBUG){
+                    System.out.println("\n koniec sprawdzania jakie_w_kolumnie \n" );
+                }
+            
+             if(czy_decyzja){decyzja=true;
+            data[0][nr_kol]=pelna_tabelka_klasyfikacji[i][nr_kol];
+           
+             fireTableCellUpdated(0,numer_kolumny_decyzji);
+            break;
+             }
+             
+            }
+            
+            if(!czy_decyzja){
+                
+                data[0][nr_kol]=new String("Brak danych");
+                  fireTableCellUpdated(0,numer_kolumny_decyzji);
+            }
+                    
+                    
+                    break;
+          
+          
+      }
                 
                 
                 default: {  break;}
