@@ -33,6 +33,7 @@ public class Menuski extends JMenuBar {
         ImageIcon imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
         ImageIcon imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
         ImageIcon imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
+        ImageIcon imgIcon11 = new ImageIcon(getClass().getResource("icons/view2.png"));
 
 
         cred = new JButton("<html></html>");
@@ -73,8 +74,8 @@ public class Menuski extends JMenuBar {
         klasyfikacja_z_pliku.setMaximumSize(new Dimension(30, 30));
 
         klasyfikacja_z_pliku2 = new JButton("<html></html>");
-        klasyfikacja_z_pliku2.setIcon(imgIcon5);
-        klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");
+        klasyfikacja_z_pliku2.setIcon(imgIcon11);
+        klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane do<br />wyboru decyzji</html>");
         klasyfikacja_z_pliku2.setPreferredSize(new Dimension(30, 30));
         klasyfikacja_z_pliku2.setMaximumSize(new Dimension(30, 30));
 

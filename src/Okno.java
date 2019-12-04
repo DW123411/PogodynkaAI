@@ -36,7 +36,7 @@ public class Okno extends JFrame implements ActionListener {
 
     public Okno() {
         wyswietlanie.setOkno(this);
-        f = new JFrame("PogodynkaAI v.0.2");
+        f = new JFrame("Decyzjomat  v.0.3");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //blokada zmiany rozmiaru okna
@@ -555,11 +555,12 @@ public class Okno extends JFrame implements ActionListener {
         if (wynik == JFileChooser.APPROVE_OPTION) {
             sciezkaDoPliku = zapisz.getSelectedFile().getAbsolutePath();
             try {
-                if (zapisz.getFileFilter() == filtrCSV)
+                if (zapisz.getFileFilter() == filtrCSV){
                     Zapis.zapisDoPlkiu((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), sciezkaDoPliku, "csv");
-                else if (zapisz.getFileFilter() == filtr)
+                    Zapis.zapisDoPlkiuNoDecision((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), sciezkaDoPliku, "csv");}
+                else if (zapisz.getFileFilter() == filtr){
                     Zapis.zapisDoPlkiu((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), sciezkaDoPliku, "txt");
-
+                    Zapis.zapisDoPlkiuNoDecision((ElementDrzewa[][]) daneWejsciowe.get_klasyfikacja(), sciezkaDoPliku, "txt");}
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

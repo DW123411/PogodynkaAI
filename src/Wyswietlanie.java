@@ -60,7 +60,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
         //setLayout(new GridLayout(2,1));
         //ustawRozmiar(new Dimension(szerokosc,wysokosc));
-        ustawRozmiar(new Dimension(1200, 1200));
+        ustawRozmiar(new Dimension(1920, 1920));
         ustawNasluchZdarzen();
         wyczysc();
     }
@@ -387,10 +387,18 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
             Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
             Tabela tabelaDroga = new Tabela(elementDrzewa);
+            Tabela tabelaZbiorDecyzja = new Tabela();
+            if(o.daneWejsciowe2 != null) {
+                tabelaZbiorDecyzja = new Tabela(o.daneWejsciowe2.get_klasyfikacja());
+            }
             JTable tabelaWyswietl = tabela.getTabela();
             JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
             JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
             JTable tabelaWyswietlDroga = tabelaDroga.getTabela();
+            JTable tabelaWyswietlDecyzje = new JTable();
+            if(o.daneWejsciowe2 != null) {
+                tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
+            }
             tabelaWyswietl.setFillsViewportHeight(true);
 
             o.p2 = new JPanel();
@@ -399,6 +407,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
             tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
             tabelaDane.addTab("Droga", new JScrollPane(tabelaWyswietlDroga));
+            tabelaDane.addTab("Decyzja",new JScrollPane(tabelaWyswietlDecyzje));
             tabelaDane.setSelectedIndex(3);
             o.p2.add(tabelaDane);
             o.p2.setMaximumSize(new Dimension(500, 500));
@@ -433,6 +442,14 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         o.popupMenu2.show(tabelaWyswietlDroga, e.getX(), e.getY());
+                    }
+                }
+            });
+            JTable finalTabelaWyswietlDecyzje = tabelaWyswietlDecyzje;
+            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
                     }
                 }
             });
@@ -955,7 +972,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         ImageIcon icon = new ImageIcon(getClass().getResource("icons/boink.png"));
 
         JOptionPane.showMessageDialog(null, "Program napisany w ramach Projektu Zespołowego \n" +
-                        "Wersja : 0.420  MMZ \n" +
+                        "Wersja : 0.3 Aircobra \n" +
                         "Autorzy : \n" +
                         "Główni programiści : \n" +
                         "Dominik Woźniak \n" +
