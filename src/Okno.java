@@ -202,7 +202,7 @@ public class Okno extends JFrame implements ActionListener {
                
             }else if (zrodlo == menu.theme) {
                 try {
-                    theme = new wybierzMotyw().wybierzMotyw();
+                    theme.wybierzMotyw();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {
@@ -337,7 +337,7 @@ public class Okno extends JFrame implements ActionListener {
         }
         else if (zrodlo==menu.accuracy){
             
-		         if(daneWejsciowe!=null){
+		         if(daneWejsciowe!=null&&daneWejsciowe2!=null){
             new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy());
 
         }

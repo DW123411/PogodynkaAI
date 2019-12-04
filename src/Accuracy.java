@@ -172,9 +172,11 @@ for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
                 }            for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++)
 {for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
                 if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
-                    match++;}}}temp_stringi = new ArrayList();}double MAXIMIMALIZIUM = dane_uczace.length;
+                    match++;}}}temp_stringi = new ArrayList();}double MAXIMIMALIZIUM = (double)dane_uczace.length;
                     double PERCENT_OF_QUANTIUDOMINATION = (100*match)/MAXIMIMALIZIUM;
-                return PERCENT_OF_QUANTIUDOMINATION; break;}default: {return 0;break;}
+                    PERCENT_OF_QUANTIUDOMINATION=Math.round(PERCENT_OF_QUANTIUDOMINATION);
+                    return PERCENT_OF_QUANTIUDOMINATION; }
+               default: {return 0;}
 
 
 
