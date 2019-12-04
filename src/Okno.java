@@ -35,6 +35,11 @@ public class Okno extends JFrame implements ActionListener {
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
     boolean DEBUG = false;
+    public int funny = 0;
+    public static int moty;
+    public static int dark;
+    wybierzMotyw theme = new wybierzMotyw();
+
 
     public Okno() {
         wyswietlanie.setOkno(this);
@@ -43,7 +48,7 @@ public class Okno extends JFrame implements ActionListener {
         //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //blokada zmiany rozmiaru okna
-        f.setResizable(false);
+        f.setResizable(true);
         //rozmieszczenie elementow - menadzer rozkladu
         //FlowLayout ustawia elementy jeden za drugim
         //w tym przypadku dodatkowo wysrodkowane na ekranie, z odstępem w pionie i poziomie
@@ -135,6 +140,8 @@ public class Okno extends JFrame implements ActionListener {
         zamkn.addActionListener(this);
         wyswietlanie.zmien_nazweMenuItem.addActionListener(this);
         wyswietlanie.usun_MenuItem.addActionListener(this);
+        menu.theme.addActionListener(this);
+
     }
 
     @Override
@@ -164,6 +171,34 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
                 this.temp_done = indukcja;
+            }else if (zrodlo == menu.theme) {
+                try {
+                    theme.wybierzMotyw();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (UnsupportedLookAndFeelException ex) {
+                    ex.printStackTrace();
+                } catch (InstantiationException ex) {
+                    ex.printStackTrace();
+                } catch (IllegalAccessException ex) {
+                    ex.printStackTrace();
+                }
+                //moty=motyw.getPwsz();
+                dark=theme.getDark();
+                menu.setDark(theme.getDark());
+                menu.setMotyw(theme.getPwsz());
+                System.out.println(dark);
+                p.remove(menu);
+                menu=new Menuski();
+
+                p.add(menu, BorderLayout.NORTH);
+                ustawNasluchZdarzen();
+                SwingUtilities.updateComponentTreeUI(f);
+
+                pack();
+
             }
         } else if (zrodlo == menu.decyzja_okno) {
             if (daneWejsciowe != null) {
@@ -426,6 +461,11 @@ public class Okno extends JFrame implements ActionListener {
 
         } else if (zrodlo == menu.cred) {
             wyswietlanie.credits();
+            funny++;
+            System.out.println(funny);
+            if(funny==10){moty=1;
+                JOptionPane.showMessageDialog(null,"A teraz zmień motyw na jasny ;)"); }
+            if(funny>10){moty=0;funny=0;JOptionPane.showMessageDialog(null,"Tak wiem, jest kapa. Spoko, zmień motyw będzie cacy");}
         } else if (zrodlo == menu.zam || zrodlo == zamkn) {
           System.exit(0);
         } else if (zrodlo == menu.save || zrodlo == zapisz2) {
@@ -459,10 +499,6 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
-
-
-
-
         } else if (zrodlo == menu.glebokosc1) {
             try {
                 String m = JOptionPane.showInputDialog("Podaj okreslona głebokosc", "3");
@@ -533,7 +569,6 @@ public class Okno extends JFrame implements ActionListener {
                     ex.printStackTrace();
                 }
             }
-
         }
 
 
