@@ -24,8 +24,11 @@ public class Zapis {
                     //            zapis.print("Decision,");
                     //       }
                     //       else {
-
-                    zapis.print(tablica[i][j].getNazwa() + ",");
+                    if(j==tablica[i].length-1){
+                        zapis.print(tablica[i][j].getNazwa());
+                    }
+                    else
+                        zapis.print(tablica[i][j].getNazwa() + ",");
                     //         }
 
                 }
@@ -33,32 +36,47 @@ public class Zapis {
             }
             zapis.close();
 
-            File nf = new File(sciezka + "." + plik);
-            BufferedWriter FileWriter = new BufferedWriter(new FileWriter(sciezka + "1." + plik));
-            try {
-                Scanner scanner = new Scanner(nf);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    if (line.endsWith(",")) {
-                        System.out.println(line);
-                        System.out.println(line.substring(0, line.length() - 1));
 
-                        FileWriter.write(line.substring(0, line.length() - 1));
-                        FileWriter.newLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void zapisDoPlkiuNoDecision(ElementDrzewa tablica[][], String sciezka, String plik) throws FileNotFoundException {
+
+        String save;
+        try {
+            PrintWriter zapis = new PrintWriter(sciezka + "_no_decision." + plik);
+            //zapis.print("Day,");
+            for (int k = 0; k < tablica[0].length; k++) {
+                if(k<tablica[0].length-1)
+                    zapis.print(tablica[0][k].getNazwa() + ",");
+                else{
+                    zapis.print(tablica[0][k].getNazwa());
+                }
+            }
+            zapis.println();
+            for (int i = 1; i < tablica.length; i++) {
+                //     if(i!=0){
+                //          zapis.print("D"+i+",");
+                //      }
+                for (int j = 0; j < tablica[i].length - 1; j++) {
+                    if(j==tablica[i].length-2){
+                        zapis.print(tablica[i][j].getNazwa());
                     }
+                    else
+                        zapis.print(tablica[i][j].getNazwa() + ",");
+                    //         }
 
                 }
-                FileWriter.close();
-                File f1 = new File(sciezka + "." + plik);
-                File f2 = new File(sciezka + "1." + plik);
-                boolean a = f1.delete();
-                boolean b = f2.renameTo(f1);
-            } catch (IOException e) {
-                System.out.println("Problem z dostępem do pliku");
+                zapis.println();
             }
-        } catch (IOException ex) {
-            System.out.println("Problem z dostępem do pliku");
+            zapis.close();
 
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
     }
