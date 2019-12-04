@@ -2,8 +2,6 @@ import com.bulenkov.darcula.DarculaLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -12,14 +10,12 @@ public class wybierzMotyw {
     public int darkmode;
     public String[] buttons = { "Jasny  (Windows Classic)", "Jasny (Windows Modern)", "Ciemny (Darkula)", "Jasny (Metal)"};
 
+    public void wybierzMotyw() throws IOException, FileNotFoundException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException{
 
-
-
-    public wybierzMotyw wybierzMotyw() throws IOException, FileNotFoundException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException{
 
 
         int motyw = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Procedura przed startowa",
-                JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+                JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
 
         switch(motyw) {
             case 0:
@@ -63,7 +59,6 @@ public class wybierzMotyw {
                 break;
 
         }
-        return this;
     }
 
     public void setPwsz(int pwsz){
