@@ -218,10 +218,10 @@ public class TableRenderDemo extends JPanel {
                 break;
             }
             
-            case 4 : {
-                
-                break;
-            }
+//            case 4 : {
+//                
+//                break;
+//            }
             
             default: {
                  this.dane_wejsciowe_dane = klasyfikacja.get_klasyfikacja_wart_dec();

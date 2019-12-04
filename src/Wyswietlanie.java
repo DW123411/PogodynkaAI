@@ -323,8 +323,12 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             wezlyDroga = new LinkedList<>();
             wezlyDroga = dajDrogeM(wezel,wezlyDroga);
             ElementDrzewa elementDrzewa[][] = o.daneWejsciowe.getZbiorUczacy();
+
            // var szerokosc= 0;
            int szerokosc= 0;
+
+          
+
             for(int g=0;g<1;g++){
                 for(int f=0;f<elementDrzewa[g].length;f++){
                     szerokosc++;
