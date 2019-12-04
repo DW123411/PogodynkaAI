@@ -323,7 +323,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             wezlyDroga = new LinkedList<>();
             wezlyDroga = dajDrogeM(wezel,wezlyDroga);
             ElementDrzewa elementDrzewa[][] = o.daneWejsciowe.getZbiorUczacy();
-            var szerokosc= 0;
+            int szerokosc= 0;
             for(int g=0;g<1;g++){
                 for(int f=0;f<elementDrzewa[g].length;f++){
                     szerokosc++;
@@ -354,7 +354,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
                }
                ElementDrzewa elementTnmp[][] = new ElementDrzewa[elementJtable.length][szerokosc];
-                var licznik =0;
+                int licznik =0;
                 for(int k=0;k<elementJtable.length;k++){
                     if(elementJtable[k][0]!=null){
 
@@ -803,7 +803,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         });
     }
     private void decyzja(Wezel wezel,ElementDrzewa[][] decyzja,int j){
-        var pozycja = 0;
+        int pozycja = 0;
 
         String nazwa = wezel.toString();
         for (int i = 0; i < decyzja[0].length - 1; i++) {
@@ -844,7 +844,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
     public void sprawdzTestowy(Wezel wezel){
         ElementDrzewa zbiorTestowy[][] = o.daneWejsciowe.getZbiorTestowy();
 
-        var szerokosc = 0;
+        int szerokosc = 0;
         for(int g=0;g<1;g++){
             for(int f=0;f<zbiorTestowy[g].length;f++){
                 szerokosc++;
@@ -929,7 +929,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
     }
 
     private void sprawdzTest(Wezel wezel,ElementDrzewa[][] zbiorTestowy,int j){
-        var pozycja = 0;
+        int pozycja = 0;
 
             String nazwa = wezel.toString();
             for (int i = 0; i < zbiorTestowy[0].length - 1; i++) {
