@@ -645,6 +645,8 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             g3.drawString(wezel.toString(), (wezel.getX() - (3 * wezel.toString().length())), wezel.getY());
 
             button = new PrzyciskDrzewo("<html>" + wezel.toString() + "<br> E = " + decimalFormat.format(((Atrybut) wezel.getDane()).getEntropia()) + "</html>");
+            button.setToolTipText(button.getText());
+            ToolTipManager.sharedInstance().registerComponent(button);
             popupMenu = new JPopupMenu("Title");
             usun_MenuItem.setElement((ElementDrzewa) wezel.getDane());
             zmien_nazweMenuItem.setElement((ElementDrzewa) wezel.getDane());
@@ -654,7 +656,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
 
             button.setHorizontalAlignment(SwingConstants.CENTER);
-            button.setForeground(Color.white);
+            button.setForeground(UIManager.getColor("Button.foreground"));
             button.setBackground(Color.blue);
             button.setBounds((wezel.getX() - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 6), wezel.getY() - 20, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
             button.setMargin(new Insets(0, 0, 0, 0));
@@ -676,6 +678,8 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                 button = new PrzyciskDrzewo(w.toString());
                 if (w.getDane().getClass().getName() == "Atrybut") {
                     button = new PrzyciskDrzewo("<html>" + w.toString() + "<br>E = " + decimalFormat.format(((Atrybut) w.getDane()).getEntropia()) + "</html>");
+                    button.setToolTipText(button.getText());
+                    ToolTipManager.sharedInstance().registerComponent(button);
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
@@ -688,6 +692,8 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
                 } else if (w.getDane().getClass().getName() == "WartoscAtrybutu") {
                     button = new PrzyciskDrzewo(w.toString());
+                    button.setToolTipText(button.getText());
+                    ToolTipManager.sharedInstance().registerComponent(button);
                     popupMenu = new JPopupMenu("Title");
                     usun_MenuItem.setElement((ElementDrzewa) w.getDane());
                     zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
@@ -707,7 +713,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
 
                 }
-                button.setForeground(Color.white);
+                button.setForeground(UIManager.getColor("Button.foreground"));
                 button.setBounds((w.getX() - w.toString().length() * 6), w.getY() - 20, w.toString().length() * 13, 30);
                 if (w.getDane().getClass().getName() == "Atrybut") {
                     button.setBounds((w.getX() - decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 6), w.getY() - 20, decimalFormat.format((Double) ((Atrybut) w.getDane()).getEntropia()).length() * 13, 40);
@@ -1180,7 +1186,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
             popupMenu.addSeparator();
             popupMenu.add(usun_MenuItem);
             button.setHorizontalAlignment(SwingConstants.CENTER);
-            button.setForeground(Color.white);
+            button.setForeground(UIManager.getColor("Button.foreground"));
             button.setBackground(Color.blue);
             button.setBounds(((2 * wezel.getX()) / 2 - decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 15 / 2), (1 * (wezel.getY() - 15)) / 3, decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13, 40);
             button.setMargin(new Insets(0, 0, 0, 0));
@@ -1228,7 +1234,7 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                     button.setBackground(Color.cyan);
                     button.setWezel(w);
                 }
-                button.setForeground(Color.white);
+                button.setForeground(UIManager.getColor("Button.foreground"));
                 //wezel.getDane()).getEntropia()).length() * 6 -- w prawo lub lewo
                 //wezel.getY() - 20 -- w dol i  w góre
                 //decimalFormat.format((Double) ((Atrybut) wezel.getDane()).getEntropia()).length() * 13 -- długość
