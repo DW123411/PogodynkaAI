@@ -14,7 +14,7 @@ public class Okno extends JFrame implements ActionListener {
     String sciezkaDoPliku;
     Drzewo<ElementDrzewa> wczytywanie;
     Drzewo<ElementDrzewa> zapis;
-     Drzewo<ElementDrzewa> temp_done;
+     Wezel<ElementDrzewa> temp_done;
     ElementDrzewa[][] przyklad;
     Drzewo drzewo;
     DaneWejsciowe daneWejsciowe = null;
@@ -163,7 +163,7 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
-                this.temp_done = indukcja;
+                this.temp_done = indukcja.getKorzen();
             }
         } else if (zrodlo == menu.decyzja_okno) {
             if (daneWejsciowe != null) {
@@ -273,7 +273,8 @@ public class Okno extends JFrame implements ActionListener {
         else if (zrodlo==menu.accuracy){
             
 		         if(daneWejsciowe!=null){
-            new Accuracy(this.temp_done, this.daneWejsciowe);
+            new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy());
+
         }
         else {
              JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");

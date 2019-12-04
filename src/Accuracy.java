@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import java.util.*;
 /*
  dokladnosc : 
 ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladnosc . [ w procentach]
@@ -27,7 +27,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
 
         private JLabel label1;    private JLabel label2;    private JButton buton;
         
-         private    Drzewo<ElementDrzewa> temp_prepared_tree;
+         private    Wezel<ElementDrzewa> temp_prepared_tree;
           private   DaneWejsciowe data_classified ;
           private   ElementDrzewa[][] data_load ;
          private    float accuracy;private double dbl_accuracy;
@@ -50,11 +50,12 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             setLocationRelativeTo(null);           
         }
         public Accuracy(){}
-        public Accuracy(    Drzewo<ElementDrzewa> temp, DaneWejsciowe dane){
+        public Accuracy(  ElementDrzewa[][] dane_tree, ElementDrzewa[][] dane_uczace , ElementDrzewa[][] dane_test ){
            // super();
-            this.temp_prepared_tree= temp;
-            this.data_classified = dane; 
-            this.data_load = dane.get_klasyfikacja();
+           double procent_ucz = calculate_accuracy(dane_tree, dane_uczace,2);
+            double procent_test = calculate_accuracy(dane_tree, dane_test,2);
+          
+          
             buton = new JButton("OK");
             label1 = new JLabel("Dokładność ucząca : ");
             label2 = new JLabel("Dokładność testująca : ");
@@ -79,7 +80,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
         //dopasujSieDoZawartosci();
             setVisible(true);
             
-            calculate_accuracy();
+            setDoklUcz(procent_ucz); setDoklTest(procent_test);
            
         }
 
@@ -112,7 +113,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             int a = 0; 
             while(a!=100){
                 
-                new Downpressor();
+             
                 a++;
             }
             
@@ -142,67 +143,53 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             
         }
          
-         public void calculate_accuracy(){
-          try {
-              Wezel<ElementDrzewa> root = this.temp_prepared_tree.getKorzen();
-          
-             double max = 100 ;
-             int fail =0; 
-             int succed = 0 ;
-             while(!root.czyLisc()){
-                 for(int WIT=0;WIT<root.getLiczbaDzieci();WIT++){
-                 System.out.println(root.getDzieci().get(WIT));
-                 }
-                 root= root.getDziecko(fail);
-                 fail++;
-                 
-                 
-             }
-          }catch(Exception e){}
-             
-             
-             
-             
-             
-         }
-         
-         
-         private class Downpressor extends JFrame  {
-              JButton label;
-             public  Downpressor(){
-                 super();
-                 
-                 int a ; 
-                 int b; 
-                 Random rand= new Random();
-                 a= rand.nextInt(1280);
-                 b= rand.nextInt(1680);
-                 int tempa=a;
-                 int tempb=b;
-                    setSize( a, b);  // ustawienie rozmiarow okna
-                    a= rand.nextInt(1280);
-                 b= rand.nextInt(1680);
-            setLocation(b,a);
-             setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            // Pozyskanie powierzchni zawartości
-            Container  contents = getContentPane();     
-            // Utworzenie własnego panela z powierzchnią do rysowania figur
-            // i dodanie go do powierzchni (zawartości) okna
-            //setLayout(new GridLayout( 10, 50));
-            setLayout( null );
-            
-            this.label = new JButton("VAR");
-            label.setSize(tempa,tempb);  label.setLocation(0,0);
-            add(label);
-             
-        //dopasujSieDoZawartosci();
-            setVisible(true);
-             }
-             
-             
-     
-     
-     
- }
+      
+         /**
+          * ogolnie to powinna tablica drzewa byc wieksza wydaje mis ie 
+          */
+            public double calculate_accuracy(ElementDrzewa[][] dane_tree, ElementDrzewa[][]  dane_uczace, int YETI){
 
-    }
+                
+                ArrayList<String> temp_stringi = new ArrayList();
+                double match =0; switch(YETI){case 1 : {            
+for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
+                
+                 for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
+                    temp_stringi.add(dane_uczace[ILLECULAR][IMUCALURAR].getNazwa());
+                
+
+                    }
+            for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
+
+        for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
+                if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
+                    match++;}}}temp_stringi = new ArrayList();}
+                    double MAXIMIMALIZIUM = dane_uczace.length;
+                            
+               break;}case 2: { for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
+                 for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
+                    temp_stringi.add(dane_uczace[ILLECULAR][IMUCALURAR].getNazwa());
+                }            for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++)
+{for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
+                if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
+                    match++;}}}temp_stringi = new ArrayList();}double MAXIMIMALIZIUM = dane_uczace.length;
+                    double PERCENT_OF_QUANTIUDOMINATION = (100*match)/MAXIMIMALIZIUM;
+                return PERCENT_OF_QUANTIUDOMINATION; break;}default: {return 0;break;}
+
+
+
+
+
+}
+
+    return 0 ;
+
+
+
+                
+            
+            
+            
+ }
+            
+ }

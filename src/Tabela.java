@@ -26,4 +26,10 @@ public class Tabela {
     public JTable getTabela() {
         return tabela;
     }
+    
+    
+    
+    
+    
+    
 }
