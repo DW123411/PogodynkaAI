@@ -140,7 +140,34 @@ public class Okno extends JFrame implements ActionListener {
         zamkn.addActionListener(this);
         wyswietlanie.zmien_nazweMenuItem.addActionListener(this);
         wyswietlanie.usun_MenuItem.addActionListener(this);
-        menu.theme.addActionListener(this);
+        menu.theme.addActionListener(e->{
+            try {
+                theme.wybierzMotyw();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (UnsupportedLookAndFeelException ex) {
+                ex.printStackTrace();
+            } catch (InstantiationException ex) {
+                ex.printStackTrace();
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+            //moty=motyw.getPwsz();
+            dark=theme.getDark();
+            menu.setDark(theme.getDark());
+            menu.setMotyw(theme.getPwsz());
+            System.out.println(dark);
+            p.remove(menu);
+            menu=new Menuski();
+
+            p.add(menu, BorderLayout.NORTH);
+            ustawNasluchZdarzen();
+            SwingUtilities.updateComponentTreeUI(f);
+
+            pack();
+        });
 
     }
 
@@ -171,34 +198,6 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
                 this.temp_done = indukcja;
-            }else if (zrodlo == menu.theme) {
-                try {
-                    theme.wybierzMotyw();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (UnsupportedLookAndFeelException ex) {
-                    ex.printStackTrace();
-                } catch (InstantiationException ex) {
-                    ex.printStackTrace();
-                } catch (IllegalAccessException ex) {
-                    ex.printStackTrace();
-                }
-                //moty=motyw.getPwsz();
-                dark=theme.getDark();
-                menu.setDark(theme.getDark());
-                menu.setMotyw(theme.getPwsz());
-                System.out.println(dark);
-                p.remove(menu);
-                menu=new Menuski();
-
-                p.add(menu, BorderLayout.NORTH);
-                ustawNasluchZdarzen();
-                SwingUtilities.updateComponentTreeUI(f);
-
-                pack();
-
             }
         } else if (zrodlo == menu.decyzja_okno) {
             if (daneWejsciowe != null) {
