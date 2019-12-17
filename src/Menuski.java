@@ -48,31 +48,41 @@ public class Menuski extends JMenuBar {
         ImageIcon imgIcon9 = null;
         ImageIcon imgIcon10=null;
         ImageIcon imgIcon11=null;
+        ImageIcon imgIcon12=null;
+        ImageIcon imgIcon13=null;
+        ImageIcon imgIcon14=null;
 
         if(motyw==0){
             if(dark==0){
                 imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
-                imgIcon2 = new ImageIcon(getClass().getResource("icons/save.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
-                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveText.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
-                imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/draw.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
-                imgIcon11 = new ImageIcon(getClass().getResource("icons/view2.png"));}
-            if(dark==1){ imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
-                imgIcon2 = new ImageIcon(getClass().getResource("icons/save.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/show.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));}
+            if(dark==1){
+                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
-                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveText.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
-                imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/draw.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowaniedrk.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
-                imgIcon11 = new ImageIcon(getClass().getResource("icons/view2.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/show.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
             }}
         else if(motyw==1){
             imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
@@ -92,98 +102,98 @@ public class Menuski extends JMenuBar {
         cred = new JButton("<html></html>");
         cred.setIcon(imgIcon);
         cred.setToolTipText("<html>O Programie</html>");
-        cred.setPreferredSize(new Dimension(30, 30));
-        cred.setMaximumSize(new Dimension(30, 30));
+        cred.setPreferredSize(new Dimension(32, 32));
+        cred.setMaximumSize(new Dimension(32, 32));
 
         save = new JButton("<html></html>");
         save.setIcon(imgIcon4);
         save.setToolTipText("<html>Zapisz Jako TXT</html>");
-        save.setPreferredSize(new Dimension(30, 30));
-        save.setMaximumSize(new Dimension(30, 30));
+        save.setPreferredSize(new Dimension(32, 32));
+        save.setMaximumSize(new Dimension(32, 32));
 
         skalowanie = new JButton("<html></html>");
         skalowanie.setIcon(imgIcon9);
         skalowanie.setToolTipText("<html>Skalowanie 3/4 obrazu </html>");
-        skalowanie.setPreferredSize(new Dimension(30, 30));
-        skalowanie.setMaximumSize(new Dimension(30, 30));
+        skalowanie.setPreferredSize(new Dimension(32, 32));
+        skalowanie.setMaximumSize(new Dimension(32, 32));
 
         pokaz = new JButton("<html>Pokaz Tabele</html>");
-        pokaz.setIcon(imgIcon9);
+        pokaz.setIcon(imgIcon12);
         pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
-        pokaz.setPreferredSize(new Dimension(30, 30));
-        pokaz.setMaximumSize(new Dimension(30, 30));
+        pokaz.setPreferredSize(new Dimension(32, 32));
+        pokaz.setMaximumSize(new Dimension(32, 32));
 
 
         tree = new JButton("<html></html>");
         tree.setIcon(imgIcon4);
         tree.setToolTipText("<html>Zapisz drzewo jako TXT</html>");
-        tree.setPreferredSize(new Dimension(30, 30));
-        tree.setMaximumSize(new Dimension(30, 30));
+        tree.setPreferredSize(new Dimension(32, 32));
+        tree.setMaximumSize(new Dimension(32, 32));
 
         klasyfikacja_z_pliku = new JButton("<html></html>");
         klasyfikacja_z_pliku.setIcon(imgIcon5);
         klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");
-        klasyfikacja_z_pliku.setPreferredSize(new Dimension(30, 30));
-        klasyfikacja_z_pliku.setMaximumSize(new Dimension(30, 30));
+        klasyfikacja_z_pliku.setPreferredSize(new Dimension(32, 32));
+        klasyfikacja_z_pliku.setMaximumSize(new Dimension(32, 32));
 
         klasyfikacja_z_pliku2 = new JButton("<html></html>");
         klasyfikacja_z_pliku2.setIcon(imgIcon11);
         klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane do<br />wyboru decyzji</html>");
-        klasyfikacja_z_pliku2.setPreferredSize(new Dimension(30, 30));
-        klasyfikacja_z_pliku2.setMaximumSize(new Dimension(30, 30));
+        klasyfikacja_z_pliku2.setPreferredSize(new Dimension(32, 32));
+        klasyfikacja_z_pliku2.setMaximumSize(new Dimension(32, 32));
 
         show_klasyfikacja = new JButton("<html></html>");
         show_klasyfikacja.setIcon(imgIcon8);
         show_klasyfikacja.setToolTipText("<html>Wyświetl Klasyfikację</html>");
-        show_klasyfikacja.setPreferredSize(new Dimension(30, 30));
-        show_klasyfikacja.setMaximumSize(new Dimension(30, 30));
+        show_klasyfikacja.setPreferredSize(new Dimension(32, 32));
+        show_klasyfikacja.setMaximumSize(new Dimension(32, 32));
 
         wyś = new JButton("<html></html>");
         wyś.setIcon(imgIcon6);
         wyś.setToolTipText("<html>Rysuj  Drzewo</html>");
-        wyś.setPreferredSize(new Dimension(30, 30));
-        wyś.setMaximumSize(new Dimension(30, 30));
+        wyś.setPreferredSize(new Dimension(32, 32));
+        wyś.setMaximumSize(new Dimension(32, 32));
 
         zal = new JButton("<html></html>");
         zal.setToolTipText("<html>Wczytaj Drzewo</html>");
         zal.setIcon(imgIcon5);
-        zal.setPreferredSize(new Dimension(30, 30));
-        zal.setMaximumSize(new Dimension(30, 30));
+        zal.setPreferredSize(new Dimension(32, 32));
+        zal.setMaximumSize(new Dimension(32, 32));
 
         wycz = new JButton("<html></html>");
         wycz.setIcon(imgIcon7);
         wycz.setToolTipText("<html>Wyczyść</html>");
-        wycz.setPreferredSize(new Dimension(30, 30));
-        wycz.setMaximumSize(new Dimension(30, 30));
+        wycz.setPreferredSize(new Dimension(32, 32));
+        wycz.setMaximumSize(new Dimension(32, 32));
 
         rekord3 = new JButton("<html></html>");
-        rekord3.setIcon(imgIcon9);
+        rekord3.setIcon(imgIcon13);
         rekord3.setToolTipText("<html>Rozmiary Zbiorów</html>");
-        rekord3.setPreferredSize(new Dimension(30, 30));
-        rekord3.setMaximumSize(new Dimension(30, 30));
+        rekord3.setPreferredSize(new Dimension(32, 32));
+        rekord3.setMaximumSize(new Dimension(32, 32));
 
         zam = new JButton("<html></html>");
         zam.setIcon(imgIcon3);
         zam.setToolTipText("<html>Wyjście z programu</html>");
-        zam.setPreferredSize(new Dimension(30, 30));
-        zam.setMaximumSize(new Dimension(30, 30));
+        zam.setPreferredSize(new Dimension(32, 32));
+        zam.setMaximumSize(new Dimension(32, 32));
 
         jpeg = new JButton("<html></html>");
         jpeg.setIcon(imgIcon2);
         jpeg.setToolTipText("<html>Zapisz jako obraz</html>");
-        jpeg.setPreferredSize(new Dimension(30, 30));
-        jpeg.setMaximumSize(new Dimension(30, 30));
+        jpeg.setPreferredSize(new Dimension(32, 32));
+        jpeg.setMaximumSize(new Dimension(32, 32));
 
         decyzja_okno = new JButton("<html></html>");
         decyzja_okno.setIcon(imgIcon8);
         decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
-        decyzja_okno.setPreferredSize(new Dimension(30, 30));
-        decyzja_okno.setMaximumSize(new Dimension(30, 30));
+        decyzja_okno.setPreferredSize(new Dimension(32, 32));
+        decyzja_okno.setMaximumSize(new Dimension(32, 32));
      accuracy = new JButton("<html></html>");
         accuracy.setIcon(imgIcon10);
         accuracy.setToolTipText("<html>Dokładność.</html>");
-        accuracy.setPreferredSize(new Dimension(30, 30));
-        accuracy.setMaximumSize(new Dimension(30, 30));
+        accuracy.setPreferredSize(new Dimension(32, 32));
+        accuracy.setMaximumSize(new Dimension(32, 32));
 
         zbior = new JLabel("<html>Ilość rekordów</html>");
         zbior.setToolTipText("<html>Ilość rekordów:</html>");
@@ -231,7 +241,7 @@ public class Menuski extends JMenuBar {
 
 
         glebokosc1 = new JButton("<html></html>");
-        glebokosc1.setIcon(imgIcon4);
+        glebokosc1.setIcon(imgIcon14);
         glebokosc1.setToolTipText("<html>Rozmiar maksymalnej głębokości</html>");
         glebokosc1.setPreferredSize(new Dimension(30, 30));
         glebokosc1.setMaximumSize(new Dimension(30, 30));
