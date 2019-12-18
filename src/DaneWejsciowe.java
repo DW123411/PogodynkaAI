@@ -483,4 +483,16 @@ public class DaneWejsciowe {
 
         return atrybuty.length;
     }
+    
+    
+    public static void DEBUG_PRINT_TABLE(ElementDrzewa[][] tab){
+        for(int i=0;i<tab.length;i++){
+        for(int j=0; j < tab[i].length;j++){
+            System.out.print("["+tab[i][j].getNazwa()+"]");
+        }
+            System.out.println();
+        }
+    
+    
+    }
 }

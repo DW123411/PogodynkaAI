@@ -189,9 +189,10 @@ public class Okno extends JFrame implements ActionListener {
 
                 int poziom = wyswietlanie.getPoziom((Wezel)listaT.remove(1),new Integer(0));
 
-
+                if(DEBUG){
                 System.out.println("poziom "+poziom );
                 System.out.println();
+                }
                 wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
                 if(daneWejsciowe2 != null) {
                     wyswietlanie.getDecyzja(indukcja.getKorzen());
@@ -341,6 +342,12 @@ public class Okno extends JFrame implements ActionListener {
         else if (zrodlo==menu.accuracy){
             
 		         if(daneWejsciowe!=null&&daneWejsciowe2!=null){
+                                         if(DEBUG)
+                         {daneWejsciowe2.print_in_console();
+                             System.out.println("$#!@$!");
+                             DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorUczacy());
+                             System.out.println("$#!@$!");
+                             DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorTestowy());}
             new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy());
 
         }

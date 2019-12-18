@@ -53,7 +53,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
         public Accuracy(  ElementDrzewa[][] dane_tree, ElementDrzewa[][] dane_uczace , ElementDrzewa[][] dane_test ){
            // super();
            double procent_ucz = calculate_accuracy(dane_tree, dane_uczace,2);
-            double procent_test = calculate_accuracy(dane_tree, dane_test,2);
+            double procent_test = calculate_accuracy(dane_tree, dane_test,1);
           
           
             buton = new JButton("OK");
@@ -153,51 +153,46 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
                 ArrayList<String> temp_stringi = new ArrayList();
                 double match =0;
                 double FinalMatcher =0;
-                switch(YETI){case 1 : {            
-for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
-                
-                 for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
+                switch(YETI){case 1 : { for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
+                 for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length-1;IMUCALURAR++ ){ 
                     temp_stringi.add(dane_uczace[ILLECULAR][IMUCALURAR].getNazwa());
-                
-
-                    }
-            for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
-
-        for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
+                }            
+                 for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
+                    for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
                 if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
-                    match++;}}}temp_stringi = new ArrayList();}
-                    double MAXIMIMALIZIUM = dane_uczace.length;break;}
+                    match++;}
+                    }
+                  if(match== dane_tree[INTERCELKULAR].length-1){FinalMatcher++;}   }  match=0;temp_stringi = new ArrayList();}
+                    
+                    double MAXIMIMALIZIUM = (double)dane_tree.length;
+                    double PERCENT_OF_QUANTIUDOMINATION = (double) ((100*FinalMatcher));
+                    PERCENT_OF_QUANTIUDOMINATION=PERCENT_OF_QUANTIUDOMINATION/MAXIMIMALIZIUM;
+                    PERCENT_OF_QUANTIUDOMINATION=(double)Math.round(PERCENT_OF_QUANTIUDOMINATION);
+                    return PERCENT_OF_QUANTIUDOMINATION; }
                 
                 case 2: { for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
                  for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
                     temp_stringi.add(dane_uczace[ILLECULAR][IMUCALURAR].getNazwa());
                 }            
-                 //for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
-                    for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[ILLECULAR].length;EXETUCULMIN++){
-                if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[ILLECULAR][EXETUCULMIN].getNazwa())){
-                    match++;}} if(match== dane_tree[ILLECULAR].length-1){FinalMatcher++;}     match=0;temp_stringi = new ArrayList();}
+                 System.out.println(temp_stringi.size());
+                 for(int Etgr=0;Etgr<temp_stringi.size();Etgr++){
+                 System.out.print(temp_stringi.get(Etgr));
+                 
+                 }
+                 for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
+                    for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
+                if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
+                    match++;}
+                    }
+                  if(match== dane_tree[INTERCELKULAR].length-1){FinalMatcher++;}     match=0;}temp_stringi = new ArrayList();}
                     
-                    double MAXIMIMALIZIUM = (double)dane_uczace.length;
+                    double MAXIMIMALIZIUM = (double)dane_tree.length;
                     double PERCENT_OF_QUANTIUDOMINATION = (double) ((100*FinalMatcher));
                     PERCENT_OF_QUANTIUDOMINATION=PERCENT_OF_QUANTIUDOMINATION/MAXIMIMALIZIUM;
                     PERCENT_OF_QUANTIUDOMINATION=(double)Math.round(PERCENT_OF_QUANTIUDOMINATION);
                     return PERCENT_OF_QUANTIUDOMINATION; }
                default: {return 0;}
-
-
-
-
-
-}
-
-    return 0 ;
-
-
-
-                
-            
-            
-            
+}       
  }
             
  }
