@@ -12,6 +12,7 @@ public class DaneWejsciowe {
     private Object[][] wartosci_atr_i_decyzja;
     private Object[][] wartosci_atr_i_decyzja_uczace ;
     private Object[][] wartosci_atr_i_decyzja_testujace ;
+    private int maxGlebokosc;
    boolean DEBUG = false; 
     /**
      * zwykły konstruktor klasy klasyfikacja ze stałym rozmiarem 50x50
@@ -210,6 +211,10 @@ public class DaneWejsciowe {
     public void setZbiorUczacy(ElementDrzewa[][] zbiorUczacy) { this.zbiorUczacy = zbiorUczacy; }
 
     public void setZbiorTestowy(ElementDrzewa[][] zbiorTestowy) { this.zbiorTestowy = zbiorTestowy; }
+
+    public void setMaxGlebokosc(int maxGlebokosc) { this.maxGlebokosc = maxGlebokosc; }
+
+    public int getMaxGlebokosc() { return maxGlebokosc; }
 
     /**
      * metoda zwracajaca liczbe elementow w tablicy

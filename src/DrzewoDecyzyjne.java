@@ -7,7 +7,7 @@ public class DrzewoDecyzyjne {
         this.daneWejsciowe = daneWejsciowe;
     }
 
-    public Drzewo<ElementDrzewa> indukcja(ElementDrzewa[][] przyklady, Atrybut[] atrybuty, Drzewo<ElementDrzewa> def) {
+    public Drzewo<ElementDrzewa> indukcja(ElementDrzewa[][] przyklady, Atrybut[] atrybuty, Drzewo<ElementDrzewa> def, Wezel<ElementDrzewa> ostatni) {
         //sprawdzenie ilości "Yes" i "No" w celu określenia ewentualnej jednorodności decyzji
         int iloscY = 0;
         int iloscN = 0;
@@ -17,6 +17,11 @@ public class DrzewoDecyzyjne {
             } else {
                 iloscN++;
             }
+        }
+        int poziom = 0;
+        if(ostatni != null){
+            Wyswietlanie w = new Wyswietlanie();
+            poziom = w.getPoziom(ostatni,0);
         }
         //jeśli tablica przykładów jest pusta to zwracamy drzewo przekazane rekurencyjnie
         if (przyklady.length == 1 || przyklady.length == 0) {
@@ -29,7 +34,7 @@ public class DrzewoDecyzyjne {
                 return new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), new Decyzja(daneWejsciowe.getOpcja2())));
             }
             //jeśli tablica atrybutów jest pusta to zwracamy nowe drzewo z decyzją z pozostałych przykładów oraz rodzicem z drzewa przekazanego rekurencyjnie
-        } else if (atrybuty.length == 0) {
+        } else if (atrybuty.length == 0 || (daneWejsciowe.getMaxGlebokosc() >= 1 && poziom >= daneWejsciowe.getMaxGlebokosc())) {
             return new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(def.getKorzen().getRodzic(), decyduj(przyklady)));
         } else {
             //wybór najlepszego atrybutu i stworzenie węzła
@@ -59,8 +64,11 @@ public class DrzewoDecyzyjne {
                         j++;
                     }
                 }
+                if(poziom<=0){
+                    poziom = 1;
+                }
                 //rekurencyjne wywołanie indukcji w danej gałęzi powstającego drzewa
-                Drzewo<ElementDrzewa> galaz = indukcja(przykladyDlaDanejWartosci, tmpAtrybuty, new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(obj, decyduj(przyklady))));
+                Drzewo<ElementDrzewa> galaz = indukcja(przykladyDlaDanejWartosci, tmpAtrybuty, new Drzewo<ElementDrzewa>(new Wezel<ElementDrzewa>(obj, decyduj(przyklady))),new Wezel<ElementDrzewa>(obj, decyduj(przyklady)));
                 //dodanie gałęzi do węzła wartości atrybutu
                 obj.dodajDziecko(galaz.getKorzen());
             }

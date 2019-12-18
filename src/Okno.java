@@ -181,7 +181,7 @@ public class Okno extends JFrame implements ActionListener {
             ukryjTabele();
             if (daneWejsciowe != null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
-                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
                 zapis = indukcja;
                 lista = new LinkedList();
                 LinkedList listaT = new LinkedList();
@@ -525,7 +525,7 @@ public class Okno extends JFrame implements ActionListener {
                     daneWejsciowe.podzialZbioru(ilosc / 2);
                 }
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
-                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
                 zapis = indukcja;
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
@@ -543,6 +543,7 @@ public class Okno extends JFrame implements ActionListener {
                     if (!m.equals("")) {
                         if (Integer.parseInt(m) > 0) {
                             // daneWejsciowe.podzialZbioru(Integer.parseInt(m));
+                            daneWejsciowe.setMaxGlebokosc(Integer.parseInt(m));
                         } else {
                             JOptionPane.showMessageDialog(f, "Głębokość nie może być zerowa lub mniejsza niż zero");
                             menu.glebokosc1.setEnabled(false);
@@ -585,7 +586,7 @@ public class Okno extends JFrame implements ActionListener {
 
             if (daneWejsciowe != null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
-                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null);
+                Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
                 zapis = indukcja;
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
