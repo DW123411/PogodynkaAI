@@ -505,7 +505,15 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
 
     }
+    public int getPoziom(Wezel wezel,int poziom){
+        while(wezel.getRodzic() != null){
+            poziom++;
+            Wezel rodzic = wezel.getRodzic();
+            wezel = rodzic;
+        }
 
+        return poziom;
+    }
 
     public void obliczanieWspozednychY(Wezel wezel, int podzial, Drzewo drzewo, Wezel korzen) {
         if (wezel.equals(korzen)) {

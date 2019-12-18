@@ -1,5 +1,4 @@
 
-import com.bulenkov.darcula.DarculaLaf;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -7,9 +6,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.io.File;
 public class Okno extends JFrame implements ActionListener {
     Menuski menu = new Menuski();
     Wyswietlanie wyswietlanie = new Wyswietlanie();
@@ -186,8 +185,12 @@ public class Okno extends JFrame implements ActionListener {
                 zapis = indukcja;
                 lista = new LinkedList();
                 LinkedList listaT = new LinkedList();
-                //lista = wyswietlanie.dajWezly(indukcja.getKorzen(), listaT);
+                lista = wyswietlanie.dajWezly(indukcja.getKorzen(), listaT);
 
+                int poziom = wyswietlanie.getPoziom((Wezel)listaT.remove(1),new Integer(0));
+
+
+                System.out.println("poziom "+poziom );
                 System.out.println();
                 wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
                 if(daneWejsciowe2 != null) {
@@ -429,6 +432,7 @@ public class Okno extends JFrame implements ActionListener {
             wyswietlanie.wyczysc();
 
         } else if (zrodlo == menu.pokaz) {
+            if(daneWejsciowe != null){
             p.remove(p2);
             Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
             Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
@@ -486,7 +490,7 @@ public class Okno extends JFrame implements ActionListener {
                         popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
                     }
                 }
-            });
+            });}
         } else if (zrodlo == menu.wycz) {
             wyswietlanie.wyczysc();
 
