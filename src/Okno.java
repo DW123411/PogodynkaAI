@@ -348,7 +348,15 @@ public class Okno extends JFrame implements ActionListener {
                              DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorUczacy());
                              System.out.println("$#!@$!");
                              DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorTestowy());}
-            new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy());
+                                         if(daneWejsciowe2.get_klasyfikacja()!=null){
+                                               if(daneWejsciowe.getZbiorUczacy()!=null){
+                                                     if(daneWejsciowe.getZbiorTestowy()!=null){
+                                                         new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy());
+                                                     }   }   }
+                                         else {
+                                             JOptionPane.showMessageDialog(null, "Nie można obliczyć dokładności.");  
+                                         }
+            
 
         }
         else {
