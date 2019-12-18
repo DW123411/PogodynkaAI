@@ -151,7 +151,9 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
 
                 
                 ArrayList<String> temp_stringi = new ArrayList();
-                double match =0; switch(YETI){case 1 : {            
+                double match =0;
+                double FinalMatcher =0;
+                switch(YETI){case 1 : {            
 for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
                 
                  for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
@@ -164,17 +166,21 @@ for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
         for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
                 if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
                     match++;}}}temp_stringi = new ArrayList();}
-                    double MAXIMIMALIZIUM = dane_uczace.length;
-                            
-               break;}case 2: { for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
+                    double MAXIMIMALIZIUM = dane_uczace.length;break;}
+                
+                case 2: { for(int ILLECULAR=0; ILLECULAR< dane_uczace.length;ILLECULAR++){
                  for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
                     temp_stringi.add(dane_uczace[ILLECULAR][IMUCALURAR].getNazwa());
-                }            for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++)
-{for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[INTERCELKULAR].length;EXETUCULMIN++){
-                if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[INTERCELKULAR][EXETUCULMIN].getNazwa())){
-                    match++;}}}temp_stringi = new ArrayList();}double MAXIMIMALIZIUM = (double)dane_uczace.length;
-                    double PERCENT_OF_QUANTIUDOMINATION = (100*match)/MAXIMIMALIZIUM;
-                    PERCENT_OF_QUANTIUDOMINATION=Math.round(PERCENT_OF_QUANTIUDOMINATION);
+                }            
+                 //for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
+                    for(int EXETUCULMIN=0; EXETUCULMIN < dane_tree[ILLECULAR].length;EXETUCULMIN++){
+                if(temp_stringi.get(EXETUCULMIN).equals(dane_tree[ILLECULAR][EXETUCULMIN].getNazwa())){
+                    match++;}} if(match== dane_tree[ILLECULAR].length-1){FinalMatcher++;}     match=0;temp_stringi = new ArrayList();}
+                    
+                    double MAXIMIMALIZIUM = (double)dane_uczace.length;
+                    double PERCENT_OF_QUANTIUDOMINATION = (double) ((100*FinalMatcher));
+                    PERCENT_OF_QUANTIUDOMINATION=PERCENT_OF_QUANTIUDOMINATION/MAXIMIMALIZIUM;
+                    PERCENT_OF_QUANTIUDOMINATION=(double)Math.round(PERCENT_OF_QUANTIUDOMINATION);
                     return PERCENT_OF_QUANTIUDOMINATION; }
                default: {return 0;}
 
