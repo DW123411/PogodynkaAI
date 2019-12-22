@@ -50,6 +50,40 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             setLocationRelativeTo(null);           
         }
         public Accuracy(){}
+        /*
+        konstr. z danymi ze sprawdzenia zbiorow uczacych i testujacych 
+        */
+        public Accuracy(int TestMax, int TestSucces, int TeachMax, int TeachSucces){
+             
+            buton = new JButton("OK");
+            label1 = new JLabel("Dokładność ucząca : ");
+            label2 = new JLabel("Dokładność testująca : ");
+            setSize( 250, 250);  // ustawienie rozmiarow okna
+            setLocation(500,500);
+            // Pozyskanie powierzchni zawartości
+            Container  contents = getContentPane();     
+            // Utworzenie własnego panela z powierzchnią do rysowania figur
+            // i dodanie go do powierzchni (zawartości) okna
+            //setLayout(new GridLayout( 10, 50));
+            setLayout( null );
+            label1.setSize(200,25);  label1.setLocation(10,50);
+
+            label2.setSize(200,25);  label2.setLocation(10,75);
+
+            buton.setSize(100,25);  buton.setLocation(50,100);
+            add(label1);
+             add(label2);
+            buton.addActionListener(this);
+
+            add(buton);
+        //dopasujSieDoZawartosci();
+            setVisible(true);
+            double ProcentTest = ObliczAccuracyMain(TestMax, TestSucces);
+            double ProcentTeach = ObliczAccuracyMain(TeachMax, TeachSucces);
+            
+            setDoklUcz(ProcentTeach); setDoklTest(ProcentTest);
+           
+        }
         public Accuracy(  ElementDrzewa[][] dane_tree, ElementDrzewa[][] dane_uczace , ElementDrzewa[][] dane_test , Wezel root){
            // super();
 //           double procent_ucz = calculate_accuracy(dane_tree, dane_uczace,2);
@@ -87,6 +121,15 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
            
         }
 
+        public double ObliczAccuracyMain(int Max, int Succes){
+            
+            double MAXIMIMALIZIUM = (double)Max;
+                    double PERCENT_OF_QUANTIUDOMINATION = (double) ((100*Succes));
+                    PERCENT_OF_QUANTIUDOMINATION=PERCENT_OF_QUANTIUDOMINATION/MAXIMIMALIZIUM;
+                    PERCENT_OF_QUANTIUDOMINATION=(double)Math.round(PERCENT_OF_QUANTIUDOMINATION);
+                    
+            return PERCENT_OF_QUANTIUDOMINATION;
+        }
         /**
          * metoda ustawia napis labela z atrybutem wejsciowym 
          * 1 dla pierwszego(uczaca dokladnosc) 

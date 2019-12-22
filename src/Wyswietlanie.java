@@ -25,7 +25,10 @@ public class Wyswietlanie extends JPanel implements ActionListener {
     LinkedList<Wezel> wezly = new LinkedList<>();
     LinkedList<Wezel> wezlyN = new LinkedList<>();
     LinkedList<Wezel> wezlyDroga = new LinkedList<>();
-
+     int AccuracyTestMax=0;
+         int AccuracyTestSucces =0;
+    int AccuracyTeachMax = 0 ;
+    int AccuracyTeachSucces= 0 ;
 
     //konstruktor
     public Wyswietlanie() {
@@ -82,7 +85,19 @@ public class Wyswietlanie extends JPanel implements ActionListener {
         zmien_nazweMenuItem.addActionListener(this);
         usun_MenuItem.addActionListener(this);
     }
-
+    
+        public int getAccuracyTestMax(){
+            return this.AccuracyTestMax;
+        }
+public int getAccuracyTestSucces(){
+            return this.AccuracyTestSucces;
+        }
+public int getAccuracyTeachMax(){
+            return this.AccuracyTeachMax;
+        }
+public int getAccuracyTeachSucces(){
+            return this.AccuracyTeachSucces;
+        }
     @Override
     public void actionPerformed(ActionEvent e) {
         String label = e.getActionCommand();
@@ -862,7 +877,8 @@ public class Wyswietlanie extends JPanel implements ActionListener {
 
     public void sprawdzTestowy(Wezel wezel){
         ElementDrzewa zbiorTestowy[][] = o.daneWejsciowe.getZbiorTestowy();
-
+        this.AccuracyTestMax =0;
+        this.AccuracyTestSucces =0;
         int szerokosc = 0;
         for(int g=0;g<1;g++){
             for(int f=0;f<zbiorTestowy[g].length;f++){
@@ -968,9 +984,12 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                             if(tmpww.czyLisc()){
                                 if(zbiorTestowy[j][zbiorTestowy[j].length-2].toString().equals(tmpww.toString())){
                                     zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("OK");
+                                    this.AccuracyTestMax++;
+                                    this.AccuracyTestSucces++;
                                 }
                                 else {
                                     zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("Błąd");
+                                    this.AccuracyTestMax++;
                                 }
                             }
                             else {
@@ -983,9 +1002,87 @@ public class Wyswietlanie extends JPanel implements ActionListener {
                 }
 
             }
-
+                
     }
 
+    public void sprawdzIprzeliczUczacy(Wezel wezel){
+           ElementDrzewa zbiorUcz[][] = o.daneWejsciowe.getZbiorUczacy();
+        this.AccuracyTeachMax =0;
+        this.AccuracyTeachSucces =0;
+        int szerokosc = 0;
+        for(int g=0;g<1;g++){
+            for(int f=0;f<zbiorUcz[g].length;f++){
+                szerokosc++;
+            }
+        }
+        if(zbiorUcz[0][szerokosc-1].toString().equals("Wynik Testu")){
+
+        }
+        else {
+            ElementDrzewa tmp[][] = new ElementDrzewa[zbiorUcz.length][szerokosc];
+            for (int j = 0; j < tmp.length; j++) {
+                for (int o = 0; o < tmp[j].length; o++) {
+                    tmp[j][o] = zbiorUcz[j][o];
+                }
+            }
+            zbiorUcz = new ElementDrzewa[tmp.length][szerokosc + 1];
+            for (int j = 0; j < tmp.length; j++) {
+                for (int o = 0; o < tmp[j].length; o++) {
+                    if (j == 0) {
+
+                        zbiorUcz[j][zbiorUcz[j].length - 1] = new Atrybut("Wynik Testu");
+                    }
+                    zbiorUcz[j][o] = tmp[j][o];
+                }
+            }
+        }
+    for(int j=1; j<zbiorUcz.length;j++){
+        sprawdzUcz(wezel,zbiorUcz,j);
+        }
+        //o.daneWejsciowe.setZbiorTestowy(zbiorUcz);
+        
+    }
+    
+    private void sprawdzUcz(Wezel wezel,ElementDrzewa[][] zbiorUcz,int j){
+         int pozycja = 0;
+
+            String nazwa = wezel.toString();
+            for (int i = 0; i < zbiorUcz[0].length - 1; i++) {
+                if (zbiorUcz[0][i].toString().equals(nazwa)) {
+                    pozycja = i;
+                }
+            }
+            String nazwaSpr = zbiorUcz[j][pozycja].toString();
+            for(int p = 0; p<wezel.getDzieci().size(); p++){
+                Wezel tmpW = wezel.getDziecko(p);
+                zbiorUcz[j][zbiorUcz[j].length-1] = new WartoscAtrybutu("Błąd-brak drogi"); //może do zmiany Wartość atrybutu na coś innego
+                if(tmpW.toString().equals(nazwaSpr)){
+
+                    if(tmpW.getDzieci().size()!=0){
+                        for(int a = 0; a<tmpW.getDzieci().size(); a++){
+                            Wezel tmpww = tmpW.getDziecko(a);
+                            if(tmpww.czyLisc()){
+                                if(zbiorUcz[j][zbiorUcz[j].length-2].toString().equals(tmpww.toString())){
+                                    zbiorUcz[j][zbiorUcz[j].length-1] = new WartoscAtrybutu("OK");
+                                    this.AccuracyTeachMax++;
+                                    this.AccuracyTeachSucces++;
+                                }
+                                else {
+                                    zbiorUcz[j][zbiorUcz[j].length-1] = new WartoscAtrybutu("Błąd");
+                                    this.AccuracyTeachMax++;
+                                }
+                            }
+                            else {
+                                sprawdzUcz(tmpww,zbiorUcz,j);
+                            }
+
+                        }
+                    }
+                    break;
+                }
+
+            }
+    }
 
     public void credits() {
         ImageIcon icon = new ImageIcon(getClass().getResource("icons/boink.png"));

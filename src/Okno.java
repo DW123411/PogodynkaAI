@@ -35,13 +35,16 @@ public class Okno extends JFrame implements ActionListener {
     JLabel label;
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
-    boolean DEBUG = false;
+    
     public int funny = 0;
     public static int moty;
     public static int dark;
     wybierzMotyw theme = new wybierzMotyw();
     Wezel root;
-
+    // ##################### debug
+    boolean DEBUG = true;
+    // #################### debug
+    
 
     public Okno() {
         wyswietlanie.setOkno(this);
@@ -195,6 +198,7 @@ public class Okno extends JFrame implements ActionListener {
                 System.out.println();
                 }
                 wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                wyswietlanie.sprawdzIprzeliczUczacy(indukcja.getKorzen());
                 if(daneWejsciowe2 != null) {
                     wyswietlanie.getDecyzja(indukcja.getKorzen());
                 }
@@ -353,7 +357,12 @@ public class Okno extends JFrame implements ActionListener {
                                          if(daneWejsciowe2.get_klasyfikacja()!=null){
                                                if(daneWejsciowe.getZbiorUczacy()!=null){
                                                      if(daneWejsciowe.getZbiorTestowy()!=null){
-                                                         new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
+                                                      //   new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
+                                                      new Accuracy(wyswietlanie.AccuracyTestMax, wyswietlanie.AccuracyTestSucces, wyswietlanie.AccuracyTeachMax, wyswietlanie.AccuracyTeachSucces);
+                                                     if(DEBUG){
+                                                         System.out.println("Accuracy Test : Max:"+wyswietlanie.AccuracyTestMax+" , Succes:"+wyswietlanie.AccuracyTestSucces);
+                                                         System.out.println("Accuracy Teach : Max:"+wyswietlanie.AccuracyTeachMax+" , Succes:"+wyswietlanie.AccuracyTeachSucces);
+                                                     }
                                                      }   }   }
                                          else {
                                              JOptionPane.showMessageDialog(null, "Nie można obliczyć dokładności.");  
