@@ -527,6 +527,8 @@ public class Okno extends JFrame implements ActionListener {
         } else if (zrodlo == menu.rekord3) {
 
             String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego", "10");
+         //   System.out.print("#m from input  : "+m);
+                if(m!=null){
             wyswietlanie.wyczysc();
             ukryjTabele();
             if (daneWejsciowe != null) {
@@ -551,6 +553,7 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
+                }
         } else if (zrodlo == menu.glebokosc1) {
             try {
                 String m = JOptionPane.showInputDialog("Podaj okreslona głebokosc", "3");
