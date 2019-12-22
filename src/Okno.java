@@ -40,6 +40,7 @@ public class Okno extends JFrame implements ActionListener {
     public static int moty;
     public static int dark;
     wybierzMotyw theme = new wybierzMotyw();
+    Wezel root;
 
 
     public Okno() {
@@ -199,6 +200,7 @@ public class Okno extends JFrame implements ActionListener {
                 }
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
                 indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                this.root = indukcja.getKorzen();
                 wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
@@ -351,7 +353,7 @@ public class Okno extends JFrame implements ActionListener {
                                          if(daneWejsciowe2.get_klasyfikacja()!=null){
                                                if(daneWejsciowe.getZbiorUczacy()!=null){
                                                      if(daneWejsciowe.getZbiorTestowy()!=null){
-                                                         new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy());
+                                                         new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
                                                      }   }   }
                                          else {
                                              JOptionPane.showMessageDialog(null, "Nie można obliczyć dokładności.");  

@@ -50,12 +50,15 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             setLocationRelativeTo(null);           
         }
         public Accuracy(){}
-        public Accuracy(  ElementDrzewa[][] dane_tree, ElementDrzewa[][] dane_uczace , ElementDrzewa[][] dane_test ){
+        public Accuracy(  ElementDrzewa[][] dane_tree, ElementDrzewa[][] dane_uczace , ElementDrzewa[][] dane_test , Wezel root){
            // super();
-           double procent_ucz = calculate_accuracy(dane_tree, dane_uczace,2);
-            double procent_test = calculate_accuracy(dane_tree, dane_test,1);
+//           double procent_ucz = calculate_accuracy(dane_tree, dane_uczace,2);
+//            double procent_test = calculate_accuracy(dane_tree, dane_test,1);
           
-          
+           double procent_ucz = calculate_accuracy_from_tree(root, dane_uczace);
+            double procent_test = calculate_accuracy_from_tree(root, dane_test);
+            
+            
             buton = new JButton("OK");
             label1 = new JLabel("Dokładność ucząca : ");
             label2 = new JLabel("Dokładność testująca : ");
@@ -195,4 +198,84 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
 }       
  }
             
+            public double calculate_accuracy_from_tree(Wezel root, ElementDrzewa[][] dane){
+                int MAXIM= 0; 
+                
+           
+                
+                
+             
+            
+              return 0;
+           
  }
+            
+            public void dalejdrzewo(Wezel root){
+                
+                
+             while (!root.czyLisc()) {
+            LinkedList<Wezel> lista = new LinkedList<Wezel>();
+            for (int i = 0; i < root.getDzieci().size(); i++) {
+                lista.add((Wezel) root.getDzieci().get(i));
+            } //list przechowująca dzieci
+            while (!lista.isEmpty()) {
+                Wezel<ElementDrzewa> w = lista.remove(0);
+                
+                System.out.println("nazwa"+w.getDane().getNazwa());
+                 System.out.println("klasa"+w.getDane().getClass());
+                 
+              
+                 
+            }
+            
+          
+            
+            
+        }
+                
+            }
+            
+            
+            
+ }                  //end class
+
+
+
+
+
+//                
+//                
+//                
+//                g3.drawString(w.toString(), (w.getX() - (3 * w.toString().length())), w.getY());
+//                button = new PrzyciskDrzewo(w.toString());
+//                if (w.getDane().getClass().getName() == "Atrybut") {
+//                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+//                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
+//                   
+//
+//
+//                } else if (w.getDane().getClass().getName() == "WartoscAtrybutu") {
+//                    button = new PrzyciskDrzewo(w.toString());
+//                    button.setToolTipText(button.getText());
+//                    ToolTipManager.sharedInstance().registerComponent(button);
+//                    popupMenu = new JPopupMenu("Title");
+//                    usun_MenuItem.setElement((ElementDrzewa) w.getDane());
+//                    zmien_nazweMenuItem.setElement((ElementDrzewa) w.getDane());
+//                    popupMenu.add(zmien_nazweMenuItem);
+//                    popupMenu.addSeparator();
+//                    popupMenu.add(usun_MenuItem);
+//                    button.setComponentPopupMenu(popupMenu);
+//                    button.setBackground(Color.green);
+//
+//                } else {
+//                    popupMenu = new JPopupMenu("Title");
+//                    dajDroge.setWezel((Wezel)w);
+//                    popupMenu.add(dajDroge);
+//                    button.setComponentPopupMenu(popupMenu);
+//                    button.setBackground(Color.cyan);
+//                    button.setWezel(w);
+//                }
+             
+            
+            
+            
