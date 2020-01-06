@@ -199,6 +199,35 @@ public class Okno extends JFrame implements ActionListener {
 
             pack();
         });
+         menubar.motywy.addActionListener(e->{
+            try {
+                String system = System.getProperty("os.name");
+                theme.wybierzMotyw(system);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (UnsupportedLookAndFeelException ex) {
+                ex.printStackTrace();
+            } catch (InstantiationException ex) {
+                ex.printStackTrace();
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+            //moty=motyw.getPwsz();
+            dark=theme.getDark();
+            menu.setDark(theme.getDark());
+            menu.setMotyw(theme.getPwsz());
+            System.out.println(dark);
+            p.remove(menu);
+            menu=new Menuski();
+
+            p.add(menu, BorderLayout.NORTH);
+            ustawNasluchZdarzen();
+            SwingUtilities.updateComponentTreeUI(f);
+
+            pack();
+        });
 
     }
 
@@ -239,6 +268,10 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
                
             }
+            else {
+                    JOptionPane.showMessageDialog(null,"Najpierw należy wczytać dane.");
+                 }
+        } 
             //        theme.setToolTipText("<html>Wybieranie Motywu </html>");
             else if (zrodlo == menu.theme|| zrodlo == menubar.motywy) {
                 try {
@@ -271,7 +304,7 @@ public class Okno extends JFrame implements ActionListener {
               
             }
 
-        } 
+         
         //  glebokoscrekord = new JTextField("", 1);
         else if (zrodlo == menu.glebokoscrekord) {
 
@@ -401,6 +434,23 @@ public class Okno extends JFrame implements ActionListener {
         }
          //         klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");                
         else if (zrodlo == menu.klasyfikacja_z_pliku|| zrodlo == menubar.wczytalldata) {
+            
+            boolean nadpis = true;
+            if(daneWejsciowe!=null){
+                
+                 int a = JOptionPane.showConfirmDialog(this, "Czy zastąpić aktualnie wczytane dane?", "Uwaga", JOptionPane.WARNING_MESSAGE); 
+           if(a==0){       
+               nadpis = true; 
+                
+            }
+           else { nadpis = false; }
+           
+           
+            }   //   END  if(daneWejsciowe!=null){
+            
+            if(nadpis){  
+                
+            
             boolean spr = otworzPlik();
             if (spr) {
                 p.remove(p2);
@@ -460,6 +510,8 @@ public class Okno extends JFrame implements ActionListener {
             } else if (!spr) {
                 //JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
             }
+            }
+            
         }
        /*  else if (zrodlo==menu.show_klasyfikacja){
            if(daneWejsciowe ==null){
@@ -472,6 +524,22 @@ public class Okno extends JFrame implements ActionListener {
         
     //        klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane do<br />wyboru decyzji</html>");
         else if (zrodlo == menu.klasyfikacja_z_pliku2|| zrodlo == menubar.wczytdladecyzji) {
+           
+             boolean nadpis = true;
+            if(daneWejsciowe2!=null){
+                
+                 int a = JOptionPane.showConfirmDialog(this, "Czy zastąpić aktualnie wczytane dane?", "Uwaga", JOptionPane.WARNING_MESSAGE); 
+           if(a==0){       
+               nadpis = true; 
+                
+            }
+           else { nadpis = false; }
+           
+           
+            }   //   END  if(daneWejsciowe!=null){
+            
+            if(nadpis){  
+            
             boolean spr = otworzPlik();
             if (spr) {
 
@@ -479,6 +547,9 @@ public class Okno extends JFrame implements ActionListener {
 
 
             }
+            }
+            
+            
         }
         //  wycz.setToolTipText("<html>Wyczyść</html>");
         else if (zrodlo == menu.wycz || zrodlo == wyczysc|| zrodlo == menubar.wyczysc) {
@@ -558,7 +629,10 @@ public class Okno extends JFrame implements ActionListener {
         } 
         //      zam.setToolTipText("<html>Wyjście z programu</html>");
         else if (zrodlo == menu.zam || zrodlo == zamkn  || zrodlo == menubar.exit) {
-          System.exit(0);
+          
+            int a = JOptionPane.showConfirmDialog(this, "Czy na pewno wyjść z programu?", "Wyjście z programu.", JOptionPane.WARNING_MESSAGE); 
+           if(a==0){
+            System.exit(0);}
         }
         // save.setToolTipText("<html>Zapisz Jako TXT</html>");
         else if (zrodlo == menu.save || zrodlo == zapisz2|| zrodlo == menubar.zapiszPlikTXT) {

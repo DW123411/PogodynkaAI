@@ -51,6 +51,7 @@ public class Menuski extends JMenuBar {
         ImageIcon imgIcon12=null;
         ImageIcon imgIcon13=null;
         ImageIcon imgIcon14=null;
+        ImageIcon imgIcon_theme = null;
 
         if(motyw==0){
             if(dark==0){
@@ -67,7 +68,9 @@ public class Menuski extends JMenuBar {
                 imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
                 imgIcon12 = new ImageIcon(getClass().getResource("icons/show.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
-                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));}
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
+            }
             if(dark==1){
                 imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
                 imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
@@ -83,6 +86,7 @@ public class Menuski extends JMenuBar {
                 imgIcon12 = new ImageIcon(getClass().getResource("icons/show.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
+                imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
             }}
         else if(motyw==1){
             imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
@@ -96,6 +100,7 @@ public class Menuski extends JMenuBar {
             imgIcon9 = new ImageIcon(getClass().getResource("icons/zuraw.png"));
             imgIcon10 = new ImageIcon(getClass().getResource("icons/wojtech.png"));
             imgIcon11 = new ImageIcon(getClass().getResource("icons/sygula.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
         }
 
 
@@ -243,11 +248,11 @@ public class Menuski extends JMenuBar {
         glebokosc1.setMaximumSize(new Dimension(30, 30));
 
 
-        theme = new JButton("<html>Wybierz Motyw</html>");
-        //theme.setIcon(imgIcon9);
+        theme = new JButton("<html></html>");
+        theme.setIcon(imgIcon_theme);
         theme.setToolTipText("<html>Wybieranie Motywu </html>");
-        theme.setPreferredSize(new Dimension(50, 30));
-        theme.setMaximumSize(new Dimension(100, 30));
+        theme.setPreferredSize(new Dimension(30, 30));
+        theme.setMaximumSize(new Dimension(30, 30));
         
         
         add(wyś, BorderLayout.WEST);
@@ -268,9 +273,11 @@ public class Menuski extends JMenuBar {
         add(pokaz, BorderLayout.WEST);
 
                 add(accuracy, BorderLayout.WEST);
-        add(zam, BorderLayout.WEST);
+       
+                    add(theme, BorderLayout.WEST);
+                add(zam, BorderLayout.EAST);
 
-        add(theme, BorderLayout.WEST);
+    
         //add(glebokosc, BorderLayout.WEST);
         //add(glebokoscrekord, BorderLayout.WEST);
     }
