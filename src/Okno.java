@@ -585,8 +585,29 @@ public class Okno extends JFrame implements ActionListener {
                         //int ilosc = daneWejsciowe.get_klasyfikacja().length;
                         //daneWejsciowe.podzialZbioru(ilosc / 2);
                     }
+                    DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                    Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
+                    zapis = indukcja;
+                    lista = new LinkedList();
+                    LinkedList listaT = new LinkedList();
+                    lista = wyswietlanie.dajWezly(indukcja.getKorzen(), listaT);
 
+                    int poziom = wyswietlanie.getPoziom((Wezel)listaT.remove(1),new Integer(0));
 
+                    if(DEBUG){
+                        System.out.println("poziom "+poziom );
+                        System.out.println();
+                    }
+                    wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                    if(daneWejsciowe2 != null) {
+                        wyswietlanie.getDecyzja(indukcja.getKorzen());
+                    }
+                    indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);
+                    indukcja.getKorzen().setKoniecDostepnegoMiejsca(wyswietlanie.getWidth());
+                    wyswietlanie.obliczanieWspozednych(indukcja.getKorzen(), indukcja.getKorzen());
+                    wyswietlanie.obliczanieWspozednychY(indukcja.getKorzen(), wyswietlanie.getHeight() / (indukcja.getHeight(indukcja.getKorzen()) + 2), indukcja, indukcja.getKorzen());
+                    wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
+                    wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
                 }
                 else{
                     JOptionPane.showMessageDialog(f, "Nie można obliczyć głębokości bez wczytania danych. ");

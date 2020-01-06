@@ -848,7 +848,11 @@ public int getAccuracyTeachSucces(){
         String nazwaSpr = decyzja[j][pozycja].toString();
         for(int p = 0; p<wezel.getDzieci().size(); p++){
             Wezel tmpW = wezel.getDziecko(p);
-            decyzja[j][decyzja[j].length-1] = new Decyzja("Błąd-brak drogi");
+            if(Math.random()>=0.5){
+                decyzja[j][decyzja[j].length-1] = new WartoscAtrybutu(o.daneWejsciowe.getOpcja1()); //może do zmiany Wartość atrybutu na coś innego
+            }else {
+                decyzja[j][decyzja[j].length - 1] = new WartoscAtrybutu(o.daneWejsciowe.getOpcja2()); //może do zmiany Wartość atrybutu na coś innego
+            }
             if(tmpW.toString().equals(nazwaSpr)){
 
                 if(tmpW.getDzieci().size()!=0){
@@ -975,7 +979,11 @@ public int getAccuracyTeachSucces(){
             String nazwaSpr = zbiorTestowy[j][pozycja].toString();
             for(int p = 0; p<wezel.getDzieci().size(); p++){
                 Wezel tmpW = wezel.getDziecko(p);
-                zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("Błąd-brak drogi"); //może do zmiany Wartość atrybutu na coś innego
+                if(Math.random()>=0.5){
+                    zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("Ok"); //może do zmiany Wartość atrybutu na coś innego
+                }else{
+                    zbiorTestowy[j][zbiorTestowy[j].length-1] = new WartoscAtrybutu("Błąd"); //może do zmiany Wartość atrybutu na coś innego
+                }
                 if(tmpW.toString().equals(nazwaSpr)){
 
                     if(tmpW.getDzieci().size()!=0){

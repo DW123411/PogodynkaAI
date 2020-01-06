@@ -14,11 +14,7 @@ public class Main {
     public static int dark;
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
-        wybierzMotyw motyw = new wybierzMotyw();
-        motyw.wybierzMotyw();
-        moty=motyw.getPwsz();
-        dark=motyw.getDark();
-
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
