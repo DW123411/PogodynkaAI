@@ -149,7 +149,8 @@ public class Okno extends JFrame implements ActionListener {
         wyswietlanie.usun_MenuItem.addActionListener(this);
         menu.theme.addActionListener(e->{
             try {
-                theme.wybierzMotyw();
+                String system = System.getProperty("os.name");
+                theme.wybierzMotyw(system);
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
@@ -215,7 +216,8 @@ public class Okno extends JFrame implements ActionListener {
                
             }else if (zrodlo == menu.theme) {
                 try {
-                    theme.wybierzMotyw();
+                    String system = System.getProperty("os.name");
+                    theme.wybierzMotyw(system);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {
