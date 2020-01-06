@@ -31,17 +31,19 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
           private   DaneWejsciowe data_classified ;
           private   ElementDrzewa[][] data_load ;
          private    float accuracy;private double dbl_accuracy;
-             
+             private Okno host ; 
         @Override
         public void actionPerformed(ActionEvent e){
             Object zrodlo = e.getSource();
 
             if(zrodlo == buton){
+                host.set_accuracy_open(false);
                 dispose();
                 
             }
         }
 
+        
         private void dopasujSieDoZawartosci()
         {
             //dostosowanie okna do zawartości
@@ -53,8 +55,8 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
         /*
         konstr. z danymi ze sprawdzenia zbiorow uczacych i testujacych 
         */
-        public Accuracy(int TestMax, int TestSucces, int TeachMax, int TeachSucces){
-             
+        public Accuracy(int TestMax, int TestSucces, int TeachMax, int TeachSucces, Okno parent){
+             super();
             buton = new JButton("OK");
             label1 = new JLabel("Dokładność ucząca : ");
             label2 = new JLabel("Dokładność testująca : ");
@@ -66,6 +68,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             // i dodanie go do powierzchni (zawartości) okna
             //setLayout(new GridLayout( 10, 50));
             setLayout( null );
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             label1.setSize(200,25);  label1.setLocation(10,50);
 
             label2.setSize(200,25);  label2.setLocation(10,75);
@@ -74,7 +77,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             add(label1);
              add(label2);
             buton.addActionListener(this);
-
+            this.host = parent;
             add(buton);
         //dopasujSieDoZawartosci();
             setVisible(true);
