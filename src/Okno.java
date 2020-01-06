@@ -33,6 +33,7 @@ public class Okno extends JFrame implements ActionListener {
     JMenuItem dodaj;
     JMenuItem pokaz;
     JLabel label;
+    MenuBar menubar = new MenuBar();
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
     boolean accuracy_open_secure;
@@ -60,7 +61,7 @@ public class Okno extends JFrame implements ActionListener {
          p = new JPanel(new BorderLayout(5, 5));
         Border blackline = BorderFactory.createLineBorder(Color.black);
         p.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+        f.setJMenuBar(menubar);
         p2.setBorder(new TitledBorder(
                 new TitledBorder(
                         LineBorder.createGrayLineBorder(),
@@ -147,6 +148,28 @@ public class Okno extends JFrame implements ActionListener {
         zamkn.addActionListener(this);
         wyswietlanie.zmien_nazweMenuItem.addActionListener(this);
         wyswietlanie.usun_MenuItem.addActionListener(this);
+        
+        //menu bar 
+        
+            menubar.wczytalldata.addActionListener(this);
+                menubar.wczytdladecyzji.addActionListener(this);
+                menubar.zapiszPlikJPG.addActionListener(this);
+                menubar.zapiszPlikTXT.addActionListener(this);
+                menubar.exit.addActionListener(this);
+                menubar.rysujdrzewo.addActionListener(this);
+                menubar.wyczysc.addActionListener(this);
+                menubar.ustawrozmiarzbiorow.addActionListener(this);
+                menubar.ustawmaxglebokosc.addActionListener(this);
+                menubar.pokatabele.addActionListener(this);
+                menubar.pokaaccuracy.addActionListener(this);
+                menubar.scalowanie.addActionListener(this);
+                menubar.motywy.addActionListener(this);
+                menubar.credits.addActionListener(this);
+                menubar.manual.addActionListener(this);
+                
+        
+        
+        
         menu.theme.addActionListener(e->{
             try {
                 String system = System.getProperty("os.name");
@@ -183,7 +206,8 @@ public class Okno extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
         Object zrodlo = e.getSource();
-        if (zrodlo == menu.wyś) {
+        //  wyś.setToolTipText("<html>Rysuj  Drzewo</html>");
+        if (zrodlo == menu.wyś|| zrodlo == menubar.rysujdrzewo) {
             wyswietlanie.wyczysc();
             ukryjTabele();
             if (daneWejsciowe != null) {
@@ -214,7 +238,9 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujDrzewo(indukcja.getKorzen(), indukcja.getKorzen());
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
                
-            }else if (zrodlo == menu.theme) {
+            }
+            //        theme.setToolTipText("<html>Wybieranie Motywu </html>");
+            else if (zrodlo == menu.theme|| zrodlo == menubar.motywy) {
                 try {
                     String system = System.getProperty("os.name");
                     theme.wybierzMotyw(system);
@@ -246,7 +272,9 @@ public class Okno extends JFrame implements ActionListener {
               
             }
 
-        } else if (zrodlo == menu.glebokoscrekord) {
+        } 
+        //  glebokoscrekord = new JTextField("", 1);
+        else if (zrodlo == menu.glebokoscrekord) {
 
             menu.glebokoscrekord.addKeyListener(new KeyListener() {
                 public void keyTyped(KeyEvent e) {
@@ -322,7 +350,9 @@ public class Okno extends JFrame implements ActionListener {
 
 
                     }}});
-        } else if (zrodlo == menu.zal) {
+        } 
+        //        zal.setToolTipText("<html>Wczytaj Drzewo</html>");
+        else if (zrodlo == menu.zal ) {
             boolean spr = otworzPlik();
             if (spr) {
                 wczytywanie = Wczytywanie.wczytajDrzewoZPliku(sciezkaDoPliku);
@@ -331,7 +361,8 @@ public class Okno extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
             }
         }
-        else if (zrodlo==menu.accuracy){
+        //   accuracy.setToolTipText("<html>Dokładność.</html>");
+        else if (zrodlo==menu.accuracy|| zrodlo == menubar.pokaaccuracy){
             
 		         if(daneWejsciowe!=null){
                                          if(DEBUG)
@@ -365,9 +396,12 @@ public class Okno extends JFrame implements ActionListener {
             
         }
         }
+        // ????? 
                          else if (zrodlo == wyczysc2) {
            ukryjTabele();
-        } else if (zrodlo == menu.klasyfikacja_z_pliku) {
+        }
+         //         klasyfikacja_z_pliku.setToolTipText("<html>Wczytaj dane wejściowe<br />z pliku</html>");                
+        else if (zrodlo == menu.klasyfikacja_z_pliku|| zrodlo == menubar.wczytalldata) {
             boolean spr = otworzPlik();
             if (spr) {
                 p.remove(p2);
@@ -435,7 +469,10 @@ public class Okno extends JFrame implements ActionListener {
            else{wyswietlanie.show_klasyfikacja(daneWejsciowe);
             }
         }*/
-    else if (zrodlo == menu.klasyfikacja_z_pliku2) {
+        
+        
+    //        klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane do<br />wyboru decyzji</html>");
+        else if (zrodlo == menu.klasyfikacja_z_pliku2|| zrodlo == menubar.wczytdladecyzji) {
             boolean spr = otworzPlik();
             if (spr) {
 
@@ -444,10 +481,13 @@ public class Okno extends JFrame implements ActionListener {
 
             }
         }
-        else if (zrodlo == menu.wycz || zrodlo == wyczysc) {
+        //  wycz.setToolTipText("<html>Wyczyść</html>");
+        else if (zrodlo == menu.wycz || zrodlo == wyczysc|| zrodlo == menubar.wyczysc) {
             wyswietlanie.wyczysc();
 
-        } else if (zrodlo == menu.pokaz) {
+        } 
+        //    pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
+        else if (zrodlo == menu.pokaz|| zrodlo == menubar.pokatabele) {
             if(daneWejsciowe != null){
             p.remove(p2);
             Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
@@ -507,23 +547,31 @@ public class Okno extends JFrame implements ActionListener {
                     }
                 }
             });}
-        } else if (zrodlo == menu.wycz) {
-            wyswietlanie.wyczysc();
-
-        } else if (zrodlo == menu.cred) {
+        } 
+        //         cred.setToolTipText("<html>O Programie</html>");
+        else if (zrodlo == menu.cred|| zrodlo == menubar.credits) {
             wyswietlanie.credits();
             funny++;
             System.out.println(funny);
             if(funny==10){moty=1;
                 JOptionPane.showMessageDialog(null,"A teraz zmień motyw na jasny ;)"); }
             if(funny>10){moty=0;funny=0;JOptionPane.showMessageDialog(null,"Tak wiem, jest kapa. Spoko, zmień motyw będzie cacy");}
-        } else if (zrodlo == menu.zam || zrodlo == zamkn) {
+        } 
+        //      zam.setToolTipText("<html>Wyjście z programu</html>");
+        else if (zrodlo == menu.zam || zrodlo == zamkn  || zrodlo == menubar.exit) {
           System.exit(0);
-        } else if (zrodlo == menu.save || zrodlo == zapisz2) {
+        }
+        // save.setToolTipText("<html>Zapisz Jako TXT</html>");
+        else if (zrodlo == menu.save || zrodlo == zapisz2|| zrodlo == menubar.zapiszPlikTXT) {
             zapiszPlik();
-        } else if (zrodlo == menu.tree) {
-            zapiszPlikDrzewa();
-        } else if (zrodlo == menu.rekord3) {
+        }
+        //   tree.setToolTipText("<html>Zapisz drzewo jako TXT</html>");
+//        else if (zrodlo == menu.tree) {
+//            zapiszPlikDrzewa();
+//        }
+        
+        //    rekord3.setToolTipText("<html>Rozmiary Zbiorów</html>");
+        else if (zrodlo == menu.rekord3 || zrodlo == menubar.ustawrozmiarzbiorow) {
 
             String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego", "10");
          //   System.out.print("#m from input  : "+m);
@@ -553,7 +601,9 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
                 }
-        } else if (zrodlo == menu.glebokosc1) {
+        } 
+        //         glebokosc1.setToolTipText("<html>Rozmiar maksymalnej głębokości</html>");
+        else if (zrodlo == menu.glebokosc1|| zrodlo == menubar.ustawmaxglebokosc) {
             try {
                 String m = JOptionPane.showInputDialog("Podaj okreslona głebokosc", "3");
                 wyswietlanie.wyczysc();
@@ -615,13 +665,17 @@ public class Okno extends JFrame implements ActionListener {
 
             }
         }
-        else if (zrodlo == menu.jpeg || zrodlo == zapisz) {
+        
+        //    jpeg.setToolTipText("<html>Zapisz jako obraz</html>");
+        else if (zrodlo == menu.jpeg || zrodlo == zapisz|| zrodlo == menubar.zapiszPlikJPG) {
             try {
                 Zapis.save_jpeg();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        } else if (zrodlo == menu.skalowanie) {
+        } 
+        //         skalowanie.setToolTipText("<html>Skalowanie 3/4 obrazu </html>");
+        else if (zrodlo == menu.skalowanie|| zrodlo == menubar.scalowanie) {
             wyswietlanie.wyczysc();
 
             if (daneWejsciowe != null) {
@@ -638,12 +692,12 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
 
 
-            } else if (zrodlo == menu.jpeg || zrodlo == zapisz) {
-                try {
-                    Zapis.save_jpeg();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            }
+            else {
+                JOptionPane.showMessageDialog(f, "Najpierw należy wczytać dane.");
+
+                
+                
             }
         }
 

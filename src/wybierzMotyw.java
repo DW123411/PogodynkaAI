@@ -19,7 +19,7 @@ public class wybierzMotyw {
 
 
     public void wybierzMotyw(String system) throws IOException, FileNotFoundException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException{
-        if(system.equals("Linux")){
+        if(system.contains("Linux")){
             int motyw = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Procedura przed startowa",
                     JOptionPane.WARNING_MESSAGE, 0, null, buttonsNonWin, buttonsNonWin[0]);
 
@@ -61,7 +61,7 @@ public class wybierzMotyw {
 
             }
         }
-        else if(system.equals("Windows")){
+        else if(system.contains("Windows")){
 
             int motyw = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Procedura przed startowa",
                     JOptionPane.WARNING_MESSAGE, 0, null, buttonsWin, buttonsWin[0]);
