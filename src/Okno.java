@@ -35,14 +35,14 @@ public class Okno extends JFrame implements ActionListener {
     JLabel label;
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
-    
+    boolean accuracy_open;
     public int funny = 0;
     public static int moty;
     public static int dark;
     wybierzMotyw theme = new wybierzMotyw();
     Wezel root;
     // ##################### debug
-    boolean DEBUG = true;
+    boolean DEBUG = false;
     // #################### debug
     
 
@@ -116,6 +116,8 @@ public class Okno extends JFrame implements ActionListener {
 
         // set the size of frame
         f.setSize(1200, 700);
+        
+        accuracy_open=false;
 
     }
 
@@ -340,7 +342,11 @@ public class Okno extends JFrame implements ActionListener {
                                                if(daneWejsciowe.getZbiorUczacy()!=null){
                                                      if(daneWejsciowe.getZbiorTestowy()!=null){
                                                       //   new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
-                                                      new Accuracy(wyswietlanie.AccuracyTestMax, wyswietlanie.AccuracyTestSucces, wyswietlanie.AccuracyTeachMax, wyswietlanie.AccuracyTeachSucces);
+                                                      if(!accuracy_open){accuracy_open=true;
+                                                                   new Accuracy(wyswietlanie.AccuracyTestMax, wyswietlanie.AccuracyTestSucces, wyswietlanie.AccuracyTeachMax, wyswietlanie.AccuracyTeachSucces, this);
+                                                      }
+                                                      
+
                                                      if(DEBUG){
                                                          System.out.println("Accuracy Test : Max:"+wyswietlanie.AccuracyTestMax+" , Succes:"+wyswietlanie.AccuracyTestSucces);
                                                          System.out.println("Accuracy Teach : Max:"+wyswietlanie.AccuracyTeachMax+" , Succes:"+wyswietlanie.AccuracyTeachSucces);
@@ -694,6 +700,9 @@ public class Okno extends JFrame implements ActionListener {
 
     }
 
+        public void set_accuracy_open(boolean e){
+        this.accuracy_open= e;
+        }
     private void zapiszPlikDrzewa() {
         JFileChooser zapisz = new JFileChooser();
         FileNameExtensionFilter filtr = new FileNameExtensionFilter("TXT Files", "txt");
