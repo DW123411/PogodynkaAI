@@ -166,6 +166,7 @@ public class Okno extends JFrame implements ActionListener {
                 menubar.motywy.addActionListener(this);
                 menubar.credits.addActionListener(this);
                 menubar.manual.addActionListener(this);
+                menubar.schowajMenu.addActionListener(this);
                 
         
         
@@ -771,6 +772,15 @@ public class Okno extends JFrame implements ActionListener {
 
                 
                 
+            }
+        }else if(zrodlo == menubar.schowajMenu)
+        {
+            if(menubar.schowajMenu.getText().equals("Schowaj menu")){
+                menu.setVisible(false);
+                menubar.schowajMenu.setText("Pokaż menu");
+            }else{
+                menu.setVisible(true);
+                menubar.schowajMenu.setText("Schowaj menu");
             }
         }
 
