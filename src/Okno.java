@@ -255,7 +255,6 @@ public class Okno extends JFrame implements ActionListener {
                 } catch (IllegalAccessException ex) {
                     ex.printStackTrace();
                 }
-                //moty=motyw.getPwsz();
                 dark=theme.getDark();
                 menu.setDark(theme.getDark());
                 menu.setMotyw(theme.getPwsz());
