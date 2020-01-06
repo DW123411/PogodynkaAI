@@ -16,6 +16,8 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
+
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Okno();
