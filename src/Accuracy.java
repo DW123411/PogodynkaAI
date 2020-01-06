@@ -56,7 +56,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
         konstr. z danymi ze sprawdzenia zbiorow uczacych i testujacych 
         */
         public Accuracy(int TestMax, int TestSucces, int TeachMax, int TeachSucces, Okno parent){
-             super();
+             
             buton = new JButton("OK");
             label1 = new JLabel("Dokładność ucząca : ");
             label2 = new JLabel("Dokładność testująca : ");
