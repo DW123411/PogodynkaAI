@@ -132,7 +132,7 @@ public class Okno extends JFrame implements ActionListener {
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.klasyfikacja_z_pliku2.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
-        menu.decyzja_okno.addActionListener(this);
+
         menu.jpeg.addActionListener(this);
         menu.accuracy.addActionListener(this);
         menu.glebokoscrekord.addActionListener(this);
@@ -185,6 +185,7 @@ public class Okno extends JFrame implements ActionListener {
             ukryjTabele();
             if (daneWejsciowe != null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                wyswietlanie.fixUczacy();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
                 zapis = indukcja;
                 lista = new LinkedList();
@@ -198,7 +199,7 @@ public class Okno extends JFrame implements ActionListener {
                 System.out.println();
                 }
                 wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
-                wyswietlanie.sprawdzIprzeliczUczacy(indukcja.getKorzen());
+                wyswietlanie.sprawdzUczacy(indukcja.getKorzen());
                 if(daneWejsciowe2 != null) {
                     wyswietlanie.getDecyzja(indukcja.getKorzen());
                 }
@@ -240,26 +241,7 @@ public class Okno extends JFrame implements ActionListener {
 
               
             }
-        } else if (zrodlo == menu.decyzja_okno) {
-            if (daneWejsciowe != null) {
-                  
-            
 
-                try {
-                        new decyzja_before_popup();
-                        // popup do wyboru 
-                        //TableRenderDemo.createAndShowGUI(daneWejsciowe,1);
-                } catch (Exception de) {
-                    if(DEBUG){
-                        System.out.println(de);            }
-                    JOptionPane.showMessageDialog(null, "Error.");
-                }
-            } 
-            
-            else {
-                JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.");
-               
-            }
         } else if (zrodlo == menu.glebokoscrekord) {
 
             menu.glebokoscrekord.addKeyListener(new KeyListener() {
@@ -347,14 +329,14 @@ public class Okno extends JFrame implements ActionListener {
         }
         else if (zrodlo==menu.accuracy){
             
-		         if(daneWejsciowe!=null&&daneWejsciowe2!=null){
+		         if(daneWejsciowe!=null){
                                          if(DEBUG)
-                         {daneWejsciowe2.print_in_console();
+                         {
                              System.out.println("$#!@$!");
                              DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorUczacy());
                              System.out.println("$#!@$!");
                              DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorTestowy());}
-                                         if(daneWejsciowe2.get_klasyfikacja()!=null){
+
                                                if(daneWejsciowe.getZbiorUczacy()!=null){
                                                      if(daneWejsciowe.getZbiorTestowy()!=null){
                                                       //   new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
@@ -363,7 +345,7 @@ public class Okno extends JFrame implements ActionListener {
                                                          System.out.println("Accuracy Test : Max:"+wyswietlanie.AccuracyTestMax+" , Succes:"+wyswietlanie.AccuracyTestSucces);
                                                          System.out.println("Accuracy Teach : Max:"+wyswietlanie.AccuracyTeachMax+" , Succes:"+wyswietlanie.AccuracyTeachSucces);
                                                      }
-                                                     }   }   }
+                                                     }   }
                                          else {
                                              JOptionPane.showMessageDialog(null, "Nie można obliczyć dokładności.");  
                                          }
@@ -755,83 +737,5 @@ public class Okno extends JFrame implements ActionListener {
     
     
    
-    
-     private class decyzja_before_popup extends JFrame  implements ActionListener{
 
-        private JLabel label1;    
-        private JButton buton, buton1, buton2, buton3;
-        @Override
-        public void actionPerformed(ActionEvent e){
-            Object zrodlo = e.getSource();
-
-            if(zrodlo == buton){
-                TableRenderDemo.createAndShowGUI(daneWejsciowe,1);
-                dispose();
-                
-            }
-              else if(zrodlo == buton1){
-                TableRenderDemo.createAndShowGUI(daneWejsciowe,2);
-                dispose();
-                
-            }
-              else if(zrodlo == buton2){
-                TableRenderDemo.createAndShowGUI(daneWejsciowe,3);
-                dispose();
-                
-            }
-              else   if(zrodlo == buton3){
-                TableRenderDemo.createAndShowGUI(daneWejsciowe,4);
-                dispose();
-                
-            }
-        }
-
-        private void dopasujSieDoZawartosci()
-        {
-            //dostosowanie okna do zawartości
-            pack();   
-            //wyśrodkowanie ramki
-            setLocationRelativeTo(null);           
-        }
-
-        public decyzja_before_popup(){
-            buton = new JButton("Dane z pliku");
-            buton1 = new JButton("Dane uczące");
-            buton2= new JButton("Dane testujące");
-            buton3 = new JButton("Dane z drzewa");
-            label1 = new JLabel("Wybierz odnośnik porównywarki decyzji klasyfikacji : ");
-         
-            setSize( 360, 360);  // ustawienie rozmiarow okna
-            setLocation(250,250);
-            // Pozyskanie powierzchni zawartości
-            Container  contents = getContentPane();     
-            // Utworzenie własnego panela z powierzchnią do rysowania figur
-            // i dodanie go do powierzchni (zawartości) okna
-            //setLayout(new GridLayout( 10, 50));
-            setLayout( null );
-            label1.setSize(360,25);  label1.setLocation(10,10);
-
-
-            buton.setSize(160,24);  buton.setLocation(80,100);
-               buton1.setSize(160,24);  buton1.setLocation(80,126);
-                  buton2.setSize(160,24);  buton2.setLocation(80,152);
-                     buton3.setSize(160,24);  buton3.setLocation(80,178);
-            add(label1);
-        
-            buton.addActionListener(this);
-            buton1.addActionListener(this);
-                   buton2.addActionListener(this);
-                          buton3.addActionListener(this);
-            add(buton);add(buton1);add(buton2);add(buton3);
-            
-            setVisible(true);
-           
-        }
-
-       
-        public void popup(){
-            
-        }
-
-    }
 }

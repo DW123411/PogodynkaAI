@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class Menuski extends JMenuBar {
-    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, klasyfikacja_z_pliku2, show_klasyfikacja, accuracy, jpeg, pokaz, rekord3, decyzja_okno,glebokosc1,theme;
+    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, klasyfikacja_z_pliku2, show_klasyfikacja, accuracy, jpeg, pokaz, rekord3,glebokosc1,theme;
     public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -184,11 +184,7 @@ public class Menuski extends JMenuBar {
         jpeg.setPreferredSize(new Dimension(32, 32));
         jpeg.setMaximumSize(new Dimension(32, 32));
 
-        decyzja_okno = new JButton("<html></html>");
-        decyzja_okno.setIcon(imgIcon8);
-        decyzja_okno.setToolTipText("<html>Wyświetl okno decyzji</html>");
-        decyzja_okno.setPreferredSize(new Dimension(32, 32));
-        decyzja_okno.setMaximumSize(new Dimension(32, 32));
+
      accuracy = new JButton("<html></html>");
         accuracy.setIcon(imgIcon10);
         accuracy.setToolTipText("<html>Dokładność.</html>");
@@ -270,7 +266,7 @@ public class Menuski extends JMenuBar {
         add(skalowanie, BorderLayout.WEST);
         add(cred, BorderLayout.WEST);
         add(pokaz, BorderLayout.WEST);
-        add(decyzja_okno, BorderLayout.WEST);
+
                 add(accuracy, BorderLayout.WEST);
         add(zam, BorderLayout.WEST);
 

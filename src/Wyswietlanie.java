@@ -890,7 +890,7 @@ public int getAccuracyTeachSucces(){
             }
         }
         if(zbiorTestowy[0][szerokosc-1].toString().equals("Wynik Testu")){
-
+            szerokosc = szerokosc-1;
         }
         else {
             ElementDrzewa tmp[][] = new ElementDrzewa[zbiorTestowy.length][szerokosc];
@@ -1010,87 +1010,162 @@ public int getAccuracyTeachSucces(){
                 }
 
             }
-                
+
     }
 
-    public void sprawdzIprzeliczUczacy(Wezel wezel){
-           ElementDrzewa zbiorUcz[][] = o.daneWejsciowe.getZbiorUczacy();
+
+
+
+
+
+
+    public void sprawdzUczacy(Wezel wezel){
+        ElementDrzewa zbiorUczacy[][] = o.daneWejsciowe.getZbiorUczacy();
         this.AccuracyTeachMax =0;
         this.AccuracyTeachSucces =0;
         int szerokosc = 0;
         for(int g=0;g<1;g++){
-            for(int f=0;f<zbiorUcz[g].length;f++){
+            for(int f=0;f<zbiorUczacy[g].length;f++){
                 szerokosc++;
             }
         }
-        if(zbiorUcz[0][szerokosc-1].toString().equals("Wynik Testu")){
+        if(zbiorUczacy[0][szerokosc-1].toString().equals("Wynik Testu")){
 
         }
         else {
-            ElementDrzewa tmp[][] = new ElementDrzewa[zbiorUcz.length][szerokosc];
+            ElementDrzewa tmp[][] = new ElementDrzewa[zbiorUczacy.length][szerokosc];
             for (int j = 0; j < tmp.length; j++) {
                 for (int o = 0; o < tmp[j].length; o++) {
-                    tmp[j][o] = zbiorUcz[j][o];
+                    tmp[j][o] = zbiorUczacy[j][o];
                 }
             }
-            zbiorUcz = new ElementDrzewa[tmp.length][szerokosc + 1];
+            zbiorUczacy = new ElementDrzewa[tmp.length][szerokosc + 1];
             for (int j = 0; j < tmp.length; j++) {
                 for (int o = 0; o < tmp[j].length; o++) {
                     if (j == 0) {
 
-                        zbiorUcz[j][zbiorUcz[j].length - 1] = new Atrybut("Wynik Testu");
+                        zbiorUczacy[j][zbiorUczacy[j].length - 1] = new Atrybut("Wynik Testu");
                     }
-                    zbiorUcz[j][o] = tmp[j][o];
+                    zbiorUczacy[j][o] = tmp[j][o];
                 }
             }
         }
-    for(int j=1; j<zbiorUcz.length;j++){
-        sprawdzUcz(wezel,zbiorUcz,j);
+        for(int j=1; j<zbiorUczacy.length;j++){
+            sprawdzUcz(wezel,zbiorUczacy,j);
         }
-        //o.daneWejsciowe.setZbiorTestowy(zbiorUcz);
-        
+        o.daneWejsciowe.setZbiorUczacy(zbiorUczacy);
+        szerokosc=0;
+
+        o.p.remove(o.p2);
+        Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
+        Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
+        Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        JTable tabelaWyswietl = tabela.getTabela();
+        JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
+        JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        tabelaWyswietl.setFillsViewportHeight(true);
+        o.p2 = new JPanel();
+        JTabbedPane tabelaDane = new JTabbedPane();
+        tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
+        tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
+        tabelaDane.addTab("Testowy",new JScrollPane(tabelaWyswietlZbiorTestowy));
+                /*tabelaWyswietl.setBorder(new TitledBorder(
+                        new TitledBorder(
+                                LineBorder.createGrayLineBorder(),
+                                "Dane"),
+                        "",
+                        TitledBorder.RIGHT,
+                        TitledBorder.BOTTOM));*/
+        o.p2.add(tabelaDane);
+        o.p2.setMaximumSize(new Dimension(500, 500));
+        o.p.add(o.p2, BorderLayout.EAST);
+        o.dopasujSieDoZawartosci();
+        o.f.setVisible(true);
+        o.czyPrawyPanel = true;
+        o.ukryjTabele();
+        tabelaWyswietl.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorUczacy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlZbiorUczacy, e.getX(), e.getY());
+                }
+            }
+        });
+        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                }
+            }
+        });
+
     }
-    
-    private void sprawdzUcz(Wezel wezel,ElementDrzewa[][] zbiorUcz,int j){
-         int pozycja = 0;
 
-            String nazwa = wezel.toString();
-            for (int i = 0; i < zbiorUcz[0].length - 1; i++) {
-                if (zbiorUcz[0][i].toString().equals(nazwa)) {
-                    pozycja = i;
-                }
+    private void sprawdzUcz(Wezel wezel,ElementDrzewa[][] zbiorUczacy,int j){
+        int pozycja = 0;
+
+        String nazwa = wezel.toString();
+        for (int i = 0; i < zbiorUczacy[0].length - 1; i++) {
+            if (zbiorUczacy[0][i].toString().equals(nazwa)) {
+                pozycja = i;
             }
-            String nazwaSpr = zbiorUcz[j][pozycja].toString();
-            for(int p = 0; p<wezel.getDzieci().size(); p++){
-                Wezel tmpW = wezel.getDziecko(p);
-                zbiorUcz[j][zbiorUcz[j].length-1] = new WartoscAtrybutu("Błąd-brak drogi"); //może do zmiany Wartość atrybutu na coś innego
-                if(tmpW.toString().equals(nazwaSpr)){
+        }
+        String nazwaSpr = zbiorUczacy[j][pozycja].toString();
+        for(int p = 0; p<wezel.getDzieci().size(); p++){
+            Wezel tmpW = wezel.getDziecko(p);
+            zbiorUczacy[j][zbiorUczacy[j].length-1] = new WartoscAtrybutu("Błąd-brak drogi"); //może do zmiany Wartość atrybutu na coś innego
+            if(tmpW.toString().equals(nazwaSpr)){
 
-                    if(tmpW.getDzieci().size()!=0){
-                        for(int a = 0; a<tmpW.getDzieci().size(); a++){
-                            Wezel tmpww = tmpW.getDziecko(a);
-                            if(tmpww.czyLisc()){
-                                if(zbiorUcz[j][zbiorUcz[j].length-2].toString().equals(tmpww.toString())){
-                                    zbiorUcz[j][zbiorUcz[j].length-1] = new WartoscAtrybutu("OK");
-                                    this.AccuracyTeachMax++;
-                                    this.AccuracyTeachSucces++;
-                                }
-                                else {
-                                    zbiorUcz[j][zbiorUcz[j].length-1] = new WartoscAtrybutu("Błąd");
-                                    this.AccuracyTeachMax++;
-                                }
+                if(tmpW.getDzieci().size()!=0){
+                    for(int a = 0; a<tmpW.getDzieci().size(); a++){
+                        Wezel tmpww = tmpW.getDziecko(a);
+                        if(tmpww.czyLisc()){
+                            if(zbiorUczacy[j][zbiorUczacy[j].length-2].toString().equals(tmpww.toString())){
+                                zbiorUczacy[j][zbiorUczacy[j].length-1] = new WartoscAtrybutu("OK");
+                                this.AccuracyTeachMax++;
+                                this.AccuracyTeachSucces++;
                             }
                             else {
-                                sprawdzUcz(tmpww,zbiorUcz,j);
+                                zbiorUczacy[j][zbiorUczacy[j].length-1] = new WartoscAtrybutu("Błąd");
+                                this.AccuracyTeachMax++;
                             }
-
                         }
-                    }
-                    break;
-                }
+                        else {
+                            sprawdzUcz(tmpww,zbiorUczacy,j);
+                        }
 
+                    }
+                }
+                break;
             }
+
+        }
+
     }
+
+    public void fixUczacy()
+    {
+
+        ElementDrzewa zbiorUczacy[][] = o.daneWejsciowe.getZbiorUczacy();
+        if(zbiorUczacy[0][zbiorUczacy[0].length-1].toString() == "Wynik Testu") {
+            ElementDrzewa tmp[][] = new ElementDrzewa[o.daneWejsciowe.getZbiorUczacy().length][o.daneWejsciowe.getZbiorUczacy()[0].length - 1];
+            for (int i = 0; i < o.daneWejsciowe.getZbiorUczacy().length; i++) {
+                for (int j = 0; j < o.daneWejsciowe.getZbiorUczacy()[i].length - 1; j++) {
+                    tmp[i][j] = o.daneWejsciowe.getZbiorUczacy()[i][j];
+                }
+            }
+            o.daneWejsciowe.setZbiorUczacy(tmp);
+        }
+    }
+
+
+
 
     public void credits() {
         ImageIcon icon = new ImageIcon(getClass().getResource("icons/boink.png"));
