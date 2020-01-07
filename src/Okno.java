@@ -618,6 +618,10 @@ public class Okno extends JFrame implements ActionListener {
                     }
                 }
             });}
+            else {
+                 JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.");
+                
+            }
         } 
         //         cred.setToolTipText("<html>O Programie</html>");
         else if (zrodlo == menu.cred|| zrodlo == menubar.credits) {
