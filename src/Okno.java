@@ -190,7 +190,8 @@ public class Okno extends JFrame implements ActionListener {
             dark=theme.getDark();
             menu.setDark(theme.getDark());
             menu.setMotyw(theme.getPwsz());
-            System.out.println(dark);
+            if(DEBUG){
+            System.out.println(dark);}
             p.remove(menu);
             menu=new Menuski();
 
@@ -202,6 +203,7 @@ public class Okno extends JFrame implements ActionListener {
         });
          menubar.motywy.addActionListener(e->{
             try {
+             
                 String system = System.getProperty("os.name");
                 theme.wybierzMotyw(system);
             } catch (IOException ex) {
@@ -219,7 +221,8 @@ public class Okno extends JFrame implements ActionListener {
             dark=theme.getDark();
             menu.setDark(theme.getDark());
             menu.setMotyw(theme.getPwsz());
-            System.out.println(dark);
+            if(DEBUG){
+            System.out.println(dark);}
             p.remove(menu);
             menu=new Menuski();
 
@@ -627,7 +630,9 @@ public class Okno extends JFrame implements ActionListener {
         else if (zrodlo == menu.cred|| zrodlo == menubar.credits) {
             wyswietlanie.credits();
             funny++;
-            System.out.println(funny);
+            if(DEBUG){
+             System.out.println(funny); 
+            }
             if(funny==10){moty=1;
                 JOptionPane.showMessageDialog(null,"A teraz zmień motyw na jasny ;)"); }
             if(funny>10){moty=0;funny=0;JOptionPane.showMessageDialog(null,"Tak wiem, jest kapa. Spoko, zmień motyw będzie cacy");}
