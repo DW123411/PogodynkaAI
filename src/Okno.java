@@ -109,7 +109,7 @@ public class Okno extends JFrame implements ActionListener {
 
 
         //przypisanie obsługi akcji
-        ustawNasluchZdarzen();
+        ustawNasluchZdarzen(true);
         dopasujSieDoZawartosci();
         //wyswietlenie naszej ramki
 
@@ -124,7 +124,7 @@ public class Okno extends JFrame implements ActionListener {
 
     }
 
-    private void ustawNasluchZdarzen() {
+    private void ustawNasluchZdarzen(boolean eef) {
         menu.wyś.addActionListener(this);
         menu.zal.addActionListener(this);
         menu.wycz.addActionListener(this);
@@ -152,7 +152,7 @@ public class Okno extends JFrame implements ActionListener {
         wyswietlanie.usun_MenuItem.addActionListener(this);
         
         //menu bar 
-        
+        if(!eef){
             menubar.wczytalldata.addActionListener(this);
                 menubar.wczytdladecyzji.addActionListener(this);
                 menubar.zapiszPlikJPG.addActionListener(this);
@@ -169,7 +169,7 @@ public class Okno extends JFrame implements ActionListener {
                 menubar.credits.addActionListener(this);
                 menubar.manual.addActionListener(this);
                 menubar.schowajMenu.addActionListener(this);
-                
+        }
         
         
         
@@ -198,11 +198,12 @@ public class Okno extends JFrame implements ActionListener {
             menu=new Menuski();
 
             p.add(menu, BorderLayout.NORTH);
-            ustawNasluchZdarzen();
+            ustawNasluchZdarzen(true);
             SwingUtilities.updateComponentTreeUI(f);
 
             pack();
         });
+        if(!eef){
          menubar.motywy.addActionListener(e->{
             try {
              
@@ -229,11 +230,11 @@ public class Okno extends JFrame implements ActionListener {
             menu=new Menuski();
 
             p.add(menu, BorderLayout.NORTH);
-            ustawNasluchZdarzen();
+            ustawNasluchZdarzen(false);
             SwingUtilities.updateComponentTreeUI(f);
 
             pack();
-        });
+        });}
 
     }
 
@@ -306,7 +307,7 @@ public class Okno extends JFrame implements ActionListener {
                 menu=new Menuski();
                 menu.setMotywButtony(theme.getPwsz(), theme.getDark());
                 p.add(menu, BorderLayout.NORTH);
-                ustawNasluchZdarzen();
+                ustawNasluchZdarzen(false);
                 SwingUtilities.updateComponentTreeUI(f);
 
                 pack();
