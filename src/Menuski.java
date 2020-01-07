@@ -57,16 +57,16 @@ public class Menuski extends JMenuBar {
             if(dark==0){
                 imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
                 imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
-                imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/draw.png"));
-                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
                 imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
-                imgIcon12 = new ImageIcon(getClass().getResource("icons/show.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/show2.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
             imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
@@ -74,16 +74,16 @@ public class Menuski extends JMenuBar {
             if(dark==1){
                 imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
                 imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
-                imgIcon3 = new ImageIcon(getClass().getResource("icons/cancel.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/draw.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
                 imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowaniedrk.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
                 imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
-                imgIcon12 = new ImageIcon(getClass().getResource("icons/show.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/show2.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
                 imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
