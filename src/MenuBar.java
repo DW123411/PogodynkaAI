@@ -4,11 +4,13 @@
  * @author majzner marcin
  */
 import javax.swing.*;
+import javax.swing.event.MenuKeyEvent;
+import javax.swing.event.MenuKeyListener;
 
-public class MenuBar extends JMenuBar{
+public class MenuBar extends JMenuBar  implements MenuKeyListener{
 JMenu plik = new JMenu("Plik");
 //
-
+private Okno parent;
 public JMenuItem wczytalldata = new JMenuItem("Wczytaj dane.");
 JMenuItem wczytdladecyzji = new JMenuItem("Wczytaj dane bez decyzji.");
 JSeparator endwczytaj = new JSeparator();
@@ -46,8 +48,9 @@ JMenu info = new JMenu("Info");
 JMenuItem credits = new JMenuItem("O programie.");
 JMenuItem manual = new JMenuItem("Instrukcja.");
 
-public MenuBar(){
+public MenuBar(Okno parent){
     super();
+   this.parent= parent;
     plik.add(wczytalldata);
 plik.add(wczytdladecyzji);
 plik.add(endwczytaj);
@@ -81,6 +84,22 @@ add(info);
     
     
 }
+
+    @Override
+    public void menuKeyTyped(MenuKeyEvent e) {
+        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void menuKeyPressed(MenuKeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void menuKeyReleased(MenuKeyEvent e) {
+        
+    }
 
 
     

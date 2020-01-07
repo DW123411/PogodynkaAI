@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import javax.swing.event.MenuKeyEvent;
 public class Okno extends JFrame implements ActionListener {
     Menuski menu = new Menuski();
     Wyswietlanie wyswietlanie = new Wyswietlanie();
@@ -33,7 +34,7 @@ public class Okno extends JFrame implements ActionListener {
     JMenuItem dodaj;
     JMenuItem pokaz;
     JLabel label;
-    MenuBar menubar = new MenuBar();
+    MenuBar menubar = new MenuBar(this);
     LinkedList lista = new LinkedList();
     boolean czyPrawyPanel = false;
     boolean accuracy_open_secure;
@@ -48,6 +49,7 @@ public class Okno extends JFrame implements ActionListener {
     
 
     public Okno() {
+        
         wyswietlanie.setOkno(this);
         f = new JFrame("Decyzjomat  v.0.3");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
@@ -239,11 +241,15 @@ public class Okno extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String label = e.getActionCommand(); //M.Majzner zamienil na zrodlo linia nizej. NOTICE: bardziej pro
         Object zrodlo = e.getSource();
+        if(DEBUG){
+        System.out.println(e.getSource().getClass().toString());
+        System.out.println(e.getActionCommand().toString());}
         //  wyś.setToolTipText("<html>Rysuj  Drzewo</html>");
         if (zrodlo == menu.wyś|| zrodlo == menubar.rysujdrzewo) {
-            wyswietlanie.wyczysc();
-            ukryjTabele();
+            
             if (daneWejsciowe != null) {
+                wyswietlanie.wyczysc();
+            ukryjTabele();
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
                 wyswietlanie.fixUczacy();
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
@@ -892,7 +898,10 @@ public class Okno extends JFrame implements ActionListener {
         czyPrawyPanel = true;
     }
     
-    
+    public void makeEvent(MenuKeyEvent e){
+        
+        
+    }
    
 
 }
