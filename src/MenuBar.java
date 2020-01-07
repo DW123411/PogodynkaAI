@@ -34,6 +34,7 @@ JMenuItem ustawmaxglebokosc = new JMenuItem("Ustaw maxymalną głębokośc.");
 JMenu widok = new JMenu("Widok");
 JMenuItem pokatabele = new JMenuItem("Pokaż tabelę.");
 JMenuItem pokaaccuracy = new JMenuItem("Dokładność.");
+JMenuItem schowajMenu = new JMenuItem("Schowaj menu");
 JSeparator endtabela = new JSeparator();
 ///
 JMenuItem scalowanie = new JMenuItem("Skalowanie.");
@@ -63,6 +64,7 @@ edycja.add( ustawmaxglebokosc  );
 
 widok.add( pokatabele  );
 widok.add( pokaaccuracy  );
+widok.add(schowajMenu);
 widok.add( endtabela  );
 widok.add( scalowanie  );
 widok.add(  endskalowanie );
