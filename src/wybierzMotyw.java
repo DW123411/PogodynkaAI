@@ -64,7 +64,7 @@ public class wybierzMotyw {
         else if(system.contains("Windows")){
 
             int motyw = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw",
-                    JOptionPane.QUESTION_MESSAGE, 0, null, buttonsWin, buttonsWin[0]);
+                    JOptionPane.DEFAULT_OPTION, 0, null, buttonsWin, buttonsWin[0]);
 
             switch(motyw) {
                 case 0:

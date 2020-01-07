@@ -295,7 +295,7 @@ public class Okno extends JFrame implements ActionListener {
                 System.out.println(dark);
                 p.remove(menu);
                 menu=new Menuski();
-
+                menu.setMotywButtony(theme.getPwsz(), theme.getDark());
                 p.add(menu, BorderLayout.NORTH);
                 ustawNasluchZdarzen();
                 SwingUtilities.updateComponentTreeUI(f);

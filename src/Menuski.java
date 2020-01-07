@@ -11,7 +11,21 @@ public class Menuski extends JMenuBar {
     public JTextField glebokoscrekord;
     private int motyw;
     private int dark;
-
+private ImageIcon imgIcon = null;
+        private ImageIcon imgIcon2 = null;
+        private ImageIcon imgIcon3 = null;
+        private ImageIcon imgIcon4 = null;
+        private ImageIcon imgIcon5 = null;
+        private ImageIcon imgIcon6 = null;
+        private ImageIcon imgIcon7 =null;
+        private ImageIcon imgIcon8 = null;
+        private ImageIcon imgIcon9 = null;
+        private ImageIcon imgIcon10=null;
+        private ImageIcon imgIcon11=null;
+        private ImageIcon imgIcon12=null;
+        private ImageIcon imgIcon13=null;
+        private ImageIcon imgIcon14=null;
+        private ImageIcon imgIcon_theme = null;
 
     public Menuski() {
         //JPanel rozklad = new JPanel();
@@ -37,21 +51,21 @@ public class Menuski extends JMenuBar {
                 "",
                 TitledBorder.RIGHT,
                 TitledBorder.BOTTOM));
-        ImageIcon imgIcon = null;
-        ImageIcon imgIcon2 = null;
-        ImageIcon imgIcon3 = null;
-        ImageIcon imgIcon4 = null;
-        ImageIcon imgIcon5 = null;
-        ImageIcon imgIcon6 = null;
-        ImageIcon imgIcon7 =null;
-        ImageIcon imgIcon8 = null;
-        ImageIcon imgIcon9 = null;
-        ImageIcon imgIcon10=null;
-        ImageIcon imgIcon11=null;
-        ImageIcon imgIcon12=null;
-        ImageIcon imgIcon13=null;
-        ImageIcon imgIcon14=null;
-        ImageIcon imgIcon_theme = null;
+         imgIcon = null;
+         imgIcon2 = null;
+         imgIcon3 = null;
+         imgIcon4 = null;
+         imgIcon5 = null;
+         imgIcon6 = null;
+         imgIcon7 =null;
+         imgIcon8 = null;
+         imgIcon9 = null;
+         imgIcon10=null;
+         imgIcon11=null;
+         imgIcon12=null;
+         imgIcon13=null;
+         imgIcon14=null;
+         imgIcon_theme = null;
 
         if(motyw==0){
             if(dark==0){
@@ -61,7 +75,7 @@ public class Menuski extends JMenuBar {
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
                 imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
-                imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
@@ -83,7 +97,7 @@ public class Menuski extends JMenuBar {
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowaniedrk.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
                 imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
-                imgIcon12 = new ImageIcon(getClass().getResource("icons/show2.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
                 imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
@@ -290,6 +304,60 @@ public class Menuski extends JMenuBar {
     }
     public int getMotyw(){
         return motyw;
+    }
+    
+    public void setMotywButtony(int motyw, int dark){
+        
+        if(motyw==0){
+            if(dark==0){
+                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/show2.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
+            }
+            if(dark==1){
+                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowaniedrk.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
+                imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
+            }}
+        else if(motyw==1){
+            imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
+            imgIcon2 = new ImageIcon(getClass().getResource("icons/hudymson.png"));
+            imgIcon3 = new ImageIcon(getClass().getResource("icons/husar.png"));
+            imgIcon4 = new ImageIcon(getClass().getResource("icons/karpinski.png"));
+            imgIcon5 = new ImageIcon(getClass().getResource("icons/knychalson.png"));
+            imgIcon6 = new ImageIcon(getClass().getResource("icons/macowiec.png"));
+            imgIcon7 = new ImageIcon(getClass().getResource("icons/marciniak.png"));
+            imgIcon8 = new ImageIcon(getClass().getResource("icons/tetris.png"));
+            imgIcon9 = new ImageIcon(getClass().getResource("icons/zuraw.png"));
+            imgIcon10 = new ImageIcon(getClass().getResource("icons/wojtech.png"));
+            imgIcon11 = new ImageIcon(getClass().getResource("icons/sygula.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
+        }
+        
     }
 
 
