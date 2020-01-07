@@ -176,7 +176,7 @@ public class Okno extends JFrame implements ActionListener {
         menu.theme.addActionListener(e->{
             try {
                 String system = System.getProperty("os.name");
-                theme.wybierzMotyw(system);
+                this.theme.wybierzMotyw(system);
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
@@ -189,6 +189,7 @@ public class Okno extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
             //moty=motyw.getPwsz();
+            moty=theme.getPwsz();
             dark=theme.getDark();
             menu.setDark(theme.getDark());
             menu.setMotyw(theme.getPwsz());
@@ -222,6 +223,8 @@ public class Okno extends JFrame implements ActionListener {
             }
             //moty=motyw.getPwsz();
             dark=theme.getDark();
+            moty=theme.getPwsz();
+            
             menu.setDark(theme.getDark());
             menu.setMotyw(theme.getPwsz());
             if(DEBUG){

@@ -8,8 +8,8 @@ import javax.swing.plaf.*;
 import javax.swing.plaf.metal.*;
 
 public class wybierzMotyw {
-    public int pwsz;
-    public int darkmode;
+    private int pwsz;
+    private int darkmode;
     public String[] buttonsNonWin = {"Ciemny (Darkula)", "Jasny (Nimbus)","Domyślny"};
     public String[] buttonsWin= { "Jasny  (Windows Classic)", "Jasny (Domyślny)", "Ciemny (Darkula)", "Jasny (Nimbus)"};
 
@@ -122,7 +122,7 @@ public class wybierzMotyw {
         this.pwsz=pwsz;
     }
     public int getPwsz(){
-        return pwsz;
+        return this.pwsz;
     }
 
 
@@ -130,7 +130,7 @@ public class wybierzMotyw {
     }
 
     public int getDark(){
-        return darkmode;
+        return this.darkmode;
     }
 
 
