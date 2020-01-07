@@ -152,7 +152,7 @@ public class Okno extends JFrame implements ActionListener {
         wyswietlanie.usun_MenuItem.addActionListener(this);
         
         //menu bar 
-        if(!eef){
+        if(eef){
             menubar.wczytalldata.addActionListener(this);
                 menubar.wczytdladecyzji.addActionListener(this);
                 menubar.zapiszPlikJPG.addActionListener(this);
@@ -204,7 +204,7 @@ public class Okno extends JFrame implements ActionListener {
 
             pack();
         });
-        if(!eef){
+      
          menubar.motywy.addActionListener(e->{
             try {
              
@@ -237,7 +237,7 @@ public class Okno extends JFrame implements ActionListener {
             SwingUtilities.updateComponentTreeUI(f);
 
             pack();
-        });}
+        });
 
     }
 
