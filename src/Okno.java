@@ -199,7 +199,7 @@ public class Okno extends JFrame implements ActionListener {
             menu=new Menuski();
 
             p.add(menu, BorderLayout.NORTH);
-            ustawNasluchZdarzen(true);
+            ustawNasluchZdarzen(false);
             SwingUtilities.updateComponentTreeUI(f);
 
             pack();
