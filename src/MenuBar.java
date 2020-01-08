@@ -50,8 +50,7 @@ JMenuItem manual = new JMenuItem("Instrukcja.");
 
 public MenuBar(Okno parent){
     super();
-   this.parent= parent;
-   pokatabele.addActionListener(parent);
+
     plik.add(wczytalldata);
 plik.add(wczytdladecyzji);
 plik.add(endwczytaj);

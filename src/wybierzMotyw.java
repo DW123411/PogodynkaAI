@@ -18,7 +18,7 @@ public class wybierzMotyw {
 
 
 
-    public void wybierzMotyw(String system) throws IOException, FileNotFoundException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException{
+    public void setMotyw(String system) throws IOException, FileNotFoundException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException{
         if(system.contains("Linux")){
             int motyw = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw",
                     JOptionPane.INFORMATION_MESSAGE, 0, null, buttonsNonWin, buttonsNonWin[0]);
@@ -126,7 +126,7 @@ public class wybierzMotyw {
     }
 
 
-    public void setDark(int dark){  this.darkmode=pwsz;
+    public void setDark(int dark){  this.darkmode=dark;
     }
 
     public int getDark(){

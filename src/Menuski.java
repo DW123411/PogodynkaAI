@@ -9,8 +9,8 @@ public class Menuski extends JMenuBar {
     public JTextField rekord2;
     public JLabel glebokosc;
     public JTextField glebokoscrekord;
-    private int motyw;
-    private int dark;
+    public int motyw;
+    public int dark;
 private ImageIcon imgIcon = null;
         private ImageIcon imgIcon2 = null;
         private ImageIcon imgIcon3 = null;
@@ -66,58 +66,59 @@ private ImageIcon imgIcon = null;
          imgIcon13=null;
          imgIcon14=null;
          imgIcon_theme = null;
+         
+         setMotywButtony(motyw, dark);
 
-        if(motyw==0){
-            if(dark==0){
-                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
-                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
-                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
-                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
-                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
-                imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
-                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
-                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
-                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
-                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
-                imgIcon12 = new ImageIcon(getClass().getResource("icons/show2.png"));
-                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
-                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
-            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
-            }
-            if(dark==1){
-                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
-                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
-                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
-                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
-                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
-                imgIcon7 = new ImageIcon(getClass().getResource("icons/delete.png"));
-                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
-                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowaniedrk.png"));
-                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
-                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
-                imgIcon12 = new ImageIcon(getClass().getResource("icons/view.png"));
-                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
-                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
-                imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
-            }}
-        else if(motyw==1){
-            imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
-            imgIcon2 = new ImageIcon(getClass().getResource("icons/hudymson.png"));
-            imgIcon3 = new ImageIcon(getClass().getResource("icons/husar.png"));
-            imgIcon4 = new ImageIcon(getClass().getResource("icons/karpinski.png"));
-            imgIcon5 = new ImageIcon(getClass().getResource("icons/knychalson.png"));
-            imgIcon6 = new ImageIcon(getClass().getResource("icons/macowiec.png"));
-            imgIcon7 = new ImageIcon(getClass().getResource("icons/marciniak.png"));
-            imgIcon8 = new ImageIcon(getClass().getResource("icons/tetris.png"));
-            imgIcon9 = new ImageIcon(getClass().getResource("icons/zuraw.png"));
-            imgIcon10 = new ImageIcon(getClass().getResource("icons/wojtech.png"));
-            imgIcon11 = new ImageIcon(getClass().getResource("icons/sygula.png"));
-            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
-        }
+         kreujButtony();
+        
+        add(wyś, BorderLayout.WEST);
+        //add(zal, BorderLayout.WEST);
+        add(klasyfikacja_z_pliku, BorderLayout.WEST);
+        add(klasyfikacja_z_pliku2, BorderLayout.WEST);
+        //add(show_klasyfikacja, BorderLayout.WEST);
+      
+        
+       
+        //add(tree, BorderLayout.WEST);
+    
+        //add(zbior, BorderLayout.WEST);
+        //add(rekord2, BorderLayout.WEST);
+        add(rekord3, BorderLayout.WEST);
+        
+        add(glebokosc1, BorderLayout.WEST);
+        add(skalowanie, BorderLayout.WEST);
+     
+        add(pokaz, BorderLayout.WEST);
 
+                add(accuracy, BorderLayout.WEST);
+       
+           
+              
+                             add(theme, BorderLayout.WEST);
+                               add(new JSeparator());
+                               add(wycz, BorderLayout.WEST);
+                     add(save, BorderLayout.WEST);   
+                    add(jpeg, BorderLayout.WEST);
+                        
+                       add(cred, BorderLayout.EAST);
+                add(zam, BorderLayout.EAST);
 
+    
+        //add(glebokosc, BorderLayout.WEST);
+        //add(glebokoscrekord, BorderLayout.WEST);
+    }
+    public void setMotyw(int motyw){
+        this.motyw=motyw;
+    }
+
+    public void setDark(int dark){
+        this.dark=dark;
+    }
+    public int getMotyw(){
+        return motyw;
+    }
+    public void kreujButtony() {
+        
         cred = new JButton("<html></html>");
         cred.setIcon(imgIcon);
         cred.setToolTipText("<html>O Programie</html>");
@@ -269,43 +270,8 @@ private ImageIcon imgIcon = null;
         theme.setMaximumSize(new Dimension(30, 30));
         
         
-        add(wyś, BorderLayout.WEST);
-        //add(zal, BorderLayout.WEST);
-        add(klasyfikacja_z_pliku, BorderLayout.WEST);
-        add(klasyfikacja_z_pliku2, BorderLayout.WEST);
-        //add(show_klasyfikacja, BorderLayout.WEST);
-        add(wycz, BorderLayout.WEST);
-        add(save, BorderLayout.WEST);
-        //add(tree, BorderLayout.WEST);
-        add(jpeg, BorderLayout.WEST);
-        //add(zbior, BorderLayout.WEST);
-        //add(rekord2, BorderLayout.WEST);
-        add(rekord3, BorderLayout.WEST);
-        add(glebokosc1, BorderLayout.WEST);
-        add(skalowanie, BorderLayout.WEST);
-        add(cred, BorderLayout.WEST);
-        add(pokaz, BorderLayout.WEST);
-
-                add(accuracy, BorderLayout.WEST);
-       
-                    add(theme, BorderLayout.WEST);
-                add(zam, BorderLayout.EAST);
-
     
-        //add(glebokosc, BorderLayout.WEST);
-        //add(glebokoscrekord, BorderLayout.WEST);
     }
-    public void setMotyw(int motyw){
-        this.motyw=motyw;
-    }
-
-    public void setDark(int dark){
-        this.dark=dark;
-    }
-    public int getMotyw(){
-        return motyw;
-    }
-    
     public void setMotywButtony(int motyw, int dark){
         
         if(motyw==0){
@@ -315,7 +281,7 @@ private ImageIcon imgIcon = null;
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree.png"));
                 imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
@@ -332,7 +298,7 @@ private ImageIcon imgIcon = null;
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
                 imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
-                imgIcon6 = new ImageIcon(getClass().getResource("icons/rysuj.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree.png"));
                 imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowaniedrk.png"));
@@ -341,7 +307,7 @@ private ImageIcon imgIcon = null;
                 imgIcon12 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
-                imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
+                imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_ico_for_dark.png"));
             }}
         else if(motyw==1){
             imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));

@@ -98,10 +98,35 @@ public class Wczytywanie {
         return drzewo;
     }
 
+    
+     public static DaneWejsciowe wczytajKlasyfikacjeZPlikuBezDecyzji(String Ścieżka) throws Exception {
+         
+         if(!CzyWPlikuJestDecyzja(Ścieżka)){
+         return    wczytajKlasyfikacjeZPliku(Ścieżka);
+         }
+         else {
+             throw new Exception();
+         }
+         
+     }
+     public static DaneWejsciowe wczytajKlasyfikacjeZPlikuZDecyzja(String Ścieżka) throws Exception {
+         
+         if(CzyWPlikuJestDecyzja(Ścieżka)){
+           return  wczytajKlasyfikacjeZPliku(Ścieżka);
+         }
+         else {
+             throw new Exception();
+         }
+         
+     }
+     
+     
+     
     /**
      * metoda zwraca klase Klasyfikacja z podanej ścieżki do pliku jako zmienna wejściowa
      */
-    public static DaneWejsciowe wczytajKlasyfikacjeZPliku(String Ścieżka) {
+    public static DaneWejsciowe wczytajKlasyfikacjeZPliku(String Ścieżka){
+        
         File file = new File(Ścieżka);
         Scanner scanner = null;
         String[][] temp_table;
@@ -297,6 +322,31 @@ public class Wczytywanie {
         KS.set_klasyfikacja_tablica_atrybuty(temp_table_atrybuty);
         KS.set_klasyfikacja_tablica_atrybuty_i_decyzje(temp_table_atrybuty_i_decyzje);
         return KS;
+    }
+    
+    public static boolean CzyWPlikuJestDecyzja(String ścieżka){
+          File file = new File(ścieżka);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file); //inicjalizacja Scannera
+        } catch (FileNotFoundException err) {
+           if(DEBUG){ System.out.println(err.toString());}
+        }
+         while (scanner.hasNextLine()) {
+            String linia = scanner.nextLine();
+            if(linia.toLowerCase().contains("decision")||linia.toLowerCase().contains("decyzja")){
+             //   System.out.println("zawiera");
+                scanner.close();
+                return true;
+            }
+            else {
+                return false;
+            }
+         }
+        
+        
+        
+        return false;
     }
 
 }

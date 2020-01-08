@@ -152,7 +152,7 @@ public class Okno extends JFrame implements ActionListener {
         wyswietlanie.usun_MenuItem.addActionListener(this);
         
         //menu bar 
-        if(eef){
+        if(eef==true){
             menubar.wczytalldata.addActionListener(this);
                 menubar.wczytdladecyzji.addActionListener(this);
                 menubar.zapiszPlikJPG.addActionListener(this);
@@ -172,11 +172,11 @@ public class Okno extends JFrame implements ActionListener {
         }
         
         
-        
+      
         menu.theme.addActionListener(e->{
             try {
                 String system = System.getProperty("os.name");
-                this.theme.wybierzMotyw(system);
+                this.theme.setMotyw(system);
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
@@ -199,17 +199,18 @@ public class Okno extends JFrame implements ActionListener {
             menu=new Menuski();
 
             p.add(menu, BorderLayout.NORTH);
+         
             ustawNasluchZdarzen(false);
             SwingUtilities.updateComponentTreeUI(f);
 
             pack();
         });
-      
+      if(eef==true){
          menubar.motywy.addActionListener(e->{
             try {
              
                 String system = System.getProperty("os.name");
-                theme.wybierzMotyw(system);
+                theme.setMotyw(system);
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
@@ -238,6 +239,7 @@ public class Okno extends JFrame implements ActionListener {
 
             pack();
         });
+      }
 
     }
 
@@ -283,14 +285,14 @@ public class Okno extends JFrame implements ActionListener {
                
             }
             else {
-                    JOptionPane.showMessageDialog(null,"Najpierw należy wczytać dane.");
+                    JOptionPane.showMessageDialog(null,"Najpierw należy wczytać dane.", "Error 659.", JOptionPane.ERROR_MESSAGE);
                  }
         } 
             //        theme.setToolTipText("<html>Wybieranie Motywu </html>");
             else if (zrodlo == menu.theme|| zrodlo == menubar.motywy) {
                 try {
                     String system = System.getProperty("os.name");
-                    theme.wybierzMotyw(system);
+                    theme.setMotyw(system);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {
@@ -452,7 +454,7 @@ public class Okno extends JFrame implements ActionListener {
             boolean nadpis = true;
             if(daneWejsciowe!=null){
                 
-                 int a = JOptionPane.showConfirmDialog(this, "Czy zastąpić aktualnie wczytane dane?", "Uwaga", JOptionPane.WARNING_MESSAGE); 
+                 int a = JOptionPane.showConfirmDialog(this, "Czy zastąpić aktualnie wczytane dane?", "Uwaga!", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE); 
            if(a==0){       
                nadpis = true; 
                 
@@ -468,7 +470,15 @@ public class Okno extends JFrame implements ActionListener {
             boolean spr = otworzPlik();
             if (spr) {
                 p.remove(p2);
-                daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
+                boolean breakit =false;
+                try{
+                daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPlikuZDecyzja(sciezkaDoPliku);}
+                catch(Exception efg){
+                    
+                        JOptionPane.showMessageDialog(null, "Należy wczytać plik z decyzjami.", "Error 701.", JOptionPane.ERROR_MESSAGE);
+                       breakit=true;
+                }
+                if(!breakit){
                int ilosc = daneWejsciowe.get_klasyfikacja().length;
                daneWejsciowe.podzialZbioru(ilosc / 2);
 
@@ -525,6 +535,7 @@ public class Okno extends JFrame implements ActionListener {
                 //JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
             }
             }
+            }
             
         }
        /*  else if (zrodlo==menu.show_klasyfikacja){
@@ -542,7 +553,7 @@ public class Okno extends JFrame implements ActionListener {
              boolean nadpis = true;
             if(daneWejsciowe2!=null){
                 
-                 int a = JOptionPane.showConfirmDialog(this, "Czy zastąpić aktualnie wczytane dane?", "Uwaga", JOptionPane.WARNING_MESSAGE); 
+                 int a = JOptionPane.showConfirmDialog(this, "Czy zastąpić aktualnie wczytane dane?", "Uwaga!", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE); 
            if(a==0){       
                nadpis = true; 
                 
@@ -555,19 +566,39 @@ public class Okno extends JFrame implements ActionListener {
             if(nadpis){  
             
             boolean spr = otworzPlik();
+            boolean breakit= false;
             if (spr) {
-
+                
+                try{
                 daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
-
+                }catch(Exception eff){
+                        JOptionPane.showMessageDialog(null, "Należy wczytać plik bez decyzji.", "Error 401.", JOptionPane.ERROR_MESSAGE);
+                   breakit = true;
+                }
 
             }
+            
+            
             }
             
             
         }
         //  wycz.setToolTipText("<html>Wyczyść</html>");
         else if (zrodlo == menu.wycz || zrodlo == wyczysc|| zrodlo == menubar.wyczysc) {
+          boolean nadpis;
+             int a = JOptionPane.showConfirmDialog(this, "Czy na pewno wymazać dane ?", "Uwaga", JOptionPane.WARNING_MESSAGE); 
+           if(a==0){       
+               nadpis = true; 
+                
+            }
+           else { nadpis = false; }
+           
+           
+               //   END  if(daneWejsciowe!=null){
+            
+            if(nadpis){  
             wyswietlanie.wyczysc();
+            }
 
         } 
         //    pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
@@ -632,7 +663,7 @@ public class Okno extends JFrame implements ActionListener {
                 }
             });}
             else {
-                 JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.");
+                 JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 24.", JOptionPane.ERROR_MESSAGE);
                 
             }
         } 
@@ -656,7 +687,12 @@ public class Okno extends JFrame implements ActionListener {
         }
         // save.setToolTipText("<html>Zapisz Jako TXT</html>");
         else if (zrodlo == menu.save || zrodlo == zapisz2|| zrodlo == menubar.zapiszPlikTXT) {
+            if(daneWejsciowe!=null){
             zapiszPlik();
+            }
+            else {
+                 JOptionPane.showMessageDialog(null, "Nie ma danych do zapisu.", "Error 134.", JOptionPane.ERROR_MESSAGE);
+            }
         }
         //   tree.setToolTipText("<html>Zapisz drzewo jako TXT</html>");
 //        else if (zrodlo == menu.tree) {
@@ -665,7 +701,9 @@ public class Okno extends JFrame implements ActionListener {
         
         //    rekord3.setToolTipText("<html>Rozmiary Zbiorów</html>");
         else if (zrodlo == menu.rekord3 || zrodlo == menubar.ustawrozmiarzbiorow) {
-
+            
+            if(daneWejsciowe!=null){
+            
             String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego", "10");
          //   System.out.print("#m from input  : "+m);
                 if(m!=null){
@@ -694,11 +732,17 @@ public class Okno extends JFrame implements ActionListener {
                 wyswietlanie.rysujPrzyciski(wyswietlanie.listaButton);
             }
                 }
+                
+            }else {
+                 JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 59.", JOptionPane.ERROR_MESSAGE);
+                
+            }
         } 
         //         glebokosc1.setToolTipText("<html>Rozmiar maksymalnej głębokości</html>");
         else if (zrodlo == menu.glebokosc1|| zrodlo == menubar.ustawmaxglebokosc) {
+            if (daneWejsciowe != null) {
             try {
-                String m = JOptionPane.showInputDialog("Podaj okreslona głebokosc", "3");
+                String m = JOptionPane.showInputDialog("Podaj określoną głębokość", "3");
                 wyswietlanie.wyczysc();
                 ukryjTabele();
                 if (daneWejsciowe != null) {
@@ -707,7 +751,7 @@ public class Okno extends JFrame implements ActionListener {
                             // daneWejsciowe.podzialZbioru(Integer.parseInt(m));
                             daneWejsciowe.setMaxGlebokosc(Integer.parseInt(m));
                         } else {
-                            JOptionPane.showMessageDialog(f, "Głębokość nie może być zerowa lub mniejsza niż zero");
+                            JOptionPane.showMessageDialog(f, "Głębokość nie może być zerowa lub mniejsza niż zero.");
                             menu.glebokosc1.setEnabled(false);
                             menu.glebokosc1.setText("");
                             menu.glebokosc1.setEnabled(true);
@@ -751,17 +795,21 @@ public class Okno extends JFrame implements ActionListener {
 
 
             }catch  (NumberFormatException ee) {
-                JOptionPane.showMessageDialog(f, "Błędnie określona głębokość");
+                JOptionPane.showMessageDialog(f, "Błędnie określona głębokość.");
                 menu.glebokosc1.setEnabled(false);
                 menu.glebokosc1.setText("");
                 menu.glebokosc1.setEnabled(true);
 
             }
         }
+            else {
+                 JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 534.", JOptionPane.ERROR_MESSAGE);
+            }
         
+        }
         //    jpeg.setToolTipText("<html>Zapisz jako obraz</html>");
         else if (zrodlo == menu.jpeg || zrodlo == zapisz|| zrodlo == menubar.zapiszPlikJPG) {
-            try {
+              try {
                 Zapis.save_jpeg();
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -787,7 +835,7 @@ public class Okno extends JFrame implements ActionListener {
 
             }
             else {
-                JOptionPane.showMessageDialog(f, "Najpierw należy wczytać dane.");
+                 JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 432.", JOptionPane.INFORMATION_MESSAGE);
 
                 
                 
