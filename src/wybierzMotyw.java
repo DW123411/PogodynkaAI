@@ -58,11 +58,29 @@ public class wybierzMotyw {
                     }
                     setPwsz(0);
                     setDark(0);
+                    color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                    switch(color){
+                        case 0 : { setColor(0); break;}
+                        case 1 : { setColor(1); break;}
+                        case 2 : { setColor(2); break;}
+                        case 3 : { setColor(3); break;}
+                        case 4 : { setColor(4); break;}
+                        default : {break;}
+                    }
                     break;
                     case 2:
-                        UIManager.setLookAndFeel(new DarculaLaf());
+                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                         setPwsz(0);
                         setDark(0);
+                        color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            default : {break;}
+                        }
                         break;
                 default :
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

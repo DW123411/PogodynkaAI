@@ -300,7 +300,7 @@ public class Okno extends JFrame implements ActionListener {
                  }
         } 
             //        theme.setToolTipText("<html>Wybieranie Motywu </html>");
-            else if (zrodlo == menu.theme|| zrodlo == menubar.motywy) {
+            else if (zrodlo == menu.theme) {
                 try {
                     String system = System.getProperty("os.name");
                     theme.setMotyw(system);
