@@ -917,12 +917,12 @@ public class Okno extends JFrame implements ActionListener {
             }
         }else if(zrodlo == menubar.schowajMenu)
         {
-            if(menubar.schowajMenu.getText().equals("Schowaj menu")){
+            if(menubar.schowajMenu.getText().equals("Schowaj menu.")){
                 menu.setVisible(false);
-                menubar.schowajMenu.setText("Pokaż menu");
+                menubar.schowajMenu.setText("Pokaż menu.");
             }else{
                 menu.setVisible(true);
-                menubar.schowajMenu.setText("Schowaj menu");
+                menubar.schowajMenu.setText("Schowaj menu.");
             }
         }
 

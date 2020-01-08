@@ -29,7 +29,7 @@ JMenuItem wyczysc = new JMenuItem("Wyczyść.");
 JSeparator endrys = new JSeparator();
 ///
 JMenuItem ustawrozmiarzbiorow = new JMenuItem("Ustaw rozmiary zbiorów.");
-JMenuItem ustawmaxglebokosc = new JMenuItem("Ustaw maxymalną głębokośc.");
+JMenuItem ustawmaxglebokosc = new JMenuItem("Ustaw maksymalną głębokość.");
 //
 
 JMenu widok = new JMenu("Widok");
