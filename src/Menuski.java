@@ -497,6 +497,8 @@ private ImageIcon imgIcon = null;
                     }
             }}
         else if(motyw==1){
+            motyw=0;}
+        if(motyw==0){
             imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
             imgIcon2 = new ImageIcon(getClass().getResource("icons/hudymson.png"));
             imgIcon3 = new ImageIcon(getClass().getResource("icons/husar.png"));
@@ -510,6 +512,7 @@ private ImageIcon imgIcon = null;
             imgIcon11 = new ImageIcon(getClass().getResource("icons/sygula.png"));
             imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
         }
+    
         
     }
 
