@@ -86,7 +86,7 @@ private ImageIcon imgIcon = null;
         //add(zal, BorderLayout.WEST);
         add(klasyfikacja_z_pliku, BorderLayout.WEST);
         add(klasyfikacja_z_pliku2, BorderLayout.WEST);
-        add(wyswietl_decyzje,BorderLayout.WEST);
+        //add(wyswietl_decyzje,BorderLayout.WEST);
         //add(show_klasyfikacja, BorderLayout.WEST);
       
         
