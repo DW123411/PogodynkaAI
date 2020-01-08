@@ -100,7 +100,7 @@ private ImageIcon imgIcon = null;
         add(glebokosc1, BorderLayout.WEST);
         add(skalowanie, BorderLayout.WEST);
      
-        add(pokaz, BorderLayout.WEST);
+       
 
                 add(accuracy, BorderLayout.WEST);
        
@@ -108,9 +108,10 @@ private ImageIcon imgIcon = null;
               
                              add(theme, BorderLayout.WEST);
                                add(new JSeparator());
-                               add(wycz, BorderLayout.WEST);
-                     add(save, BorderLayout.WEST);   
-                    add(jpeg, BorderLayout.WEST);
+                                add(pokaz, BorderLayout.EAST);
+                               add(wycz, BorderLayout.EAST);
+                     add(save, BorderLayout.EAST);   
+                    add(jpeg, BorderLayout.EAST);
                         
                        add(cred, BorderLayout.EAST);
                 add(zam, BorderLayout.EAST);
@@ -233,7 +234,7 @@ private ImageIcon imgIcon = null;
 
      accuracy = new JButton("<html></html>");
         accuracy.setIcon(imgIcon10);
-        accuracy.setToolTipText("<html>Dokładność.</html>");
+        accuracy.setToolTipText("<html>Dokładność</html>");
         accuracy.setPreferredSize(new Dimension(32, 32));
         accuracy.setMaximumSize(new Dimension(32, 32));
 

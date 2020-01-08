@@ -45,7 +45,7 @@ JMenuItem motywy = new JMenuItem("Wybór motywu.");
 // 
 JMenu info = new JMenu("Info");
 JMenuItem credits = new JMenuItem("O programie.");
-JMenuItem manual = new JMenuItem("Instrukcja.");
+
 
 public MenuBar(Okno parent){
     super();
@@ -74,7 +74,7 @@ widok.add(  endskalowanie );
 widok.add(  motywy );
 
 info.add( credits  );
-info.add(  manual );
+
 add(plik);
 add(edycja);
 add(widok);

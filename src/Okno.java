@@ -44,7 +44,7 @@ public class Okno extends JFrame implements ActionListener {
     public static int dark;
     public static int colormode;
     wybierzMotyw theme = new wybierzMotyw();
-    int errory= 0;
+
     Wezel root;
     // ##################### debug
     boolean DEBUG = false;
@@ -171,8 +171,7 @@ public class Okno extends JFrame implements ActionListener {
                 menubar.scalowanie.addActionListener(this);
                 menubar.motywy.addActionListener(this);
                 menubar.credits.addActionListener(this);
-                menubar.manual.addActionListener(this);
-                menubar.schowajMenu.addActionListener(this);
+           menubar.schowajMenu.addActionListener(this);
 
         }
         
@@ -293,12 +292,10 @@ public class Okno extends JFrame implements ActionListener {
                
             }
             else {
-                if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+               
+                
                     JOptionPane.showMessageDialog(null,"Najpierw należy wczytać dane.", "Error 289.", JOptionPane.QUESTION_MESSAGE);
-                    errory++;}
+                   
                  }
         } 
             //        theme.setToolTipText("<html>Wybieranie Motywu </html>");
@@ -456,13 +453,10 @@ public class Okno extends JFrame implements ActionListener {
 
         }
         else {
-                             if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                         
              JOptionPane.showMessageDialog(null, "Nie wczytałeś klasyfikacji.", "Error 444.", JOptionPane.PLAIN_MESSAGE);
-            errory++;
-                             }
+      
+                           
         }
         }
         // ????? 
@@ -495,12 +489,9 @@ public class Okno extends JFrame implements ActionListener {
                 try{
                 daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPlikuZDecyzja(sciezkaDoPliku);}
                 catch(Exception efg){
-                    if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                  
                         JOptionPane.showMessageDialog(null, "Należy wczytać plik z decyzjami.", "Error 701.", JOptionPane.ERROR_MESSAGE);
-                       breakit=true; errory++; }
+                       breakit=true;
                 }
                 if(!breakit){
                int ilosc = daneWejsciowe.get_klasyfikacja().length;
@@ -610,22 +601,16 @@ public class Okno extends JFrame implements ActionListener {
                   wyswietlanie.getDecyzja(indukcja.getKorzen());
                     }
                     else {
-                        if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                      
                             daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
-                         JOptionPane.showMessageDialog(null, "Wczytano dane.Brak drzewa decyzyjnego.Aby wyświetlić decyzję: Narysuj drzewo a następnie wczytaj ponownie dane lub wybierz przycisk 'Wyświetl decyzje'");
+                         JOptionPane.showMessageDialog(null, "Wczytano dane. Brak drzewa decyzyjnego, aby wyświetlić decyzję: Narysuj drzewo, a następnie wczytaj ponownie dane lub wybierz przycisk 'Wyświetl decyzję'.");
 
-                        errory++;} 
+                      
                     }
                 }catch(Exception eff){
-                    if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                   
                         JOptionPane.showMessageDialog(null, "Należy wczytać plik bez decyzji.", "Error 592.", JOptionPane.ERROR_MESSAGE);
-                   breakit = true; errory++;}
+                   breakit = true; 
                 }
 
             }
@@ -743,12 +728,9 @@ public class Okno extends JFrame implements ActionListener {
             zapiszPlik();
             }
             else {
-                if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+               
                  JOptionPane.showMessageDialog(null, "Nie ma danych do zapisu.", "Error 711.", JOptionPane.ERROR_MESSAGE);
-                 errory++;}
+               
             }
         }
         //   tree.setToolTipText("<html>Zapisz drzewo jako TXT</html>");
@@ -791,12 +773,9 @@ public class Okno extends JFrame implements ActionListener {
                 }
                 
             }else {
-                if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+               
                  JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 754.", JOptionPane.ERROR_MESSAGE);
-                errory++;}
+            
                 
             }
         } 
@@ -866,12 +845,9 @@ public class Okno extends JFrame implements ActionListener {
             }
         }
             else {
-                if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                
                  JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 823.", JOptionPane.ERROR_MESSAGE);
-                errory++;}
+               
             }
         
         }
@@ -904,14 +880,11 @@ public class Okno extends JFrame implements ActionListener {
 
             }
             else {
-                if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+               
                     
                 
                  JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 855.", JOptionPane.INFORMATION_MESSAGE);
-                errory++;}
+               
                 
                 
             }
