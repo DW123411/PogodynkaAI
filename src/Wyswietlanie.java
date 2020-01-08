@@ -854,7 +854,7 @@ public int getAccuracyTeachSucces(){
         o.dopasujSieDoZawartosci();
         o.f.setVisible(true);
         o.czyPrawyPanel = true;
-        o.ukryjTabele();
+        //o.ukryjTabele();
         tabelaWyswietl.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {

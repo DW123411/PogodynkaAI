@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class Menuski extends JMenuBar {
-    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku, klasyfikacja_z_pliku2, show_klasyfikacja, accuracy, jpeg, pokaz, rekord3,glebokosc1,theme;
+    public JButton wycz, wyś, skalowanie, zam, zal, cred, save, tree, klasyfikacja_z_pliku,wyswietl_decyzje, klasyfikacja_z_pliku2, show_klasyfikacja, accuracy, jpeg, pokaz, rekord3,glebokosc1,theme;
     public JLabel zbior;
     public JTextArea rekord;
     public JTextField rekord2;
@@ -82,9 +82,11 @@ private ImageIcon imgIcon = null;
          kreujButtony();
         
         add(wyś, BorderLayout.WEST);
+
         //add(zal, BorderLayout.WEST);
         add(klasyfikacja_z_pliku, BorderLayout.WEST);
         add(klasyfikacja_z_pliku2, BorderLayout.WEST);
+        add(wyswietl_decyzje,BorderLayout.WEST);
         //add(show_klasyfikacja, BorderLayout.WEST);
       
         
@@ -142,6 +144,12 @@ private ImageIcon imgIcon = null;
         cred.setToolTipText("<html>O Programie</html>");
         cred.setPreferredSize(new Dimension(32, 32));
         cred.setMaximumSize(new Dimension(32, 32));
+
+        wyswietl_decyzje = new JButton("<html></html>");
+        wyswietl_decyzje.setIcon(imgIcon);
+        wyswietl_decyzje.setToolTipText("<html>Wyświetl decyzję</html>");
+        wyswietl_decyzje.setPreferredSize(new Dimension(32, 32));
+        wyswietl_decyzje.setMaximumSize(new Dimension(32, 32));
 
         save = new JButton("<html></html>");
         save.setIcon(imgIcon4);

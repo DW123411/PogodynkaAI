@@ -3,13 +3,13 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.MenuKeyEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import javax.swing.event.MenuKeyEvent;
 public class Okno extends JFrame implements ActionListener {
     Menuski menu = new Menuski();
     Wyswietlanie wyswietlanie = new Wyswietlanie();
@@ -140,7 +140,7 @@ public class Okno extends JFrame implements ActionListener {
         menu.klasyfikacja_z_pliku.addActionListener(this);
         menu.klasyfikacja_z_pliku2.addActionListener(this);
         menu.show_klasyfikacja.addActionListener(this);
-
+        menu.wyswietl_decyzje.addActionListener(this);
         menu.jpeg.addActionListener(this);
         menu.accuracy.addActionListener(this);
         menu.glebokoscrekord.addActionListener(this);
@@ -161,6 +161,7 @@ public class Okno extends JFrame implements ActionListener {
                 menubar.zapiszPlikJPG.addActionListener(this);
                 menubar.zapiszPlikTXT.addActionListener(this);
                 menubar.exit.addActionListener(this);
+                menubar.wyswietlDecyzje.addActionListener(this);
                 menubar.rysujdrzewo.addActionListener(this);
                 menubar.wyczysc.addActionListener(this);
                 menubar.ustawrozmiarzbiorow.addActionListener(this);
@@ -172,6 +173,7 @@ public class Okno extends JFrame implements ActionListener {
                 menubar.credits.addActionListener(this);
                 menubar.manual.addActionListener(this);
                 menubar.schowajMenu.addActionListener(this);
+
         }
         
         
@@ -430,22 +432,25 @@ public class Okno extends JFrame implements ActionListener {
                              DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorUczacy());
                              System.out.println("$#!@$!");
                              DaneWejsciowe.DEBUG_PRINT_TABLE(daneWejsciowe.getZbiorTestowy());}
+                                        if(indukcja!=null) {
+                                            if (daneWejsciowe.getZbiorUczacy() != null) {
+                                                if (daneWejsciowe.getZbiorTestowy() != null) {
+                                                    //   new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
+                                                    if (!accuracy_open_secure) {
+                                                        accuracy_open_secure = true;
+                                                        new Accuracy(wyswietlanie.AccuracyTestMax, wyswietlanie.AccuracyTestSucces, wyswietlanie.AccuracyTeachMax, wyswietlanie.AccuracyTeachSucces, this);
+                                                    }
 
-                                               if(daneWejsciowe.getZbiorUczacy()!=null){
-                                                     if(daneWejsciowe.getZbiorTestowy()!=null){
-                                                      //   new Accuracy(daneWejsciowe2.get_klasyfikacja(), daneWejsciowe.getZbiorUczacy(), daneWejsciowe.getZbiorTestowy(), this.root);
-                                                      if(!accuracy_open_secure){accuracy_open_secure=true;
-                                                                   new Accuracy(wyswietlanie.AccuracyTestMax, wyswietlanie.AccuracyTestSucces, wyswietlanie.AccuracyTeachMax, wyswietlanie.AccuracyTeachSucces, this);
-                                                      }
-                                                      
 
-                                                     if(DEBUG){
-                                                         System.out.println("Accuracy Test : Max:"+wyswietlanie.AccuracyTestMax+" , Succes:"+wyswietlanie.AccuracyTestSucces);
-                                                         System.out.println("Accuracy Teach : Max:"+wyswietlanie.AccuracyTeachMax+" , Succes:"+wyswietlanie.AccuracyTeachSucces);
-                                                     }
-                                                     }   }
+                                                    if (DEBUG) {
+                                                        System.out.println("Accuracy Test : Max:" + wyswietlanie.AccuracyTestMax + " , Succes:" + wyswietlanie.AccuracyTestSucces);
+                                                        System.out.println("Accuracy Teach : Max:" + wyswietlanie.AccuracyTeachMax + " , Succes:" + wyswietlanie.AccuracyTeachSucces);
+                                                    }
+                                                }
+                                            }
+                                        }
                                          else {
-                                             JOptionPane.showMessageDialog(null, "Nie można obliczyć dokładności.");  
+                                             JOptionPane.showMessageDialog(null, "Najpierw wygeneruj drzewo. Aby wygenerować drzewo wczytaj dane wejściowe i kliknij przycisk 'Rysuj Drzewo'.");
                                          }
             
 
@@ -567,6 +572,17 @@ public class Okno extends JFrame implements ActionListener {
         
         
     //        klasyfikacja_z_pliku2.setToolTipText("<html>Wczytaj dane do<br />wyboru decyzji</html>");
+        else if (zrodlo == menu.wyswietl_decyzje || zrodlo==menubar.wyswietlDecyzje) {
+            if(daneWejsciowe2!=null){
+                if(indukcja!=null){
+                    wyswietlanie.getDecyzja(indukcja.getKorzen());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Brak drzewa decyzyjnego.Aby wyświetlić decyzję: Narysuj drzewo a następnie wczytaj ponownie dane lub wybierz przycisk 'Wyświetl decyzje'");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Brak danych do klasyfikacji. Najpierw wczytaj dane.");
+            }
+        }
         else if (zrodlo == menu.klasyfikacja_z_pliku2|| zrodlo == menubar.wczytdladecyzji) {
            
              boolean nadpis = true;
@@ -581,17 +597,7 @@ public class Okno extends JFrame implements ActionListener {
            
            
             }   //   END  if(daneWejsciowe!=null){
-               if(daneWejsciowe==null){
-                
-                 int a = JOptionPane.showConfirmDialog(this, "Nie wczytano danych wejściowych. \nMogą wystąpić problemy, kontynuować?", "Uwaga!", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE); 
-           if(a==0){       
-               nadpis = true; 
-                
-            }
-           else { nadpis = false; }
-           
-           
-            } 
+
             if(nadpis){  
             
             boolean spr = otworzPlik();
@@ -599,7 +605,7 @@ public class Okno extends JFrame implements ActionListener {
             if (spr) {
                 
                 try{
-                    if(daneWejsciowe!=null&&indukcja!=null){
+                    if(indukcja!=null){
                 daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
                   wyswietlanie.getDecyzja(indukcja.getKorzen());
                     }
@@ -608,7 +614,9 @@ public class Okno extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
                     errory=0;
                 }else{
-                         JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane wejściowe.", "Error 589.", JOptionPane.ERROR_MESSAGE);
+                            daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
+                         JOptionPane.showMessageDialog(null, "Wczytano dane.Brak drzewa decyzyjnego.Aby wyświetlić decyzję: Narysuj drzewo a następnie wczytaj ponownie dane lub wybierz przycisk 'Wyświetl decyzje'");
+
                         errory++;} 
                     }
                 }catch(Exception eff){
@@ -797,7 +805,7 @@ public class Okno extends JFrame implements ActionListener {
             if (daneWejsciowe != null) {
             try {
                 String m = JOptionPane.showInputDialog("Podaj określoną głębokość", "3");
-                wyswietlanie.wyczysc();
+
                 ukryjTabele();
                 if (daneWejsciowe != null) {
                     if (!m.equals("")) {
@@ -816,6 +824,7 @@ public class Okno extends JFrame implements ActionListener {
                         //int ilosc = daneWejsciowe.get_klasyfikacja().length;
                         //daneWejsciowe.podzialZbioru(ilosc / 2);
                     }
+                    wyswietlanie.wyczysc();
                     DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
                     Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
                     zapis = indukcja;
@@ -880,6 +889,7 @@ public class Okno extends JFrame implements ActionListener {
 
             if (daneWejsciowe != null) {
                 DrzewoDecyzyjne dd = new DrzewoDecyzyjne(daneWejsciowe);
+                wyswietlanie.fixUczacy();  
                 Drzewo<ElementDrzewa> indukcja = dd.indukcja((ElementDrzewa[][]) daneWejsciowe.getZbiorUczacy(), daneWejsciowe.get_klasyfikacja_atrybuty(), null, null);
                 zapis = indukcja;
                 indukcja.getKorzen().setPoczatekDostepnegoMiejsca(0);

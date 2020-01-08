@@ -4,8 +4,6 @@
  * @author majzner marcin
  */
 import javax.swing.*;
-import javax.swing.event.MenuKeyEvent;
-import javax.swing.event.MenuKeyListener;
 
 public class MenuBar extends JMenuBar {
 JMenu plik = new JMenu("Plik");
@@ -26,6 +24,7 @@ JMenu edycja = new JMenu("Edycja");
 //
 
 JMenuItem rysujdrzewo = new JMenuItem("Rysuj drzewo.");
+    JMenuItem wyswietlDecyzje = new JMenuItem("Wyświetl decyzję.");
 JMenuItem wyczysc = new JMenuItem("Wyczyść.");
 JSeparator endrys = new JSeparator();
 ///
@@ -60,6 +59,7 @@ plik.add(endzapis);
 plik.add(exit);
 
 edycja.add( rysujdrzewo  );
+edycja.add (wyswietlDecyzje);
 edycja.add( wyczysc  );
 edycja.add( endrys  );
 edycja.add( ustawrozmiarzbiorow  );
