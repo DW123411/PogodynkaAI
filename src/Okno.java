@@ -100,7 +100,6 @@ public class Okno extends JFrame implements ActionListener {
         popupMenu2.add(wyczysc2);
         // popupMenu2.add(pokaz);
         popupMenu2.add(zapisz2);
-        popupMenu2.add(dodaj);
 
         wyswietlanie.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
