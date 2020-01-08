@@ -55,8 +55,9 @@ public class wybierzMotyw {
                         default : {break;}
                     }
                                 break;
-                            }
-                        }} catch (ClassNotFoundException e) {
+                            
+                        }
+                    }} catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (InstantiationException e) {
                         e.printStackTrace();
@@ -68,20 +69,22 @@ public class wybierzMotyw {
                     setPwsz(0);
                     setDark(0);
                     break;}
-                    case 2:{
-                        UIManager.setLookAndFeel(new DarculaLaf());
-                            int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
-                    switch(color){
-                        case 0 : { setColor(0); break;}
-                        case 1 : { setColor(1); break;}
-                        case 2 : { setColor(2); break;}
-                        case 3 : { setColor(3); break;}
-                        case 4 : { setColor(4); break;}
-                        default : {break;}
+                     
                     
-                    }
+         
+                    case 2:{
+                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                         setPwsz(0);
                         setDark(0);
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            default : {break;}
+                        }
                         break;}
                 default :{
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -182,10 +185,10 @@ public class wybierzMotyw {
                     JOptionPane.WARNING_MESSAGE);
         }
 
-
-
-
     }
+
+
+    
 
     public void setPwsz(int pwsz){
         this.pwsz=pwsz;
