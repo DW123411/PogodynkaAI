@@ -637,8 +637,8 @@ public class Okno extends JFrame implements ActionListener {
         }
         //  wycz.setToolTipText("<html>Wyczyść</html>");
         else if (zrodlo == menu.wycz || zrodlo == wyczysc|| zrodlo == menubar.wyczysc) {
-          boolean nadpis;
-             int a = JOptionPane.showConfirmDialog(this, "Czy na pewno wymazać dane ?", "Uwaga!", JOptionPane.WARNING_MESSAGE); 
+          /*boolean nadpis;
+             int a = JOptionPane.showConfirmDialog(this, "Czy na pewno wymazać dane?", "Uwaga!", JOptionPane.WARNING_MESSAGE);
            if(a==0){       
                nadpis = true; 
                 
@@ -648,9 +648,9 @@ public class Okno extends JFrame implements ActionListener {
            
                //   END  if(daneWejsciowe!=null){
             
-            if(nadpis){  
+            if(nadpis){ */
             wyswietlanie.wyczysc();
-            }
+            //}
 
         } 
         //    pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
