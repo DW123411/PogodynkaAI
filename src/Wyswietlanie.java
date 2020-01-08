@@ -1231,7 +1231,7 @@ public int getAccuracyTeachSucces(){
                         "Damian Staśkiewicz \n" +
                         "Projektant interfejsu : \n" +
                         "Adam Witasiak \n" +
-                        "2019, PWSZ KALISZ ",
+                        "2019/2020, PWSZ KALISZ ",
                 "O Programie", JOptionPane.INFORMATION_MESSAGE, icon);
         //wyczysc();
         // Graphics2D g2 = (Graphics2D) okno.getGraphics();

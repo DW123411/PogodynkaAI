@@ -11,6 +11,7 @@ public class Menuski extends JMenuBar {
     public JTextField glebokoscrekord;
     public int motyw;
     public int dark;
+    public int colormode;
 private ImageIcon imgIcon = null;
         private ImageIcon imgIcon2 = null;
         private ImageIcon imgIcon3 = null;
@@ -40,6 +41,15 @@ private ImageIcon imgIcon = null;
             setMotyw(1);
         }
         else setMotyw(0);
+        switch(Okno.colormode){
+            case 0 : { setColorMode(0);break;}
+            case 1 : { setColorMode(1);break;}
+            case 2 : { setColorMode(2);break;}
+            case 3 : { setColorMode(3);break;}
+            case 4 : { setColorMode(4);break;}
+            default: { setColorMode(1);  break;}
+            
+        }
         
         
         
@@ -67,7 +77,7 @@ private ImageIcon imgIcon = null;
          imgIcon14=null;
          imgIcon_theme = null;
          
-         setMotywButtony(motyw, dark);
+         setMotywButtony(motyw, dark,colormode);
 
          kreujButtony();
         
@@ -117,6 +127,14 @@ private ImageIcon imgIcon = null;
     public int getMotyw(){
         return motyw;
     }
+    
+    public void setColorMode(int col){
+        this.colormode= col;
+    }
+    public int getColorMode(){
+        return this.colormode;
+    }
+    
     public void kreujButtony() {
         
         cred = new JButton("<html></html>");
@@ -272,11 +290,27 @@ private ImageIcon imgIcon = null;
         
     
     }
-    public void setMotywButtony(int motyw, int dark){
+    public void setMotywButtony(int motyw, int dark, int col){
         
         if(motyw==0){
             if(dark==0){
-                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+                     switch(col){
+                        case 0 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_red.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_red.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_red.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_red.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_red.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_red.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_red.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view_red.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_red.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_dark_red.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_red.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_red.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_red.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_red.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png")); break;}
+                        case 1 : { imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
                 imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
@@ -284,16 +318,160 @@ private ImageIcon imgIcon = null;
                 imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree.png"));
                 imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
                 imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
-                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_green.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_green.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_green.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png")); break;}
+                        case 2 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_yellow.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_yellow.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_yellow.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_yellow.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_yellow.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_yellow.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_yellow.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_yellow.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_dark_yellow.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_yellow.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_yellow.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_yellow.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_yellow.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));; break;}
+                        case 3 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_blue.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_blue.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_blue.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_blue.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_blue.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_blue.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_blue.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_blue.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_dark_blue.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_blue.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_blue.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_blue.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_blue.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png")); break;}
+                        case 4 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_purple.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_purple.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_purple.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_purple.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_purple.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_purple.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_purple.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view_purple.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_purple.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_dark_purple.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_purple.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_purple.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_purple.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_purple.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png")); break;}
+                        default : {
+                            
+                            
+                            imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_red.png"));
                 imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy.png"));
                 imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
                 imgIcon12 = new ImageIcon(getClass().getResource("icons/show2.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
-            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));break;}
+                    }
+                
             }
             if(dark==1){
-                imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+              switch(col){
+                        case 0 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_red.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_red.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_red.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_red.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_red.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_red.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_red.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_red.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_red.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_red.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_red.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_red.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_red.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_dark.png")); break;}
+                        case 1 : { imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_green.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_dark_green.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_green.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_green.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_dark.png")); break;}
+                        case 2 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_yellow.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_yellow.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_yellow.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_yellow.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_yellow.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_yellow.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_yellow.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_yellow.png"));
+               imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_yellow.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_yellow.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_yellow.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_yellow.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_yellow.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_dark.png")); break;}
+                        case 3 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_blue.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_blue.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_blue.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_blue.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_blue.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_blue.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_blue.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_blue.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_blue.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_blue.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_blue.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_blue.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_blue.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_dark.png")); break;}
+                        case 4 : { imgIcon = new ImageIcon(getClass().getResource("icons/info_purple.png"));
+                imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG_purple.png"));
+                imgIcon3 = new ImageIcon(getClass().getResource("icons/exit_purple.png"));
+                imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT_purple.png"));
+                imgIcon5 = new ImageIcon(getClass().getResource("icons/wczytaj_purple.png"));
+                imgIcon6 = new ImageIcon(getClass().getResource("icons/make_tree_purple.png"));
+                imgIcon7 = new ImageIcon(getClass().getResource("icons/clear_purple.png"));
+                imgIcon8 = new ImageIcon(getClass().getResource("icons/view.png"));
+                imgIcon9 = new ImageIcon(getClass().getResource("icons/skalowanie_purple.png"));
+                imgIcon10 = new ImageIcon(getClass().getResource("icons/accuracy_purple.png"));
+                imgIcon11 = new ImageIcon(getClass().getResource("icons/file_purple.png"));
+                imgIcon12 = new ImageIcon(getClass().getResource("icons/view_purple.png"));
+                imgIcon13 = new ImageIcon(getClass().getResource("icons/size_purple.png"));
+                imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_purple.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_dark.png")); break;}
+                        default : {
+                            
+                            
+                            imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
                 imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
                 imgIcon4 = new ImageIcon(getClass().getResource("icons/saveTXT.png"));
@@ -307,7 +485,8 @@ private ImageIcon imgIcon = null;
                 imgIcon12 = new ImageIcon(getClass().getResource("icons/view.png"));
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth.png"));
-                imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_ico_for_dark.png"));
+            imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));break;}
+                    }
             }}
         else if(motyw==1){
             imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
