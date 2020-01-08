@@ -25,7 +25,7 @@ public class wybierzMotyw {
             int motyw = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), buttonsNonWin, buttonsNonWin[0]);
             
             switch(motyw) {
-                case 0:
+                case 0:{
                     UIManager.setLookAndFeel(new DarculaLaf());
                     setPwsz(0);
                     setDark(1);
@@ -38,13 +38,22 @@ public class wybierzMotyw {
                         case 4 : { setColor(4); break;}
                         default : {break;}
                     }
-                    
-                    break;
-                case 1:
+                
+                    break;}
+                case 1:{
                     try {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                             if ("Nimbus".equals(info.getName())) {
                                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                   int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                    switch(color){
+                        case 0 : { setColor(0); break;}
+                        case 1 : { setColor(1); break;}
+                        case 2 : { setColor(2); break;}
+                        case 3 : { setColor(3); break;}
+                        case 4 : { setColor(4); break;}
+                        default : {break;}
+                    }
                                 break;
                             }
                         }} catch (ClassNotFoundException e) {
@@ -58,18 +67,28 @@ public class wybierzMotyw {
                     }
                     setPwsz(0);
                     setDark(0);
-                    break;
-                    case 2:
+                    break;}
+                    case 2:{
                         UIManager.setLookAndFeel(new DarculaLaf());
+                            int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                    switch(color){
+                        case 0 : { setColor(0); break;}
+                        case 1 : { setColor(1); break;}
+                        case 2 : { setColor(2); break;}
+                        case 3 : { setColor(3); break;}
+                        case 4 : { setColor(4); break;}
+                        default : {break;}
+                    
+                    }
                         setPwsz(0);
                         setDark(0);
-                        break;
-                default :
+                        break;}
+                default :{
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     setPwsz(0);
                     setDark(0);
                     break;
-
+                    }
             }
         }
         else if(system.contains("Windows")){
