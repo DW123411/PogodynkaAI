@@ -743,18 +743,19 @@ public class Okno extends JFrame implements ActionListener {
             
             if(daneWejsciowe!=null){
             
-            String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego", "10");
+            String m = JOptionPane.showInputDialog("Podaj rozmiar zbioru uczącego.", "10");
          //   System.out.print("#m from input  : "+m);
                 if(m!=null){
             wyswietlanie.wyczysc();
             ukryjTabele();
             if (daneWejsciowe != null) {
                 if (!m.equals("")) {
-                    if (Integer.parseInt(m) > 0 && Integer.parseInt(m) <= daneWejsciowe.get_klasyfikacja().length - 1) {
+                    if (Integer.parseInt(m) > 0 && Integer.parseInt(m) <= daneWejsciowe.get_klasyfikacja()[0].length - 1) {
                         daneWejsciowe.podzialZbioru(Integer.parseInt(m));
                     } else {
                         int ilosc = daneWejsciowe.get_klasyfikacja().length;
                         daneWejsciowe.podzialZbioru(ilosc / 2);
+                            JOptionPane.showMessageDialog(null, "Podzielono zbiór automatycznie.", "Error 758.", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else {
                     int ilosc = daneWejsciowe.get_klasyfikacja().length;
