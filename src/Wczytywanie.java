@@ -269,7 +269,7 @@ public class Wczytywanie {
  
  // temp_table_atrybuty_i_decyzje  robienie 
  
-       for(int i=0;i<temp_table_obj[i].length;i++){
+       /*for(int i=0;i<temp_table_obj[i].length;i++){
             for(int j=1;j<temp_table_obj.length;j++)
             {
                   if(temp_table_obj[j][i]!=null){
@@ -309,7 +309,7 @@ public class Wczytywanie {
             
                    //     System.out.println("");
             temp_stringow= new ArrayList();
-        }
+        }*/
         
         //koniec temp_table_atrybuty_i_decyzje tworzenie 
         

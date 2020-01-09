@@ -603,28 +603,28 @@ public class Okno extends JFrame implements ActionListener {
             boolean breakit= false;
             if (spr) {
                 
-                try{
+                //try{
                     if(indukcja!=null){
                 daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
                   wyswietlanie.getDecyzja(indukcja.getKorzen());
                     }
                     else {
-                        if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                        //if(errory==3){
+                    //JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
+                    //errory=0;
+                //}else{
                             daneWejsciowe2 = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);
-                         JOptionPane.showMessageDialog(null, "Wczytano dane.Brak drzewa decyzyjnego.Aby wyświetlić decyzję: Narysuj drzewo a następnie wczytaj ponownie dane lub wybierz przycisk 'Wyświetl decyzje'");
+                         //JOptionPane.showMessageDialog(null, "Wczytano dane.Brak drzewa decyzyjnego.Aby wyświetlić decyzję: Narysuj drzewo a następnie wczytaj ponownie dane lub wybierz przycisk 'Wyświetl decyzje'");
 
-                        errory++;} 
-                    }
-                }catch(Exception eff){
-                    if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
-                        JOptionPane.showMessageDialog(null, "Należy wczytać plik bez decyzji.", "Error 592.", JOptionPane.ERROR_MESSAGE);
-                   breakit = true; errory++;}
+                        //errory++;}
+                    //}
+                //}catch(Exception eff){
+                   // if(errory==3){
+                    //JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
+                    //errory=0;
+                //}else{
+                        //JOptionPane.showMessageDialog(null, "Należy wczytać plik bez decyzji.", "Error 592.", JOptionPane.ERROR_MESSAGE);
+                   //breakit = true; errory++;}
                 }
 
             }
