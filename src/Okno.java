@@ -277,7 +277,9 @@ public class Okno extends JFrame implements ActionListener {
                 System.out.println("poziom "+poziom );
                 System.out.println();
                 }
-                wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                if(daneWejsciowe.czyPustyTestowy()){
+                    wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                }
                 wyswietlanie.sprawdzUczacy(indukcja.getKorzen());
                 if(daneWejsciowe2 != null) {
                     wyswietlanie.getDecyzja(indukcja.getKorzen());
@@ -492,16 +494,16 @@ public class Okno extends JFrame implements ActionListener {
                 p.remove(p2);
                 boolean breakit =false;
                 try{
-                daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPlikuZDecyzja(sciezkaDoPliku);}
+                daneWejsciowe = Wczytywanie.wczytajKlasyfikacjeZPliku(sciezkaDoPliku);}
                 catch(Exception efg){
-                    if(errory==3){
-                    JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
-                    errory=0;
-                }else{
+                    //if(errory==3){
+                    //JOptionPane.showMessageDialog(null,"Zalecamy zapoznać się z instukcją.", "?", JOptionPane.PLAIN_MESSAGE);
+                    //errory=0;
+                //}else{
                         JOptionPane.showMessageDialog(null, "Należy wczytać plik z decyzjami.", "Error 701.", JOptionPane.ERROR_MESSAGE);
-                       breakit=true; errory++; }
+                       //breakit=true; errory++; }
                 }
-                if(!breakit){
+                //if(!breakit){
                int ilosc = daneWejsciowe.get_klasyfikacja().length;
                daneWejsciowe.podzialZbioru(ilosc / 2);
 
@@ -554,9 +556,9 @@ public class Okno extends JFrame implements ActionListener {
                         }
                     }
                 });
-            } else if (!spr) {
+            /*} else if (!spr) {
                 //JOptionPane.showMessageDialog(null, "Nie wczytałeś pliku.");
-            }
+            }*/
             }
             }
             
@@ -658,14 +660,20 @@ public class Okno extends JFrame implements ActionListener {
             p.remove(p2);
             Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
             Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
-            Tabela tabelaZbiorTestowy = new Tabela(daneWejsciowe.getZbiorTestowy());
+            Tabela tabelaZbiorTestowy = null;
+            if(daneWejsciowe.czyPustyTestowy()) {
+                tabelaZbiorTestowy = new Tabela(daneWejsciowe.getZbiorTestowy());
+            }
             Tabela tabelaZbiorDecyzja = new Tabela();
             if(daneWejsciowe2 != null) {
                 tabelaZbiorDecyzja = new Tabela(daneWejsciowe2.get_klasyfikacja());
             }
             JTable tabelaWyswietl = tabela.getTabela();
             JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
-            JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+            JTable tabelaWyswietlZbiorTestowy = null;
+            if(tabelaZbiorTestowy != null) {
+                tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+            }
             JTable tabelaWyswietlDecyzje = new JTable();
             if(daneWejsciowe2 != null) {
                 tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
@@ -698,15 +706,18 @@ public class Okno extends JFrame implements ActionListener {
                     }
                 }
             });
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+            JTable finalTabelaWyswietlTestowy = tabelaWyswietlZbiorTestowy;
+            if(tabelaWyswietlZbiorTestowy != null){
+                tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                    public void mouseReleased(MouseEvent e) {
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            popupMenu2.show(finalTabelaWyswietlTestowy, e.getX(), e.getY());
+                        }
                     }
-                }
-            });
+                });
+            }
             JTable finalTabelaWyswietlDecyzje = tabelaWyswietlDecyzje;
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            tabelaWyswietlDecyzje.addMouseListener(new MouseAdapter() {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
@@ -837,7 +848,9 @@ public class Okno extends JFrame implements ActionListener {
                         System.out.println("poziom "+poziom );
                         System.out.println();
                     }
-                    wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                    if(daneWejsciowe.czyPustyTestowy()) {
+                        wyswietlanie.sprawdzTestowy(indukcja.getKorzen());
+                    }
                     if(daneWejsciowe2 != null) {
                         wyswietlanie.getDecyzja(indukcja.getKorzen());
                     }

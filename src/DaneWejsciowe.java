@@ -231,6 +231,17 @@ public class DaneWejsciowe {
         return ilosc;
     }
 
+    public boolean czyPustyTestowy(){
+        for(int i=1;i<zbiorTestowy.length;i++){
+            for(int j=0;j<zbiorTestowy[i].length;j++){
+                if(zbiorTestowy[i][j] != null){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void opcje() {
         int szerokosc = dane[0].length - 1;
         opcja1 = dane[1][szerokosc].getNazwa();

@@ -453,7 +453,10 @@ public int getAccuracyTeachSucces(){
             o.p.remove(o.p2);
             Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
             Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
-            Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+            Tabela tabelaZbiorTestowy = null;
+            if(o.daneWejsciowe.czyPustyTestowy()) {
+                tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+            }
             Tabela tabelaDroga = new Tabela(elementDrzewa);
             Tabela tabelaZbiorDecyzja = new Tabela();
             if(o.daneWejsciowe2 != null) {
@@ -461,7 +464,10 @@ public int getAccuracyTeachSucces(){
             }
             JTable tabelaWyswietl = tabela.getTabela();
             JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
-            JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+            JTable tabelaWyswietlZbiorTestowy = null;
+            if(tabelaZbiorTestowy != null) {
+                tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+            }
             JTable tabelaWyswietlDroga = tabelaDroga.getTabela();
             JTable tabelaWyswietlDecyzje = new JTable();
             if(o.daneWejsciowe2 != null) {
@@ -499,14 +505,17 @@ public int getAccuracyTeachSucces(){
                     }
                 }
             });
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+            JTable finalTabelaWyswietlZbiorTestowy = tabelaWyswietlZbiorTestowy;
+            if(tabelaWyswietlZbiorTestowy != null) {
+                tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                    public void mouseReleased(MouseEvent e) {
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            o.popupMenu2.show(finalTabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                        }
                     }
-                }
-            });
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                });
+            }
+            tabelaWyswietlDroga.addMouseListener(new MouseAdapter() {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         o.popupMenu2.show(tabelaWyswietlDroga, e.getX(), e.getY());
@@ -514,7 +523,7 @@ public int getAccuracyTeachSucces(){
                 }
             });
             JTable finalTabelaWyswietlDecyzje = tabelaWyswietlDecyzje;
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            tabelaWyswietlDecyzje.addMouseListener(new MouseAdapter() {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         o.popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
@@ -828,11 +837,17 @@ public int getAccuracyTeachSucces(){
         o.p.remove(o.p2);
         Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
         Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
-        Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        Tabela tabelaZbiorTestowy = null;
+        if(o.daneWejsciowe.czyPustyTestowy()) {
+            tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        }
         Tabela tabelaZbiorDecyzja = new Tabela(o.daneWejsciowe2.get_klasyfikacja());
         JTable tabelaWyswietl = tabela.getTabela();
         JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
-        JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        JTable tabelaWyswietlZbiorTestowy = null;
+        if(tabelaZbiorTestowy != null) {
+            tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        }
         JTable tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
         tabelaWyswietl.setFillsViewportHeight(true);
         o.p2 = new JPanel();
@@ -869,14 +884,17 @@ public int getAccuracyTeachSucces(){
                 }
             }
         });
-        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
-            public void mouseReleased(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+        JTable finalTabelaWyswietlZbiorTestowy = tabelaWyswietlZbiorTestowy;
+        if(tabelaWyswietlZbiorTestowy != null) {
+            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(finalTabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                    }
                 }
-            }
-        });
-        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+            });
+        }
+        tabelaWyswietlDecyzje.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     o.popupMenu2.show(tabelaWyswietlDecyzje, e.getX(), e.getY());
@@ -1107,10 +1125,16 @@ public int getAccuracyTeachSucces(){
         o.p.remove(o.p2);
         Tabela tabela = new Tabela(o.daneWejsciowe.get_klasyfikacja());
         Tabela tabelaZbiorUczacy = new Tabela(o.daneWejsciowe.getZbiorUczacy());
-        Tabela tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        Tabela tabelaZbiorTestowy = null;
+        if(o.daneWejsciowe.czyPustyTestowy()) {
+            tabelaZbiorTestowy = new Tabela(o.daneWejsciowe.getZbiorTestowy());
+        }
         JTable tabelaWyswietl = tabela.getTabela();
         JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
-        JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        JTable tabelaWyswietlZbiorTestowy = null;
+        if(tabelaWyswietlZbiorTestowy != null) {
+            tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+        }
         tabelaWyswietl.setFillsViewportHeight(true);
         o.p2 = new JPanel();
         JTabbedPane tabelaDane = new JTabbedPane();
@@ -1145,14 +1169,16 @@ public int getAccuracyTeachSucces(){
                 }
             }
         });
-        tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
-            public void mouseReleased(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    o.popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+        JTable finalTabelaWyswietlZbiorTestowy = tabelaWyswietlZbiorTestowy;
+        if(tabelaWyswietlZbiorTestowy != null) {
+            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+                public void mouseReleased(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        o.popupMenu2.show(finalTabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+                    }
                 }
-            }
-        });
-
+            });
+        }
     }
 
     private void sprawdzUcz(Wezel wezel,ElementDrzewa[][] zbiorUczacy,int j){
