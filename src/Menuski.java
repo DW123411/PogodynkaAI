@@ -47,6 +47,7 @@ private ImageIcon imgIcon = null;
             case 2 : { setColorMode(2);break;}
             case 3 : { setColorMode(3);break;}
             case 4 : { setColorMode(4);break;}
+            case 5 : {setColorMode(5);break;}
             default: { setColorMode(1);  break;}
             
         }
@@ -378,6 +379,21 @@ private ImageIcon imgIcon = null;
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size_purple.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_purple.png"));
             imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png")); break;}
+                        case 5 : { imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
+                        imgIcon2 = new ImageIcon(getClass().getResource("icons/hudymson.png"));
+                        imgIcon3 = new ImageIcon(getClass().getResource("icons/husar.png"));
+                             imgIcon4 = new ImageIcon(getClass().getResource("icons/karpinski.png"));
+                             imgIcon5 = new ImageIcon(getClass().getResource("icons/knychalson.png"));
+                             imgIcon6 = new ImageIcon(getClass().getResource("icons/macowiec.png"));
+                             imgIcon7 = new ImageIcon(getClass().getResource("icons/marciniak.png"));
+                             imgIcon8 = new ImageIcon(getClass().getResource("icons/tetris.png"));
+                             imgIcon9 = new ImageIcon(getClass().getResource("icons/zuraw.png"));
+                             imgIcon10 = new ImageIcon(getClass().getResource("icons/wojtech.png"));
+                             imgIcon11 = new ImageIcon(getClass().getResource("icons/sygula.png"));
+                             imgIcon12 = new ImageIcon(getClass().getResource("icons/husar.png"));
+                             imgIcon13 = new ImageIcon(getClass().getResource("icons/knychalson.png"));
+                             imgIcon14 = new ImageIcon(getClass().getResource("icons/sygula.png"));
+                             imgIcon_theme = new ImageIcon(getClass().getResource("icons/hudymson.png")); break;}
                         default : {
                             
                             
@@ -476,9 +492,24 @@ private ImageIcon imgIcon = null;
                 imgIcon13 = new ImageIcon(getClass().getResource("icons/size_purple.png"));
                 imgIcon14 = new ImageIcon(getClass().getResource("icons/sizeDepth_purple.png"));
             imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes_dark.png")); break;}
+                  case 5 : { imgIcon = new ImageIcon(getClass().getResource("icons/dudko.png"));
+                      imgIcon2 = new ImageIcon(getClass().getResource("icons/hudymson.png"));
+                      imgIcon3 = new ImageIcon(getClass().getResource("icons/husar.png"));
+                      imgIcon4 = new ImageIcon(getClass().getResource("icons/karpinski.png"));
+                      imgIcon5 = new ImageIcon(getClass().getResource("icons/knychalson.png"));
+                      imgIcon6 = new ImageIcon(getClass().getResource("icons/macowiec.png"));
+                      imgIcon7 = new ImageIcon(getClass().getResource("icons/marciniak.png"));
+                      imgIcon8 = new ImageIcon(getClass().getResource("icons/tetris.png"));
+                      imgIcon9 = new ImageIcon(getClass().getResource("icons/zuraw.png"));
+                      imgIcon10 = new ImageIcon(getClass().getResource("icons/wojtech.png"));
+                      imgIcon11 = new ImageIcon(getClass().getResource("icons/sygula.png"));
+                      imgIcon12 = new ImageIcon(getClass().getResource("icons/husar.png"));
+                      imgIcon13 = new ImageIcon(getClass().getResource("icons/knychalson.png"));
+                      imgIcon14 = new ImageIcon(getClass().getResource("icons/sygula.png"));
+                      imgIcon_theme = new ImageIcon(getClass().getResource("icons/hudymson.png")); break;}
                         default : {
-                            
-                            
+
+
                             imgIcon = new ImageIcon(getClass().getResource("icons/info.png"));
                 imgIcon2 = new ImageIcon(getClass().getResource("icons/saveJPG.png"));
                 imgIcon3 = new ImageIcon(getClass().getResource("icons/exit.png"));
@@ -513,7 +544,7 @@ private ImageIcon imgIcon = null;
             imgIcon_theme = new ImageIcon(getClass().getResource("icons/themes.png"));
         }
     
-        
+        System.out.println(col);
     }
 
 

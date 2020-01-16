@@ -736,9 +736,9 @@ public class Okno extends JFrame implements ActionListener {
             if(DEBUG){
              System.out.println(funny); 
             }
-            if(funny==10){moty=1;
+            if(funny==10){theme.setFunny(1);
                 JOptionPane.showMessageDialog(null,"A teraz zmień motyw na jasny ;)"); }
-            if(funny>10){moty=0;funny=0;JOptionPane.showMessageDialog(null,"Tak wiem, jest kapa. Spoko, zmień motyw będzie cacy");}
+            if(funny>10){theme.setFunny(0);funny=0;JOptionPane.showMessageDialog(null,"Tak wiem, jest kapa. Spoko, zmień motyw będzie cacy");}
         } 
         //      zam.setToolTipText("<html>Wyjście z programu</html>");
         else if (zrodlo == menu.zam || zrodlo == zamkn  || zrodlo == menubar.exit) {

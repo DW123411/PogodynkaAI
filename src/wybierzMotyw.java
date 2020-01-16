@@ -14,7 +14,9 @@ public class wybierzMotyw {
     public String[] buttonsNonWin = {"Ciemny (Darkula)", "Jasny (Nimbus)","Domyślny"};
     public String[] buttonsWin= { "Jasny  (Windows Classic)", "Jasny (Domyślny)", "Ciemny (Darkula)", "Jasny (Nimbus)"};
     public String[] Colors = {"Czerwony", "Zielony", "Żółty","Niebieski", "Fioletowy"};
-       
+    public String[] Colors2 = {"Czerwony", "Zielony", "Żółty","Niebieski", "Fioletowy", "PWSZ-owy"};
+    public int funny =0;
+
 
 
 
@@ -29,6 +31,7 @@ public class wybierzMotyw {
                     UIManager.setLookAndFeel(new DarculaLaf());
                     setPwsz(0);
                     setDark(1);
+                    if(funny==0){
                     int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
                     switch(color){
                         case 0 : { setColor(0); break;}
@@ -36,8 +39,19 @@ public class wybierzMotyw {
                         case 2 : { setColor(2); break;}
                         case 3 : { setColor(3); break;}
                         case 4 : { setColor(4); break;}
-                        default : {break;}
+                        default : {break;}}
                     }
+                    else if(funny==1){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            case 5 : { setColor(5);break;}
+
+                        }}
                 
                     break;}
                 case 1:{
@@ -45,18 +59,29 @@ public class wybierzMotyw {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                             if ("Nimbus".equals(info.getName())) {
                                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                   int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
-                    switch(color){
-                        case 0 : { setColor(0); break;}
-                        case 1 : { setColor(1); break;}
-                        case 2 : { setColor(2); break;}
-                        case 3 : { setColor(3); break;}
-                        case 4 : { setColor(4); break;}
-                        default : {break;}
-                    }
-                                break;
-                            
-                        }
+                                if(funny==0){
+                                    int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                                    switch(color){
+                                        case 0 : { setColor(0); break;}
+                                        case 1 : { setColor(1); break;}
+                                        case 2 : { setColor(2); break;}
+                                        case 3 : { setColor(3); break;}
+                                        case 4 : { setColor(4); break;}
+                                        default : {break;}}
+                                }
+                                else if(funny==1){
+                                    int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,null);
+                                    switch(color){
+                                        case 0 : { setColor(0); break;}
+                                        case 1 : { setColor(1); break;}
+                                        case 2 : { setColor(2); break;}
+                                        case 3 : { setColor(3); break;}
+                                        case 4 : { setColor(4); break;}
+                                        case 5 : { setColor(5); break;}
+
+                                    }}
+
+                                break;}
                     }} catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (InstantiationException e) {
@@ -76,15 +101,28 @@ public class wybierzMotyw {
                         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                         setPwsz(0);
                         setDark(0);
-                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
-                        switch(color){
-                            case 0 : { setColor(0); break;}
-                            case 1 : { setColor(1); break;}
-                            case 2 : { setColor(2); break;}
-                            case 3 : { setColor(3); break;}
-                            case 4 : { setColor(4); break;}
-                            default : {break;}
+                        if(funny==0){
+                            int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                            switch(color){
+                                case 0 : { setColor(0); break;}
+                                case 1 : { setColor(1); break;}
+                                case 2 : { setColor(2); break;}
+                                case 3 : { setColor(3); break;}
+                                case 4 : { setColor(4); break;}
+                                default : {break;}}
                         }
+                        else if(funny==1){
+                            int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,null);
+                            switch(color){
+                                case 0 : { setColor(0); break;}
+                                case 1 : { setColor(1); break;}
+                                case 2 : { setColor(2); break;}
+                                case 3 : { setColor(3); break;}
+                                case 4 : { setColor(4); break;}
+                                case 5 : { setColor(5);break;}
+
+                            }}
+
                         break;}
                 default :{
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -104,62 +142,111 @@ public class wybierzMotyw {
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
                     setPwsz(0);
                     setDark(0);
-                     int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,Colors[1]);
-                  
-                     switch(color){
-                        case 0 : { setColor(0); break;}
-                        case 1 : { setColor(1); break;}
-                        case 2 : { setColor(2); break;}
-                        case 3 : { setColor(3); break;}
-                        case 4 : { setColor(4); break;}
-                        default : {break;}
+                    if(funny==0){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            default : {break;}}
                     }
-                    
+                    else if(funny==1){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            case 5 : { setColor(5);break;}
+
+                        }}
+
                     break;}
                 case 1: {
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                     setPwsz(0);
                     setDark(0);
-                       int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,Colors[1]);
-                    switch(color){
-                        case 0 : { setColor(0); break;}
-                        case 1 : { setColor(1); break;}
-                        case 2 : { setColor(2); break;}
-                        case 3 : { setColor(3); break;}
-                        case 4 : { setColor(4); break;}
-                        default : {break;}
+                    if(funny==0){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            default : {break;}}
                     }
+                    else if(funny==1){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            case 5 : { setColor(5);break;}
+
+                        }}
+
                     break;}
                 case 2:{
                     UIManager.setLookAndFeel(new DarculaLaf());
                     setPwsz(0);
                     setDark(1);
-                       int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,Colors[1]);
-                    switch(color){
-                        case 0 : { setColor(0); break;}
-                        case 1 : { setColor(1); break;}
-                        case 2 : { setColor(2); break;}
-                        case 3 : { setColor(3); break;}
-                        case 4 : { setColor(4); break;}
-                        default : {break;}
+                    if(funny==0){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            default : {break;}}
                     }
+                    else if(funny==1){
+                        int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,0);
+                        switch(color){
+                            case 0 : { setColor(0); break;}
+                            case 1 : { setColor(1); break;}
+                            case 2 : { setColor(2); break;}
+                            case 3 : { setColor(3); break;}
+                            case 4 : { setColor(4); break;}
+                            case 5 : { setColor(5);break;}
+
+                        }}
+
                     break;}
                 case 3:{
                     try {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                             if ("Nimbus".equals(info.getName())) {
                                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                   int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,Colors[1]);
-                    switch(color){
-                        case 0 : { setColor(0); break;}
-                        case 1 : { setColor(1); break;}
-                        case 2 : { setColor(2); break;}
-                        case 3 : { setColor(3); break;}
-                        case 4 : { setColor(4); break;}
-                        default : {break;}
-                    }
-                                break;
-                            }
+                                if(funny==0){
+                                    int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors,null);
+                                    switch(color){
+                                        case 0 : { setColor(0); break;}
+                                        case 1 : { setColor(1); break;}
+                                        case 2 : { setColor(2); break;}
+                                        case 3 : { setColor(3); break;}
+                                        case 4 : { setColor(4); break;}
+                                        default : {break;}}
+                                }
+                                else if(funny==1){
+                                    int color = JOptionPane.showOptionDialog(null, "Wybierz jaki chcesz motyw", "Wybierz Motyw", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE,  new ImageIcon(getClass().getResource("icons/themes.png")), Colors2,null);
+                                    switch(color){
+                                        case 0 : { setColor(0); break;}
+                                        case 1 : { setColor(1); break;}
+                                        case 2 : { setColor(2); break;}
+                                        case 3 : { setColor(3); break;}
+                                        case 4 : { setColor(4); break;}
+                                        case 5 : { setColor(5);break;}
+
+                                    }}
+
+                                break;}
                         }} catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (InstantiationException e) {
@@ -196,6 +283,9 @@ public class wybierzMotyw {
     public int getPwsz(){
         return this.pwsz;
     }
+    public void setFunny(int fun){  this.funny=fun;
+    }
+
 
 
     public void setDark(int dark){  this.darkmode=dark;
