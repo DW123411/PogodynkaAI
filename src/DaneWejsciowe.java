@@ -495,4 +495,33 @@ public class DaneWejsciowe {
     
     
     }
+    
+    public static ElementDrzewa[][] empty_tree(){
+        ElementDrzewa[][] elmnt = new ElementDrzewa[10][4] ;
+          for(int i=0;i<elmnt.length;i++){
+        for(int j=0; j < elmnt[i].length;j++){
+                if(i==0){
+            if(j==3){
+                    elmnt[i][j] = new Decyzja("");
+            
+            }else {elmnt[i][j] = new Atrybut("");}
+                }else{
+        
+                    
+                    if(j==3){
+                    elmnt[i][j] = new Decyzja("");
+            
+            }else {elmnt[i][j] = new WartoscAtrybutu("");}
+        }
+        
+        }
+         
+        }
+        
+        
+        
+        return elmnt;
+        
+    }
+    
 }

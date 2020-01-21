@@ -674,7 +674,8 @@ int motyw = JOptionPane.showOptionDialog(null, "Co wymazać ?", "UWAGA ! Czyszcz
         }
         //    pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
         else if (zrodlo == menu.pokaz|| zrodlo == menubar.pokatabele) {
-            if(daneWejsciowe != null){
+            boolean t = true;
+            if(t){
                 if(tabelka_show){ukryjTabele();}
                 else{
                 pokazTabele();}
@@ -1040,6 +1041,23 @@ int motyw = JOptionPane.showOptionDialog(null, "Co wymazać ?", "UWAGA ! Czyszcz
     }
     public void pokazTabele(){
         tabelka_show = true;
+        if(daneWejsciowe==null&&daneWejsciowe2==null){
+          p.remove(p2);   
+        p2 = new JPanel();
+        JTabbedPane tabelaDane = new JTabbedPane();
+    
+           Tabela tabela = new Tabela(DaneWejsciowe.empty_tree());
+                JTable tabelaWyswietl = tabela.getTabela();
+            tabelaWyswietl.setFillsViewportHeight(true);
+            tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
+        p2.add(tabelaDane);
+        p2.setMaximumSize(new Dimension(500, 500));
+                p.add(p2, BorderLayout.EAST);
+                dopasujSieDoZawartosci();
+                f.setVisible(true);
+                czyPrawyPanel = true;
+        }
+
         
         if(daneWejsciowe!=null&&daneWejsciowe2==null){
             p.remove(p2);   
