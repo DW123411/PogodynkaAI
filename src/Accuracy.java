@@ -26,7 +26,7 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
  public class Accuracy extends JFrame  implements ActionListener{
 
         private JLabel label1;    private JLabel label2;    private JButton buton;
-        
+        private boolean DEBUG = false;
          private    Wezel<ElementDrzewa> temp_prepared_tree;
           private   DaneWejsciowe data_classified ;
           private   ElementDrzewa[][] data_load ;
@@ -223,9 +223,11 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
                  for(int IMUCALURAR=0;IMUCALURAR< dane_uczace[ILLECULAR].length;IMUCALURAR++ ){ 
                     temp_stringi.add(dane_uczace[ILLECULAR][IMUCALURAR].getNazwa());
                 }            
-                 System.out.println(temp_stringi.size());
+                if(DEBUG)
+                    System.out.println(temp_stringi.size());
                  for(int Etgr=0;Etgr<temp_stringi.size();Etgr++){
-                 System.out.print(temp_stringi.get(Etgr));
+                if(DEBUG)
+                     System.out.print(temp_stringi.get(Etgr));
                  
                  }
                  for(int INTERCELKULAR=0; INTERCELKULAR< dane_tree.length;INTERCELKULAR++){
@@ -266,9 +268,10 @@ ze zbioru wczytanych danych , porownac z decyzjami w drzewie i obliczyc dokladno
             } //list przechowująca dzieci
             while (!lista.isEmpty()) {
                 Wezel<ElementDrzewa> w = lista.remove(0);
-                
+                if(DEBUG)
                 System.out.println("nazwa"+w.getDane().getNazwa());
-                 System.out.println("klasa"+w.getDane().getClass());
+                if(DEBUG) 
+                System.out.println("klasa"+w.getDane().getClass());
                  
               
                  

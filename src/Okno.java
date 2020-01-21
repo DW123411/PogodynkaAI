@@ -44,7 +44,7 @@ public class Okno extends JFrame implements ActionListener {
     public static int dark;
     public static int colormode;
     wybierzMotyw theme = new wybierzMotyw();
-
+    boolean tabelka_show =false; 
     Wezel root;
     // ##################### debug
     boolean DEBUG = false;
@@ -57,7 +57,7 @@ public class Okno extends JFrame implements ActionListener {
         f = new JFrame("Decyzjomat  v.0.3");
         //ustawienie standardowej akcji po naciśnięciu przycisku zamkniecia
         //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         //blokada zmiany rozmiaru okna
         f.setResizable(true);
         //rozmieszczenie elementow - menadzer rozkladu
@@ -316,7 +316,9 @@ public class Okno extends JFrame implements ActionListener {
                 }
                 dark=theme.getDark();
                 menu.setDark(theme.getDark());
+             
                 menu.setMotyw(theme.getPwsz());
+                if(DEBUG)
                 System.out.println(dark);
                 p.remove(menu);
                 menu=new Menuski();
@@ -373,8 +375,10 @@ public class Okno extends JFrame implements ActionListener {
                             }
                             //int s = Integer.parseInt(menu.rekord2.getText());
                             else {
+                             if(DEBUG)
                                 System.out.println(menu.rekord2.getText());
-                                System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
+                             if(DEBUG)   
+                             System.out.println("Cyfra : " + Integer.parseInt(menu.rekord2.getText()));
                                 //PodzialUczTest.losowanietest(s, daneWejsciowe);
                                 //PodzialUczTest.losowanieucz(s, daneWejsciowe);
                                 wyswietlanie.wyczysc();
@@ -622,83 +626,117 @@ public class Okno extends JFrame implements ActionListener {
         }
         //  wycz.setToolTipText("<html>Wyczyść</html>");
         else if (zrodlo == menu.wycz || zrodlo == wyczysc|| zrodlo == menubar.wyczysc) {
-          /*boolean nadpis;
-             int a = JOptionPane.showConfirmDialog(this, "Czy na pewno wymazać dane?", "Uwaga!", JOptionPane.WARNING_MESSAGE);
-           if(a==0){       
-               nadpis = true; 
-                
-            }
-           else { nadpis = false; }
-           
-           
-               //   END  if(daneWejsciowe!=null){
-            
-            if(nadpis){ */
-            wyswietlanie.wyczysc();
-            //}
+//          boolean nadpis;
+//             int a = JOptionPane.showConfirmDialog(this, "Czy na pewno wymazać dane?", "Uwaga!", JOptionPane.WARNING_MESSAGE);
+//           if(a==0){       
+//               nadpis = true; 
+//
+//            }
+//           else { nadpis = false; }
+//
+//
+//                   if(daneWejsciowe!=null){
+//
+//            if(nadpis){ 
+//            wyswietlanie.wyczysc();
+//                 ukryjTabele();
+//                
+//            //}
+//
+//        } }
+//        
+            String[] egsd = {"Drzewo", "Tabele", "Wszystko", "Anuluj"};
+int motyw = JOptionPane.showOptionDialog(null, "Co wymazać ?", "UWAGA ! Czyszczenie.", JOptionPane.PLAIN_MESSAGE, JOptionPane.PLAIN_MESSAGE, null , egsd,null);
 
-        } 
+    switch(motyw){
+        case 0 : {
+             wyswietlanie.wyczysc();
+          ukryjTabele();
+        break;}
+        case 1 : { 
+             daneWejsciowe = null;
+              daneWejsciowe2 = null;
+                ukryjTabele();
+            
+        break;}
+        case 2 : { 
+            wyswietlanie.wyczysc();
+             daneWejsciowe = null;
+              daneWejsciowe2 = null;
+                     ukryjTabele();
+        break;}
+        default :{ break;}
+        
+        
+        
+    }
+
+
+        }
         //    pokaz.setToolTipText("<html>Pokazywanie tabelki </html>");
         else if (zrodlo == menu.pokaz|| zrodlo == menubar.pokatabele) {
             if(daneWejsciowe != null){
-            p.remove(p2);
-            Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
-            Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
-            Tabela tabelaZbiorTestowy = new Tabela(daneWejsciowe.getZbiorTestowy());
-            Tabela tabelaZbiorDecyzja = new Tabela();
-            if(daneWejsciowe2 != null) {
-                tabelaZbiorDecyzja = new Tabela(daneWejsciowe2.get_klasyfikacja());
+                pokazTabele();
+//            p.remove(p2);
+//            Tabela tabela = new Tabela(daneWejsciowe.get_klasyfikacja());
+//            Tabela tabelaZbiorUczacy = new Tabela(daneWejsciowe.getZbiorUczacy());
+//            Tabela tabelaZbiorTestowy = new Tabela(daneWejsciowe.getZbiorTestowy());
+//            Tabela tabelaZbiorDecyzja = new Tabela();
+//            if(daneWejsciowe2 != null) {
+//                tabelaZbiorDecyzja = new Tabela(daneWejsciowe2.get_klasyfikacja());
+//            }
+//            JTable tabelaWyswietl = tabela.getTabela();
+//            JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
+//            JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
+//            JTable tabelaWyswietlDecyzje = new JTable();
+//            if(daneWejsciowe2 != null) {
+//                tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
+//            }
+//            tabelaWyswietl.setFillsViewportHeight(true);
+//            p2 = new JPanel();
+//            JTabbedPane tabelaDane = new JTabbedPane();
+//            tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
+//            tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
+//            tabelaDane.addTab("Testujący",new JScrollPane(tabelaWyswietlZbiorTestowy));
+//            tabelaDane.addTab("Decyzja",new JScrollPane(tabelaWyswietlDecyzje));
+//            p2.add(tabelaDane);
+//            p2.setMaximumSize(new Dimension(500, 500));
+//            p.add(p2, BorderLayout.EAST);
+//            dopasujSieDoZawartosci();
+//            f.setVisible(true);
+//            czyPrawyPanel = true;
+//
+//            tabelaWyswietl.addMouseListener(new MouseAdapter() {
+//                public void mouseReleased(MouseEvent e) {
+//                    if (SwingUtilities.isRightMouseButton(e)) {
+//                        popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
+//                    }
+//                }
+//            });
+//            tabelaWyswietlZbiorUczacy.addMouseListener(new MouseAdapter() {
+//                public void mouseReleased(MouseEvent e) {
+//                    if (SwingUtilities.isRightMouseButton(e)) {
+//                        popupMenu2.show(tabelaWyswietlZbiorUczacy, e.getX(), e.getY());
+//                    }
+//                }
+//            });
+//            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+//                public void mouseReleased(MouseEvent e) {
+//                    if (SwingUtilities.isRightMouseButton(e)) {
+//                        popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
+//                    }
+//                }
+//            });
+//            JTable finalTabelaWyswietlDecyzje = tabelaWyswietlDecyzje;
+//            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
+//                public void mouseReleased(MouseEvent e) {
+//                    if (SwingUtilities.isRightMouseButton(e)) {
+//                        popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
+//                    }
+//                }
+//            });
+            
             }
-            JTable tabelaWyswietl = tabela.getTabela();
-            JTable tabelaWyswietlZbiorUczacy = tabelaZbiorUczacy.getTabela();
-            JTable tabelaWyswietlZbiorTestowy = tabelaZbiorTestowy.getTabela();
-            JTable tabelaWyswietlDecyzje = new JTable();
-            if(daneWejsciowe2 != null) {
-                tabelaWyswietlDecyzje = tabelaZbiorDecyzja.getTabela(); //poprawić nazwy
-            }
-            tabelaWyswietl.setFillsViewportHeight(true);
-            p2 = new JPanel();
-            JTabbedPane tabelaDane = new JTabbedPane();
-            tabelaDane.addTab("Dane",new JScrollPane(tabelaWyswietl));
-            tabelaDane.addTab("Uczący",new JScrollPane(tabelaWyswietlZbiorUczacy));
-            tabelaDane.addTab("Testujący",new JScrollPane(tabelaWyswietlZbiorTestowy));
-            tabelaDane.addTab("Decyzja",new JScrollPane(tabelaWyswietlDecyzje));
-            p2.add(tabelaDane);
-            p2.setMaximumSize(new Dimension(500, 500));
-            p.add(p2, BorderLayout.EAST);
-            dopasujSieDoZawartosci();
-            f.setVisible(true);
-            czyPrawyPanel = true;
-
-            tabelaWyswietl.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        popupMenu2.show(tabelaWyswietl, e.getX(), e.getY());
-                    }
-                }
-            });
-            tabelaWyswietlZbiorUczacy.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        popupMenu2.show(tabelaWyswietlZbiorUczacy, e.getX(), e.getY());
-                    }
-                }
-            });
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        popupMenu2.show(tabelaWyswietlZbiorTestowy, e.getX(), e.getY());
-                    }
-                }
-            });
-            JTable finalTabelaWyswietlDecyzje = tabelaWyswietlDecyzje;
-            tabelaWyswietlZbiorTestowy.addMouseListener(new MouseAdapter() {
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        popupMenu2.show(finalTabelaWyswietlDecyzje, e.getX(), e.getY());
-                    }
-                }
-            });}
             else {
                  JOptionPane.showMessageDialog(null, "Najpierw należy wczytać dane.", "Error 683.", JOptionPane.INFORMATION_MESSAGE);
                 
@@ -980,6 +1018,7 @@ public class Okno extends JFrame implements ActionListener {
     }
 
     public void ukryjTabele(){
+        tabelka_show = false;
         p.remove(p2);
         //Tabela tabela = new Tabela();
         //JTable tabelaWyswietl = tabela.getTabela();
@@ -997,6 +1036,16 @@ public class Okno extends JFrame implements ActionListener {
         dopasujSieDoZawartosci();
         f.setVisible(true);
         czyPrawyPanel = true;
+    }
+    public void pokazTabele(){
+        tabelka_show = true;
+        p.add(p2, BorderLayout.EAST);
+         dopasujSieDoZawartosci();
+          f.setVisible(true);
+          czyPrawyPanel = true;
+        
+        
+        
     }
     
     public void makeEvent(MenuKeyEvent e){

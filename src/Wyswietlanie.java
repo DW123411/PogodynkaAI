@@ -1219,18 +1219,20 @@ public int getAccuracyTeachSucces(){
         ImageIcon icon = new ImageIcon(getClass().getResource("icons/boink.png"));
 
         JOptionPane.showMessageDialog(null, "Program napisany w ramach Projektu Zespołowego \n" +
-                        "Wersja : 0.3 Aircobra \n" +
-                        "Autorzy : \n" +
-                        "Główni programiści : \n" +
+                        "Wersja: 0.3 Aircobra \n" +
+                        "Autorzy: \n" +
+                        "Silnik programu: \n" +
                         "Dominik Woźniak \n" +
                         "Adler Mateusz \n" +
-                        "Testerzy : \n" +
+                        "Interfejs: \n" +
                         "Jakub Gabryś \n" +
                         "Marcin Majzner \n" +
-                        "Programista Pomocniczy \n" +
+                        "Adam Witasiak \n" +     
                         "Damian Staśkiewicz \n" +
-                        "Projektant interfejsu : \n" +
+                        "Obsługa motywów interfejsu: \n" +
                         "Adam Witasiak \n" +
+                        "Kolory motywów interfejsu: \n" +
+                        "Marcin Majzner \n" +
                         "2019/2020, PWSZ KALISZ ",
                 "O Programie", JOptionPane.INFORMATION_MESSAGE, icon);
         //wyczysc();
